@@ -3,7 +3,7 @@ import React from "react"
 
 function MyApp({ Component, pageProps }) {
   return <ChakraProvider>
-   <Component {...pageProps} />
+    <Component {...pageProps} />
   </ChakraProvider>
 }
 
