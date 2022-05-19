@@ -1,13 +1,16 @@
 import { Box } from "@chakra-ui/react"
 import { GetServerSideProps } from "next"
-import { getSession } from "next-auth/react"
 import { FC } from "react"
 import { getAccessToken } from "../../../../services/auth/getAccessToken"
-import { GithubClient, IssueResponse } from "../../../../services/github/client"
-import { IssueChatPage, ChatInput } from "../../../../components/page/IssueChatPage"
+import { GithubClient } from "../../../../services/github/client"
+import { IssueChatPage, IssuePageProps } from "../../../../components/page/IssueChatPage"
 import { LoginButton } from "../../../../components/Login"
 
-export const Page: FC<{ error?: string, issues: IssueResponse[] }> = ({ error, issues }) => {
+type Props = {
+  error?: string,
+} & IssuePageProps
+
+export const Page: FC<Props> = ({ error, ...issueChatProps }) => {
   if (error) {
     return <Box>
       {error}
@@ -15,7 +18,7 @@ export const Page: FC<{ error?: string, issues: IssueResponse[] }> = ({ error, i
     </Box>
   }
   return <Box>
-    <IssueChatPage issues={issues} />
+    <IssueChatPage  {...issueChatProps} />
   </Box>
 }
 
@@ -42,6 +45,8 @@ export const getServerSideProps: GetServerSideProps = async (req) => {
   const issues = await accessor.getIssue({ owner, repo })
   return {
     props: {
+      owner,
+      repo,
       issues
     }
   }
