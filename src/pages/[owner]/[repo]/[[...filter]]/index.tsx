@@ -1,7 +1,7 @@
 import { Box } from "@chakra-ui/react"
 import { GetServerSideProps } from "next"
 import { FC } from "react"
-import { getAccessToken } from "../../../../services/auth/getAccessToken"
+import { getSessionAccount } from "../../../../services/auth/getSessionAccount"
 import { GithubClient } from "../../../../services/github/client"
 import { IssueChatPage, IssuePageProps } from "../../../../components/page/IssueChatPage"
 import { LoginButton } from "../../../../components/Login"
@@ -23,8 +23,8 @@ export const Page: FC<Props> = ({ error, ...issueChatProps }) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async (req) => {
-  const accessToken = await getAccessToken(req)
-  if (!accessToken) {
+  const account = await getSessionAccount(req)
+  if (!account) {
     return {
       props: {
         error: "needLogin"
@@ -40,7 +40,7 @@ export const getServerSideProps: GetServerSideProps = async (req) => {
     }
   }
 
-  const accessor = new GithubClient(accessToken)
+  const accessor = new GithubClient(account)
   // // // console.log(accessor)
   const issues = await accessor.getIssue({ owner, repo })
   return {
