@@ -22,7 +22,7 @@ const app = new App({
 })
 
 
-export class GithubAccessor {
+export class GithubClient {
   client: Octokit
   token: string
   constructor(token: string) {
@@ -45,25 +45,8 @@ export class GithubAccessor {
     const app = new Octokit({
       auth: this.token
     })
-    // const r = await auth({
-    //   type: "oauth"
-    // })
-    // console.log(r)
-    // await app.eachInstallation(({ octokit, installation }) => {
 
-    //   console.log(installation)
-    // })
-
-    // auth({
-    //   type: "installation",
-    //   repositoryNames: [param.repo]
-    // })
-    // const r = await app.eachRepository(param)
-    // console.log(r)
-    // // const kit = await app.getInstallationOctokit(2579801)
-
-    // // console.log(param)
-    const result = await app.rest.issues.list(param)
+    const result = await app.rest.issues.listForRepo(param) //.issues.list(param)
     return result
   }
 }
