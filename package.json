@@ -9,9 +9,6 @@
     "start": "next start",
     "test": "vitest"
   },
-  "engines": {
-    "node": ">=16"
-  },
   "dependencies": {
     "@chakra-ui/react": "^2.0.2",
     "@emotion/react": "^11",
