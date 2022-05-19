@@ -2,19 +2,20 @@ import { Box } from "@chakra-ui/react"
 import { GetServerSideProps } from "next"
 import { getSession } from "next-auth/react"
 import { FC } from "react"
-import { getAccessToken } from "../../../services/auth/getAccessToken"
-import { GithubClient, IssueResponse } from "../../../services/github/client"
+import { getAccessToken } from "../../../../services/auth/getAccessToken"
+import { GithubClient, IssueResponse } from "../../../../services/github/client"
+import { IssueChatPage, ChatInput } from "../../../../components/page/IssueChatPage"
+import { LoginButton } from "../../../../components/Login"
 
-const Issue: FC<{ issue: IssueResponse }> = ({ issue }) => {
-  return <Box>{issue.title}</Box>
-}
-
-export const Page: FC<{ issues: IssueResponse[] }> = ({ issues }) => {
-  console.log(issues)
+export const Page: FC<{ error?: string, issues: IssueResponse[] }> = ({ error, issues }) => {
+  if (error) {
+    return <Box>
+      {error}
+      <LoginButton />
+    </Box>
+  }
   return <Box>
-    {issues.map((issue, key) => {
-      return <Issue issue={issue} key={key} />
-    })}
+    <IssueChatPage issues={issues} />
   </Box>
 }
 
@@ -35,7 +36,7 @@ export const getServerSideProps: GetServerSideProps = async (req) => {
       }
     }
   }
-  // console.log(session.token.accessToken)
+
   const accessor = new GithubClient(accessToken)
   // // // console.log(accessor)
   const issues = await accessor.getIssue({ owner, repo })

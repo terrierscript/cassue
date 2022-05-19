@@ -1,12 +1,21 @@
 import { SessionProvider } from "next-auth/react"
-import { ChakraProvider } from "@chakra-ui/react"
-import React from "react"
+import { ChakraProvider, ColorModeScript, Container, useColorMode } from "@chakra-ui/react"
+import React, { useEffect } from "react"
+import { appTheme } from "../services/chakra/theme"
+
+// const Theme = () => {
+//   const { colorMode, toggleColorMode, setColorMode } = useColorMode()
+//   useEffect(() => {
+//     setColorMode("light")
+//   }, [])
+//   return null
+// }
 
 function MyApp({ Component, pageProps: { session, ...pageProps },
 }) {
-  return <ChakraProvider>
+  return <ChakraProvider theme={appTheme}>
+    {/* <Theme /> */}
     <SessionProvider session={session}>
-
       <Component {...pageProps} />
     </SessionProvider>
   </ChakraProvider>

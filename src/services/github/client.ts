@@ -1,5 +1,6 @@
 import { Octokit, App } from "octokit"
 import { createAppAuth } from "@octokit/auth-app"
+import { Endpoints, GetResponseDataTypeFromEndpointMethod } from "@octokit/types"
 export type IssueParam = {
   owner: string,
   repo: string
@@ -22,9 +23,14 @@ const app = new App({
 
 })
 
-// TODO
-export type IssueResponse = any  //Awaited<ReturnType<typeof app.rest.issues.listForRepo>>
 
+const octo = new Octokit()
+
+// TODO
+
+export type IssueResponsees = GetResponseDataTypeFromEndpointMethod<typeof octo.rest.issues.listForRepo>
+export type IssueResponse = IssueResponsees[number]
+// ReturnType>　//any  //Awaited<ReturnType<typeof app.rest.issues.listForRepo>>
 
 export class GithubClient {
   client: Octokit
@@ -45,7 +51,7 @@ export class GithubClient {
   async grant(param: IssueParam) {
     return app
   }
-  async getIssue(param: IssueParam) {
+  async getIssue(param: IssueParam): Promise<IssueResponsees> {
     const app = new Octokit({
       auth: this.token
     })
