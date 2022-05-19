@@ -13,6 +13,7 @@ const auth = createAppAuth({
 })
 
 
+
 const app = new App({
   appId: process.env.GITHUB_APP_ID!,
   privateKey: process.env.GITHUB_APP_PRIVATE_KEY.replaceAll('\\n', "\n"),
@@ -20,6 +21,9 @@ const app = new App({
   clientSecret: process.env.GITHUB_CLIENT_SECRET!,
 
 })
+
+// TODO
+export type IssueResponse = any  //Awaited<ReturnType<typeof app.rest.issues.listForRepo>>
 
 
 export class GithubClient {
@@ -47,6 +51,6 @@ export class GithubClient {
     })
 
     const result = await app.rest.issues.listForRepo(param) //.issues.list(param)
-    return result
+    return result.data
   }
 }

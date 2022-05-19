@@ -1,31 +1,48 @@
 import { Box } from "@chakra-ui/react"
 import { GetServerSideProps } from "next"
 import { getSession } from "next-auth/react"
-import { GithubClient } from "../../../services/github/client"
+import { FC } from "react"
+import { getAccessToken } from "../../../services/auth/getAccessToken"
+import { GithubClient, IssueResponse } from "../../../services/github/client"
 
-export const Page = () => {
+const Issue: FC<{ issue: IssueResponse }> = ({ issue }) => {
+  return <Box>{issue.title}</Box>
+}
+
+export const Page: FC<{ issues: IssueResponse[] }> = ({ issues }) => {
+  console.log(issues)
   return <Box>
-    pp
+    {issues.map((issue, key) => {
+      return <Issue issue={issue} key={key} />
+    })}
   </Box>
 }
 
 export const getServerSideProps: GetServerSideProps = async (req) => {
-  const session = await getSession(req)
-  if (!session.token.accessToken) {
+  const accessToken = await getAccessToken(req)
+  if (!accessToken) {
     return {
       props: {
-        error: "not found"
+        error: "needLogin"
       }
     }
   }
   const { owner, repo, filter } = req.query
+  if (typeof owner !== "string" || typeof repo !== "string") {
+    return {
+      props: {
+        error: "invalid_param"
+      }
+    }
+  }
   // console.log(session.token.accessToken)
-  const accessor = new GithubClient(session.token.accessToken)
+  const accessor = new GithubClient(accessToken)
   // // // console.log(accessor)
-  const r = await accessor.getIssue({ owner, repo })
-  console.log(r)
+  const issues = await accessor.getIssue({ owner, repo })
   return {
-    props: {}
+    props: {
+      issues
+    }
   }
 }
 
