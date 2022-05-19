@@ -13,7 +13,9 @@ export const getServerSideProps: GetServerSideProps = async (req) => {
   const session = await getSession(req)
   if (!session.token.accessToken) {
     return {
-      props: "x"
+      props: {
+        error: "not found"
+      }
     }
   }
   const { owner, repo, filter } = req.query
