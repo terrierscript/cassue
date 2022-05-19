@@ -6,22 +6,22 @@ export type IssueParam = {
   repo: string
 }
 
-const auth = createAppAuth({
-  appId: process.env.GITHUB_APP_ID!,
-  privateKey: process.env.GITHUB_APP_PRIVATE_KEY.replaceAll('\\n', "\n"),
-  clientId: process.env.GITHUB_CLIENT_ID!,
-  clientSecret: process.env.GITHUB_CLIENT_SECRET!,
-})
+// const auth = createAppAuth({
+//   appId: process.env.GITHUB_APP_ID!,
+//   privateKey: process.env.GITHUB_APP_PRIVATE_KEY.replaceAll('\\n', "\n"),
+//   clientId: process.env.GITHUB_CLIENT_ID!,
+//   clientSecret: process.env.GITHUB_CLIENT_SECRET!,
+// })
 
 
 
-const app = new App({
-  appId: process.env.GITHUB_APP_ID!,
-  privateKey: process.env.GITHUB_APP_PRIVATE_KEY.replaceAll('\\n', "\n"),
-  clientId: process.env.GITHUB_CLIENT_ID!,
-  clientSecret: process.env.GITHUB_CLIENT_SECRET!,
+// const app = new App({
+//   appId: process.env.GITHUB_APP_ID!,
+//   privateKey: process.env.GITHUB_APP_PRIVATE_KEY.replaceAll('\\n', "\n"),
+//   clientId: process.env.GITHUB_CLIENT_ID!,
+//   clientSecret: process.env.GITHUB_CLIENT_SECRET!,
 
-})
+// })
 
 
 const octo = new Octokit()
@@ -48,9 +48,9 @@ export class GithubClient {
     // this.client = new Octokit({ auth })
 
   }
-  async grant(param: IssueParam) {
-    return app
-  }
+  // async grant(param: IssueParam) {
+  //   return app
+  // }
   async getIssue(param: IssueParam): Promise<IssueResponsees> {
     const app = new Octokit({
       auth: this.token
