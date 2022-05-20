@@ -42,40 +42,28 @@ export class GithubClient {
   account: Record<string, string>
   constructor(account: Record<string, string>) {
     this.account = account
-    // auth({
-    //   type: "oauth-user",
-    // })
-    // this.auth = createOAuthUserAuth({
-    //   clientId: process.env.GITHUB_CLIENT_ID!,
-    //   clientSecret: process.env.GITHUB_CLIENT_SECRET!,
-
-    // })
     this.client = new Octokit({
-
+      auth: this.account.access_token,
     })
-    // console.log(app.eachInstallation)
-    // const auth = createAppAuth({
-    //   appId: process.env.GITHUB_APP_ID!,
-    //   privateKey: process.env.GITHUB_APP_PRIVATE_KEY!,
-    //   clientId: process.env.GITHUB_CLIENT_ID!,
-    //   clientSecret: process.env.GITHUB_CLIENT_SECRET!,
-    // })
-    // console.log(auth)
-    // this.client = new Octokit({ auth })
 
   }
 
   async getIssue(param: IssueParam): Promise<IssueResponsees> {
-    const app = new Octokit({
-      auth: this.account.access_token,
 
-    })
-
-    const result = await app.rest.issues.listForRepo(param) //.issues.list(param)
+    const result = await this.client.rest.issues.listForRepo({
+      ...param,
+      // sort: "updated",
+      direction: "desc"
+    }) //.issues.list(param)
     return result.data
   }
-  postIssue(target: IssueParam, param: IssuePostParam) {
-    // throw new Error("Method not implemented.")
+  async postIssue(target: IssueParam, param: IssuePostParam) {
+    const result = await this.client.rest.issues.create({
+      ...target,
+      ...param
+    }) //.issues.list(param)
+    return result.data
+
   }
 
 }

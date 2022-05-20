@@ -2,6 +2,7 @@ import { Box, Button, HStack, Input, Link } from "@chakra-ui/react"
 import { useSession } from "next-auth/react"
 import { FC, useMemo, useState } from "react"
 import { RepoQueryProps } from "./Props"
+import { useIssues } from "./useIssues"
 
 
 const ReadOnlyMode: FC<RepoQueryProps> = ({ owner, repo }) => {
@@ -37,12 +38,16 @@ const ChatInput: FC<{ onSubmit: (value: string) => void }> = ({ onSubmit }) => {
 }
 
 const InputSending: FC<RepoQueryProps> = ({ owner, repo }) => {
-
+  const { mutate } = useIssues({ owner, repo })
   return <ChatInput onSubmit={async (v) => {
     const result = await fetch(`/api/issues/${owner}/${repo}`, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
       method: "POST",
       body: JSON.stringify({ title: v })
     })
+    mutate()
   }} />
 }
 export const ChatInputArea: FC<RepoQueryProps> = ({ owner, repo }) => {

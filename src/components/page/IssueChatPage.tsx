@@ -38,8 +38,11 @@ const Issue: FC<{ issue: IssueResponse }> = ({ issue }) => {
 
 const IssueStream: FC<{ issues: IssueResponse[] }> = ({ issues }) => {
   return <Stack spacing={4}>
-    <Spacer minH="100vh" />
-    {issues?.map((issue, key) => {
+    <Spacer
+      bg="red.100"
+      minH="100vh"
+    />
+    {issues?.concat().reverse().map((issue, key) => {
       return <Issue issue={issue} key={key} />
     })}
   </Stack>
@@ -66,10 +69,14 @@ const IssueStreamWrap: FC<IssuePageProps> = ({ owner, repo, filter }) => {
   return <IssueStream issues={data.issues} />
 }
 export const IssueChatPage: FC<IssuePageProps> = ({ owner, repo, filter }) => {
-  return <Grid gridTemplateRows={"1fr auto 1fr"} h="100vh">
-    < ChatHeader {...{ owner, repo, filter }} />
-    < Flex overflow="scroll" w="100%" p={4}
-      flexDirection="column-reverse" >
+  return <Grid gridTemplateRows={"1fr auto 1fr"}
+    h="100vh"
+  >
+    <ChatHeader {...{ owner, repo, filter }} />
+    <Flex overflow="scroll" w="100%"
+      p={4}
+      flexDirection="column-reverse"
+    >
       <IssueStreamWrap  {...{ owner, repo, filter }} />
     </Flex >
     <Box bg="gray.200" p={2}>
