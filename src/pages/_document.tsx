@@ -15,6 +15,7 @@ export default class Document extends NextDocument {
               height: 100%;
               width: 100%;
               overflow: auto;
+              overscroll-behavior: none;
             }
             `}
           </style>
