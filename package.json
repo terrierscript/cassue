@@ -13,6 +13,7 @@
     "@chakra-ui/react": "^2.0.2",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
+    "@heroicons/react": "^1.0.6",
     "@octokit/auth-app": "^3.6.1",
     "framer-motion": "^6.3.3",
     "next": "^12.1.6",
