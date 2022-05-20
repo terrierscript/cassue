@@ -39,9 +39,9 @@ const Issue: FC<{ issue: IssueResponse }> = ({ issue }) => {
 
 const IssueStream: FC<{ issues: IssueResponse[] }> = ({ issues }) => {
   return <Stack spacing={4}>
-    {/* <Spacer
+    <Spacer
     // minH="100vh"
-    /> */}
+    />
     {issues?.concat().reverse().map((issue, key) => {
       return <Issue issue={issue} key={key} />
     })}
@@ -71,7 +71,8 @@ const IssueStreamWrap: FC<IssuePageProps> = ({ owner, repo, filter }) => {
 export const IssueChatPage: FC<IssuePageProps> = ({ owner, repo, filter }) => {
   const height = use100vh()
   return <Box
-    w="100%" h={height ?? "100%"}
+    w="100%" h={`calc(min(${height}px,100%,100vh))`}
+    sx={{ touchAction: "none" }}
   // overflow={"hidden"} position="absolute"
   >
     <Box
@@ -80,8 +81,8 @@ export const IssueChatPage: FC<IssuePageProps> = ({ owner, repo, filter }) => {
     >
       <Grid gridTemplateRows={"1fr auto max-content"}
         // minH="-webkit-fill-available"
-        // h="100vh"
-        h={height ?? "100%"}
+        h="100%"
+      // h={height ?? "100%"}
 
       >
         <ChatHeader {...{ owner, repo, filter }} />
