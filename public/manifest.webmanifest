@@ -4,9 +4,9 @@
   "display": "fullscreen",
   "icons": [
     {
-      "src": "icon/fox-icon.png",
+      "src": "icon/icon.svg",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/svg"
     }
   ],
   "name": "chattiisue",
