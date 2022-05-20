@@ -14,6 +14,7 @@ export default NextAuth({
         return {
           id: profile.id.toString(),
           name: profile.login,
+          login: profile.login,
           email: profile.email,
           image: profile.avatar_url,
         }
