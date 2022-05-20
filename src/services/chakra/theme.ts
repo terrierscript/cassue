@@ -11,7 +11,7 @@ export const appTheme = extendTheme({
       body: {
         minHeight: ["100vh", "-webkit-fill-available"],
         // h: "100vh",
-        overflow: "hidden"
+        // overflow: "hidden"
       },
       html: {
         minHeight: "-webkit-fill-available",

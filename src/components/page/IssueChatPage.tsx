@@ -69,8 +69,8 @@ const IssueStreamWrap: FC<IssuePageProps> = ({ owner, repo, filter }) => {
 }
 export const IssueChatPage: FC<IssuePageProps> = ({ owner, repo, filter }) => {
   return <Box
-    w="100%" h="100%"
-    overflow={"hidden"} position="absolute"
+  // w="100%" h="100%"
+  // overflow={"hidden"} position="absolute"
   >
     <Box
       position="absolute"
