@@ -5,27 +5,25 @@ import { appTheme } from "../services/chakra/theme"
 import { AppProps } from "next/app"
 import Div100vh from "react-div-100vh"
 
-// const Theme = () => {
-//   const { colorMode, toggleColorMode, setColorMode } = useColorMode()
-//   useEffect(() => {
-//     setColorMode("light")
-//   }, [])
-//   return null
-// }
+const Theme = () => {
+  const { colorMode, toggleColorMode, setColorMode } = useColorMode()
+  useEffect(() => {
+    setColorMode("light")
+  }, [])
+  return null
+}
 
 function MyApp({ Component, pageProps: { session, ...pageProps },
 }: AppProps) {
   return (
     <ChakraProvider theme={appTheme}>
       <Flex overflow={"hidden"} >
-        <Div100vh >
-          {/* <Theme /> */}
-          {/* <Suspense fallback={<Box>...</Box>}> */}
-          <SessionProvider session={session}>
-            <Component {...pageProps} />
-          </SessionProvider>
-          {/* </Suspense> */}
-        </Div100vh>
+        <Theme />
+        {/* <Suspense fallback={<Box>...</Box>}> */}
+        <SessionProvider session={session}>
+          <Component {...pageProps} />
+        </SessionProvider>
+        {/* </Suspense> */}
       </Flex>
     </ChakraProvider >
   )
