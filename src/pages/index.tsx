@@ -1,4 +1,4 @@
-import { Box } from '@chakra-ui/react'
+import { Box, Center } from '@chakra-ui/react'
 import Head from 'next/head'
 import React from 'react'
 import { LoginButton } from '../components/Login'
@@ -10,7 +10,9 @@ export default function Home() {
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Box>hello</Box>
+      <Center>
+
+      </Center>
       <LoginButton />
     </Box>
   )

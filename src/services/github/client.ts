@@ -2,10 +2,19 @@ import { Octokit, App } from "octokit"
 import { createAppAuth } from "@octokit/auth-app"
 import { createOAuthUserAuth } from "@octokit/auth-oauth-user"
 import { Endpoints, GetResponseDataTypeFromEndpointMethod } from "@octokit/types"
-export type IssueParam = {
-  owner: string,
-  repo: string
-}
+import { z } from "zod"
+
+export const IssueParamScheme = z.object({
+  owner: z.string(),
+  repo: z.string(),
+})
+export type IssueParam = z.infer<typeof IssueParamScheme>
+
+export const IssuePostScheme = z.object({
+  title: z.string(),
+
+})
+export type IssuePostParam = z.infer<typeof IssuePostScheme>
 
 // const auth = createAppAuth({
 //   appId: process.env.GITHUB_APP_ID!,
@@ -65,4 +74,8 @@ export class GithubClient {
     const result = await app.rest.issues.listForRepo(param) //.issues.list(param)
     return result.data
   }
+  postIssue(target: IssueParam, param: IssuePostParam) {
+    // throw new Error("Method not implemented.")
+  }
+
 }

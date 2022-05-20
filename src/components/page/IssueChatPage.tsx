@@ -10,13 +10,13 @@ const Issue: FC<{ issue: IssueResponse }> = ({ issue }) => {
     <HStack spacing={4}>
       <Box alignSelf={"start"} py={2}>
         <Avatar size="sm"
-          name={issue.user.login}
-          src={issue.user.avatar_url}
+          name={issue.user?.login}
+          src={issue.user?.avatar_url}
         />
       </Box>
       <Stack spacing={0}>
         <HStack>
-          <Box fontWeight={"bold"}>{issue.user.login}</Box>
+          <Box fontWeight={"bold"}>{issue.user?.login}</Box>
           <Box fontSize={"sm"}>{issue.updated_at}</Box>
           <Box fontSize={"xs"} color="gray.500">
             <Link href={issue.html_url} target="_blank" >
@@ -54,7 +54,6 @@ const ChatHeader: FC<Omit<IssuePageProps, "issues">> = ({ owner, repo }) => {
     </Box>
     <Divider />
   </Box>
-
 }
 
 const IssueStreamWrap: FC<IssuePageProps> = ({ owner, repo, filter }) => {

@@ -16,23 +16,32 @@ const ReadOnlyMode: FC<RepoQueryProps> = ({ owner, repo }) => {
   </HStack>
 }
 
-const ChatInput: FC<{ onChange: (value: string) => void }> = ({ onChange }) => {
-  return <HStack>
-    <Input bg="gray.50"
-      onChange={(e) => onChange(e.target.value)}
-      border={"2px solid"}
-      _focus={{
-        borderColor: "gray.400",
-        // outlineColor: "gray.800"
-        outline: "none"
-      }} />
-  </HStack>
+const ChatInput: FC<{ value: string, string, onSubmit: (value: string) => void }> = ({ onSubmit }) => {
+  const [value, setValue] = useState("")
+  return <form onSubmit={(e) => {
+    e.preventDefault()
+    setValue("")
+    onSubmit(value)
+  }}>
+    <HStack>
+      <Input bg="gray.50"
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        border={"2px solid"}
+        _focus={{
+          borderColor: "gray.400",
+          // outlineColor: "gray.800"
+          outline: "none"
+        }} />
+    </HStack>
+  </form>
 }
 
 const InputSending = () => {
-  const [value, setValue] = useState("")
-  return <ChatInput onChange={(value) => { setValue(value) }} />
 
+  return <ChatInput onSubmit={(v) => {
+
+  }} />
 }
 export const ChatInputArea: FC<RepoQueryProps> = ({ owner, repo }) => {
   const { data } = useSession()
