@@ -1,0 +1,15 @@
+{
+  "background_color": "white",
+  "description": "",
+  "display": "fullscreen",
+  "icons": [
+    {
+      "src": "icon/fox-icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
+  "name": "chattiisue",
+  "short_name": "chattiisue",
+  "start_url": "/"
+}
