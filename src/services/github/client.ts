@@ -20,9 +20,6 @@ export type IssueParam = {
 //   clientId: process.env.GITHUB_CLIENT_ID!,
 //   clientSecret: process.env.GITHUB_CLIENT_SECRET!,
 
-// })
-
-
 const octo = new Octokit()
 
 // TODO
@@ -58,6 +55,7 @@ export class GithubClient {
     // this.client = new Octokit({ auth })
 
   }
+
   async getIssue(param: IssueParam): Promise<IssueResponsees> {
     const app = new Octokit({
       auth: this.account.access_token,

@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node -v",
     "build": "next build",
     "start": "next start",
     "test": "vitest"
@@ -12,12 +13,11 @@
     "@chakra-ui/react": "^2.0.2",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
-    "@lexical/react": "^0.2.9",
+    "@heroicons/react": "^1.0.6",
     "@octokit/auth-app": "^3.6.1",
     "@octokit/auth-oauth-user": "^1.3.0",
     "@octokit/oauth-methods": "^1.2.6",
     "framer-motion": "^6.3.3",
-    "lexical": "^0.2.9",
     "next": "^12.1.6",
     "next-auth": "^4.3.4",
     "octokit": "^1.7.1",

@@ -3,7 +3,8 @@ import { GetServerSideProps } from "next"
 import { FC } from "react"
 import { getSessionAccount } from "../../../../services/auth/getSessionAccount"
 import { GithubClient } from "../../../../services/github/client"
-import { IssueChatPage, IssuePageProps } from "../../../../components/page/IssueChatPage"
+import { IssueChatPage } from "../../../../components/page/IssueChatPage"
+import { IssuePageProps } from "../../../../components/page/Props"
 import { LoginButton } from "../../../../components/Login"
 
 type Props = {
