@@ -1,6 +1,6 @@
 import { Box, Button, HStack, Input, Link } from "@chakra-ui/react"
 import { useSession } from "next-auth/react"
-import { FC, useMemo } from "react"
+import { FC, useMemo, useState } from "react"
 import { RepoQueryProps } from "./Props"
 
 
@@ -16,10 +16,10 @@ const ReadOnlyMode: FC<RepoQueryProps> = ({ owner, repo }) => {
   </HStack>
 }
 
-const ChatInput = () => {
-
+const ChatInput: FC<{ onChange: (value: string) => void }> = ({ onChange }) => {
   return <HStack>
     <Input bg="gray.50"
+      onChange={(e) => onChange(e.target.value)}
       border={"2px solid"}
       _focus={{
         borderColor: "gray.400",
@@ -27,6 +27,12 @@ const ChatInput = () => {
         outline: "none"
       }} />
   </HStack>
+}
+
+const InputSending = () => {
+  const [value, setValue] = useState("")
+  return <ChatInput onChange={(value) => { setValue(value) }} />
+
 }
 export const ChatInputArea: FC<RepoQueryProps> = ({ owner, repo }) => {
   const { data } = useSession()
@@ -39,5 +45,5 @@ export const ChatInputArea: FC<RepoQueryProps> = ({ owner, repo }) => {
   if (disabled) {
     return <ReadOnlyMode {...{ owner, repo }} />
   }
-  return <ChatInput />
+  return <InputSending />
 }

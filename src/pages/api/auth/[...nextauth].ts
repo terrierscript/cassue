@@ -24,7 +24,7 @@ export default NextAuth({
   ],
   callbacks: {
     async session({ session, user, token }) {
-      // console.log({ session, user, token })
+      console.log({ session, user, token })
       // console.log(new Date(token.exp * 1000))
       // await refreshAccessToken(token.accessToken)
 
@@ -33,6 +33,7 @@ export default NextAuth({
       return session
     },
     async jwt({ token, user, account, profile, isNewUser }) {
+      console.log({ token, user, account, profile, isNewUser })
       if (account) {
         token.account = account
       }
