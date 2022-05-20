@@ -1,7 +1,7 @@
 import { Avatar, Box, Divider, Flex, Grid, HStack, Link, Spacer, Stack, Textarea } from "@chakra-ui/react"
 import { FC } from "react"
 import { IssueResponse } from "../../services/github/client"
-import { ChatInput } from "./ChatInput"
+import { ChatInputArea } from "./ChatInput"
 import { IssuePageProps } from "./Props"
 
 const Issue: FC<{ issue: IssueResponse }> = ({ issue }) => {
@@ -64,7 +64,7 @@ export const IssueChatPage: FC<IssuePageProps> = ({ issues, owner, repo, filter 
       <IssueStream issues={issues} />
     </Flex>
     <Box bg="gray.200" p={2}>
-      <ChatInput {...{ owner, repo }} />
+      <ChatInputArea {...{ owner, repo }} />
     </Box>
   </Grid >
 }

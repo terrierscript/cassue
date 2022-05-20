@@ -16,7 +16,19 @@ const ReadOnlyMode: FC<RepoQueryProps> = ({ owner, repo }) => {
   </HStack>
 }
 
-export const ChatInput: FC<RepoQueryProps> = ({ owner, repo }) => {
+const ChatInput = () => {
+
+  return <HStack>
+    <Input bg="gray.50"
+      border={"2px solid"}
+      _focus={{
+        borderColor: "gray.400",
+        // outlineColor: "gray.800"
+        outline: "none"
+      }} />
+  </HStack>
+}
+export const ChatInputArea: FC<RepoQueryProps> = ({ owner, repo }) => {
   const { data } = useSession()
   const disabled = useMemo(() => {
     return (data?.user?.name !== owner)
@@ -27,14 +39,5 @@ export const ChatInput: FC<RepoQueryProps> = ({ owner, repo }) => {
   if (disabled) {
     return <ReadOnlyMode {...{ owner, repo }} />
   }
-  return <HStack>
-    <Input bg="gray.50"
-      border={"2px solid"}
-      _focus={{
-        borderColor: "gray.400",
-        // outlineColor: "gray.800"
-        outline: "none"
-      }} />
-
-  </HStack>
+  return <ChatInput />
 }
