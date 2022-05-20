@@ -1,8 +1,8 @@
-import { Box, Button, HStack, Input, Link } from "@chakra-ui/react"
+import { Button, HStack, Input, Link } from "@chakra-ui/react"
 import { useSession } from "next-auth/react"
-import { FC, useMemo, useState } from "react"
-import { createEditor, Descendant } from "slate"
-import { withReact, Slate, Editable } from "slate-react"
+import { FC, useMemo } from "react"
+import { Transforms } from "slate"
+import { SlateEditor } from "./SlateEditor"
 import { RepoQueryProps } from "./Props"
 
 
@@ -18,29 +18,10 @@ const ReadOnlyMode: FC<RepoQueryProps> = ({ owner, repo }) => {
   </HStack>
 }
 
-const initialValue = [
-  {
-    type: "paragrahp",
-    children: [{ text: '' }],
-  },
-]
-const Editor = () => {
-  // @ts-ignore
-  const [editor] = useState(() => withReact(createEditor()))
-  const [value, setValue] = useState<Descendant[]>(initialValue)
-  console.log(value)
-  // Render the Slate context.
-  return <Box bg="gray.100" w="100%" p={2}>
-    <Slate editor={editor} value={value} onChange={(n) => setValue(n)}>
-      <Editable />
-    </Slate>
-  </Box>
-}
-
 const ChatInput = () => {
 
   return <HStack>
-    <Editor />
+    <SlateEditor />
     {/* <Input bg="gray.50"
       border={"2px solid"}
       _focus={{
