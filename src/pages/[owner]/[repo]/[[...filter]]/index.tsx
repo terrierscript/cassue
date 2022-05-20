@@ -13,7 +13,6 @@ export type Props = {
 } & IssuePageProps
 
 export const Page: FC<Props> = ({ error, ...issueChatProps }) => {
-  const { data } = useIssues(issueChatProps)
   if (error) {
     return <Box>
       {error}
@@ -43,14 +42,14 @@ export const getServerSideProps: GetServerSideProps = async (req) => {
     }
   }
 
-  const accessor = new GithubClient(account)
-  // // // console.log(accessor)
-  const issues = await accessor.getIssue({ owner, repo })
+  // const accessor = new GithubClient(account)
+  // // // // console.log(accessor)
+  // const issues = await accessor.getIssue({ owner, repo })
   return {
     props: {
       owner,
       repo,
-      issues
+      // issues
     }
   }
 }

@@ -1,6 +1,6 @@
 import { SessionProvider } from "next-auth/react"
-import { ChakraProvider, ColorModeScript, Container, useColorMode } from "@chakra-ui/react"
-import React, { useEffect } from "react"
+import { Box, ChakraProvider, ColorModeScript, Container, useColorMode } from "@chakra-ui/react"
+import React, { Suspense, useEffect } from "react"
 import { appTheme } from "../services/chakra/theme"
 
 // const Theme = () => {
@@ -15,9 +15,12 @@ function MyApp({ Component, pageProps: { session, ...pageProps },
 }) {
   return <ChakraProvider theme={appTheme}>
     {/* <Theme /> */}
+    {/* <Suspense fallback={<Box>...</Box>}> */}
+
     <SessionProvider session={session}>
       <Component {...pageProps} />
     </SessionProvider>
+    {/* </Suspense> */}
   </ChakraProvider>
 }
 
