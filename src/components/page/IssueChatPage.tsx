@@ -4,6 +4,7 @@ import { IssueResponse } from "../../services/github/client"
 import { ChatInputArea } from "./ChatInput"
 import { IssuePageProps } from "./Props"
 import { useIssues } from "./useIssues"
+import { use100vh } from 'react-div-100vh'
 
 const Issue: FC<{ issue: IssueResponse }> = ({ issue }) => {
   return <Stack>
@@ -68,8 +69,9 @@ const IssueStreamWrap: FC<IssuePageProps> = ({ owner, repo, filter }) => {
   return <IssueStream issues={data.issues} />
 }
 export const IssueChatPage: FC<IssuePageProps> = ({ owner, repo, filter }) => {
+  const height = use100vh()
   return <Box
-  // w="100%" h="100%"
+    w="100%" h="100%"
   // overflow={"hidden"} position="absolute"
   >
     <Box
@@ -77,8 +79,10 @@ export const IssueChatPage: FC<IssuePageProps> = ({ owner, repo, filter }) => {
       top={0} left={0} right={0} bottom={0}
     >
       <Grid gridTemplateRows={"1fr auto max-content"}
-        minH="-webkit-fill-available"
-        h="100vh"
+        // minH="-webkit-fill-available"
+        // h="100vh"
+        h={height ?? "100%"}
+
       >
         <ChatHeader {...{ owner, repo, filter }} />
         <Flex overflow="scroll" w="100%"

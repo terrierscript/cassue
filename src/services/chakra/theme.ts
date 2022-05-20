@@ -11,9 +11,11 @@ export const appTheme = extendTheme({
       body: {
         minHeight: ["100vh", "-webkit-fill-available"],
         // h: "100vh",
-        // overflow: "hidden"
+        // overflow: "hidden",
+        "overscroll-behavior-y": "none",
       },
       html: {
+        "overscroll-behavior-y": "none",
         minHeight: "-webkit-fill-available",
       }
     })
