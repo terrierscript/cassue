@@ -1,7 +1,8 @@
 import { Box, Button, HStack, Input, Link } from "@chakra-ui/react"
 import { useSession } from "next-auth/react"
-import { FC, useMemo } from "react"
+import { FC, useMemo, useState } from "react"
 import { RepoQueryProps } from "./Props"
+import { useIssues } from "./useIssues"
 
 
 const ReadOnlyMode: FC<RepoQueryProps> = ({ owner, repo }) => {
@@ -16,17 +17,38 @@ const ReadOnlyMode: FC<RepoQueryProps> = ({ owner, repo }) => {
   </HStack>
 }
 
-const ChatInput = () => {
+const ChatInput: FC<{ onSubmit: (value: string) => void }> = ({ onSubmit }) => {
+  const [value, setValue] = useState("")
+  return <form onSubmit={(e) => {
+    e.preventDefault()
+    onSubmit(value)
+  }}>
+    <HStack>
+      <Input bg="gray.50"
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        border={"2px solid"}
+        _focus={{
+          borderColor: "gray.400",
+          // outlineColor: "gray.800"
+          outline: "none"
+        }} />
+    </HStack>
+  </form>
+}
 
-  return <HStack>
-    <Input bg="gray.50"
-      border={"2px solid"}
-      _focus={{
-        borderColor: "gray.400",
-        // outlineColor: "gray.800"
-        outline: "none"
-      }} />
-  </HStack>
+const InputSending: FC<RepoQueryProps> = ({ owner, repo }) => {
+  const { mutate } = useIssues({ owner, repo })
+  return <ChatInput onSubmit={async (v) => {
+    const result = await fetch(`/api/issues/${owner}/${repo}`, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: "POST",
+      body: JSON.stringify({ title: v })
+    })
+    mutate()
+  }} />
 }
 export const ChatInputArea: FC<RepoQueryProps> = ({ owner, repo }) => {
   const { data } = useSession()
@@ -39,5 +61,5 @@ export const ChatInputArea: FC<RepoQueryProps> = ({ owner, repo }) => {
   if (disabled) {
     return <ReadOnlyMode {...{ owner, repo }} />
   }
-  return <ChatInput />
+  return <InputSending  {...{ owner, repo }} />
 }

@@ -1,8 +1,9 @@
-import { Avatar, Box, Divider, Flex, Grid, HStack, Link, Spacer, Stack, Textarea } from "@chakra-ui/react"
-import { FC } from "react"
+import { Avatar, Box, Center, Divider, Flex, Grid, HStack, Link, Spacer, Spinner, Stack, Textarea } from "@chakra-ui/react"
+import { FC, Suspense } from "react"
 import { IssueResponse } from "../../services/github/client"
 import { ChatInputArea } from "./ChatInput"
 import { IssuePageProps } from "./Props"
+import { useIssues } from "./useIssues"
 
 const Issue: FC<{ issue: IssueResponse }> = ({ issue }) => {
   return <Stack>
@@ -34,10 +35,14 @@ const Issue: FC<{ issue: IssueResponse }> = ({ issue }) => {
 }
 
 
+
 const IssueStream: FC<{ issues: IssueResponse[] }> = ({ issues }) => {
   return <Stack spacing={4}>
-    <Spacer minH="100vh" />
-    {issues.map((issue, key) => {
+    <Spacer
+      bg="red.100"
+      minH="100vh"
+    />
+    {issues?.concat().reverse().map((issue, key) => {
       return <Issue issue={issue} key={key} />
     })}
   </Stack>
@@ -52,17 +57,28 @@ const ChatHeader: FC<Omit<IssuePageProps, "issues">> = ({ owner, repo }) => {
     </Box>
     <Divider />
   </Box>
-
 }
 
-export const IssueChatPage: FC<IssuePageProps> = ({ issues, owner, repo, filter }) => {
-
-  return <Grid gridTemplateRows={"1fr auto 1fr"} h="100vh">
+const IssueStreamWrap: FC<IssuePageProps> = ({ owner, repo, filter }) => {
+  const { data } = useIssues({ owner, repo, filter })
+  if (!data) {
+    return <Center minH="100vh">
+      <Spinner />
+    </Center>
+  }
+  return <IssueStream issues={data.issues} />
+}
+export const IssueChatPage: FC<IssuePageProps> = ({ owner, repo, filter }) => {
+  return <Grid gridTemplateRows={"1fr auto 1fr"}
+    h="100vh"
+  >
     <ChatHeader {...{ owner, repo, filter }} />
-    <Flex overflow="scroll" w="100%" p={4}
-      flexDirection="column-reverse">
-      <IssueStream issues={issues} />
-    </Flex>
+    <Flex overflow="scroll" w="100%"
+      p={4}
+      flexDirection="column-reverse"
+    >
+      <IssueStreamWrap  {...{ owner, repo, filter }} />
+    </Flex >
     <Box bg="gray.200" p={2}>
       <ChatInputArea {...{ owner, repo }} />
     </Box>

@@ -7,6 +7,6 @@ export type RepoQueryProps = {
 }
 
 export type IssuePageProps = {
-  issues: IssueResponse[]
-  filter: string
+  // issues: IssueResponse[]
+  filter?: string
 } & RepoQueryProps

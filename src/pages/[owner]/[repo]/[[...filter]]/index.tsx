@@ -6,8 +6,9 @@ import { GithubClient } from "../../../../services/github/client"
 import { IssueChatPage } from "../../../../components/page/IssueChatPage"
 import { IssuePageProps } from "../../../../components/page/Props"
 import { LoginButton } from "../../../../components/Login"
+import { useIssues } from "../../../../components/page/useIssues"
 
-type Props = {
+export type Props = {
   error?: string,
 } & IssuePageProps
 
@@ -41,14 +42,14 @@ export const getServerSideProps: GetServerSideProps = async (req) => {
     }
   }
 
-  const accessor = new GithubClient(account)
-  // // // console.log(accessor)
-  const issues = await accessor.getIssue({ owner, repo })
+  // const accessor = new GithubClient(account)
+  // // // // console.log(accessor)
+  // const issues = await accessor.getIssue({ owner, repo })
   return {
     props: {
       owner,
       repo,
-      issues
+      // issues
     }
   }
 }
