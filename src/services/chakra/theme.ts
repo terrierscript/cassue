@@ -5,20 +5,5 @@ export const themeConfig: ThemeConfig = {
 }
 
 export const appTheme = extendTheme({
-  config: themeConfig,
-  styles: {
-    global: () => ({
-      // body: {
-      //   minHeight: ["100vh", "-webkit-fill-available"],
-      //   // h: "100vh",
-      //   // overflow: "hidden",
-      //   "overscroll-behavior-y": "none",
-      // },
-      // html: {
-      //   "overscroll-behavior-y": "none",
-      //   minHeight: "-webkit-fill-available",
-      // }
-    })
-  }
+  config: themeConfig
 })
-1
