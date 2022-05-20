@@ -31,7 +31,7 @@ export type IssueResponse = IssueResponsees[number]
 export class GithubClient {
   client: Octokit
   account: Record<string, string>
-  constructor(account) {
+  constructor(account: Record<string, string>) {
     this.account = account
     // auth({
     //   type: "oauth-user",
