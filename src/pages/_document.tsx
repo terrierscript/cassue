@@ -9,7 +9,7 @@ export default class Document extends NextDocument {
       <Html lang='en'>
         <Head />
         <body>
-          <ColorModeScript type="localStorage" initialColorMode={"dark"} />
+          {/* <ColorModeScript type="localStorage" initialColorMode={"dark"} /> */}
           <Main />
           <NextScript />
         </body>
