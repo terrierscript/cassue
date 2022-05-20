@@ -22,6 +22,7 @@ const ChatInput: FC<{ onSubmit: (value: string) => void }> = ({ onSubmit }) => {
   return <form onSubmit={(e) => {
     e.preventDefault()
     onSubmit(value)
+    setValue("")
   }}>
     <HStack>
       <Input bg="gray.50"
