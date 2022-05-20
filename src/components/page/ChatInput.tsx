@@ -18,19 +18,17 @@ const ReadOnlyMode: FC<RepoQueryProps> = ({ owner, repo }) => {
   </HStack>
 }
 
-const initialValue: Descendant[] = [
+const initialValue = [
   {
-    // @ts-ignore
-    type: 'paragraph',
+    type: "paragrahp",
     children: [{ text: '' }],
   },
 ]
 const Editor = () => {
-
   // @ts-ignore
   const [editor] = useState(() => withReact(createEditor()))
-  const [value, setValue] = useState(initialValue)
-
+  const [value, setValue] = useState<Descendant[]>(initialValue)
+  console.log(value)
   // Render the Slate context.
   return <Box bg="gray.100" w="100%" p={2}>
     <Slate editor={editor} value={value} onChange={(n) => setValue(n)}>
@@ -38,6 +36,7 @@ const Editor = () => {
     </Slate>
   </Box>
 }
+
 const ChatInput = () => {
 
   return <HStack>
