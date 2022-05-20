@@ -16,11 +16,10 @@ const ReadOnlyMode: FC<RepoQueryProps> = ({ owner, repo }) => {
   </HStack>
 }
 
-const ChatInput: FC<{ value: string, string, onSubmit: (value: string) => void }> = ({ onSubmit }) => {
+const ChatInput: FC<{ onSubmit: (value: string) => void }> = ({ onSubmit }) => {
   const [value, setValue] = useState("")
   return <form onSubmit={(e) => {
     e.preventDefault()
-    setValue("")
     onSubmit(value)
   }}>
     <HStack>
@@ -37,10 +36,13 @@ const ChatInput: FC<{ value: string, string, onSubmit: (value: string) => void }
   </form>
 }
 
-const InputSending = () => {
+const InputSending: FC<RepoQueryProps> = ({ owner, repo }) => {
 
-  return <ChatInput onSubmit={(v) => {
-
+  return <ChatInput onSubmit={async (v) => {
+    const result = await fetch(`/api/issues/${owner}/${repo}`, {
+      method: "POST",
+      body: JSON.stringify({ title: v })
+    })
   }} />
 }
 export const ChatInputArea: FC<RepoQueryProps> = ({ owner, repo }) => {
@@ -54,5 +56,5 @@ export const ChatInputArea: FC<RepoQueryProps> = ({ owner, repo }) => {
   if (disabled) {
     return <ReadOnlyMode {...{ owner, repo }} />
   }
-  return <InputSending />
+  return <InputSending  {...{ owner, repo }} />
 }
