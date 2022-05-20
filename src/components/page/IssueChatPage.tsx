@@ -1,5 +1,5 @@
 import { Avatar, Box, Center, Divider, Flex, Grid, HStack, Link, Spacer, Spinner, Stack, Textarea } from "@chakra-ui/react"
-import { FC, Suspense } from "react"
+import { FC, Suspense, useMemo } from "react"
 import { IssueResponse } from "../../services/github/client"
 import { ChatInputArea } from "./ChatInput"
 import { IssuePageProps } from "./Props"
@@ -38,11 +38,14 @@ const Issue: FC<{ issue: IssueResponse }> = ({ issue }) => {
 
 
 const IssueStream: FC<{ issues: IssueResponse[] }> = ({ issues }) => {
-  return <Stack spacing={4}>
-    {/* <Spacer
+  const stream = useMemo(() => {
+    return issues?.concat().reverse()
+  }, [])
+  return <Stack spacing={4} >
+    <Spacer
     // minH="100vh"
-    /> */}
-    {issues?.concat().reverse().map((issue, key) => {
+    />
+    {stream.map((issue, key) => {
       return <Issue issue={issue} key={key} />
     })}
   </Stack>
@@ -66,35 +69,33 @@ const IssueStreamWrap: FC<IssuePageProps> = ({ owner, repo, filter }) => {
       <Spinner />
     </Center>
   }
-  return <IssueStream issues={data.issues} />
+  return <Flex
+    overflow="scroll"
+    w="100%"
+    h="100%"
+    p={4}
+    flexDirection="column-reverse"
+  >
+    <IssueStream issues={data.issues} />
+  </Flex >
+
 }
 export const IssueChatPage: FC<IssuePageProps> = ({ owner, repo, filter }) => {
-  const height = use100vh()
   return <Box
-    w="100%" h={height ?? "100%"}
-  // overflow={"hidden"} position="absolute"
+    position="absolute"
+    top={0} left={0} right={0} bottom={0}
   >
-    <Box
-      position="absolute"
-      top={0} left={0} right={0} bottom={0}
+    <Grid
+      gridTemplateRows={"1fr auto max-content"}
+      // minH="-webkit-fill-available"
+      h="100%"
+    // h={height ?? "100%"}
     >
-      <Grid gridTemplateRows={"1fr auto max-content"}
-        // minH="-webkit-fill-available"
-        // h="100vh"
-        h={height ?? "100%"}
-
-      >
-        <ChatHeader {...{ owner, repo, filter }} />
-        <Flex overflow="scroll" w="100%"
-          p={4}
-          flexDirection="column-reverse"
-        >
-          <IssueStreamWrap  {...{ owner, repo, filter }} />
-        </Flex >
-        <Box bg="gray.200" p={2}>
-          <ChatInputArea {...{ owner, repo }} />
-        </Box>
-      </Grid >
-    </Box>
-  </Box >
+      <ChatHeader {...{ owner, repo, filter }} />
+      <IssueStreamWrap  {...{ owner, repo, filter }} />
+      <Box bg="gray.200" p={2}>
+        <ChatInputArea {...{ owner, repo }} />
+      </Box>
+    </Grid >
+  </Box>
 }
