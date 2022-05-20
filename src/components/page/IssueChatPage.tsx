@@ -1,6 +1,8 @@
-import { Avatar, Box, Divider, Flex, Grid, HStack, Input, Link, Spacer, Stack, Textarea } from "@chakra-ui/react"
+import { Avatar, Box, Divider, Flex, Grid, HStack, Link, Spacer, Stack, Textarea } from "@chakra-ui/react"
 import { FC } from "react"
 import { IssueResponse } from "../../services/github/client"
+import { ChatInputArea } from "./ChatInput"
+import { IssuePageProps } from "./Props"
 
 const Issue: FC<{ issue: IssueResponse }> = ({ issue }) => {
   return <Stack>
@@ -31,19 +33,6 @@ const Issue: FC<{ issue: IssueResponse }> = ({ issue }) => {
   </Stack>
 }
 
-export const ChatInput = () => {
-  return <HStack>
-    <Input bg="gray.50"
-      border={"2px solid"}
-      _focus={{
-        borderColor: "gray.400",
-        // outlineColor: "gray.800"
-        outline: "none"
-      }}
-    />
-
-  </HStack>
-}
 
 const IssueStream: FC<{ issues: IssueResponse[] }> = ({ issues }) => {
   return <Stack spacing={4}>
@@ -55,12 +44,6 @@ const IssueStream: FC<{ issues: IssueResponse[] }> = ({ issues }) => {
 
 }
 
-export type IssuePageProps = {
-  issues: IssueResponse[],
-  owner: string,
-  repo: string,
-  filter: string
-}
 
 const ChatHeader: FC<Omit<IssuePageProps, "issues">> = ({ owner, repo }) => {
   return <Box>
@@ -81,7 +64,7 @@ export const IssueChatPage: FC<IssuePageProps> = ({ issues, owner, repo, filter 
       <IssueStream issues={issues} />
     </Flex>
     <Box bg="gray.200" p={2}>
-      <ChatInput />
+      <ChatInputArea {...{ owner, repo }} />
     </Box>
   </Grid >
 }
