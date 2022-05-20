@@ -17,7 +17,6 @@ function MyApp({ Component, pageProps: { session, ...pageProps },
   return <ChakraProvider theme={appTheme}>
     {/* <Theme /> */}
     {/* <Suspense fallback={<Box>...</Box>}> */}
-
     <SessionProvider session={session}>
       <Component {...pageProps} />
     </SessionProvider>

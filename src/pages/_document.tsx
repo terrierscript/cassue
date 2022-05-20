@@ -7,10 +7,10 @@ export default class Document extends NextDocument {
   render() {
     return (
       <Html lang='en'>
-        <Head >
+        <Head>
           <link rel="manifest" href="manifest.webmanifest" />
         </Head>
-        <body>
+        <body >
           {/* <ColorModeScript type="localStorage" initialColorMode={"dark"} /> */}
           <Main />
           <NextScript />
