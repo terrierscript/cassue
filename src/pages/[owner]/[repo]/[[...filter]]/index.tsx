@@ -2,11 +2,9 @@ import { Box } from "@chakra-ui/react"
 import { GetServerSideProps } from "next"
 import { FC } from "react"
 import { getSessionAccount } from "../../../../services/auth/getSessionAccount"
-import { GithubClient } from "../../../../services/github/client"
 import { IssueChatPage } from "../../../../components/page/IssueChatPage"
 import { IssuePageProps } from "../../../../components/page/Props"
 import { LoginButton } from "../../../../components/Login"
-import { useIssues } from "../../../../components/page/useIssues"
 
 export type Props = {
   error?: string,

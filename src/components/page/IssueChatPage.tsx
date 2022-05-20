@@ -5,9 +5,19 @@ import { ChatInputArea } from "./ChatInput"
 import { IssuePageProps } from "./Props"
 import { useIssues } from "./useIssues"
 import { use100vh } from 'react-div-100vh'
+import { formatDistance } from "date-fns"
 
 const Issue: FC<{ issue: IssueResponse }> = ({ issue }) => {
-  return <Stack>
+  return <Stack
+    spacing={4}
+    p={2}
+    _active={
+      { bg: "gray.50" }
+    }
+    _pressed={
+      { bg: "gray.50" }
+    }
+  >
     <HStack spacing={4}>
       <Box alignSelf={"start"} py={2}>
         <Avatar size="sm"
@@ -15,10 +25,13 @@ const Issue: FC<{ issue: IssueResponse }> = ({ issue }) => {
           src={issue.user?.avatar_url}
         />
       </Box>
-      <Stack spacing={0}>
-        <HStack>
+      <Stack spacing={0} w="100%">
+        <HStack w="100%" >
           <Box fontWeight={"bold"}>{issue.user?.login}</Box>
-          <Box fontSize={"sm"}>{issue.updated_at}</Box>
+          <Box fontSize={"sm"}>
+            {formatDistance(new Date(issue.updated_at), new Date())}
+          </Box>
+          <Spacer />
           <Box fontSize={"xs"} color="gray.500">
             <Link href={issue.html_url} target="_blank" >
               #{issue.number}
@@ -65,15 +78,16 @@ const ChatHeader: FC<Omit<IssuePageProps, "issues">> = ({ owner, repo }) => {
 const IssueStreamWrap: FC<IssuePageProps> = ({ owner, repo, filter }) => {
   const { data } = useIssues({ owner, repo, filter })
   if (!data) {
-    return <Center minH="100vh">
-      <Spinner />
-    </Center>
+    return <Flex h="100%" w="100%" overflow={"scroll"}>
+      <Center h="50vh" w="100%" overflow={"scroll"} >
+        <Spinner />
+      </Center>
+    </Flex>
   }
   return <Flex
     overflow="scroll"
     w="100%"
     h="100%"
-    p={4}
     flexDirection="column-reverse"
   >
     <IssueStream issues={data.issues} />
