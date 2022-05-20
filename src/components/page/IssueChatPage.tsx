@@ -38,9 +38,9 @@ const Issue: FC<{ issue: IssueResponse }> = ({ issue }) => {
 
 const IssueStream: FC<{ issues: IssueResponse[] }> = ({ issues }) => {
   return <Stack spacing={4}>
-    <Spacer
+    {/* <Spacer
     // minH="100vh"
-    />
+    /> */}
     {issues?.concat().reverse().map((issue, key) => {
       return <Issue issue={issue} key={key} />
     })}
