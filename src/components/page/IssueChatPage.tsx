@@ -7,16 +7,17 @@ import { useIssues } from "./useIssues"
 import { use100vh } from 'react-div-100vh'
 import { formatDistance } from "date-fns"
 
+const activeStyle = {
+  bg: "gray.50"
+}
 const Issue: FC<{ issue: IssueResponse }> = ({ issue }) => {
   return <Stack
     spacing={4}
     p={2}
-    _active={
-      { bg: "gray.50" }
-    }
-    _pressed={
-      { bg: "gray.50" }
-    }
+    px={4}
+    _active={activeStyle}
+    _pressed={activeStyle}
+    _hover={activeStyle}
   >
     <HStack spacing={4}>
       <Box alignSelf={"start"} py={2}>
@@ -53,8 +54,8 @@ const Issue: FC<{ issue: IssueResponse }> = ({ issue }) => {
 const IssueStream: FC<{ issues: IssueResponse[] }> = ({ issues }) => {
   const stream = useMemo(() => {
     return issues?.concat().reverse()
-  }, [])
-  return <Stack spacing={4} >
+  }, [issues])
+  return <Stack spacing={0} >
     <Spacer
     // minH="100vh"
     />

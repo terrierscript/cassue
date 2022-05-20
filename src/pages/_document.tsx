@@ -14,8 +14,10 @@ export default class Document extends NextDocument {
               touch-action:none;
               height: 100%;
               width: 100%;
-              overflow: auto;
-              overscroll-behavior: none;
+              overscroll-behavior-y: none;
+
+              position: fixed;
+              overflow: hidden;
             }
             `}
           </style>
