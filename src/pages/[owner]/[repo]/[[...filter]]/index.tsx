@@ -6,12 +6,14 @@ import { GithubClient } from "../../../../services/github/client"
 import { IssueChatPage } from "../../../../components/page/IssueChatPage"
 import { IssuePageProps } from "../../../../components/page/Props"
 import { LoginButton } from "../../../../components/Login"
+import { useIssues } from "../../../../components/page/useIssues"
 
-type Props = {
+export type Props = {
   error?: string,
 } & IssuePageProps
 
 export const Page: FC<Props> = ({ error, ...issueChatProps }) => {
+  const { data } = useIssues(issueChatProps)
   if (error) {
     return <Box>
       {error}

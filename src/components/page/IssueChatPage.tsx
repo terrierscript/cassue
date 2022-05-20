@@ -3,6 +3,7 @@ import { FC } from "react"
 import { IssueResponse } from "../../services/github/client"
 import { ChatInputArea } from "./ChatInput"
 import { IssuePageProps } from "./Props"
+import { useIssues } from "./useIssues"
 
 const Issue: FC<{ issue: IssueResponse }> = ({ issue }) => {
   return <Stack>
@@ -34,6 +35,7 @@ const Issue: FC<{ issue: IssueResponse }> = ({ issue }) => {
 }
 
 
+
 const IssueStream: FC<{ issues: IssueResponse[] }> = ({ issues }) => {
   return <Stack spacing={4}>
     <Spacer minH="100vh" />
@@ -56,7 +58,8 @@ const ChatHeader: FC<Omit<IssuePageProps, "issues">> = ({ owner, repo }) => {
 }
 
 export const IssueChatPage: FC<IssuePageProps> = ({ issues, owner, repo, filter }) => {
-
+  const r = useIssues({ owner, repo, filter, issues })
+  console.log(r)
   return <Grid gridTemplateRows={"1fr auto 1fr"} h="100vh">
     <ChatHeader {...{ owner, repo, filter }} />
     <Flex overflow="scroll" w="100%" p={4}
