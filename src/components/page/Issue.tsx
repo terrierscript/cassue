@@ -19,7 +19,10 @@ export const Issue: FC<{ issue: IssueResponse }> = ({ issue }) => {
           name={issue.user?.login}
           src={issue.user?.avatar_url} />
       </Box>
-      <Stack spacing={0} minW="0">
+      <Stack spacing={0}
+        minW="0"
+        w="100%"
+      >
         <HStack w="100%">
           <Box fontWeight={"bold"}>{issue.user?.login}</Box>
           <Box fontSize={"sm"}>
