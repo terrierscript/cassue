@@ -3,13 +3,16 @@ import { GetResponseDataTypeFromEndpointMethod } from "@octokit/types"
 import { RepositoryQuery, IssuePostParam, IssuesTargetQuery } from "./Schema"
 
 
-const octo = new Octokit()
+const octokit = new Octokit()
 
 // TODO
 
-export type IssueResponsees = GetResponseDataTypeFromEndpointMethod<typeof octo.rest.issues.listForRepo>
+export type IssueResponsees = GetResponseDataTypeFromEndpointMethod<typeof octokit.rest.issues.listForRepo>
 export type IssueResponse = IssueResponsees[number]
 // ReturnType>　//any  //Awaited<ReturnType<typeof app.rest.issues.listForRepo>>
+
+
+export type LabelResponse = GetResponseDataTypeFromEndpointMethod<typeof octokit.rest.issues.listLabelsForRepo>
 
 const resolveFilter = (filter: string[]) => {
   const [type, value] = filter

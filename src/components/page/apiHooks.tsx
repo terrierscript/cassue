@@ -1,5 +1,5 @@
 import useSWR from "swr"
-import { IssueResponse } from "../../services/github/GithubClient"
+import { IssueResponse, LabelResponse } from "../../services/github/GithubClient"
 import { IssuesTargetQuery, RepositoryQuery } from "../../services/github/Schema"
 import { jsonFetcher } from "../../services/swr/fetcher"
 
@@ -12,8 +12,19 @@ export const useIssues = ({ owner, repo, filter }: IssuesTargetQuery) => {
 }
 
 export const useLabels = ({ owner, repo }: RepositoryQuery) => {
-  return useSWR<{ labels: { name: string }[] }>(`/api/issues/${owner}/${repo}/labels`, jsonFetcher, {
+  return useSWR<{ labels: LabelResponse }>(`/api/issues/${owner}/${repo}/labels`, jsonFetcher, {
     // fallbackData: { issues },
     // suspense: true
   })
+}
+
+// TODO: create api?
+export const useLabel = ({ owner, repo }: RepositoryQuery, targetLabel: string) => {
+  const { data, ...rest } = useLabels({ owner, repo })
+  return {
+    data: {
+      label: data?.labels.find(label => label.name === targetLabel)
+    },
+    ...rest
+  }
 }
