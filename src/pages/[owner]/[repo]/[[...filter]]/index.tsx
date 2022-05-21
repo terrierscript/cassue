@@ -1,27 +1,18 @@
 import { Box } from "@chakra-ui/react"
 import { GetServerSideProps } from "next"
 import { FC } from "react"
-import { getSessionAccount } from "../../../../services/auth/getSessionAccount"
 import { IssueChatPage } from "../../../../components/page/IssueChatPage"
-import { IssuePageProps } from "../../../../components/page/Props"
-import { LoginButton } from "../../../../components/Login"
 import Head from "next/head"
-import { IssueParamScheme } from "../../../../services/github/client"
+import { IssueParam, IssueParamScheme } from "../../../../services/github/client"
 
 export type Props = {
   error?: string,
-} & IssuePageProps
+} & IssueParam
 
 const ManifestLink: FC<Props> = ({ owner, repo }) => {
   return <link rel="manifest" href={`/api/issues/${owner}/${repo}/manifest.webmanifest`} />
 }
 export const Page: FC<Props> = ({ error, ...issueChatProps }) => {
-  if (error) {
-    return <Box>
-      {error}
-      <LoginButton />
-    </Box>
-  }
   return <Box>
     <Head>
       <ManifestLink {...issueChatProps} />
@@ -31,14 +22,6 @@ export const Page: FC<Props> = ({ error, ...issueChatProps }) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async (req) => {
-  const account = await getSessionAccount(req)
-  if (!account) {
-    return {
-      props: {
-        error: "needLogin"
-      }
-    }
-  }
   const { owner, repo, filter } = IssueParamScheme.parse(req.query)
 
   return {
