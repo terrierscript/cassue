@@ -91,15 +91,19 @@ const IssueStreamWrap: FC<IssuePageProps> = ({ owner, repo, filter }) => {
   >
     <IssueStream issues={data.issues} />
   </Flex >
-
 }
 export const IssueChatPage: FC<IssuePageProps> = ({ owner, repo, filter }) => {
   return <Box
     position="absolute"
     top={0} left={0} right={0} bottom={0}
   >
-    <Grid h="100%" gridTemplateColumns={"max-content 1fr"}>
-      <Rooms />
+    <Grid h="100%" gridTemplateColumns={{
+      base: "auto",
+      md: "max-content 1fr"
+    }} >
+      <Box display={{ base: "none", md: "block" }}>
+        <Rooms />
+      </Box>
       <Grid
         gridTemplateRows={"1fr auto max-content"}
         // minH="-webkit-fill-available"
@@ -112,6 +116,6 @@ export const IssueChatPage: FC<IssuePageProps> = ({ owner, repo, filter }) => {
           <ChatInputArea {...{ owner, repo }} />
         </Box>
       </Grid >
-    </Grid>
-  </Box>
+    </Grid >
+  </Box >
 }
