@@ -1,7 +1,5 @@
-import { Octokit, App } from "octokit"
-import { createAppAuth } from "@octokit/auth-app"
-import { createOAuthUserAuth } from "@octokit/auth-oauth-user"
-import { Endpoints, GetResponseDataTypeFromEndpointMethod } from "@octokit/types"
+import { Octokit } from "octokit"
+import { GetResponseDataTypeFromEndpointMethod } from "@octokit/types"
 import { IssueParam, IssuePostParam } from "./Schema"
 
 
@@ -24,12 +22,11 @@ export class GithubClient {
 
   }
 
-  async getIssue(param: IssueParam): Promise<IssueResponsees> {
+  async getAllIssue(param: IssueParam): Promise<IssueResponsees> {
 
     const result = await this.client.rest.issues.listForRepo({
       ...param,
-      state: "closed",
-      state_reason: "not_planned",
+      state: "all",
       // sort: "updated",
       direction: "desc"
     }) //.issues.list(param)
@@ -42,6 +39,15 @@ export class GithubClient {
     }) //.issues.list(param)
     return result.data
 
+  }
+  async getCustomLabels(param: IssueParam): Promise<unknown> {
+    const result = await this.client.rest.issues.listLabelsForRepo({
+      ...param,
+    })
+
+    return result.data.filter(label => {
+      return label.default === false
+    })
   }
 
 }

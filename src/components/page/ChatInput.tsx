@@ -3,7 +3,7 @@ import { useSession } from "next-auth/react"
 import { FC, useMemo, useState } from "react"
 import { IssueParam } from "../../services/github/Schema"
 import { RepoQueryProps } from "./Props"
-import { useIssues } from "./useIssues"
+import { useIssues } from "./apiHooks"
 
 
 const ReadOnlyMode: FC<IssueParam> = ({ owner, repo }) => {

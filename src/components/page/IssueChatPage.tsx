@@ -1,53 +1,15 @@
-import { Avatar, Box, Center, Divider, Flex, Grid, HStack, Link, Spacer, Spinner, Stack, Textarea } from "@chakra-ui/react"
+import { Box, Center, Divider, Flex, Grid, Spacer, Spinner, Stack, Textarea } from "@chakra-ui/react"
 import { FC, Suspense, useMemo } from "react"
-import { IssueResponse } from "../../services/github/client"
+import { IssueResponse } from "../../services/github/GithubClient"
 import { ChatInputArea } from "./ChatInput"
 import { IssuePageProps } from "./Props"
-import { useIssues } from "./useIssues"
+import { useIssues } from "./apiHooks"
 import { use100vh } from 'react-div-100vh'
-import { formatDistance } from "date-fns"
 import { Rooms } from "./Rooms"
+import { Issue } from "./Issue"
 
-const activeStyle = {
+export const activeStyle = {
   bg: "gray.50"
-}
-const Issue: FC<{ issue: IssueResponse }> = ({ issue }) => {
-  return <Stack
-    spacing={4}
-    p={2}
-    px={4}
-    _active={activeStyle}
-    _pressed={activeStyle}
-    _hover={activeStyle}
-  >
-    <HStack spacing={4}>
-      <Box alignSelf={"start"} py={2}>
-        <Avatar size="sm"
-          name={issue.user?.login}
-          src={issue.user?.avatar_url}
-        />
-      </Box>
-      <Stack spacing={0} w="100%">
-        <HStack w="100%" >
-          <Box fontWeight={"bold"}>{issue.user?.login}</Box>
-          <Box fontSize={"sm"}>
-            {formatDistance(new Date(issue.updated_at), new Date())}
-          </Box>
-          <Spacer />
-          <Box fontSize={"xs"} color="gray.500">
-            <Link href={issue.html_url} target="_blank" >
-              #{issue.number}
-            </Link>
-          </Box>
-        </HStack>
-        <Stack>
-          <Box>
-            {issue.title}
-          </Box>
-        </Stack>
-      </Stack>
-    </HStack>
-  </Stack>
 }
 
 const IssueStream: FC<{ issues: IssueResponse[] }> = ({ issues }) => {
@@ -102,7 +64,7 @@ export const IssueChatPage: FC<IssuePageProps> = ({ owner, repo, filter }) => {
       md: "max-content 1fr"
     }} >
       <Box display={{ base: "none", md: "block" }}>
-        <Rooms />
+        <Rooms {...{ owner, repo, filter }} />
       </Box>
       <Grid
         gridTemplateRows={"1fr auto max-content"}
