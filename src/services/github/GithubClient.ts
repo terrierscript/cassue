@@ -40,7 +40,7 @@ export class GithubClient {
     return result.data
 
   }
-  async getCustomLabels(param: IssueParam): Promise<unknown> {
+  async getCustomLabels(param: IssueParam) {
     const result = await this.client.rest.issues.listLabelsForRepo({
       ...param,
     })
