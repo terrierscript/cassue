@@ -40,17 +40,7 @@ export const getServerSideProps: GetServerSideProps = async (req) => {
     }
   }
   const { owner, repo, filter } = IssueParamScheme.parse(req.query)
-  if (typeof owner !== "string" || typeof repo !== "string") {
-    return {
-      props: {
-        error: "invalid_param"
-      }
-    }
-  }
 
-  // const accessor = new GithubClient(account)
-  // // // // console.log(accessor)
-  // const issues = await accessor.getIssue({ owner, repo })
   return {
     props: {
       owner,

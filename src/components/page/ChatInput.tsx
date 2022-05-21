@@ -1,12 +1,12 @@
-import { Box, Button, HStack, Input, Link } from "@chakra-ui/react"
+import { Button, HStack, Input } from "@chakra-ui/react"
 import { useSession } from "next-auth/react"
 import { FC, useMemo, useState } from "react"
+import { IssueParam } from "../../services/github/client"
 import { RepoQueryProps } from "./Props"
 import { useIssues } from "./useIssues"
 
 
-const ReadOnlyMode: FC<RepoQueryProps> = ({ owner, repo }) => {
-
+const ReadOnlyMode: FC<IssueParam> = ({ owner, repo }) => {
   return <HStack>
     <Button as="a"
       w="100%"
