@@ -1,7 +1,7 @@
 import { Button, HStack, Input } from "@chakra-ui/react"
 import { useSession } from "next-auth/react"
 import { FC, useMemo, useState } from "react"
-import { IssueParam } from "../../services/github/client"
+import { IssueParam } from "../../services/github/Schema"
 import { RepoQueryProps } from "./Props"
 import { useIssues } from "./useIssues"
 

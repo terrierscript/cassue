@@ -1,3 +1,3 @@
-import { IssueParam } from "../../services/github/client"
+import { IssueParam } from "../../services/github/Schema"
 
 export type IssuePageProps = IssueParam

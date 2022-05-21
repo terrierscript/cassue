@@ -1,5 +1,5 @@
 import { NextApiHandler } from "next"
-import { IssueParamScheme } from "../../../../../services/github/client"
+import { IssueParamScheme } from "../../../../../services/github/Schema"
 
 export const handler: NextApiHandler = async (req, res) => {
   const { owner, repo } = IssueParamScheme.parse(req.query)

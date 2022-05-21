@@ -6,7 +6,7 @@ import { IssueChatPage } from "../../../../components/page/IssueChatPage"
 import { IssuePageProps } from "../../../../components/page/Props"
 import { LoginButton } from "../../../../components/Login"
 import Head from "next/head"
-import { IssueParamScheme } from "../../../../services/github/client"
+import { IssueParamScheme } from "../../../../services/github/Schema"
 
 export type Props = {
   error?: string,

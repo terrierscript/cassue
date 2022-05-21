@@ -2,33 +2,8 @@ import { Octokit, App } from "octokit"
 import { createAppAuth } from "@octokit/auth-app"
 import { createOAuthUserAuth } from "@octokit/auth-oauth-user"
 import { Endpoints, GetResponseDataTypeFromEndpointMethod } from "@octokit/types"
-import { z } from "zod"
+import { IssueParam, IssuePostParam } from "./Schema"
 
-export const IssueParamScheme = z.object({
-  owner: z.string(),
-  repo: z.string(),
-  filter: z.array(z.string()).optional()
-})
-export type IssueParam = z.infer<typeof IssueParamScheme>
-
-export const IssuePostScheme = z.object({
-  title: z.string(),
-
-})
-export type IssuePostParam = z.infer<typeof IssuePostScheme>
-
-// const auth = createAppAuth({
-//   appId: process.env.GITHUB_APP_ID!,
-//   privateKey: process.env.GITHUB_APP_PRIVATE_KEY.replaceAll('\\n', "\n"),
-//   clientId: process.env.GITHUB_CLIENT_ID!,
-//   clientSecret: process.env.GITHUB_CLIENT_SECRET!,
-// })
-
-// const app = new App({
-//   appId: process.env.GITHUB_APP_ID!,
-//   privateKey: process.env.GITHUB_APP_PRIVATE_KEY.replaceAll('\\n', "\n"),
-//   clientId: process.env.GITHUB_CLIENT_ID!,
-//   clientSecret: process.env.GITHUB_CLIENT_SECRET!,
 
 const octo = new Octokit()
 
@@ -53,6 +28,8 @@ export class GithubClient {
 
     const result = await this.client.rest.issues.listForRepo({
       ...param,
+      state: "closed",
+      state_reason: "not_planned",
       // sort: "updated",
       direction: "desc"
     }) //.issues.list(param)
@@ -61,7 +38,7 @@ export class GithubClient {
   async postIssue(target: IssueParam, param: IssuePostParam) {
     const result = await this.client.rest.issues.create({
       ...target,
-      ...param
+      ...param,
     }) //.issues.list(param)
     return result.data
 
