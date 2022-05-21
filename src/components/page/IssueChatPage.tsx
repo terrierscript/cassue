@@ -49,8 +49,6 @@ const Issue: FC<{ issue: IssueResponse }> = ({ issue }) => {
   </Stack>
 }
 
-
-
 const IssueStream: FC<{ issues: IssueResponse[] }> = ({ issues }) => {
   const stream = useMemo(() => {
     return issues?.concat().reverse()
@@ -65,7 +63,6 @@ const IssueStream: FC<{ issues: IssueResponse[] }> = ({ issues }) => {
   </Stack>
 
 }
-
 
 const ChatHeader: FC<Omit<IssuePageProps, "issues">> = ({ owner, repo }) => {
   return <Box>

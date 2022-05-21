@@ -38,5 +38,5 @@ tsconfig.tsbuildinfo
 
 /secrets
 
-public/sw.js
+public/sw.js*
 public/workbox-*
