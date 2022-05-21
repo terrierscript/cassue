@@ -6,6 +6,7 @@ import { IssuePageProps } from "./Props"
 import { useIssues } from "./useIssues"
 import { use100vh } from 'react-div-100vh'
 import { formatDistance } from "date-fns"
+import { Rooms } from "./Rooms"
 
 const activeStyle = {
   bg: "gray.50"
@@ -97,17 +98,20 @@ export const IssueChatPage: FC<IssuePageProps> = ({ owner, repo, filter }) => {
     position="absolute"
     top={0} left={0} right={0} bottom={0}
   >
-    <Grid
-      gridTemplateRows={"1fr auto max-content"}
-      // minH="-webkit-fill-available"
-      h="100%"
-    // h={height ?? "100%"}
-    >
-      <ChatHeader {...{ owner, repo, filter }} />
-      <IssueStreamWrap  {...{ owner, repo, filter }} />
-      <Box bg="gray.200" p={2}>
-        <ChatInputArea {...{ owner, repo }} />
-      </Box>
-    </Grid >
+    <Grid h="100%" gridTemplateColumns={"max-content 1fr"}>
+      <Rooms />
+      <Grid
+        gridTemplateRows={"1fr auto max-content"}
+        // minH="-webkit-fill-available"
+        h="100%"
+      // h={height ?? "100%"}
+      >
+        <ChatHeader {...{ owner, repo, filter }} />
+        <IssueStreamWrap  {...{ owner, repo, filter }} />
+        <Box bg="gray.200" p={2}>
+          <ChatInputArea {...{ owner, repo }} />
+        </Box>
+      </Grid >
+    </Grid>
   </Box>
 }
