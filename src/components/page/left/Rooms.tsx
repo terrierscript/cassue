@@ -1,4 +1,4 @@
-import { Box, Divider, Link, Stack } from "@chakra-ui/react"
+import { Box, Button, Divider, Link, Stack } from "@chakra-ui/react"
 import { FC } from "react"
 import { RepositoryQuery } from "../../../services/github/Schema"
 import { useLabels } from "../apiHooks"
@@ -6,10 +6,19 @@ import { CreateLabel } from "./CreateLabel"
 
 type Room = {
   name: string,
+  query?: string
 }
 export const Rooms: FC<RepositoryQuery> = ({ owner, repo }) => {
   const { data } = useLabels({ owner, repo })
-  const rooms = data?.labels ?? []
+  const rooms: Room[] = [
+    { name: "all", query: "" },
+    ...(data?.labels ?? []).map(label => {
+      return {
+        name: label.name,
+        query: `label/${label.name}`
+      }
+    })
+  ]
   return <Stack  >
     <Stack spacing={0}>
 
@@ -22,13 +31,14 @@ export const Rooms: FC<RepositoryQuery> = ({ owner, repo }) => {
     </Stack>
     <Divider />
     {rooms.map(room => {
-      return <Box key={room.name}>
-        <Link href={`/${owner}/${repo}/${room.name}`}>
+      const query = room?.query ?? room.name
+      return <Box key={room.name} >
+        <Link display={"block"} href={`/${owner}/${repo}/${query}`} >
           # {room.name}
         </Link>
       </Box>
     })}
     <Divider />
     {/* <CreateLabel  {...{ owner, repo }} /> */}
-  </Stack>
+  </Stack >
 }

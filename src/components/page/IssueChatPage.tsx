@@ -3,7 +3,7 @@ import { FC } from "react"
 import { ChatInputArea } from "./main/ChatInput"
 import { useIssues } from "./apiHooks"
 import { LeftSidebar } from "./left/LeftSidebar"
-import { IssuesTargetQuery, RepositoryQuery } from "../../services/github/Schema"
+import { IssuesTargetQuery } from "../../services/github/Schema"
 import { ChatHeader } from "./main/ChatHeader"
 import { IssueStream } from "./main/IssueStream"
 

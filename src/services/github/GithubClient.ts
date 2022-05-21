@@ -1,6 +1,6 @@
 import { Octokit } from "octokit"
 import { GetResponseDataTypeFromEndpointMethod } from "@octokit/types"
-import { RepositoryQuery, IssuePostParam } from "./Schema"
+import { RepositoryQuery, IssuePostParam, IssuesTargetQuery } from "./Schema"
 
 
 const octo = new Octokit()
@@ -10,6 +10,15 @@ const octo = new Octokit()
 export type IssueResponsees = GetResponseDataTypeFromEndpointMethod<typeof octo.rest.issues.listForRepo>
 export type IssueResponse = IssueResponsees[number]
 // ReturnType>　//any  //Awaited<ReturnType<typeof app.rest.issues.listForRepo>>
+
+const resolveFilter = (filter: string[]) => {
+  const [type, value] = filter
+  switch (type) {
+    case "label":
+      return { labels: value }
+  }
+  return {}
+}
 
 export class GithubClient {
   client: Octokit
@@ -22,16 +31,19 @@ export class GithubClient {
 
   }
 
-  async getAllIssue(param: RepositoryQuery): Promise<IssueResponsees> {
-
+  async getAllIssue(param: IssuesTargetQuery): Promise<IssueResponsees> {
+    const { filter, ...repoParam } = param
+    const filterQuery = resolveFilter(filter ?? [])
     const result = await this.client.rest.issues.listForRepo({
-      ...param,
+      ...repoParam,
+      ...filterQuery,
       state: "all",
       // sort: "updated",
       direction: "desc"
     }) //.issues.list(param)
     return result.data
   }
+
   async postIssue(target: RepositoryQuery, param: IssuePostParam) {
     const result = await this.client.rest.issues.create({
       ...target,

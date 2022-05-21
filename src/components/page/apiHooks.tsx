@@ -3,8 +3,9 @@ import { IssueResponse } from "../../services/github/GithubClient"
 import { IssuesTargetQuery, RepositoryQuery } from "../../services/github/Schema"
 import { jsonFetcher } from "../../services/swr/fetcher"
 
-export const useIssues = ({ owner, repo }: IssuesTargetQuery) => {
-  return useSWR<{ issues: IssueResponse[] }>(`/api/issues/${owner}/${repo}`, jsonFetcher, {
+export const useIssues = ({ owner, repo, filter }: IssuesTargetQuery) => {
+  const filterQuery = filter?.join("/") ?? ""
+  return useSWR<{ issues: IssueResponse[] }>(`/api/issues/${owner}/${repo}/${filterQuery}`, jsonFetcher, {
     // fallbackData: { issues },
     // suspense: true
   })
