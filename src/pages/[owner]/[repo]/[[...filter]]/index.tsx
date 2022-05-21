@@ -1,9 +1,9 @@
 import { Box } from "@chakra-ui/react"
 import { GetServerSideProps } from "next"
 import { FC } from "react"
-import { IssueChatPage } from "../../../../components/page/IssueChatPage"
 import Head from "next/head"
 import { IssueParam, IssueParamScheme } from "../../../../services/github/Schema"
+import { IssueChatPage } from "../../../../components/page/main/IssueChatPage"
 
 export type Props = {
   error?: string,
@@ -28,6 +28,7 @@ export const getServerSideProps: GetServerSideProps = async (req) => {
     props: {
       owner,
       repo,
+      filter
       // issues
     }
   }

@@ -1,8 +1,8 @@
 import { Button, HStack, Input } from "@chakra-ui/react"
 import { useSession } from "next-auth/react"
 import { FC, useMemo, useState } from "react"
-import { IssueParam } from "../../services/github/Schema"
-import { useIssues } from "./apiHooks"
+import { IssueParam } from "../../../services/github/Schema"
+import { useIssues } from "../apiHooks"
 
 
 const ReadOnlyMode: FC<IssueParam> = ({ owner, repo }) => {

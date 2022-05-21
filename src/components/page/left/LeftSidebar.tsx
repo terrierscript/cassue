@@ -1,7 +1,7 @@
 import { Avatar, Box, Divider, HStack, IconButton, Spacer, Stack, useColorMode, useColorModeValue } from "@chakra-ui/react"
 import { useSession } from "next-auth/react"
 import { FC } from "react"
-import { IssueParam } from "../../services/github/Schema"
+import { IssueParam } from "../../../services/github/Schema"
 import { Rooms } from "./Rooms"
 import { LightBulbIcon } from '@heroicons/react/outline'
 

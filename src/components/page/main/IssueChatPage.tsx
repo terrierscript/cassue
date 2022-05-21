@@ -1,11 +1,11 @@
 import { Box, Center, Divider, Flex, Grid, Spacer, Spinner, Stack } from "@chakra-ui/react"
 import { FC, useMemo } from "react"
-import { IssueResponse } from "../../services/github/GithubClient"
+import { IssueResponse } from "../../../services/github/GithubClient"
 import { ChatInputArea } from "./ChatInput"
-import { useIssues } from "./apiHooks"
-import { Issue } from "./Issue"
-import { LeftSidebar } from "./LeftSidebar"
-import { IssueParam } from "../../services/github/Schema"
+import { useIssues } from "../apiHooks"
+import { StreamIssue } from "./StreamIssue"
+import { LeftSidebar } from "../left/LeftSidebar"
+import { IssueParam } from "../../../services/github/Schema"
 
 
 const IssueStream: FC<{ issues: IssueResponse[] }> = ({ issues }) => {
@@ -17,7 +17,7 @@ const IssueStream: FC<{ issues: IssueResponse[] }> = ({ issues }) => {
     // minH="100vh"
     />
     {stream.map((issue, key) => {
-      return <Issue issue={issue} key={key} />
+      return <StreamIssue issue={issue} key={key} />
     })}
   </Stack>
 

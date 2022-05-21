@@ -1,6 +1,6 @@
 import { Box, Divider, Link, Stack } from "@chakra-ui/react"
 import { FC } from "react"
-import { IssueParam } from "../../services/github/Schema"
+import { IssueParam } from "../../../services/github/Schema"
 
 
 type Room = {
