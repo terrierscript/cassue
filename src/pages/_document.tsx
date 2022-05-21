@@ -3,12 +3,14 @@ import NextDocument, { Html, Head, Main, NextScript } from 'next/document'
 import { themeConfig } from '../services/chakra/theme'
 
 
+const css = (str: TemplateStringsArray) => str
+
 export default class Document extends NextDocument {
   render() {
     return (
       <Html lang='en'>
         <Head>
-          <style >{`
+          <style >{css`
             html,body {
               touch-action:none;
               height: 100%;

@@ -32,7 +32,7 @@ export const Issue: FC<{ issue: IssueResponse }> = ({ issue }) => {
             </Link>
           </Box>
         </HStack>
-        <Stack maxW="min-content" >
+        <Stack>
           <Box boxSizing="border-box" textOverflow={"ellipsis"}>
             {issue.title}
           </Box>
