@@ -28,7 +28,7 @@ export const getServerSideProps: GetServerSideProps = async (req) => {
     props: {
       owner,
       repo,
-      filter
+      filter: filter ?? [] // TODO
       // issues
     }
   }

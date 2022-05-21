@@ -6,7 +6,7 @@ import { Rooms } from "./Rooms"
 import { LightBulbIcon } from '@heroicons/react/outline'
 
 const ThemeSwitcher = () => {
-  const { colorMode, toggleColorMode, setColorMode } = useColorMode()
+  const { toggleColorMode } = useColorMode()
   return <Box>
     <IconButton p={2} onClick={() => toggleColorMode()} aria-label={""} icon={<LightBulbIcon />} />
   </Box>
@@ -24,9 +24,6 @@ const User = () => {
 
 const useAlpha = (value: number) => {
   return useColorModeValue(`blackAlpha.${value}`, `whiteAlpha.${value}`)
-}
-const useAlpha2 = (value: number) => {
-  return useColorModeValue(`whiteAlpha.${value}`, `blackAlpha.${value}`)
 }
 
 export const LeftSidebar: FC<IssueParam> = (props) => {
