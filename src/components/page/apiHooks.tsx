@@ -1,19 +1,18 @@
-import { IssueResponse } from "../../services/github/GithubClient"
 import useSWR from "swr"
-import { IssuePageProps } from "./Props"
+import { IssueResponse } from "../../services/github/GithubClient"
+import { IssueParam } from "../../services/github/Schema"
+import { jsonFetcher } from "../../services/swr/fetcher"
 
-const fetcher = (url: RequestInfo) => fetch(url).then(r => r.json())
-
-export const useIssues = ({ owner, repo }: IssuePageProps) => {
-  return useSWR<{ issues: IssueResponse[] }>(`/api/issues/${owner}/${repo}`, fetcher, {
+export const useIssues = ({ owner, repo }: IssueParam) => {
+  return useSWR<{ issues: IssueResponse[] }>(`/api/issues/${owner}/${repo}`, jsonFetcher, {
     // fallbackData: { issues },
     // suspense: true
   })
 }
 
 
-export const useLabels = ({ owner, repo }: IssuePageProps) => {
-  return useSWR<{ issues: IssueResponse[] }>(`/api/issues/${owner}/${repo}/labels`, fetcher, {
+export const useLabels = ({ owner, repo }: IssueParam) => {
+  return useSWR<{ issues: IssueResponse[] }>(`/api/issues/${owner}/${repo}/labels`, jsonFetcher, {
     // fallbackData: { issues },
     // suspense: true
   })

@@ -2,7 +2,6 @@ import { Button, HStack, Input } from "@chakra-ui/react"
 import { useSession } from "next-auth/react"
 import { FC, useMemo, useState } from "react"
 import { IssueParam } from "../../services/github/Schema"
-import { RepoQueryProps } from "./Props"
 import { useIssues } from "./apiHooks"
 
 
@@ -38,7 +37,7 @@ const ChatInput: FC<{ onSubmit: (value: string) => void }> = ({ onSubmit }) => {
   </form>
 }
 
-const InputSending: FC<RepoQueryProps> = ({ owner, repo }) => {
+const InputSending: FC<IssueParam> = ({ owner, repo }) => {
   const { mutate } = useIssues({ owner, repo })
   return <ChatInput onSubmit={async (v) => {
     const result = await fetch(`/api/issues/${owner}/${repo}`, {
@@ -51,7 +50,7 @@ const InputSending: FC<RepoQueryProps> = ({ owner, repo }) => {
     mutate()
   }} />
 }
-export const ChatInputArea: FC<RepoQueryProps> = ({ owner, repo }) => {
+export const ChatInputArea: FC<IssueParam> = ({ owner, repo }) => {
   const { data } = useSession()
   const disabled = useMemo(() => {
     return (data?.user?.name !== owner)

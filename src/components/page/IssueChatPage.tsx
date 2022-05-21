@@ -1,13 +1,11 @@
-import { Box, Center, Divider, Flex, Grid, Spacer, Spinner, Stack, Textarea } from "@chakra-ui/react"
-import { FC, Suspense, useMemo } from "react"
+import { Box, Center, Divider, Flex, Grid, Spacer, Spinner, Stack } from "@chakra-ui/react"
+import { FC, useMemo } from "react"
 import { IssueResponse } from "../../services/github/GithubClient"
 import { ChatInputArea } from "./ChatInput"
-import { IssuePageProps } from "./Props"
 import { useIssues } from "./apiHooks"
-import { use100vh } from 'react-div-100vh'
-import { Rooms } from "./Rooms"
 import { Issue } from "./Issue"
 import { LeftSidebar } from "./LeftSidebar"
+import { IssueParam } from "../../services/github/Schema"
 
 export const activeStyle = {
   bg: "gray.50"
@@ -28,7 +26,7 @@ const IssueStream: FC<{ issues: IssueResponse[] }> = ({ issues }) => {
 
 }
 
-const ChatHeader: FC<Omit<IssuePageProps, "issues">> = ({ owner, repo }) => {
+const ChatHeader: FC<IssueParam> = ({ owner, repo }) => {
   return <Box>
     <Box p={4} fontWeight="bold" >
       # {owner}/{repo}
@@ -37,7 +35,7 @@ const ChatHeader: FC<Omit<IssuePageProps, "issues">> = ({ owner, repo }) => {
   </Box>
 }
 
-const IssueStreamWrap: FC<IssuePageProps> = ({ owner, repo, filter }) => {
+const IssueStreamWrap: FC<IssueParam> = ({ owner, repo, filter }) => {
   const { data } = useIssues({ owner, repo, filter })
   if (!data) {
     return <Flex h="100%" w="100%" overflow={"scroll"}>
@@ -55,7 +53,7 @@ const IssueStreamWrap: FC<IssuePageProps> = ({ owner, repo, filter }) => {
     <IssueStream issues={data.issues} />
   </Flex >
 }
-export const IssueChatPage: FC<IssuePageProps> = ({ owner, repo, filter }) => {
+export const IssueChatPage: FC<IssueParam> = ({ owner, repo, filter }) => {
   return <Box
     position="absolute"
     top={0} left={0} right={0} bottom={0}

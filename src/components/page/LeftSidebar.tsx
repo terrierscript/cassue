@@ -1,7 +1,7 @@
 import { Avatar, Box, Button, Divider, HStack, Spacer, Stack, useColorMode, useColorModeValue } from "@chakra-ui/react"
 import { useSession } from "next-auth/react"
 import { FC, useEffect } from "react"
-import { IssuePageProps } from "./Props"
+import { IssueParam } from "../../services/github/Schema"
 import { Rooms } from "./Rooms"
 
 const ThemeSwitcher = () => {
@@ -28,7 +28,7 @@ const useAlpha2 = (value: number) => {
   return useColorModeValue(`whiteAlpha.${value}`, `blackAlpha.${value}`)
 }
 
-export const LeftSidebar: FC<IssuePageProps> = (props) => {
+export const LeftSidebar: FC<IssueParam> = (props) => {
   const bg = useAlpha(200)
   const color = useAlpha(800)
 
