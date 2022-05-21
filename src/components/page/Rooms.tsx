@@ -12,7 +12,7 @@ export const Rooms: FC<IssuePageProps> = ({ owner, repo }) => {
   }, {
     name: "is:close"
   }]
-  return <Stack p={8} w={240} bg="orange.600" h="100%" color="white" >
+  return <Stack  >
     <Stack spacing={0}>
 
       <Box fontWeight={"bold"}>
@@ -24,7 +24,7 @@ export const Rooms: FC<IssuePageProps> = ({ owner, repo }) => {
     </Stack>
     <Divider />
     {rooms.map(room => {
-      return <Box key={room.name} color="white">
+      return <Box key={room.name}>
         <Link href={``}>
           # {room.name}
         </Link>

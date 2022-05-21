@@ -4,20 +4,10 @@ import React, { Suspense, useEffect } from "react"
 import { appTheme } from "../services/chakra/theme"
 import { AppProps } from "next/app"
 import Div100vh from "react-div-100vh"
-
-const Theme = () => {
-  const { colorMode, toggleColorMode, setColorMode } = useColorMode()
-  useEffect(() => {
-    setColorMode("light")
-  }, [])
-  return null
-}
-
 function MyApp({ Component, pageProps: { session, ...pageProps },
 }: AppProps) {
   return (
     <ChakraProvider theme={appTheme}>
-      <Theme />
       {/* <Suspense fallback={<Box>...</Box>}> */}
       <SessionProvider session={session}>
         <Component {...pageProps} />

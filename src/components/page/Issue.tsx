@@ -13,16 +13,13 @@ export const Issue: FC<{ issue: IssueResponse }> = ({ issue }) => {
     _pressed={activeStyle}
     _hover={activeStyle}
   >
-    <HStack spacing={4} w="100%">
+    <HStack spacing={4} w="100%" cursor={"default"}>
       <Box alignSelf={"start"} py={2}>
         <Avatar size="sm"
           name={issue.user?.login}
           src={issue.user?.avatar_url} />
       </Box>
-      <Stack spacing={0}
-        minW="0"
-        w="100%"
-      >
+      <Stack spacing={0} minW="0" w="100%">
         <HStack w="100%">
           <Box fontWeight={"bold"}>{issue.user?.login}</Box>
           <Box fontSize={"sm"}>
@@ -36,7 +33,7 @@ export const Issue: FC<{ issue: IssueResponse }> = ({ issue }) => {
           </Box>
         </HStack>
         <Stack maxW="min-content" >
-          <Box boxSizing="border-box">
+          <Box boxSizing="border-box" textOverflow={"ellipsis"}>
             {issue.title}
           </Box>
         </Stack>

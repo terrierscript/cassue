@@ -7,6 +7,7 @@ import { useIssues } from "./apiHooks"
 import { use100vh } from 'react-div-100vh'
 import { Rooms } from "./Rooms"
 import { Issue } from "./Issue"
+import { LeftSidebar } from "./LeftSidebar"
 
 export const activeStyle = {
   bg: "gray.50"
@@ -64,7 +65,7 @@ export const IssueChatPage: FC<IssuePageProps> = ({ owner, repo, filter }) => {
       md: "max-content 1fr"
     }} >
       <Box display={{ base: "none", md: "block" }}>
-        <Rooms {...{ owner, repo, filter }} />
+        <LeftSidebar {...{ owner, repo, filter }} />
       </Box>
       <Grid
         gridTemplateRows={"1fr auto max-content"}
