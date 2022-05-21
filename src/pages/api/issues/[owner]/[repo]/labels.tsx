@@ -13,6 +13,8 @@ export const getLabels: NextApiHandler = async (req, res) => {
     labels
   })
 }
+
+
 export const postLabel: NextApiHandler = async (req, res) => {
   const account = await getSessionAccount({ req })
   const param = RepositoryQueryScheme.parse(req.query)

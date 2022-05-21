@@ -10,7 +10,6 @@ export const useIssues = ({ owner, repo }: IssuesTargetQuery) => {
   })
 }
 
-
 export const useLabels = ({ owner, repo }: RepositoryQuery) => {
   return useSWR<{ issues: IssueResponse[] }>(`/api/issues/${owner}/${repo}/labels`, jsonFetcher, {
     // fallbackData: { issues },

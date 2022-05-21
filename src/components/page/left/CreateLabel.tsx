@@ -1,12 +1,18 @@
-import { Button, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, useDisclosure } from "@chakra-ui/react"
+import { Box, Button, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure } from "@chakra-ui/react"
 import { FC, useState } from "react"
-import { RepositoryQuery } from "../../../services/github/Schema"
+import { useForm } from "react-hook-form"
+import { LabelPost, RepositoryQuery } from "../../../services/github/Schema"
 
-const LabelForm = () => {
-  const [title, setTitle] = useState()
+const LabelForm: FC<RepositoryQuery> = (param) => {
+  const { register, handleSubmit } = useForm<LabelPost>()
 
+  return <form onSubmit={handleSubmit((data) => {
+
+  })}>
+    <Input {...register("name")} autoComplete="off" />
+  </form >
 }
-export const CreateLabel: FC<RepositoryQuery> = ({ owner, repo }) => {
+export const CreateLabel: FC<RepositoryQuery> = (param) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   return <>
     <Button variant={"outline"} onClick={onOpen}>
@@ -15,12 +21,15 @@ export const CreateLabel: FC<RepositoryQuery> = ({ owner, repo }) => {
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Modal Title</ModalHeader>
-      </ModalContent>
-      <ModalCloseButton />
-      <ModalBody>
+        <ModalHeader>Create new Label</ModalHeader>
+        <ModalCloseButton />
+        <ModalBody>
+          <LabelForm {...param} />
+        </ModalBody>
+        <ModalFooter>
 
-      </ModalBody>
+        </ModalFooter>
+      </ModalContent>
     </Modal>
   </>
 }

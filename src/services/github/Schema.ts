@@ -24,3 +24,9 @@ export const IssueSearchScehme = z.object({
   state: z.enum(["open", "closed"]),
   labels: z.array(z.string()).optional()
 })
+
+
+export const LabelPostScheme = z.object({
+  name: z.string(),
+})
+export type LabelPost = z.infer<typeof LabelPostScheme>
