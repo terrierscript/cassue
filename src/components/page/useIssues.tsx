@@ -1,9 +1,8 @@
-import { IssueResponse } from "../../services/github/client"
+import { IssueParam, IssueResponse } from "../../services/github/client"
 import useSWR from "swr"
-import { IssuePageProps } from "./Props"
 import { jsonFetcher } from "../../services/swr/fetcher"
 
-export const useIssues = ({ owner, repo }: IssuePageProps) => {
+export const useIssues = ({ owner, repo }: IssueParam) => {
   return useSWR<{ issues: IssueResponse[] }>(`/api/issues/${owner}/${repo}`, jsonFetcher, {
     // fallbackData: { issues },
     // suspense: true
