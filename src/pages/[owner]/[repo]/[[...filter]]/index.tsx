@@ -6,6 +6,7 @@ import { IssueChatPage } from "../../../../components/page/IssueChatPage"
 import { IssuePageProps } from "../../../../components/page/Props"
 import { LoginButton } from "../../../../components/Login"
 import Head from "next/head"
+import { IssueParamScheme } from "../../../../services/github/client"
 
 export type Props = {
   error?: string,
@@ -38,18 +39,8 @@ export const getServerSideProps: GetServerSideProps = async (req) => {
       }
     }
   }
-  const { owner, repo, filter } = req.query
-  if (typeof owner !== "string" || typeof repo !== "string") {
-    return {
-      props: {
-        error: "invalid_param"
-      }
-    }
-  }
+  const { owner, repo, filter } = IssueParamScheme.parse(req.query)
 
-  // const accessor = new GithubClient(account)
-  // // // // console.log(accessor)
-  // const issues = await accessor.getIssue({ owner, repo })
   return {
     props: {
       owner,

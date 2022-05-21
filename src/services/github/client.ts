@@ -7,6 +7,7 @@ import { z } from "zod"
 export const IssueParamScheme = z.object({
   owner: z.string(),
   repo: z.string(),
+  filter: z.array(z.string()).optional()
 })
 export type IssueParam = z.infer<typeof IssueParamScheme>
 
