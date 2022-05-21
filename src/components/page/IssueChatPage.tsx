@@ -68,6 +68,7 @@ export const IssueChatPage: FC<IssuePageProps> = ({ owner, repo, filter }) => {
         <LeftSidebar {...{ owner, repo, filter }} />
       </Box>
       <Grid
+        minH={0}
         gridTemplateRows={"1fr auto max-content"}
         // minH="-webkit-fill-available"
         h="100%"
