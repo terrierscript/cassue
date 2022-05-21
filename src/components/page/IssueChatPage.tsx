@@ -1,28 +1,12 @@
-import { Box, Center, Flex, Grid, Spacer, Spinner, Stack } from "@chakra-ui/react"
-import { FC, useMemo } from "react"
-import { IssueResponse } from "../../services/github/GithubClient"
+import { Box, Center, Flex, Grid, Spinner } from "@chakra-ui/react"
+import { FC } from "react"
 import { ChatInputArea } from "./main/ChatInput"
 import { useIssues } from "./apiHooks"
-import { StreamIssue } from "./main/StreamIssue"
 import { LeftSidebar } from "./left/LeftSidebar"
 import { IssuesTargetQuery, RepositoryQuery } from "../../services/github/Schema"
 import { ChatHeader } from "./main/ChatHeader"
+import { IssueStream } from "./main/IssueStream"
 
-
-const IssueStream: FC<{ issues: IssueResponse[] }> = ({ issues }) => {
-  const stream = useMemo(() => {
-    return issues?.concat().reverse()
-  }, [issues])
-  return <Stack spacing={0} >
-    <Spacer
-    // minH="100vh"
-    />
-    {stream.map((issue, key) => {
-      return <StreamIssue issue={issue} key={key} />
-    })}
-  </Stack>
-
-}
 
 const IssueStreamWrap: FC<IssuesTargetQuery> = ({ owner, repo, filter }) => {
   const { data } = useIssues({ owner, repo, filter })
@@ -42,6 +26,7 @@ const IssueStreamWrap: FC<IssuesTargetQuery> = ({ owner, repo, filter }) => {
     <IssueStream issues={data.issues} />
   </Flex >
 }
+
 
 export const IssueChatPage: FC<IssuesTargetQuery> = ({ owner, repo, filter }) => {
   return <Box
@@ -64,7 +49,10 @@ export const IssueChatPage: FC<IssuesTargetQuery> = ({ owner, repo, filter }) =>
       >
         <ChatHeader {...{ owner, repo, filter }} />
         <IssueStreamWrap  {...{ owner, repo, filter }} />
-        <Box bg="gray.200" p={2}>
+        <Box
+          _light={{ bg: "blackAlpha.50" }}
+          _dark={{ bg: "whiteAlpha.50" }}
+          p={2}>
           <ChatInputArea {...{ owner, repo }} />
         </Box>
       </Grid >

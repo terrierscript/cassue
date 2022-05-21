@@ -24,12 +24,23 @@ const ChatInput: FC<{ onSubmit: (value: string) => void }> = ({ onSubmit }) => {
     setValue("")
   }}>
     <HStack>
-      <Input bg="gray.50"
+      <Input
+        _light={{
+          bg: "whiteAlpha.800"
+        }}
+        _dark={{
+          bg: "blackAlpha.800"
+        }}
         value={value}
         onChange={(e) => setValue(e.target.value)}
         border={"2px solid"}
         _focus={{
-          borderColor: "gray.400",
+          _light: {
+            borderColor: "blackAlpha.600",
+          },
+          _dark: {
+            borderColor: "whiteAlpha.600",
+          },
           // outlineColor: "gray.800"
           outline: "none"
         }} />
@@ -50,6 +61,7 @@ const InputSending: FC<RepositoryQuery> = ({ owner, repo }) => {
     mutate()
   }} />
 }
+
 export const ChatInputArea: FC<RepositoryQuery> = ({ owner, repo }) => {
   const { data } = useSession()
   const disabled = useMemo(() => {
