@@ -1,14 +1,15 @@
 import { NextApiHandler } from "next"
 import { getSession } from "next-auth/react"
 import { getSessionAccount } from "../../../../../../services/auth/getSessionAccount"
-import { GithubClient, IssueParamScheme, IssuePostScheme } from "../../../../../../services/github/client"
+import { GithubClient } from "../../../../../../services/github/GithubClient"
+import { RepositoryQueryScheme, IssuePostScheme, IssuesTargetQueryScheme } from "../../../../../../services/github/Schema"
 
 
 const getIssueHandler: NextApiHandler = async (req, res) => {
   const account = await getSessionAccount({ req })
-  const param = IssueParamScheme.parse(req.query)
+  const param = IssuesTargetQueryScheme.parse(req.query)
   const accessor = new GithubClient(account)
-  const issues = await accessor.getIssue(param)
+  const issues = await accessor.getAllIssue(param)
   res.json({
     issues
   })
@@ -16,7 +17,7 @@ const getIssueHandler: NextApiHandler = async (req, res) => {
 
 const postIssueHandler: NextApiHandler = async (req, res) => {
   const account = await getSessionAccount({ req })
-  const param = IssueParamScheme.parse(req.query)
+  const param = RepositoryQueryScheme.parse(req.query)
   const body = IssuePostScheme.parse(req.body)
   const accessor = new GithubClient(account)
   const issue = await accessor.postIssue(param, body)

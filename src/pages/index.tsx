@@ -1,6 +1,6 @@
-import { Box, Button, Center, HStack, IconButton, Input } from '@chakra-ui/react'
+import { Box, Center, HStack, IconButton, Input } from '@chakra-ui/react'
 import React, { useMemo, useState } from 'react'
-import { ArrowCircleLeftIcon, ArrowCircleRightIcon } from '@heroicons/react/outline'
+import { ArrowCircleRightIcon } from '@heroicons/react/outline'
 
 const Generate = () => {
   const [value, setValue] = useState("")

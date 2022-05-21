@@ -24,7 +24,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "src/services/github/client"  ],
   "exclude": [
     "node_modules"
   ]

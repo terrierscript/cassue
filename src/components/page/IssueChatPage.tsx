@@ -1,77 +1,14 @@
-import { Avatar, Box, Center, Divider, Flex, Grid, HStack, Link, Spacer, Spinner, Stack } from "@chakra-ui/react"
-import { FC, useMemo } from "react"
-import { IssueParam, IssueResponse } from "../../services/github/client"
-import { ChatInputArea } from "./ChatInput"
-import { useIssues } from "./useIssues"
-import { formatDistance } from "date-fns"
+import { Box, Center, Flex, Grid, Spinner } from "@chakra-ui/react"
+import { FC } from "react"
+import { ChatInputArea } from "./main/ChatInput"
+import { useIssues } from "./apiHooks"
+import { LeftSidebar } from "./left/LeftSidebar"
+import { IssuesTargetQuery } from "../../services/github/Schema"
+import { ChatHeader } from "./main/ChatHeader"
+import { IssueStream } from "./main/IssueStream"
 
-const activeStyle = {
-  bg: "gray.50"
-}
-const Issue: FC<{ issue: IssueResponse }> = ({ issue }) => {
-  return <Stack
-    spacing={4}
-    p={2}
-    px={4}
-    _active={activeStyle}
-    _pressed={activeStyle}
-    _hover={activeStyle}
-  >
-    <HStack spacing={4}>
-      <Box alignSelf={"start"} py={2}>
-        <Avatar size="sm"
-          name={issue.user?.login}
-          src={issue.user?.avatar_url}
-        />
-      </Box>
-      <Stack spacing={0} w="100%">
-        <HStack w="100%" >
-          <Box fontWeight={"bold"}>{issue.user?.login}</Box>
-          <Box fontSize={"sm"}>
-            {formatDistance(new Date(issue.updated_at), new Date())}
-          </Box>
-          <Spacer />
-          <Box fontSize={"xs"} color="gray.500">
-            <Link href={issue.html_url} target="_blank" >
-              #{issue.number}
-            </Link>
-          </Box>
-        </HStack>
-        <Stack>
-          <Box>
-            {issue.title}
-          </Box>
-        </Stack>
-      </Stack>
-    </HStack>
-  </Stack>
-}
 
-const IssueStream: FC<{ issues: IssueResponse[] }> = ({ issues }) => {
-  const stream = useMemo(() => {
-    return issues?.concat().reverse()
-  }, [issues])
-  return <Stack spacing={0} >
-    <Spacer
-    // minH="100vh"
-    />
-    {stream.map((issue, key) => {
-      return <Issue issue={issue} key={key} />
-    })}
-  </Stack>
-
-}
-
-const ChatHeader: FC<IssueParam> = ({ owner, repo }) => {
-  return <Box>
-    <Box p={4} fontWeight="bold" >
-      # {owner}/{repo}
-    </Box>
-    <Divider />
-  </Box>
-}
-
-const IssueStreamWrap: FC<IssueParam> = ({ owner, repo, filter }) => {
+const IssueStreamWrap: FC<IssuesTargetQuery> = ({ owner, repo, filter }) => {
   const { data } = useIssues({ owner, repo, filter })
   if (!data) {
     return <Flex h="100%" w="100%" overflow={"scroll"}>
@@ -88,24 +25,37 @@ const IssueStreamWrap: FC<IssueParam> = ({ owner, repo, filter }) => {
   >
     <IssueStream issues={data.issues} />
   </Flex >
-
 }
-export const IssueChatPage: FC<IssueParam> = ({ owner, repo, filter }) => {
+
+
+export const IssueChatPage: FC<IssuesTargetQuery> = ({ owner, repo, filter }) => {
   return <Box
     position="absolute"
     top={0} left={0} right={0} bottom={0}
   >
-    <Grid
-      gridTemplateRows={"1fr auto max-content"}
-      // minH="-webkit-fill-available"
-      h="100%"
-    // h={height ?? "100%"}
-    >
-      <ChatHeader {...{ owner, repo, filter }} />
-      <IssueStreamWrap  {...{ owner, repo, filter }} />
-      <Box bg="gray.200" p={2}>
-        <ChatInputArea {...{ owner, repo }} />
+    <Grid h="100%" gridTemplateColumns={{
+      base: "auto",
+      md: "max-content 1fr"
+    }} >
+      <Box display={{ base: "none", md: "block" }}>
+        <LeftSidebar {...{ owner, repo, filter }} />
       </Box>
+      <Grid
+        minH={0}
+        gridTemplateRows={"1fr auto max-content"}
+        // minH="-webkit-fill-available"
+        h="100%"
+      // h={height ?? "100%"}
+      >
+        <ChatHeader {...{ owner, repo, filter }} />
+        <IssueStreamWrap  {...{ owner, repo, filter }} />
+        <Box
+          _light={{ bg: "blackAlpha.50" }}
+          _dark={{ bg: "whiteAlpha.50" }}
+          p={2}>
+          <ChatInputArea {...{ owner, repo }} />
+        </Box>
+      </Grid >
     </Grid >
-  </Box>
+  </Box >
 }

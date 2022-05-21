@@ -1,13 +1,13 @@
 import { Box } from "@chakra-ui/react"
 import { GetServerSideProps } from "next"
 import { FC } from "react"
-import { IssueChatPage } from "../../../../components/page/IssueChatPage"
 import Head from "next/head"
-import { IssueParam, IssueParamScheme } from "../../../../services/github/client"
+import { IssuesTargetQueryScheme, RepositoryQuery, RepositoryQueryScheme } from "../../../../services/github/Schema"
+import { IssueChatPage } from "../../../../components/page/IssueChatPage"
 
 export type Props = {
   error?: string,
-} & IssueParam
+} & RepositoryQuery
 
 const PageHead: FC<Props> = ({ owner, repo }) => {
   return <Head>
@@ -23,13 +23,13 @@ export const Page: FC<Props> = ({ error, ...issueChatProps }) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async (req) => {
-  const { owner, repo, filter } = IssueParamScheme.parse(req.query)
+  const { owner, repo, filter } = IssuesTargetQueryScheme.parse(req.query)
 
   return {
     props: {
       owner,
       repo,
-      // issues
+      filter
     }
   }
 }
