@@ -5,6 +5,7 @@ import { getSessionAccount } from "../../../../services/auth/getSessionAccount"
 import { IssueChatPage } from "../../../../components/page/IssueChatPage"
 import { IssuePageProps } from "../../../../components/page/Props"
 import { LoginButton } from "../../../../components/Login"
+import Head from "next/head"
 
 export type Props = {
   error?: string,
@@ -18,6 +19,9 @@ export const Page: FC<Props> = ({ error, ...issueChatProps }) => {
     </Box>
   }
   return <Box>
+    <Head>
+      <link rel="manifest" href="/manifest.webmanifest" />
+    </Head>
     <IssueChatPage  {...issueChatProps} />
   </Box>
 }
