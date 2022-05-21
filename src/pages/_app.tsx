@@ -17,14 +17,12 @@ function MyApp({ Component, pageProps: { session, ...pageProps },
 }: AppProps) {
   return (
     <ChakraProvider theme={appTheme}>
-      <Flex overflow={"hidden"} >
-        <Theme />
-        {/* <Suspense fallback={<Box>...</Box>}> */}
-        <SessionProvider session={session}>
-          <Component {...pageProps} />
-        </SessionProvider>
-        {/* </Suspense> */}
-      </Flex>
+      <Theme />
+      {/* <Suspense fallback={<Box>...</Box>}> */}
+      <SessionProvider session={session}>
+        <Component {...pageProps} />
+      </SessionProvider>
+      {/* </Suspense> */}
     </ChakraProvider >
   )
 }
