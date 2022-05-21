@@ -9,14 +9,15 @@ export type Props = {
   error?: string,
 } & IssueParam
 
-const ManifestLink: FC<Props> = ({ owner, repo }) => {
-  return <link rel="manifest" href={`/api/issues/${owner}/${repo}/manifest.webmanifest`} />
+const PageHead: FC<Props> = ({ owner, repo }) => {
+  return <Head>
+    <title>{owner}/{repo}</title>
+    <link rel="manifest" href={`/api/issues/${owner}/${repo}/manifest.webmanifest`} />
+  </Head>
 }
 export const Page: FC<Props> = ({ error, ...issueChatProps }) => {
   return <Box>
-    <Head>
-      <ManifestLink {...issueChatProps} />
-    </Head>
+    <PageHead {...issueChatProps} />
     <IssueChatPage  {...issueChatProps} />
   </Box>
 }
