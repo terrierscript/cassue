@@ -1,7 +1,7 @@
 import { Box, Divider, Link, Stack } from "@chakra-ui/react"
 import { FC } from "react"
 import { RepositoryQuery } from "../../../services/github/Schema"
-
+import { CreateLabel } from "./CreateLabel"
 
 type Room = {
   name: string,
@@ -30,5 +30,7 @@ export const Rooms: FC<RepositoryQuery> = ({ owner, repo }) => {
         </Link>
       </Box>
     })}
+    <Divider />
+    <CreateLabel  {...{ owner, repo }} />
   </Stack>
 }
