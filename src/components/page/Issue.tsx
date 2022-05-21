@@ -1,10 +1,11 @@
-import { Avatar, Box, HStack, Link, Spacer, Stack } from "@chakra-ui/react"
+import { Avatar, Box, HStack, Link, Spacer, Stack, useColorModeValue } from "@chakra-ui/react"
 import { FC } from "react"
 import { IssueResponse } from "../../services/github/GithubClient"
 import { formatDistance } from "date-fns"
-import { activeStyle } from "./IssueChatPage"
 
 export const Issue: FC<{ issue: IssueResponse }> = ({ issue }) => {
+  const activeStyle = useColorModeValue({ bg: "blackAlpha.50" }, { bg: "whiteAlpha.50" })
+
   return <Stack
     spacing={4}
     p={2}

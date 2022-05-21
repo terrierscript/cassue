@@ -7,9 +7,6 @@ import { Issue } from "./Issue"
 import { LeftSidebar } from "./LeftSidebar"
 import { IssueParam } from "../../services/github/Schema"
 
-export const activeStyle = {
-  bg: "gray.50"
-}
 
 const IssueStream: FC<{ issues: IssueResponse[] }> = ({ issues }) => {
   const stream = useMemo(() => {
