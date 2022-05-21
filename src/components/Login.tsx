@@ -5,7 +5,7 @@ import { signIn, signOut, useSession } from "next-auth/react"
 export const LoginButton = () => {
   const { data: session } = useSession()
   if (!session?.user) {
-    return <Button onClick={() => signIn()}>
+    return <Button onClick={() => signIn("github")}>
       Sign in
     </Button>
   }
