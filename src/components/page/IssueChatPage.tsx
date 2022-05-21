@@ -1,10 +1,9 @@
-import { Avatar, Box, Center, Divider, Flex, Grid, HStack, Link, Spacer, Spinner, Stack, Textarea } from "@chakra-ui/react"
-import { FC, Suspense, useMemo } from "react"
+import { Avatar, Box, Center, Divider, Flex, Grid, HStack, Link, Spacer, Spinner, Stack } from "@chakra-ui/react"
+import { FC, useMemo } from "react"
 import { IssueResponse } from "../../services/github/client"
 import { ChatInputArea } from "./ChatInput"
 import { IssuePageProps } from "./Props"
 import { useIssues } from "./useIssues"
-import { use100vh } from 'react-div-100vh'
 import { formatDistance } from "date-fns"
 
 const activeStyle = {

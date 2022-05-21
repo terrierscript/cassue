@@ -7,3 +7,4 @@ export const themeConfig: ThemeConfig = {
 export const appTheme = extendTheme({
   config: themeConfig
 })
+

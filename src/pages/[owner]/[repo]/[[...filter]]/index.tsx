@@ -4,7 +4,7 @@ import { FC } from "react"
 import { getSessionAccount } from "../../../../services/auth/getSessionAccount"
 import { IssueChatPage } from "../../../../components/page/IssueChatPage"
 import { IssuePageProps } from "../../../../components/page/Props"
-import { LoginButton } from "../../../../components/Login"
+import { LoginButton } from "../../../../components/layout/Login"
 import Head from "next/head"
 import { IssueParamScheme } from "../../../../services/github/client"
 

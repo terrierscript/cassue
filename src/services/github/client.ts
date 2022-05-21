@@ -3,6 +3,7 @@ import { createAppAuth } from "@octokit/auth-app"
 import { createOAuthUserAuth } from "@octokit/auth-oauth-user"
 import { Endpoints, GetResponseDataTypeFromEndpointMethod } from "@octokit/types"
 import { z } from "zod"
+import { GithubAccount } from "../auth/getSessionAccount"
 
 export const IssueParamScheme = z.object({
   owner: z.string(),
@@ -40,15 +41,17 @@ export type IssueResponse = IssueResponsees[number]
 
 export class GithubClient {
   client: Octokit
-  account: Record<string, string>
-  constructor(account: Record<string, string>) {
+  account: GithubAccount
+  constructor(account: GithubAccount) {
     this.account = account
     this.client = new Octokit({
       auth: this.account.access_token,
     })
 
   }
-
+  async getOwnerRepository(username: string) {
+    return await this.client.rest.repos.listForUser({ username })
+  }
   async getIssue(param: IssueParam): Promise<IssueResponsees> {
 
     const result = await this.client.rest.issues.listForRepo({
