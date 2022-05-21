@@ -1,13 +1,14 @@
-import { Avatar, Box, Button, Divider, HStack, Spacer, Stack, useColorMode, useColorModeValue } from "@chakra-ui/react"
+import { Avatar, Box, Divider, HStack, IconButton, Spacer, Stack, useColorMode, useColorModeValue } from "@chakra-ui/react"
 import { useSession } from "next-auth/react"
-import { FC, useEffect } from "react"
+import { FC } from "react"
 import { IssueParam } from "../../services/github/Schema"
 import { Rooms } from "./Rooms"
+import { LightBulbIcon } from '@heroicons/react/outline'
 
 const ThemeSwitcher = () => {
   const { colorMode, toggleColorMode, setColorMode } = useColorMode()
   return <Box>
-    <Button onClick={() => toggleColorMode()}>{colorMode}</Button>
+    <IconButton p={2} onClick={() => toggleColorMode()} aria-label={""} icon={<LightBulbIcon />} />
   </Box>
 }
 
