@@ -1,8 +1,8 @@
 import { NextApiHandler } from "next"
-import { IssueParamScheme } from "../../../../../services/github/Schema"
+import { RepositoryQueryScheme } from "../../../../../services/github/Schema"
 
 export const handler: NextApiHandler = async (req, res) => {
-  const { owner, repo } = IssueParamScheme.parse(req.query)
+  const { owner, repo } = RepositoryQueryScheme.parse(req.query)
 
   const manifest = {
     "background_color": "white",

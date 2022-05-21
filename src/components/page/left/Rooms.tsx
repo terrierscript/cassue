@@ -1,12 +1,12 @@
 import { Box, Divider, Link, Stack } from "@chakra-ui/react"
 import { FC } from "react"
-import { IssueParam } from "../../../services/github/Schema"
+import { RepositoryQuery } from "../../../services/github/Schema"
 
 
 type Room = {
   name: string,
 }
-export const Rooms: FC<IssueParam> = ({ owner, repo }) => {
+export const Rooms: FC<RepositoryQuery> = ({ owner, repo }) => {
   const rooms = [{
     name: "is:open"
   }, {

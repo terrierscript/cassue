@@ -1,6 +1,6 @@
 import { Octokit } from "octokit"
 import { GetResponseDataTypeFromEndpointMethod } from "@octokit/types"
-import { IssueParam, IssuePostParam } from "./Schema"
+import { RepositoryQuery, IssuePostParam } from "./Schema"
 
 
 const octo = new Octokit()
@@ -22,7 +22,7 @@ export class GithubClient {
 
   }
 
-  async getAllIssue(param: IssueParam): Promise<IssueResponsees> {
+  async getAllIssue(param: RepositoryQuery): Promise<IssueResponsees> {
 
     const result = await this.client.rest.issues.listForRepo({
       ...param,
@@ -32,7 +32,7 @@ export class GithubClient {
     }) //.issues.list(param)
     return result.data
   }
-  async postIssue(target: IssueParam, param: IssuePostParam) {
+  async postIssue(target: RepositoryQuery, param: IssuePostParam) {
     const result = await this.client.rest.issues.create({
       ...target,
       ...param,
@@ -40,7 +40,7 @@ export class GithubClient {
     return result.data
 
   }
-  async getCustomLabels(param: IssueParam) {
+  async getCustomLabels(param: RepositoryQuery) {
     const result = await this.client.rest.issues.listLabelsForRepo({
       ...param,
     })

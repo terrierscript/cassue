@@ -1,7 +1,7 @@
 import { Avatar, Box, Divider, HStack, IconButton, Spacer, Stack, useColorMode, useColorModeValue } from "@chakra-ui/react"
 import { useSession } from "next-auth/react"
 import { FC } from "react"
-import { IssueParam } from "../../../services/github/Schema"
+import { RepositoryQuery } from "../../../services/github/Schema"
 import { Rooms } from "./Rooms"
 import { LightBulbIcon } from '@heroicons/react/outline'
 
@@ -26,7 +26,7 @@ const useAlpha = (value: number) => {
   return useColorModeValue(`blackAlpha.${value}`, `whiteAlpha.${value}`)
 }
 
-export const LeftSidebar: FC<IssueParam> = (props) => {
+export const LeftSidebar: FC<RepositoryQuery> = (props) => {
   const bg = useAlpha(200)
   const color = useAlpha(800)
 

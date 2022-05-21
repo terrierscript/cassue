@@ -5,7 +5,7 @@ import { ChatInputArea } from "./main/ChatInput"
 import { useIssues } from "./apiHooks"
 import { StreamIssue } from "./main/StreamIssue"
 import { LeftSidebar } from "./left/LeftSidebar"
-import { IssueParam } from "../../services/github/Schema"
+import { IssuesTargetQuery, RepositoryQuery } from "../../services/github/Schema"
 import { ChatHeader } from "./main/ChatHeader"
 
 
@@ -24,7 +24,7 @@ const IssueStream: FC<{ issues: IssueResponse[] }> = ({ issues }) => {
 
 }
 
-const IssueStreamWrap: FC<IssueParam> = ({ owner, repo, filter }) => {
+const IssueStreamWrap: FC<IssuesTargetQuery> = ({ owner, repo, filter }) => {
   const { data } = useIssues({ owner, repo, filter })
   if (!data) {
     return <Flex h="100%" w="100%" overflow={"scroll"}>
@@ -43,7 +43,7 @@ const IssueStreamWrap: FC<IssueParam> = ({ owner, repo, filter }) => {
   </Flex >
 }
 
-export const IssueChatPage: FC<IssueParam> = ({ owner, repo, filter }) => {
+export const IssueChatPage: FC<IssuesTargetQuery> = ({ owner, repo, filter }) => {
   return <Box
     position="absolute"
     top={0} left={0} right={0} bottom={0}
