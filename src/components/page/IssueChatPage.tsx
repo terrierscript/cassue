@@ -1,11 +1,12 @@
-import { Box, Center, Divider, Flex, Grid, Spacer, Spinner, Stack } from "@chakra-ui/react"
+import { Box, Center, Flex, Grid, Spacer, Spinner, Stack } from "@chakra-ui/react"
 import { FC, useMemo } from "react"
-import { IssueResponse } from "../../../services/github/GithubClient"
-import { ChatInputArea } from "./ChatInput"
-import { useIssues } from "../apiHooks"
-import { StreamIssue } from "./StreamIssue"
-import { LeftSidebar } from "../left/LeftSidebar"
-import { IssueParam } from "../../../services/github/Schema"
+import { IssueResponse } from "../../services/github/GithubClient"
+import { ChatInputArea } from "./main/ChatInput"
+import { useIssues } from "./apiHooks"
+import { StreamIssue } from "./main/StreamIssue"
+import { LeftSidebar } from "./left/LeftSidebar"
+import { IssueParam } from "../../services/github/Schema"
+import { ChatHeader } from "./main/ChatHeader"
 
 
 const IssueStream: FC<{ issues: IssueResponse[] }> = ({ issues }) => {
@@ -21,15 +22,6 @@ const IssueStream: FC<{ issues: IssueResponse[] }> = ({ issues }) => {
     })}
   </Stack>
 
-}
-
-const ChatHeader: FC<IssueParam> = ({ owner, repo }) => {
-  return <Box>
-    <Box p={4} fontWeight="bold" >
-      # {owner}/{repo}
-    </Box>
-    <Divider />
-  </Box>
 }
 
 const IssueStreamWrap: FC<IssueParam> = ({ owner, repo, filter }) => {
@@ -50,6 +42,7 @@ const IssueStreamWrap: FC<IssueParam> = ({ owner, repo, filter }) => {
     <IssueStream issues={data.issues} />
   </Flex >
 }
+
 export const IssueChatPage: FC<IssueParam> = ({ owner, repo, filter }) => {
   return <Box
     position="absolute"

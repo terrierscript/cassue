@@ -3,7 +3,7 @@ import { GetServerSideProps } from "next"
 import { FC } from "react"
 import Head from "next/head"
 import { IssueParam, IssueParamScheme } from "../../../../services/github/Schema"
-import { IssueChatPage } from "../../../../components/page/main/IssueChatPage"
+import { IssueChatPage } from "../../../../components/page/IssueChatPage"
 
 export type Props = {
   error?: string,

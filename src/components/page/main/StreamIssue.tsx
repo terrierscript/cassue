@@ -5,7 +5,6 @@ import { IssueResponse } from "../../../services/github/GithubClient"
 
 export const StreamIssue: FC<{ issue: IssueResponse }> = ({ issue }) => {
   const activeStyle = useColorModeValue({ bg: "blackAlpha.50" }, { bg: "whiteAlpha.50" })
-
   return <Stack
     spacing={4}
     p={2}
