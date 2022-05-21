@@ -11,7 +11,7 @@ export const useIssues = ({ owner, repo }: IssuesTargetQuery) => {
 }
 
 export const useLabels = ({ owner, repo }: RepositoryQuery) => {
-  return useSWR<{ issues: IssueResponse[] }>(`/api/issues/${owner}/${repo}/labels`, jsonFetcher, {
+  return useSWR<{ labels: { name: string }[] }>(`/api/issues/${owner}/${repo}/labels`, jsonFetcher, {
     // fallbackData: { issues },
     // suspense: true
   })
