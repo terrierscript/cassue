@@ -17,5 +17,11 @@ export function localStorageProvider() {
   window.addEventListener('pagehide', () => {
     save()
   })
+  window.addEventListener('unload', () => {
+    save()
+  })
+  window.addEventListener('visibilitychange', () => {
+    save()
+  })
   return map
 }
