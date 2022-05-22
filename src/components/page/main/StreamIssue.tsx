@@ -28,9 +28,8 @@ const IssueFooter: FC<{ issue: IssueResponse }> = ({ issue }) => {
   return <Box color="gray.500" fontSize={"sm"}>
     {(issue.labels).flat(1).map(label => {
       const labelName = typeof label === "string" ? label : label.name
-      return <NextLink href={`/${params.owner}/${params.repo}/labels/${labelName}`}>
-        <Link key={labelName}
-        >
+      return <NextLink key={labelName} href={`/${params.owner}/${params.repo}/labels/${labelName}`}>
+        <Link>
           #{labelName}
         </Link>
       </NextLink>
