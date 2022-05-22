@@ -5,6 +5,7 @@ import { appTheme } from "../services/chakra/theme"
 import { AppProps } from "next/app"
 import { NeedLayout } from "../components/layout/NeedLayout"
 import Head from "next/head"
+import { AppSWRPRovider } from "../services/swr/AppSWRProvider"
 
 function MyApp({ Component, pageProps: { session, ...pageProps },
 }: AppProps) {
@@ -16,14 +17,16 @@ function MyApp({ Component, pageProps: { session, ...pageProps },
         <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
       </Head>
       <ChakraProvider theme={appTheme}>
-        {/* <Suspense fallback={<Box>...</Box>}> */}
-        <SessionProvider session={session}>
-          <NeedLayout>
+        <AppSWRPRovider>
+          {/* <Suspense fallback={<Box>...</Box>}> */}
+          <SessionProvider session={session}>
+            <NeedLayout>
 
-            <Component {...pageProps} />
-          </NeedLayout>
-        </SessionProvider>
-        {/* </Suspense> */}
+              <Component {...pageProps} />
+            </NeedLayout>
+          </SessionProvider>
+          {/* </Suspense> */}
+        </AppSWRPRovider>
       </ChakraProvider >
     </>
   )
