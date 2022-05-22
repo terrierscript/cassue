@@ -1,9 +1,10 @@
 import { Button, HStack, IconButton, Input } from "@chakra-ui/react"
 import { useSession } from "next-auth/react"
 import { FC, useMemo, useState } from "react"
-import { RepositoryQuery } from "../../../services/github/Schema"
+import { IssuePostParam, IssuesTargetQuery, RepositoryQuery } from "../../../services/github/Schema"
 import { useIssues } from "../apiHooks"
 import { ArrowCircleRightIcon, PaperAirplaneIcon } from "@heroicons/react/solid"
+import { resolveFilter, resolveFilterToPost } from "../../../services/github/resolveFilter"
 
 const ReadOnlyMode: FC<RepositoryQuery> = ({ owner, repo }) => {
   return <HStack>
@@ -55,21 +56,24 @@ const ChatInput: FC<{ onSubmit: (value: string) => void }> = ({ onSubmit }) => {
   </form>
 }
 
-const InputSending: FC<RepositoryQuery> = ({ owner, repo }) => {
-  const { mutate } = useIssues({ owner, repo })
+const InputSending: FC<IssuesTargetQuery> = ({ owner, repo, filter }) => {
+  const { mutate } = useIssues({ owner, repo, filter })
   return <ChatInput onSubmit={async (v) => {
+    const resolvedParams = resolveFilterToPost(filter)
+    const issue: IssuePostParam = { title: v, ...resolvedParams }
     const result = await fetch(`/api/issues/${owner}/${repo}`, {
       headers: {
         'Content-Type': 'application/json'
       },
       method: "POST",
-      body: JSON.stringify({ title: v })
+      body: JSON.stringify(issue)
     })
     mutate()
+    return result
   }} />
 }
 
-export const ChatInputArea: FC<RepositoryQuery> = ({ owner, repo }) => {
+export const ChatInputArea: FC<IssuesTargetQuery> = ({ owner, repo, filter }) => {
   const { data } = useSession()
   const disabled = useMemo(() => {
     return (data?.user?.name !== owner)
@@ -80,5 +84,5 @@ export const ChatInputArea: FC<RepositoryQuery> = ({ owner, repo }) => {
   if (disabled) {
     return <ReadOnlyMode {...{ owner, repo }} />
   }
-  return <InputSending  {...{ owner, repo }} />
+  return <InputSending  {...{ owner, repo, filter }} />
 }

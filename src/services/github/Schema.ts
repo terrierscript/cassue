@@ -16,6 +16,7 @@ export type IssuesTargetQuery = z.infer<typeof RepositoryQueryScheme> & {
 
 export const IssuePostScheme = z.object({
   title: z.string(),
+  labels: z.array(z.string()).optional() //.or(z.string()).optional()
 })
 
 export type IssuePostParam = z.infer<typeof IssuePostScheme>
