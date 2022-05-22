@@ -28,7 +28,7 @@ const IssueStreamWrap: FC<IssuesTargetQuery> = ({ owner, repo, filter }) => {
 }
 
 
-export const IssueChatPage: FC<IssuesTargetQuery> = ({ owner, repo, filter }) => {
+export const IssueChatPage: FC<IssuesTargetQuery> = (params) => {
   return <Box
     position="absolute"
     top={0} left={0} right={0} bottom={0}
@@ -38,7 +38,7 @@ export const IssueChatPage: FC<IssuesTargetQuery> = ({ owner, repo, filter }) =>
       md: "max-content 1fr"
     }} >
       <Box display={{ base: "none", md: "block" }}>
-        <LeftSidebar {...{ owner, repo, filter }} />
+        <LeftSidebar {...params} />
       </Box>
       <Grid
         minH={0}
@@ -47,15 +47,15 @@ export const IssueChatPage: FC<IssuesTargetQuery> = ({ owner, repo, filter }) =>
         h="100%"
       // h={height ?? "100%"}
       >
-        <ChatHeader {...{ owner, repo, filter }} />
-        <IssueStreamWrap  {...{ owner, repo, filter }} />
+        <ChatHeader {...params} />
+        <IssueStreamWrap  {...params} />
         <Box
           _light={{ bg: "blackAlpha.50" }}
           _dark={{ bg: "whiteAlpha.50" }}
           p={2}>
-          <ChatInputArea {...{ owner, repo }} />
+          <ChatInputArea {...params} />
         </Box>
-      </Grid >
-    </Grid >
-  </Box >
+      </Grid>
+    </Grid>
+  </Box>
 }

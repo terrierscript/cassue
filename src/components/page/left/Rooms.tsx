@@ -3,6 +3,7 @@ import { FC } from "react"
 import { RepositoryQuery } from "../../../services/github/Schema"
 import { useLabels } from "../apiHooks"
 import { CreateLabel } from "./CreateLabel"
+import NextLink from "next/link"
 
 type Room = {
   name: string,
@@ -15,7 +16,7 @@ export const Rooms: FC<RepositoryQuery> = ({ owner, repo }) => {
     ...(data?.labels ?? []).map(label => {
       return {
         name: label.name,
-        query: `label/${label.name}`
+        query: `labels/${label.name}`
       }
     })
   ]
@@ -33,9 +34,12 @@ export const Rooms: FC<RepositoryQuery> = ({ owner, repo }) => {
     {rooms.map(room => {
       const query = room?.query ?? room.name
       return <Box key={room.name} >
-        <Link display={"block"} href={`/${owner}/${repo}/${query}`} >
-          # {room.name}
-        </Link>
+        <NextLink href={`/${owner}/${repo}/${query}`} passHref>
+          <Button variant={"ghost"} w="100%" justifyContent={"start"}
+            size="sm" colorScheme={"gray"} as="a" >
+            # {room.name}
+          </Button>
+        </NextLink>
       </Box>
     })}
     <Divider />

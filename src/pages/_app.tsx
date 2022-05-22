@@ -6,6 +6,7 @@ import { AppProps } from "next/app"
 import { NeedLayout } from "../components/layout/NeedLayout"
 import Head from "next/head"
 import { AppSWRPRovider } from "../services/swr/AppSWRProvider"
+import { IconContext } from "react-icons"
 
 function MyApp({ Component, pageProps: { session, ...pageProps },
 }: AppProps) {
@@ -18,6 +19,8 @@ function MyApp({ Component, pageProps: { session, ...pageProps },
       </Head>
       <ChakraProvider theme={appTheme}>
         <AppSWRPRovider>
+
+          {/* <IconContext.Provider value={{ color: "white" }}> */}
           {/* <Suspense fallback={<Box>...</Box>}> */}
           <SessionProvider session={session}>
             <NeedLayout>
@@ -26,6 +29,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps },
             </NeedLayout>
           </SessionProvider>
           {/* </Suspense> */}
+          {/* </IconContext.Provider> */}
         </AppSWRPRovider>
       </ChakraProvider >
     </>
