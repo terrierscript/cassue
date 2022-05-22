@@ -10,9 +10,9 @@ export const handler: NextApiHandler = async (req, res) => {
     "display": "fullscreen",
     "icons": [
       {
-        "src": "/icon.svg",
+        "src": "/icon.png",
         "sizes": "150x150",
-        "type": "image/svg",
+        "type": "image/png",
         // "purpose": "any"
       }
     ],
