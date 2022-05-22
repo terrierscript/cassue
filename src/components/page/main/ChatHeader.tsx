@@ -1,4 +1,5 @@
-import { Box, Divider, Stack } from "@chakra-ui/react"
+import { ChevronLeftIcon } from "@chakra-ui/icons"
+import { Box, Divider, HStack, IconButton, Stack } from "@chakra-ui/react"
 import { FC, useMemo } from "react"
 import { IssuesTargetQuery, RepositoryQuery } from "../../../services/github/Schema"
 import { useLabel, useLabels } from "../apiHooks"
@@ -37,11 +38,18 @@ export const ChatHeader: FC<IssuesTargetQuery> = ({ owner, repo, filter }) => {
     }
     return `${owner}/${repo}`
   }, [repo, owner, type, value])
-  console.log(type, value)
   return <Stack p={4} spacing={1}>
-    <Box fontWeight="bold">
-      # {title}
-    </Box>
+    <HStack>
+      <Box>
+        <IconButton
+          variant={"ghost"}
+          icon={<ChevronLeftIcon />} aria-label={"back to menu"}
+        />
+      </Box>
+      <Box fontWeight="bold">
+        # {title}
+      </Box>
+    </HStack>
     <Stack p={2} fontSize="xs">
       <Description {...{ owner, repo, filter }} />
     </Stack>

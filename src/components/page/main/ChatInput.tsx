@@ -3,7 +3,7 @@ import { useSession } from "next-auth/react"
 import { FC, useMemo, useState } from "react"
 import { RepositoryQuery } from "../../../services/github/Schema"
 import { useIssues } from "../apiHooks"
-import { GrReturn } from "react-icons/gr"
+import { ArrowCircleRightIcon, PaperAirplaneIcon } from "@heroicons/react/solid"
 
 const ReadOnlyMode: FC<RepositoryQuery> = ({ owner, repo }) => {
   return <HStack>
@@ -48,7 +48,7 @@ const ChatInput: FC<{ onSubmit: (value: string) => void }> = ({ onSubmit }) => {
       <IconButton
         type="submit"
         p={2}
-        icon={<GrReturn />}
+        icon={<PaperAirplaneIcon />}
         aria-label={"Post"}
       />
     </HStack>

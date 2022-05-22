@@ -33,9 +33,10 @@ export const Rooms: FC<RepositoryQuery> = ({ owner, repo }) => {
     {rooms.map(room => {
       const query = room?.query ?? room.name
       return <Box key={room.name} >
-        <Link display={"block"} href={`/${owner}/${repo}/${query}`} >
+        <Button variant={"ghost"} w="100%" justifyContent={"start"}
+          size="sm" colorScheme={"gray"} as="a" href={`/${owner}/${repo}/${query}`} >
           # {room.name}
-        </Link>
+        </Button>
       </Box>
     })}
     <Divider />
