@@ -12,7 +12,8 @@ export const handler: NextApiHandler = async (req, res) => {
       {
         "src": "/icon.svg",
         "sizes": "150x150",
-        "type": "image/svg"
+        "type": "image/svg",
+        // "purpose": "any"
       }
     ],
     "name": "chattiisue",

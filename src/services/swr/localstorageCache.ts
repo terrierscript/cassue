@@ -6,6 +6,7 @@ export function localStorageProvider() {
   const map = new Map(JSON.parse(localStorage.getItem('app-cache') || '[]'))
 
   window.addEventListener('beforeunload', () => {
+    console.log("save")
     const appCache = JSON.stringify(Array.from(map.entries()))
     localStorage.setItem('app-cache', appCache)
   })
