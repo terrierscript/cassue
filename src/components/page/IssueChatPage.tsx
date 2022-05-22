@@ -35,7 +35,7 @@ export const IssueChatPage: FC<IssuesTargetQuery> = (params) => {
       return {
         left: {
           w: sideBarWidth,
-          display: { base: "none", md: "block" }
+          display: { base: "none", bp: "block" }
         },
         center: {
         }
@@ -44,11 +44,11 @@ export const IssueChatPage: FC<IssuesTargetQuery> = (params) => {
     return {
       left: {
         w: {
-          base: "100%", md: sideBarWidth
+          base: "100%", bp: sideBarWidth
         }
       },
       center: {
-        display: { base: "none", md: "grid" }
+        display: { base: "none", bp: "grid" }
       }
     }
   }, [params])
@@ -58,7 +58,7 @@ export const IssueChatPage: FC<IssuesTargetQuery> = (params) => {
   >
     <Grid h="100%" gridTemplateColumns={{
       base: "auto",
-      md: "max-content 1fr"
+      bp: "max-content 1fr"
     }} >
       <Box {...layout.left}>
         <LeftSidebar {...params} />
