@@ -1,9 +1,9 @@
-import { Button, HStack, Input } from "@chakra-ui/react"
+import { Button, HStack, IconButton, Input } from "@chakra-ui/react"
 import { useSession } from "next-auth/react"
 import { FC, useMemo, useState } from "react"
 import { RepositoryQuery } from "../../../services/github/Schema"
 import { useIssues } from "../apiHooks"
-
+import { GrReturn } from "react-icons/gr"
 
 const ReadOnlyMode: FC<RepositoryQuery> = ({ owner, repo }) => {
   return <HStack>
@@ -33,17 +33,24 @@ const ChatInput: FC<{ onSubmit: (value: string) => void }> = ({ onSubmit }) => {
         }}
         value={value}
         onChange={(e) => setValue(e.target.value)}
-        border={"2px solid"}
-        _focus={{
-          _light: {
-            borderColor: "blackAlpha.600",
-          },
-          _dark: {
-            borderColor: "whiteAlpha.600",
-          },
-          // outlineColor: "gray.800"
-          outline: "none"
-        }} />
+      // border={"2px solid"}
+      // _focus={{
+      // _light: {
+      //   borderColor: "blackAlpha.600",
+      // },
+      // _dark: {
+      //   borderColor: "whiteAlpha.600",
+      // },
+      // outlineColor: "gray.800"
+      // outline: "none"
+      // }} 
+      />
+      <IconButton
+        type="submit"
+        p={2}
+        icon={<GrReturn />}
+        aria-label={"Post"}
+      />
     </HStack>
   </form>
 }
