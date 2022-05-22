@@ -1,8 +1,9 @@
 import { ChevronLeftIcon } from "@chakra-ui/icons"
 import { Box, Divider, HStack, IconButton, Stack } from "@chakra-ui/react"
 import { FC, useMemo } from "react"
-import { IssuesTargetQuery, RepositoryQuery } from "../../../services/github/Schema"
-import { useLabel, useLabels } from "../apiHooks"
+import { IssuesTargetQuery } from "../../../services/github/Schema"
+import { NextLink } from "../../../services/next/components"
+import { useLabel } from "../apiHooks"
 
 
 const resolveFilter = (filter: string[]) => {
@@ -41,11 +42,14 @@ export const ChatHeader: FC<IssuesTargetQuery> = ({ owner, repo, filter }) => {
   return <Stack p={4} spacing={1}>
     <HStack>
       <Box>
-        <IconButton
-          variant={"ghost"}
-          colorScheme="gray"
-          icon={<ChevronLeftIcon />} aria-label={"back to menu"}
-        />
+        <NextLink href={`/${owner}/${repo}`}>
+          <IconButton
+            as="a"
+            variant={"ghost"}
+            colorScheme="gray"
+            icon={<ChevronLeftIcon />} aria-label={"back to menu"}
+          />
+        </NextLink>
       </Box>
       <Box fontWeight="bold">
         # {title}
