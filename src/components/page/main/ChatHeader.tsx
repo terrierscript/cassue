@@ -43,6 +43,7 @@ export const ChatHeader: FC<IssuesTargetQuery> = ({ owner, repo, filter }) => {
       <Box>
         <IconButton
           variant={"ghost"}
+          colorScheme="gray"
           icon={<ChevronLeftIcon />} aria-label={"back to menu"}
         />
       </Box>
