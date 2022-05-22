@@ -27,7 +27,7 @@ const useAlpha = (value: number) => {
 }
 
 const Debugger = () => {
-  const cacheSize = JSON.parse(localStorage.getItem('app-cache'))
+  const cacheSize = JSON.parse(localStorage.getItem('app-cache') ?? "{}")
   return <Box color="gray.500">
     Cache:  {Object.keys(cacheSize).length}
   </Box>
