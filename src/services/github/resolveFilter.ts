@@ -2,7 +2,7 @@
 export const resolveFilter = (filter: string[] = []) => {
   const [type, value] = filter
   switch (type) {
-    case "label":
+    case "labels":
       return { labels: value }
   }
   return {}
@@ -10,7 +10,7 @@ export const resolveFilter = (filter: string[] = []) => {
 export const resolveFilterToPost = (filter: string[] = []) => {
   const [type, value] = filter
   switch (type) {
-    case "label":
+    case "labels":
       return { labels: [value] }
   }
   return {}

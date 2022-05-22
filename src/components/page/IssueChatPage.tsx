@@ -55,7 +55,7 @@ export const IssueChatPage: FC<IssuesTargetQuery> = (params) => {
           p={2}>
           <ChatInputArea {...params} />
         </Box>
-      </Grid >
-    </Grid >
-  </Box >
+      </Grid>
+    </Grid>
+  </Box>
 }

@@ -2,7 +2,41 @@ import { Avatar, Box, HStack, Link, Spacer, Stack, useColorModeValue } from "@ch
 import { FC } from "react"
 import { formatDistance } from "date-fns"
 import { IssueResponse } from "../../../services/github/GithubClient"
+import { useChatPageParams } from "../chatHooks"
+import NextLink from "next/link"
+const IssueTitle: FC<{ issue: IssueResponse }> = ({ issue }) => {
+  return <HStack w="100%">
+    <Box fontWeight={"bold"}>{issue.user?.login}</Box>
+    <Box fontSize={"sm"}>
+      {formatDistance(new Date(issue.updated_at), new Date())}
+    </Box>
+    <Spacer />
+    <Box fontSize={"xs"} color="gray.500">
+      <Link href={issue.html_url} target="_blank">
+        #{issue.number}
+      </Link>
+    </Box>
+  </HStack>
+}
 
+const IssueFooter: FC<{ issue: IssueResponse }> = ({ issue }) => {
+  const params = useChatPageParams()
+  if (!params) {
+    return null
+  }
+  return <Box color="gray.500" fontSize={"sm"}>
+    {(issue.labels).flat(1).map(label => {
+      const labelName = typeof label === "string" ? label : label.name
+      return <NextLink href={`/${params.owner}/${params.repo}/labels/${labelName}`}>
+        <Link key={labelName}
+        >
+          #{labelName}
+        </Link>
+      </NextLink>
+    })}
+  </Box>
+
+}
 export const StreamIssue: FC<{ issue: IssueResponse }> = ({ issue }) => {
   const activeStyle = useColorModeValue({ bg: "blackAlpha.50" }, { bg: "whiteAlpha.50" })
   return <Stack
@@ -20,22 +54,14 @@ export const StreamIssue: FC<{ issue: IssueResponse }> = ({ issue }) => {
           src={issue.user?.avatar_url} />
       </Box>
       <Stack spacing={0} minW="0" w="100%">
-        <HStack w="100%">
-          <Box fontWeight={"bold"}>{issue.user?.login}</Box>
-          <Box fontSize={"sm"}>
-            {formatDistance(new Date(issue.updated_at), new Date())}
-          </Box>
-          <Spacer />
-          <Box fontSize={"xs"} color="gray.500">
-            <Link href={issue.html_url} target="_blank">
-              #{issue.number}
-            </Link>
-          </Box>
-        </HStack>
+        <IssueTitle issue={issue} />
         <Stack>
           <Box boxSizing="border-box" textOverflow={"ellipsis"}>
             {issue.title}
           </Box>
+        </Stack>
+        <Stack>
+          <IssueFooter issue={issue} />
         </Stack>
       </Stack>
     </HStack>
