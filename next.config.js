@@ -1,10 +1,10 @@
 const withPWA = require("next-pwa")
 
-module.exports = withPWA({
+module.exports = {
   experimental: {
     esmExternals: false,
   },
-  pwa: {
-    dest: "public",
-  },
-})
+  // pwa: {
+  //   dest: "public",
+  // },
+}
