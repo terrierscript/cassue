@@ -48,7 +48,7 @@ export const IssueChatPage: FC<IssuesTargetQuery> = (params) => {
         }
       },
       center: {
-        display: { base: "none", md: "grid" }
+        display: { base: "none", md: "block" }
       }
     }
   }, [params])
