@@ -5,6 +5,7 @@ import { IssuePostParam, IssuesTargetQuery, RepositoryQuery } from "../../../ser
 import { useIssues } from "../apiHooks"
 import { ArrowCircleRightIcon, PaperAirplaneIcon } from "@heroicons/react/solid"
 import { resolveFilter, resolveFilterToPost } from "../../../services/github/resolveFilter"
+import { BiPaperPlane, BiPen, BiPencil, BiSend, BiSubdirectoryLeft } from "react-icons/bi"
 
 const ReadOnlyMode: FC<RepositoryQuery> = ({ owner, repo }) => {
   return <HStack>
@@ -48,8 +49,7 @@ const ChatInput: FC<{ onSubmit: (value: string) => void }> = ({ onSubmit }) => {
       />
       <IconButton
         type="submit"
-        p={2}
-        icon={<PaperAirplaneIcon />}
+        icon={<BiSubdirectoryLeft />}
         aria-label={"Post"}
       />
     </HStack>
