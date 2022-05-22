@@ -1,18 +1,19 @@
 import { Box, Button, Divider, Link, Stack } from "@chakra-ui/react"
 import { FC } from "react"
 import { RepositoryQuery } from "../../../services/github/Schema"
+import { NextLink } from "../../../services/next/components"
 import { useLabels } from "../apiHooks"
 import { CreateLabel } from "./CreateLabel"
-import NextLink from "next/link"
 
 type Room = {
   name: string,
   query?: string
 }
+
 export const Rooms: FC<RepositoryQuery> = ({ owner, repo }) => {
   const { data } = useLabels({ owner, repo })
   const rooms: Room[] = [
-    { name: "all", query: "" },
+    { name: "all", query: "issues/all" },
     ...(data?.labels ?? []).map(label => {
       return {
         name: label.name,

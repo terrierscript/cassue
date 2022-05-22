@@ -4,6 +4,7 @@ import { formatDistance } from "date-fns"
 import { IssueResponse } from "../../../services/github/GithubClient"
 import { useChatPageParams } from "../chatHooks"
 import NextLink from "next/link"
+
 const IssueTitle: FC<{ issue: IssueResponse }> = ({ issue }) => {
   return <HStack w="100%">
     <Box fontWeight={"bold"}>{issue.user?.login}</Box>
