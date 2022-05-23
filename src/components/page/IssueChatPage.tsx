@@ -4,7 +4,7 @@ import { ChatInputArea } from "./main/ChatInput"
 import { useIssues } from "./apiHooks"
 import { LeftSidebar } from "./left/LeftSidebar"
 import { IssuesTargetQuery } from "../../services/github/Schema"
-import { ChatHeader } from "./main/ChatHeader"
+import { ChatHeader } from "./main/header/ChatHeader"
 import { IssueStream } from "./main/IssueStream"
 
 
@@ -69,7 +69,7 @@ export const IssueChatPage: FC<IssuesTargetQuery> = (params) => {
         gridTemplateRows={"1fr auto max-content"}
         h="100%"
       >
-        <ChatHeader {...params} />
+        <ChatHeader />
         <IssueStreamWrap  {...params} />
         <Box
           _light={{ bg: "blackAlpha.50" }}
