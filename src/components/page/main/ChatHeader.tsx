@@ -4,6 +4,7 @@ import { FC, useMemo } from "react"
 import { IssuesTargetQuery } from "../../../services/github/Schema"
 import { NextLink } from "../../../services/next/components"
 import { useLabel } from "../apiHooks"
+import { useChatRouteParam } from "../useChatRouteParam"
 
 
 const resolveFilter = (filter: string[]) => {
@@ -28,7 +29,8 @@ const Description: FC<IssuesTargetQuery> = ({ owner, repo, filter }) => {
   return null
 }
 
-export const ChatHeader: FC<IssuesTargetQuery> = ({ owner, repo, filter }) => {
+export const ChatHeader: FC<{}> = () => {
+  const { owner, repo, filter } = useChatRouteParam()
   const { type, value } = useMemo(() => {
     const [type, value] = filter ?? []
     return { type, value }
