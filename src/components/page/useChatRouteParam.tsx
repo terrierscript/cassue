@@ -13,6 +13,10 @@ export const useChatRouteParam = () => {
 export const useFilterValue = () => {
   const { filter } = useChatRouteParam()
   const [type, value] = filter ?? []
-  return IssuesTargetTypeValue.parse({ type, value })
+  const result = IssuesTargetTypeValue.safeParse({ type, value })
+  if (result.success) {
+    return result.data
+  }
+  return { type: "issues", value: "open" }
   // return { type, value }
 }

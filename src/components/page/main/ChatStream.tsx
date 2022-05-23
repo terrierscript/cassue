@@ -1,7 +1,7 @@
 import { Center, Flex, Spinner } from "@chakra-ui/react"
 import { FC, PropsWithChildren } from "react"
 import { useIssueComments, useIssues } from "../apiHooks"
-import { IssueStream } from "./IssueStream"
+import { CommentStream, IssueStream } from "./Stream"
 import { useChatRouteParam, useFilterValue } from "../useChatRouteParam"
 
 const StreamContainer: FC<PropsWithChildren<{}>> = ({ children }) => {
@@ -42,7 +42,7 @@ const CommentStreamLoader: FC<{}> = ({ }) => {
     return <Loading />
   }
   return <StreamContainer>
-    {/* <IssueStream issues={data.comments} /> */}
+    <CommentStream comments={data.comments} />
   </StreamContainer>
 }
 

@@ -35,6 +35,9 @@ const resolveIssueListFilter = (filter: string[] = []) => {
 
 export type LabelResponse = GetResponseDataTypeFromEndpointMethod<typeof octokit.rest.issues.listLabelsForRepo>
 
+const headers = {
+  accept: "application/vnd.github.VERSION.full+json"
+}
 export class GithubClient {
   client: Octokit
   account: Record<string, string>
@@ -53,7 +56,8 @@ export class GithubClient {
     const result = await this.client.rest.issues.listForRepo({
       ...repoParam,
       ...filterQuery,
-      direction: "desc"
+      direction: "desc",
+      headers
     }) //.issues.list(param)
     return result.data
   }
@@ -70,7 +74,8 @@ export class GithubClient {
     const { number, ...rest } = param
     const result = await this.client.rest.issues.listComments({
       ...rest,
-      issue_number: number
+      issue_number: number,
+      headers
     })
     return result.data
   }
