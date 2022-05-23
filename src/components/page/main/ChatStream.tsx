@@ -47,10 +47,10 @@ const CommentStreamLoader: FC<{}> = ({ }) => {
 }
 
 export const ChatStream: FC<{}> = ({ }) => {
-  const { type } = useFilterValue()
-  if (type === "comments") {
-    return <CommentStreamLoader />
-  }
+  // const { target } = useFilterValue()
+  // if (target === "comments") {
+  //   return <CommentStreamLoader />
+  // }
 
   return <IssueStreamLoader />
 }

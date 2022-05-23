@@ -4,33 +4,34 @@ import { formatDistance } from "date-fns"
 import { IssueComementResponse, IssueResponse } from "../../../services/github/GithubClient"
 import { useChatPageParams } from "../chatHooks"
 import NextLink from "next/link"
-import { useChatRouteParam } from "../useChatRouteParam"
+import { useChatRouteParam, useFilterValue } from "../useChatRouteParam"
 
 type Message = {
-  type: "issue"
+  messageType: "issue"
   data: IssueResponse
 } | {
-  type: "comment"
+  messageType: "comment"
   data: IssueComementResponse
 }
 // type Postable2 = IssueComementResponse & IssueResponse
 
-const IssueTitle: FC<{ message: Message }> = ({ message: { type, data } }) => {
+const IssueTitle: FC<{ message: Message }> = ({ message }) => {
+  const { messageType, data } = message
   const linkLabel = useMemo(() => {
-    if (type === "comment") {
-      return data.id
+    if (messageType === "issue") {
+      return `#${data.number}`
     }
-    return `#${data.id}`
-  }, [type, data])
+    return data.id
+  }, [messageType, data])
   return <HStack w="100%">
     <Box fontWeight={"bold"}>{data.user?.login}</Box>
     <Box fontSize={"sm"}>
       {formatDistance(new Date(data.updated_at), new Date())}
     </Box>
     <Spacer />
-    {type === "issue" && <Box fontSize={"xs"} color="gray.500">
+    {messageType === "issue" && <Box fontSize={"xs"} color="gray.500">
       <Link href={data.html_url} target="_blank">
-        #{linkLabel}
+        {linkLabel}
       </Link>
     </Box>}
   </HStack>
@@ -38,8 +39,8 @@ const IssueTitle: FC<{ message: Message }> = ({ message: { type, data } }) => {
 
 const MessageFooter: FC<{ message: Message }> = ({ message }) => {
   const params = useChatPageParams()
-  const { type, data } = message
-  if (type === "comment") {
+  const { messageType, data } = message
+  if (messageType === "comment") {
     return null
   }
   if (!params) {
@@ -80,9 +81,10 @@ const HtmlBody: FC<{ html: string }> = ({ html }) => {
 
 const MessageBody: FC<{ message: Message }> = ({ message }) => {
   const { owner, repo } = useChatRouteParam()
-  const { data, type } = message
+  const { target, value } = useFilterValue()
+  const { data, messageType } = message
 
-  if (type === "comment") {
+  if (messageType === "comment") {
     return <Stack>
       <Box boxSizing="border-box" >
         <HtmlBody html={data.body_html ?? ""} />
@@ -90,7 +92,7 @@ const MessageBody: FC<{ message: Message }> = ({ message }) => {
     </Stack>
   }
   return <Stack>
-    <NextLink href={`/${owner}/${repo}/comments/${data.number}`}>
+    <NextLink href={`/${owner}/${repo}/${target}/${value}/${data.number}`}>
       <Link >
         <Box boxSizing="border-box" textOverflow={"ellipsis"}>
           {data.title}

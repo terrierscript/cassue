@@ -10,7 +10,7 @@ export const IssueStream: FC<{ issues: IssueResponse[] }> = ({ issues }) => {
   return <Stack spacing={0}>
     <Spacer />
     {stream.map((issue, key) => {
-      return <StreamMessage message={{ type: "issue", data: issue }} key={key} />
+      return <StreamMessage message={{ messageType: "issue", data: issue }} key={key} />
     })}
   </Stack>
 
@@ -23,7 +23,7 @@ export const CommentStream: FC<{ comments: IssueComementResponse[] }> = ({ comme
   return <Stack spacing={0}>
     <Spacer />
     {stream.map((comment, key) => {
-      return <StreamMessage message={{ type: "comment", data: comment }} key={key} />
+      return <StreamMessage message={{ messageType: "comment", data: comment }} key={key} />
     })}
   </Stack>
 

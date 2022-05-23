@@ -19,8 +19,8 @@ export const IssuesTargetQueryScheme = RepositoryQueryScheme.extend({
   filter: z.array(z.string()).optional().default([])
 })
 
-export const IssuesTargetTypeValue = z.object({
-  type: z.enum(["labels", "issues", "comments"]),
+export const IssuesTargetTypeValueScheme = z.object({
+  target: z.enum(["labels", "issues", "comments"]),
   value: z.string()
 })
 

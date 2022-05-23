@@ -1,5 +1,6 @@
-import { IssuesTargetQueryScheme, IssuesTargetTypeValue } from "../../services/github/Schema"
+import { IssuesTargetQueryScheme, IssuesTargetTypeValueScheme } from "../../services/github/Schema"
 import { useRouter } from "next/router"
+import { z } from "zod"
 
 
 export const useChatRouteParam = () => {
@@ -10,13 +11,13 @@ export const useChatRouteParam = () => {
 }
 
 
-export const useFilterValue = () => {
+export const useFilterValue = (): z.infer<typeof IssuesTargetTypeValueScheme> => {
   const { filter } = useChatRouteParam()
-  const [type, value] = filter ?? []
-  const result = IssuesTargetTypeValue.safeParse({ type, value })
+  const [target, value] = filter ?? []
+  const result = IssuesTargetTypeValueScheme.safeParse({ target, value })
   if (result.success) {
     return result.data
   }
-  return { type: "issues", value: "open" }
+  return { target: "issues", value: "open" }
   // return { type, value }
 }
