@@ -4,6 +4,7 @@ import { formatDistance } from "date-fns"
 import { IssueResponse } from "../../../services/github/GithubClient"
 import { useChatPageParams } from "../chatHooks"
 import NextLink from "next/link"
+import { useChatRouteParam } from "../useChatRouteParam"
 
 const IssueTitle: FC<{ issue: IssueResponse }> = ({ issue }) => {
   return <HStack w="100%">
@@ -39,6 +40,8 @@ const IssueFooter: FC<{ issue: IssueResponse }> = ({ issue }) => {
 }
 export const StreamIssue: FC<{ issue: IssueResponse }> = ({ issue }) => {
   const activeStyle = useColorModeValue({ bg: "blackAlpha.50" }, { bg: "whiteAlpha.50" })
+  const { owner, repo } = useChatRouteParam()
+
   return <Stack
     spacing={4}
     p={2}
@@ -56,9 +59,11 @@ export const StreamIssue: FC<{ issue: IssueResponse }> = ({ issue }) => {
       <Stack spacing={0} minW="0" w="100%">
         <IssueTitle issue={issue} />
         <Stack>
-          <Box boxSizing="border-box" textOverflow={"ellipsis"}>
-            {issue.title}
-          </Box>
+          <Link href={`/${owner}/${repo}/issues/${issue.number}`}>
+            <Box boxSizing="border-box" textOverflow={"ellipsis"}>
+              {issue.title}
+            </Box>
+          </Link>
         </Stack>
         <Stack>
           <IssueFooter issue={issue} />

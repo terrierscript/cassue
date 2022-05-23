@@ -1,5 +1,4 @@
 import { NextApiHandler } from "next"
-import { getSession } from "next-auth/react"
 import { getSessionAccount } from "../../../../../../services/auth/getSessionAccount"
 import { GithubClient } from "../../../../../../services/github/GithubClient"
 import { RepositoryQueryScheme, IssuePostScheme, IssuesTargetQueryScheme } from "../../../../../../services/github/Schema"
