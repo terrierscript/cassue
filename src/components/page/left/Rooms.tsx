@@ -1,4 +1,4 @@
-import { Box, Button, Divider, Link, Stack } from "@chakra-ui/react"
+import { Box, Button, Divider, HStack, Link, Stack } from "@chakra-ui/react"
 import { FC } from "react"
 import { RepositoryQuery } from "../../../services/github/Schema"
 import { NextLink } from "../../../services/next/components"
@@ -8,7 +8,24 @@ import { CreateLabel } from "./CreateLabel"
 
 type Room = {
   name: string,
+  color: string,
   query?: string
+}
+
+const RoomButton: FC<{ room: Room }> = ({ room }) => {
+  const { owner, repo } = useChatRouteParam()
+  const query = room?.query ?? room.name
+  return <NextLink href={`/${owner}/${repo}/${query}`} passHref>
+    <Button variant={"ghost"} w="100%" justifyContent={"start"}
+      size="sm" colorScheme={"gray"} as="a" >
+      <HStack>
+        <Box rounded="full" w={"1em"} h="1em" bg={`#${room?.color}`}></Box>
+        <Box>
+          {room.name}
+        </Box>
+      </HStack>
+    </Button>
+  </NextLink>
 }
 
 export const Rooms: FC<{}> = ({ }) => {
@@ -16,17 +33,17 @@ export const Rooms: FC<{}> = ({ }) => {
 
   const { data } = useLabels({ owner, repo })
   const rooms: Room[] = [
-    { name: "all", query: "issues/all" },
+    { name: "all", color: "ffffff", query: "issues/all" },
     ...(data?.labels ?? []).map(label => {
       return {
         name: label.name,
+        color: label.color,
         query: `labels/${label.name}`
       }
     })
   ]
   return <Stack  >
     <Stack spacing={0}>
-
       <Box fontWeight={"bold"}>
         {owner}
       </Box>
@@ -36,14 +53,8 @@ export const Rooms: FC<{}> = ({ }) => {
     </Stack>
     <Divider />
     {rooms.map(room => {
-      const query = room?.query ?? room.name
       return <Box key={room.name} >
-        <NextLink href={`/${owner}/${repo}/${query}`} passHref>
-          <Button variant={"ghost"} w="100%" justifyContent={"start"}
-            size="sm" colorScheme={"gray"} as="a" >
-            # {room.name}
-          </Button>
-        </NextLink>
+        <RoomButton room={room} />
       </Box>
     })}
     <Divider />
