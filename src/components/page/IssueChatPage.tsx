@@ -67,9 +67,7 @@ export const IssueChatPage: FC<IssuesTargetQuery> = (params) => {
         {...layout.center}
         minH={0}
         gridTemplateRows={"1fr auto max-content"}
-        // minH="-webkit-fill-available"
         h="100%"
-      // h={height ?? "100%"}
       >
         <ChatHeader {...params} />
         <IssueStreamWrap  {...params} />
