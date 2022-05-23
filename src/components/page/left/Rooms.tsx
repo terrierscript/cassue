@@ -3,6 +3,7 @@ import { FC } from "react"
 import { RepositoryQuery } from "../../../services/github/Schema"
 import { NextLink } from "../../../services/next/components"
 import { useLabels } from "../apiHooks"
+import { useChatRouteParam } from "../useChatRouteParam"
 import { CreateLabel } from "./CreateLabel"
 
 type Room = {
@@ -10,7 +11,9 @@ type Room = {
   query?: string
 }
 
-export const Rooms: FC<RepositoryQuery> = ({ owner, repo }) => {
+export const Rooms: FC<{}> = ({ }) => {
+  const { owner, repo } = useChatRouteParam()
+
   const { data } = useLabels({ owner, repo })
   const rooms: Room[] = [
     { name: "all", query: "issues/all" },

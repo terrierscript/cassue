@@ -6,9 +6,12 @@ import { LeftSidebar } from "./left/LeftSidebar"
 import { IssuesTargetQuery } from "../../services/github/Schema"
 import { ChatHeader } from "./main/header/ChatHeader"
 import { IssueStream } from "./main/IssueStream"
+import { useChatRouteParam } from "./useChatRouteParam"
 
 
-const IssueStreamWrap: FC<IssuesTargetQuery> = ({ owner, repo, filter }) => {
+const IssueStreamWrap: FC<{}> = ({ }) => {
+  const { owner, repo, filter } = useChatRouteParam()
+
   const { data } = useIssues({ owner, repo, filter })
   if (!data) {
     return <Flex h="100%" w="100%" overflow={"scroll"}>
@@ -61,7 +64,7 @@ export const IssueChatPage: FC<IssuesTargetQuery> = (params) => {
       bp: "max-content 1fr"
     }} >
       <Box {...layout.left}>
-        <LeftSidebar {...params} />
+        <LeftSidebar />
       </Box>
       <Grid
         {...layout.center}
@@ -70,12 +73,12 @@ export const IssueChatPage: FC<IssuesTargetQuery> = (params) => {
         h="100%"
       >
         <ChatHeader />
-        <IssueStreamWrap  {...params} />
+        <IssueStreamWrap />
         <Box
           _light={{ bg: "blackAlpha.50" }}
           _dark={{ bg: "whiteAlpha.50" }}
           p={2}>
-          <ChatInputArea {...params} />
+          <ChatInputArea />
         </Box>
       </Grid>
     </Grid>

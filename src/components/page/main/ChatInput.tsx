@@ -6,8 +6,10 @@ import { useIssues } from "../apiHooks"
 import { ArrowCircleRightIcon, PaperAirplaneIcon } from "@heroicons/react/solid"
 import { resolveFilter, resolveFilterToPost } from "../../../services/github/resolveFilter"
 import { BiPaperPlane, BiPen, BiPencil, BiSend, BiSubdirectoryLeft } from "react-icons/bi"
+import { useChatRouteParam } from "../useChatRouteParam"
 
-const ReadOnlyMode: FC<RepositoryQuery> = ({ owner, repo }) => {
+const ReadOnlyMode: FC<{}> = ({ }) => {
+  const { owner, repo } = useChatRouteParam()
   return <HStack>
     <Button as="a"
       w="100%"
@@ -56,7 +58,9 @@ const ChatInput: FC<{ onSubmit: (value: string) => void }> = ({ onSubmit }) => {
   </form>
 }
 
-const InputSending: FC<IssuesTargetQuery> = ({ owner, repo, filter }) => {
+const InputSending: FC<{}> = ({ }) => {
+  const { owner, repo, filter } = useChatRouteParam()
+
   const { mutate } = useIssues({ owner, repo, filter })
   return <ChatInput onSubmit={async (v) => {
     const resolvedParams = resolveFilterToPost(filter)
@@ -73,7 +77,9 @@ const InputSending: FC<IssuesTargetQuery> = ({ owner, repo, filter }) => {
   }} />
 }
 
-export const ChatInputArea: FC<IssuesTargetQuery> = ({ owner, repo, filter }) => {
+export const ChatInputArea: FC<{}> = ({ }) => {
+  const { owner } = useChatRouteParam()
+
   const { data } = useSession()
   const disabled = useMemo(() => {
     return (data?.user?.name !== owner)
@@ -82,7 +88,7 @@ export const ChatInputArea: FC<IssuesTargetQuery> = ({ owner, repo, filter }) =>
     return null
   }
   if (disabled) {
-    return <ReadOnlyMode {...{ owner, repo }} />
+    return <ReadOnlyMode />
   }
-  return <InputSending  {...{ owner, repo, filter }} />
+  return <InputSending />
 }

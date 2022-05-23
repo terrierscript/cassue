@@ -33,14 +33,15 @@ const Debugger = () => {
     Cache:  {Object.keys(cacheSize).length}
   </Box>
 }
-export const LeftSidebar: FC<RepositoryQuery> = (props) => {
+export const LeftSidebar: FC<{}> = () => {
+
   const bg = useAlpha(200)
   const color = useAlpha(800)
 
   return <Stack h="100%" p={6}
     bg={bg}
     color={color}>
-    <Rooms {...props} />
+    <Rooms />
     <Spacer />
     <Divider />
 
