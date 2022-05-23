@@ -1,5 +1,5 @@
 import { Box, Center, Flex, Grid, Spinner } from "@chakra-ui/react"
-import { FC, useMemo } from "react"
+import { FC, PropsWithChildren, useMemo } from "react"
 import { ChatInputArea } from "./main/ChatInput"
 import { useIssues } from "./apiHooks"
 import { LeftSidebar } from "./left/LeftSidebar"
@@ -27,31 +27,31 @@ const IssueStreamWrap: FC<IssuesTargetQuery> = ({ owner, repo, filter }) => {
   </Flex >
 }
 
-
-export const IssueChatPage: FC<IssuesTargetQuery> = (params) => {
+const useLayoutStyle = (params: IssuesTargetQuery) => {
   const sideBarWidth = 240
   const layout = useMemo(() => {
     if (params.filter && params.filter?.length > 1) {
       return {
         left: {
-          w: sideBarWidth,
-          display: { base: "none", bp: "block" }
+          w: sideBarWidth, display: { base: "none", bp: "block" }
         },
-        center: {
-        }
+        center: {}
       }
     }
     return {
       left: {
-        w: {
-          base: "100%", bp: sideBarWidth
-        }
+        w: { base: "100%", bp: sideBarWidth }
       },
       center: {
         display: { base: "none", bp: "grid" }
       }
     }
   }, [params])
+  return layout
+}
+
+export const IssueChatPage: FC<IssuesTargetQuery> = (params) => {
+  const layout = useLayoutStyle(params)
   return <Box
     position="absolute"
     top={0} left={0} right={0} bottom={0}
