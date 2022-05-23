@@ -1,11 +1,12 @@
-import { Avatar, Box, HStack, Link, Spacer, Stack, useColorModeValue } from "@chakra-ui/react"
+import { Avatar, Box, HStack, Link, Spacer, Stack, useColorModeValue, Wrap } from "@chakra-ui/react"
 import { FC } from "react"
 import { formatDistance } from "date-fns"
-import { IssueResponse } from "../../../services/github/GithubClient"
+import { IssueComementResponse, IssueResponse } from "../../../services/github/GithubClient"
 import { useChatPageParams } from "../chatHooks"
 import NextLink from "next/link"
 import { useChatRouteParam } from "../useChatRouteParam"
 
+type Postable = IssueComementResponse | IssueResponse
 const IssueTitle: FC<{ issue: IssueResponse }> = ({ issue }) => {
   return <HStack w="100%">
     <Box fontWeight={"bold"}>{issue.user?.login}</Box>
@@ -26,7 +27,7 @@ const IssueFooter: FC<{ issue: IssueResponse }> = ({ issue }) => {
   if (!params) {
     return null
   }
-  return <Box color="gray.500" fontSize={"sm"}>
+  return <Wrap color="gray.500" fontSize={"sm"}>
     {(issue.labels).flat(1).map(label => {
       const labelName = typeof label === "string" ? label : label.name
       return <NextLink key={labelName} href={`/${params.owner}/${params.repo}/labels/${labelName}`}>
@@ -35,7 +36,8 @@ const IssueFooter: FC<{ issue: IssueResponse }> = ({ issue }) => {
         </Link>
       </NextLink>
     })}
-  </Box>
+    {issue.comments > 0 && <Box>{issue.comments} Comments</Box>}
+  </Wrap>
 
 }
 export const StreamIssue: FC<{ issue: IssueResponse }> = ({ issue }) => {
@@ -59,11 +61,13 @@ export const StreamIssue: FC<{ issue: IssueResponse }> = ({ issue }) => {
       <Stack spacing={0} minW="0" w="100%">
         <IssueTitle issue={issue} />
         <Stack>
-          <Link href={`/${owner}/${repo}/issues/${issue.number}`}>
-            <Box boxSizing="border-box" textOverflow={"ellipsis"}>
-              {issue.title}
-            </Box>
-          </Link>
+          <NextLink href={`/${owner}/${repo}/comments/${issue.number}`}>
+            <Link >
+              <Box boxSizing="border-box" textOverflow={"ellipsis"}>
+                {issue.title}
+              </Box>
+            </Link>
+          </NextLink>
         </Stack>
         <Stack>
           <IssueFooter issue={issue} />

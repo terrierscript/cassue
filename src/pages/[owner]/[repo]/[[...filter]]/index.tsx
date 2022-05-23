@@ -1,37 +1,42 @@
-import { Box } from "@chakra-ui/react"
+import { Box, Spinner } from "@chakra-ui/react"
 import { GetServerSideProps } from "next"
 import { FC } from "react"
 import Head from "next/head"
 import { IssuesTargetQueryScheme, RepositoryQuery, RepositoryQueryScheme } from "../../../../services/github/Schema"
 import { IssueChatPage } from "../../../../components/page/IssueChatPage"
+import { useChatRouteParam } from "../../../../components/page/useChatRouteParam"
+import { useRouter } from "next/router"
 
 export type Props = {
   error?: string,
 } & RepositoryQuery
 
-const PageHead: FC<Props> = ({ owner, repo }) => {
+const PageHead: FC<{}> = ({ }) => {
+  const { owner, repo } = useChatRouteParam()
+
   return <Head>
     <title>{owner}/{repo}</title>
     <link rel="manifest" href={`/api/issues/${owner}/${repo}/manifest.webmanifest`} />
   </Head>
 }
-export const Page: FC<Props> = ({ error, ...issueChatProps }) => {
+
+export const Page: FC<Props> = ({ }) => {
+  const router = useRouter()
+  if (!router.isReady) {
+    return <Spinner />
+  }
+
   return <Box>
-    <PageHead {...issueChatProps} />
-    <IssueChatPage  {...issueChatProps} />
+    <PageHead />
+    <IssueChatPage />
   </Box>
 }
 
-export const getServerSideProps: GetServerSideProps = async (req) => {
-  const { owner, repo, filter } = IssuesTargetQueryScheme.parse(req.query)
+// export const getServerSideProps: GetServerSideProps = async (req) => {
 
-  return {
-    props: {
-      owner,
-      repo,
-      filter
-    }
-  }
-}
+//   return {
+//     props: {}
+//   }
+// }
 
 export default Page

@@ -1,15 +1,17 @@
 import { Octokit } from "octokit"
 import { GetResponseDataTypeFromEndpointMethod } from "@octokit/types"
-import { RepositoryQuery, IssuePostParam, IssuesTargetQuery } from "./Schema"
+import { RepositoryQuery, IssuePostParam, IssuesTargetQuery, IssueCommentQuery } from "./Schema"
 
 
 const octokit = new Octokit()
 
 // TODO
 
-export type IssueResponsees = GetResponseDataTypeFromEndpointMethod<typeof octokit.rest.issues.listForRepo>
+type IssueResponsees = GetResponseDataTypeFromEndpointMethod<typeof octokit.rest.issues.listForRepo>
 export type IssueResponse = IssueResponsees[number]
-// ReturnType>　//any  //Awaited<ReturnType<typeof app.rest.issues.listForRepo>>
+
+type IssueCommentResponsees = GetResponseDataTypeFromEndpointMethod<typeof octokit.rest.issues.listComments>
+export type IssueComementResponse = IssueCommentResponsees[number]
 
 const issueState = ["all", "closed", "open"] as const
 
@@ -57,18 +59,22 @@ export class GithubClient {
   }
 
   async postIssue(target: RepositoryQuery, param: IssuePostParam) {
-    console.log({
-      ...target,
-      ...param,
-    })
     const result = await this.client.rest.issues.create({
       ...target,
       ...param,
     }) //.issues.list(param)
-    console.log(result)
     return result.data
-
   }
+
+  async getComments(param: IssueCommentQuery) {
+    const { number, ...rest } = param
+    const result = await this.client.rest.issues.listComments({
+      ...rest,
+      issue_number: number
+    })
+    return result.data
+  }
+
   async getCustomLabels(param: RepositoryQuery) {
     const result = await this.client.rest.issues.listLabelsForRepo({
       ...param,
