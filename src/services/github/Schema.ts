@@ -8,7 +8,12 @@ export type RepositoryQuery = z.infer<typeof RepositoryQueryScheme>
 
 
 export const zStringNumber = z.preprocess(
-  (a) => parseInt(z.string().parse(a), 10),
+  (a) => {
+    const parse = z.string().safeParse(a)
+    return parse.success
+      ? parseInt(parse.data, 10)
+      : null
+  },
   z.number().positive()
 )
 

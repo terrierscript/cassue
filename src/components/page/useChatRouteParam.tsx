@@ -12,9 +12,11 @@ export const useChatRouteParam = () => {
 
 export const useCommentNumber = (): number | null => {
 
+
   const { filter } = useChatRouteParam()
   const [_target, _value, number] = filter ?? []
   const parseResult = zStringNumber.safeParse(number)
+
   if (parseResult.success) {
     return parseResult.data
   }

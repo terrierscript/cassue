@@ -48,6 +48,7 @@ const CommentStreamLoader: FC<{ number: number }> = ({ number }) => {
 
 export const ChatStream: FC<{}> = ({ }) => {
   const number = useCommentNumber()
+  console.log(number)
   if (number) {
     return <CommentStreamLoader number={number} />
   }
