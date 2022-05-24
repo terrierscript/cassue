@@ -11,8 +11,6 @@ export const useChatRouteParam = () => {
 }
 
 export const useCommentNumber = (): number | null => {
-
-
   const { filter } = useChatRouteParam()
   const [_target, _value, number] = filter ?? []
   const parseResult = zStringNumber.safeParse(number)
@@ -22,6 +20,7 @@ export const useCommentNumber = (): number | null => {
   }
   return null
 }
+
 export const useFilterValue = (): z.infer<typeof IssuesTargetTypeValueScheme> => {
   const { filter } = useChatRouteParam()
   const [target, value] = filter ?? []

@@ -1,7 +1,7 @@
 import { Box, Grid } from "@chakra-ui/react"
 import { FC, useMemo } from "react"
 import { IssuesTargetQuery } from "../../services/github/Schema"
-import { useChatRouteParam } from "./useChatRouteParam"
+import { useChatRouteParam, useCommentNumber } from "./useChatRouteParam"
 // import { ChatInputArea } from "./main/ChatInput"
 // import { LeftSidebar } from "./left/LeftSidebar"
 // import { ChatHeader } from "./main/header/ChatHeader"
@@ -21,26 +21,42 @@ const ChatInputArea = dynamic(async () => {
   const { ChatInputArea } = await import("./main/ChatInput")
   return ChatInputArea
 })
-const ChatHeader = dynamic( import("./main/header/ChatHeader"))
+const ChatHeader = dynamic(import("./main/header/ChatHeader"))
+
+const useLayoutMode = () => {
+  const params = useChatRouteParam()
+  const number = useCommentNumber()
+  if (params.filter && params.filter?.length > 1) {
+    return "issue"
+  }
+  if (number) {
+    return "comment"
+  }
+  return "room"
+}
 
 const useLayoutStyle = (params: IssuesTargetQuery) => {
   const sideBarWidth = 240
+  const mode = useLayoutMode()
   const layout = useMemo(() => {
-    if (params.filter && params.filter?.length > 1) {
-      return {
-        left: {
-          w: sideBarWidth, display: { base: "none", bp: "block" }
-        },
-        center: {}
-      }
-    }
-    return {
-      left: {
-        w: { base: "100%", bp: sideBarWidth }
-      },
-      center: {
-        display: { base: "none", bp: "grid" }
-      }
+    switch (mode) {
+      case "issue":
+      case "comment":
+        return {
+          left: {
+            w: sideBarWidth, display: { base: "none", bp: "block" }
+          },
+          center: {}
+        }
+      case "room":
+        return {
+          left: {
+            w: { base: "100%", bp: sideBarWidth }
+          },
+          center: {
+            display: { base: "none", bp: "grid" }
+          }
+        }
     }
   }, [params])
   return layout

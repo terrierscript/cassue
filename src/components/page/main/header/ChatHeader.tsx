@@ -3,13 +3,13 @@ import { Box, Divider, HStack, IconButton, Stack } from "@chakra-ui/react"
 import { FC, useMemo } from "react"
 import { IssuesTargetQuery } from "../../../../services/github/Schema"
 import { NextLink } from "../../../../services/next/components"
-import { useChatRouteParam } from "../../useChatRouteParam"
+import { useChatRouteParam, useFilterValue } from "../../useChatRouteParam"
 import { Description } from "./Description"
 
 const useTitle = () => {
   const { owner, repo, filter } = useChatRouteParam()
-  const [type, value] = filter ?? []
-  if (type === "labels") {
+  const { target, value } = useFilterValue()
+  if (target === "labels") {
     return value
   }
   return `${owner}/${repo}`
