@@ -30,12 +30,10 @@ export const Page: FC<Props> = ({ }) => {
     return <Spinner />
   }
 
-  return <Suspense fallback={`loading`}>
-    <Box>
-      <PageHead />
-      <IssueChatPage />
-    </Box>
-  </Suspense>
+  return <Box>
+    <PageHead />
+    <IssueChatPage />
+  </Box>
 }
 
 // export const getServerSideProps: GetServerSideProps = async (req) => {
