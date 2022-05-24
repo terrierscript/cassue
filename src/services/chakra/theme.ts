@@ -56,4 +56,4 @@ export const appTheme = extendTheme({
   withDefaultColorScheme({ colorScheme: 'teal' }),
 )
 
-console.log(appTheme)
+// console.log(appTheme)
