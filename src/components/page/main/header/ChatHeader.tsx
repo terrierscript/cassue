@@ -40,3 +40,5 @@ export const ChatHeader: FC<{}> = () => {
     <Divider />
   </Stack>
 }
+
+export default ChatHeader
