@@ -29,7 +29,6 @@ const useBackLink = () => {
 export const ChatHeader: FC<{}> = () => {
   const title = useTitle()
   const backLink = useBackLink()
-  console.log({ backLink })
   return <Stack p={4} spacing={1}>
     <HStack>
       <Box>

@@ -26,11 +26,11 @@ const ChatHeader = dynamic(import("./main/header/ChatHeader"))
 const useLayoutMode = () => {
   const params = useChatRouteParam()
   const number = useCommentNumber()
-  if (params.filter && params.filter?.length > 1) {
-    return "issue"
-  }
   if (number) {
     return "comment"
+  }
+  if (params.filter && params.filter?.length > 1) {
+    return "issue"
   }
   return "room"
 }
@@ -41,12 +41,25 @@ const useLayoutStyle = (params: IssuesTargetQuery) => {
   const layout = useMemo(() => {
     switch (mode) {
       case "issue":
+        return {
+          left: {
+            w: sideBarWidth, display: { base: "none", bp: "block" }
+          },
+          center: {},
+          right: { display: "none" }
+        }
       case "comment":
         return {
           left: {
             w: sideBarWidth, display: { base: "none", bp: "block" }
           },
-          center: {}
+          center: {
+            display: { base: "none", bp: "block" }
+          },
+          right: {
+            w: 350,
+            display: "block"
+          }
         }
       case "room":
         return {
@@ -55,7 +68,8 @@ const useLayoutStyle = (params: IssuesTargetQuery) => {
           },
           center: {
             display: { base: "none", bp: "grid" }
-          }
+          },
+          right: { display: "none" }
         }
     }
   }, [params])
@@ -65,13 +79,14 @@ const useLayoutStyle = (params: IssuesTargetQuery) => {
 export const IssueChatPage: FC<{}> = () => {
   const params = useChatRouteParam()
   const layout = useLayoutStyle(params)
+  console.log(layout)
   return <Box
     position="absolute"
     top={0} left={0} right={0} bottom={0}
   >
     <Grid h="100%" gridTemplateColumns={{
       base: "auto",
-      bp: "max-content 1fr"
+      bp: "max-content 1fr max-content"
     }} >
       <Box {...layout.left}>
         <LeftSidebar />
@@ -91,6 +106,9 @@ export const IssueChatPage: FC<{}> = () => {
           <ChatInputArea />
         </Box>
       </Grid>
+      <Box {...layout.right}>
+        xx
+      </Box>
     </Grid>
   </Box>
 }
