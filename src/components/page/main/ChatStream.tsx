@@ -2,7 +2,7 @@ import { Center, Flex, Spinner } from "@chakra-ui/react"
 import { FC, PropsWithChildren } from "react"
 import { useIssueComments, useIssues } from "../apiHooks"
 import { CommentStream, IssueStream } from "./Stream"
-import { useChatRouteParam, useFilterValue } from "../useChatRouteParam"
+import { useChatRouteParam, useCommentNumber, useFilterValue } from "../useChatRouteParam"
 
 const StreamContainer: FC<PropsWithChildren<{}>> = ({ children }) => {
   return <Flex
@@ -34,10 +34,10 @@ const IssueStreamLoader: FC<{}> = ({ }) => {
   </StreamContainer>
 }
 
-const CommentStreamLoader: FC<{}> = ({ }) => {
+const CommentStreamLoader: FC<{ number: number }> = ({ number }) => {
   const { owner, repo } = useChatRouteParam()
-  const { value } = useFilterValue()
-  const { data } = useIssueComments({ owner, repo, number: Number(value) })
+
+  const { data } = useIssueComments({ owner, repo, number })
   if (!data) {
     return <Loading />
   }
@@ -47,10 +47,9 @@ const CommentStreamLoader: FC<{}> = ({ }) => {
 }
 
 export const ChatStream: FC<{}> = ({ }) => {
-  // const { target } = useFilterValue()
-  // if (target === "comments") {
-  //   return <CommentStreamLoader />
-  // }
-
+  const number = useCommentNumber()
+  if (number) {
+    return <CommentStreamLoader number={number} />
+  }
   return <IssueStreamLoader />
 }

@@ -1,12 +1,11 @@
 import { Box, Grid } from "@chakra-ui/react"
-import { FC, PropsWithChildren, useMemo } from "react"
+import { FC, useMemo } from "react"
 import { ChatInputArea } from "./main/ChatInput"
 import { LeftSidebar } from "./left/LeftSidebar"
 import { IssuesTargetQuery } from "../../services/github/Schema"
 import { ChatHeader } from "./main/header/ChatHeader"
 import { useChatRouteParam } from "./useChatRouteParam"
 import { ChatStream } from "./main/ChatStream"
-
 
 const useLayoutStyle = (params: IssuesTargetQuery) => {
   const sideBarWidth = 240

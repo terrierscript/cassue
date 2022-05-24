@@ -1,4 +1,4 @@
-import { IssuesTargetQueryScheme, IssuesTargetTypeValueScheme } from "../../services/github/Schema"
+import { IssuesTargetQueryScheme, IssuesTargetTypeValueScheme, zStringNumber } from "../../services/github/Schema"
 import { useRouter } from "next/router"
 import { z } from "zod"
 
@@ -10,7 +10,16 @@ export const useChatRouteParam = () => {
 
 }
 
+export const useCommentNumber = (): number | null => {
 
+  const { filter } = useChatRouteParam()
+  const [_target, _value, number] = filter ?? []
+  const parseResult = zStringNumber.safeParse(number)
+  if (parseResult.success) {
+    return parseResult.data
+  }
+  return null
+}
 export const useFilterValue = (): z.infer<typeof IssuesTargetTypeValueScheme> => {
   const { filter } = useChatRouteParam()
   const [target, value] = filter ?? []
