@@ -7,9 +7,7 @@ import { useChatRouteParam } from "../../../../components/page/useChatRouteParam
 import { useRouter } from "next/router"
 import dynamic from "next/dynamic"
 
-const IssueChatPage = dynamic(import("../../../../components/page/IssueChatPage"), {
-  suspense: true
-})
+const IssueChatPage = dynamic(import("../../../../components/page/IssueChatPage"))
 
 export type Props = {
   error?: string,
