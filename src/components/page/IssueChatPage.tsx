@@ -1,34 +1,11 @@
-import { Box, Center, Flex, Grid, Spinner } from "@chakra-ui/react"
-import { FC, PropsWithChildren, useMemo } from "react"
+import { Box, Grid } from "@chakra-ui/react"
+import { FC, useMemo } from "react"
 import { ChatInputArea } from "./main/ChatInput"
-import { useIssues } from "./apiHooks"
 import { LeftSidebar } from "./left/LeftSidebar"
 import { IssuesTargetQuery } from "../../services/github/Schema"
 import { ChatHeader } from "./main/header/ChatHeader"
-import { IssueStream } from "./main/IssueStream"
 import { useChatRouteParam } from "./useChatRouteParam"
-
-
-const IssueStreamWrap: FC<{}> = ({ }) => {
-  const { owner, repo, filter } = useChatRouteParam()
-
-  const { data } = useIssues({ owner, repo, filter })
-  if (!data) {
-    return <Flex h="100%" w="100%" overflow={"scroll"}>
-      <Center h="50vh" w="100%" overflow={"scroll"} >
-        <Spinner />
-      </Center>
-    </Flex>
-  }
-  return <Flex
-    overflow="scroll"
-    w="100%"
-    h="100%"
-    flexDirection="column-reverse"
-  >
-    <IssueStream issues={data.issues} />
-  </Flex >
-}
+import { ChatStream } from "./main/ChatStream"
 
 const useLayoutStyle = (params: IssuesTargetQuery) => {
   const sideBarWidth = 240
@@ -53,7 +30,8 @@ const useLayoutStyle = (params: IssuesTargetQuery) => {
   return layout
 }
 
-export const IssueChatPage: FC<IssuesTargetQuery> = (params) => {
+export const IssueChatPage: FC<{}> = () => {
+  const params = useChatRouteParam()
   const layout = useLayoutStyle(params)
   return <Box
     position="absolute"
@@ -73,7 +51,7 @@ export const IssueChatPage: FC<IssuesTargetQuery> = (params) => {
         h="100%"
       >
         <ChatHeader />
-        <IssueStreamWrap />
+        <ChatStream />
         <Box
           _light={{ bg: "blackAlpha.50" }}
           _dark={{ bg: "whiteAlpha.50" }}

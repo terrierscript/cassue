@@ -6,13 +6,30 @@ export const RepositoryQueryScheme = z.object({
 })
 export type RepositoryQuery = z.infer<typeof RepositoryQueryScheme>
 
+
+export const zStringNumber = z.preprocess(
+  (a) => {
+    const parse = z.string().safeParse(a)
+    return parse.success
+      ? parseInt(parse.data, 10)
+      : null
+  },
+  z.number().positive()
+)
+
+export const IssueCommentQueryScheme = RepositoryQueryScheme.extend({
+  number: zStringNumber
+})
+
+export type IssueCommentQuery = z.infer<typeof IssueCommentQueryScheme>
+
 export const IssuesTargetQueryScheme = RepositoryQueryScheme.extend({
   filter: z.array(z.string()).optional().default([])
 })
 
-export const IssuesTargetTypeValue = z.object({
-  type: z.enum(["labels", "issues"]),
-  value: z.string()
+export const IssuesTargetTypeValueScheme = z.object({
+  target: z.enum(["labels", "issues", "comments"]),
+  value: z.string(),
 })
 
 export type IssuesTargetQuery = z.infer<typeof RepositoryQueryScheme> & {

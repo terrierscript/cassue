@@ -1,14 +1,14 @@
 import { NextApiHandler } from "next"
-import { getSession } from "next-auth/react"
 import { getSessionAccount } from "../../../../../../services/auth/getSessionAccount"
 import { GithubClient } from "../../../../../../services/github/GithubClient"
-import { RepositoryQueryScheme, IssuePostScheme, IssuesTargetQueryScheme } from "../../../../../../services/github/Schema"
+import { RepositoryQueryScheme, IssuePostScheme, IssuesTargetQueryScheme, IssuesTargetTypeValueScheme } from "../../../../../../services/github/Schema"
 
 
 const getIssueHandler: NextApiHandler = async (req, res) => {
   const account = await getSessionAccount({ req })
-  const param = IssuesTargetQueryScheme.parse(req.query)
   const accessor = new GithubClient(account)
+  const param = IssuesTargetQueryScheme.parse(req.query)
+  const [type, value] = param.filter
   const issues = await accessor.getAllIssue(param)
   res.json({
     issues
