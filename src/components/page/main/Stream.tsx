@@ -6,7 +6,7 @@ import { StreamMessage } from "./StreamMessage"
 export const IssueStream: FC<{ issues: IssueResponse[] }> = ({ issues }) => {
   const stream = useMemo(() => {
     return issues?.concat().reverse()
-  }, [JSON.stringify(issues)])
+  }, [issues])
   return <Stack spacing={0}>
     <Spacer />
     {stream.map((issue, key) => {
@@ -19,7 +19,7 @@ export const CommentStream: FC<{ comments: IssueComementResponse[] }> = ({ comme
   const stream = useMemo(() => {
     // return comments?.concat().reverse()
     return comments
-  }, [JSON.stringify(comments)])
+  }, [comments])
   return <Stack spacing={0}>
     <Spacer />
     {stream.map((comment, key) => {
