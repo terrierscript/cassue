@@ -1,11 +1,27 @@
 import { Box, Grid } from "@chakra-ui/react"
 import { FC, useMemo } from "react"
-import { ChatInputArea } from "./main/ChatInput"
-import { LeftSidebar } from "./left/LeftSidebar"
 import { IssuesTargetQuery } from "../../services/github/Schema"
-import { ChatHeader } from "./main/header/ChatHeader"
 import { useChatRouteParam } from "./useChatRouteParam"
-import { ChatStream } from "./main/ChatStream"
+// import { ChatInputArea } from "./main/ChatInput"
+// import { LeftSidebar } from "./left/LeftSidebar"
+// import { ChatHeader } from "./main/header/ChatHeader"
+// import { ChatStream } from "./main/ChatStream"
+import dynamic from "next/dynamic"
+
+
+const LeftSidebar = dynamic(async () => {
+  const { LeftSidebar } = await import("./left/LeftSidebar")
+  return LeftSidebar
+})
+const ChatStream = dynamic(async () => {
+  const { ChatStream } = await import("./main/ChatStream")
+  return ChatStream
+})
+const ChatInputArea = dynamic(async () => {
+  const { ChatInputArea } = await import("./main/ChatInput")
+  return ChatInputArea
+})
+const ChatHeader = dynamic( import("./main/header/ChatHeader"))
 
 const useLayoutStyle = (params: IssuesTargetQuery) => {
   const sideBarWidth = 240
@@ -62,3 +78,5 @@ export const IssueChatPage: FC<{}> = () => {
     </Grid>
   </Box>
 }
+
+export default IssueChatPage
