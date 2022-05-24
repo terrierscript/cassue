@@ -1,20 +1,43 @@
 import { Octokit } from "octokit"
 import { GetResponseDataTypeFromEndpointMethod } from "@octokit/types"
-import { RepositoryQuery, IssuePostParam, IssuesTargetQuery } from "./Schema"
-import { resolveFilter } from "./resolveFilter"
+import { RepositoryQuery, IssuePostParam, IssuesTargetQuery, IssueCommentQuery } from "./Schema"
 
 
 const octokit = new Octokit()
 
 // TODO
 
-export type IssueResponsees = GetResponseDataTypeFromEndpointMethod<typeof octokit.rest.issues.listForRepo>
+type IssueResponsees = GetResponseDataTypeFromEndpointMethod<typeof octokit.rest.issues.listForRepo>
 export type IssueResponse = IssueResponsees[number]
-// ReturnType>　//any  //Awaited<ReturnType<typeof app.rest.issues.listForRepo>>
+
+type IssueCommentResponsees = GetResponseDataTypeFromEndpointMethod<typeof octokit.rest.issues.listComments>
+export type IssueComementResponse = IssueCommentResponsees[number]
+
+const issueState = ["all", "closed", "open"] as const
+
+const resolveIssueListFilter = (filter: string[] = []) => {
+  const [type, value] = filter
+  switch (type) {
+    case "labels":
+      return { labels: value }
+    case "issues":
+      // @ts-ignore
+      if (issueState.includes(value)) {
+        return {
+          state: value as (typeof issueState)[number]
+        }
+      }
+      return {}
+  }
+  return {}
+}
 
 
 export type LabelResponse = GetResponseDataTypeFromEndpointMethod<typeof octokit.rest.issues.listLabelsForRepo>
 
+const headers = {
+  accept: "application/vnd.github.VERSION.full+json"
+}
 export class GithubClient {
   client: Octokit
   account: Record<string, string>
@@ -26,32 +49,37 @@ export class GithubClient {
 
   }
 
+
   async getAllIssue(param: IssuesTargetQuery): Promise<IssueResponsees> {
     const { filter, ...repoParam } = param
-    const filterQuery = resolveFilter(filter ?? [])
+    const filterQuery = resolveIssueListFilter(filter ?? [])
     const result = await this.client.rest.issues.listForRepo({
       ...repoParam,
       ...filterQuery,
-      state: "all",
-      // sort: "updated",
-      direction: "desc"
+      direction: "desc",
+      headers
     }) //.issues.list(param)
     return result.data
   }
 
   async postIssue(target: RepositoryQuery, param: IssuePostParam) {
-    console.log({
-      ...target,
-      ...param,
-    })
     const result = await this.client.rest.issues.create({
       ...target,
       ...param,
     }) //.issues.list(param)
-    console.log(result)
     return result.data
-
   }
+
+  async getComments(param: IssueCommentQuery) {
+    const { number, ...rest } = param
+    const result = await this.client.rest.issues.listComments({
+      ...rest,
+      issue_number: number,
+      headers
+    })
+    return result.data
+  }
+
   async getCustomLabels(param: RepositoryQuery) {
     const result = await this.client.rest.issues.listLabelsForRepo({
       ...param,

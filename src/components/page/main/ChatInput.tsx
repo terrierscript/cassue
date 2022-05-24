@@ -1,11 +1,10 @@
 import { Button, HStack, IconButton, Input } from "@chakra-ui/react"
 import { useSession } from "next-auth/react"
 import { FC, useMemo, useState } from "react"
-import { IssuePostParam, IssuesTargetQuery, RepositoryQuery } from "../../../services/github/Schema"
+import { IssuePostParam } from "../../../services/github/Schema"
 import { useIssues } from "../apiHooks"
-import { ArrowCircleRightIcon, PaperAirplaneIcon } from "@heroicons/react/solid"
-import { resolveFilter, resolveFilterToPost } from "../../../services/github/resolveFilter"
-import { BiPaperPlane, BiPen, BiPencil, BiSend, BiSubdirectoryLeft } from "react-icons/bi"
+import { resolveFilterToPost } from "../../../services/github/resolveFilter"
+import { BiSubdirectoryLeft } from "react-icons/bi"
 import { useChatRouteParam } from "../useChatRouteParam"
 
 const ReadOnlyMode: FC<{}> = ({ }) => {
