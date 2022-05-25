@@ -13,13 +13,13 @@ const Generate = () => {
     }
     return null
   }, [value])
-  return <HStack w={"90vw"}>
-    <Input value={value} placeholder="Input repository URL" textAlign={"center"} onChange={(e) => setValue(e.target.value)} />
+  return <HStack w={"50vw"}>
+    <Input size="lg" value={value} placeholder="Input repository URL" textAlign={"center"} onChange={(e) => setValue(e.target.value)} />
     <IconButton as="a"
+      size="lg"
       isDisabled={destination === null}
       href={`/${destination}`}
       p={2} icon={<ArrowCircleRightIcon />} aria-label={'GO'}
-      colorScheme="blue"
     />
   </HStack>
 }
