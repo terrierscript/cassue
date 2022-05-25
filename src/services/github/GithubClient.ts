@@ -1,6 +1,6 @@
 import { Octokit } from "octokit"
 import { GetResponseDataTypeFromEndpointMethod } from "@octokit/types"
-import { RepositoryQuery, IssuePostParam, IssuesTargetQuery, IssueCommentQuery } from "./Schema"
+import { RepositoryQuery, IssuePost, IssuesTargetQuery, IssueCommentQuery, CommentPost } from "./Schema"
 
 
 const octokit = new Octokit()
@@ -62,7 +62,7 @@ export class GithubClient {
     return result.data
   }
 
-  async postIssue(target: RepositoryQuery, param: IssuePostParam) {
+  async postIssue(target: RepositoryQuery, param: IssuePost) {
     const result = await this.client.rest.issues.create({
       ...target,
       ...param,
@@ -74,6 +74,16 @@ export class GithubClient {
     const { number, ...rest } = param
     const result = await this.client.rest.issues.listComments({
       ...rest,
+      issue_number: number,
+      headers
+    })
+    return result.data
+  }
+  async postComment(target: IssueCommentQuery, body: CommentPost) {
+    const { number, ...rest } = target
+    const result = await this.client.rest.issues.createComment({
+      ...rest,
+      ...body,
       issue_number: number,
       headers
     })

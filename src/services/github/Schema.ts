@@ -43,7 +43,12 @@ export const IssuePostScheme = z.object({
   labels: z.array(z.string()).optional() //.or(z.string()).optional()
 })
 
-export type IssuePostParam = z.infer<typeof IssuePostScheme>
+export type IssuePost = z.infer<typeof IssuePostScheme>
+
+export const CommentPostSchema = z.object({
+  body: z.string()
+})
+export type CommentPost = z.infer<typeof CommentPostSchema>
 
 export const IssueSearchScehme = z.object({
   state: z.enum(["open", "closed"]),
