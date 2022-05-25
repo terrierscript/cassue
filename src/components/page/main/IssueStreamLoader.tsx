@@ -7,7 +7,7 @@ import { StreamLoading } from "./StreamLoading"
 
 
 export const IssueStreamLoader: FC<{}> = ({ }) => {
-  const { owner, repo, filter } = useChatRouteParam()
+  const { owner, repo } = useChatRouteParam()
   const { target, value } = useFilterValue()
   const { data } = useIssues({ owner, repo, target, value })
   if (!data) {
