@@ -4,7 +4,7 @@ import { FC, useMemo, useState } from "react"
 import { IssuePostParam } from "../../../services/github/Schema"
 import { useIssues } from "../apiHooks"
 import { resolveFilterToPost } from "../../../services/github/resolveFilter"
-import { useChatRouteParam } from "../useChatRouteParam"
+import { useChatRouteParam, useFilterValue } from "../useChatRouteParam"
 import { alphaBgStyle } from "../../atomic/styleUtils"
 import { CommentIcon } from '@primer/octicons-react'
 const ReadOnlyMode: FC<{}> = ({ }) => {
@@ -60,8 +60,9 @@ const ChatInput: FC<{ onSubmit: (value: string) => void }> = ({ onSubmit }) => {
 
 const InputSending: FC<{}> = ({ }) => {
   const { owner, repo, filter } = useChatRouteParam()
+  const { target, value } = useFilterValue()
 
-  const { mutate } = useIssues({ owner, repo, filter })
+  const { mutate } = useIssues({ owner, repo, target, value })
   return <ChatInput onSubmit={async (v) => {
     const resolvedParams = resolveFilterToPost(filter)
     const issue: IssuePostParam = { title: v, ...resolvedParams }
