@@ -69,18 +69,15 @@ export const LeftSidebar: FC<{}> = () => {
   const bg = useAlpha(200)
   const color = useAlpha(800)
 
-  return <Grid h="100%" minH={0} p={6}
+  return <Grid h="100%" minH={0} p={6} gap={4}
     gridTemplateRows={"max-content auto max-content"}
 
     bg={bg}
     color={color}>
     <Box>
-
       <Workspace />
     </Box>
-    <Box
-      overflow={"scroll"}
-    >
+    <Box overflow={"scroll"}>
       <Rooms />
     </Box>
     <Box>

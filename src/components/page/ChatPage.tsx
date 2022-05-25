@@ -47,18 +47,8 @@ export const ChatPage: FC<{}> = () => {
         <IssueStreamLoader />
         <ChatInputArea />
       </Grid>
-
-      <RightCommentDrawer />
-      {/* <Grid minH={0}
-        {...layout.right}
-        gridTemplateRows={"auto max-content"}
-        h="100%"
-        {...alphaBgStyle(100)}
-      >
-        {/* <CommentStreamLoader /> */}
-      {/* <ChatInputArea /> */}
-      {/* </Grid>  */}
     </Grid>
+    <RightCommentDrawer />
   </Box>
 }
 

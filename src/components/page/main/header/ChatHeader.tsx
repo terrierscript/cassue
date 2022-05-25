@@ -1,7 +1,6 @@
 import { ChevronLeftIcon } from "@chakra-ui/icons"
 import { Box, Divider, HStack, IconButton, Stack } from "@chakra-ui/react"
-import { FC, useMemo } from "react"
-import { IssuesTargetQuery } from "../../../../services/github/Schema"
+import { FC } from "react"
 import { NextLink } from "../../../../services/next/components"
 import { useChatRouteParam, useCommentNumber, useFilterValue } from "../../useChatRouteParam"
 import { Description } from "./Description"
@@ -29,6 +28,7 @@ const useBackLink = () => {
 export const ChatHeader: FC<{}> = () => {
   const title = useTitle()
   const backLink = useBackLink()
+
   return <Stack p={4} spacing={1}>
     <HStack>
       <Box>

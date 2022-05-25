@@ -8,9 +8,7 @@ import { StreamLoading } from "../main/StreamLoading"
 
 const CommentStreamInner: FC<{ number: number }> = ({ number }) => {
   const { owner, repo } = useChatRouteParam()
-
   const { data } = useIssueComments({ owner, repo, number })
-  console.log(data)
   if (!data) {
     return <StreamLoading />
   }
@@ -18,6 +16,7 @@ const CommentStreamInner: FC<{ number: number }> = ({ number }) => {
     <CommentStream comments={data.comments} />
   </StreamContainer>
 }
+
 export const CommentStreamLoader: FC<{}> = ({ }) => {
   const number = useCommentNumber()
 

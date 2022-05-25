@@ -37,6 +37,8 @@ const IssueTitle: FC<{ message: Message }> = ({ message }) => {
   </HStack>
 }
 
+
+
 const MessageFooter: FC<{ message: Message }> = ({ message }) => {
   const params = useChatPageParams()
   const { messageType, data } = message
@@ -46,17 +48,21 @@ const MessageFooter: FC<{ message: Message }> = ({ message }) => {
   if (!params) {
     return null
   }
-  return <Wrap color="gray.500" fontSize={"sm"}>
-    {(data.labels).flat(1).map(label => {
-      const labelName = typeof label === "string" ? label : label.name
-      return <NextLink key={labelName} href={`/${params.owner}/${params.repo}/labels/${labelName}`}>
-        <Link>
-          #{labelName}
-        </Link>
-      </NextLink>
-    })}
-    {data.comments > 0 && <Box>{data.comments} Comments</Box>}
-  </Wrap>
+  return <Box color="gray.500" fontSize={"sm"}>
+    <Wrap >
+      {(data.labels).flat(1).map(label => {
+        const labelName = typeof label === "string" ? label : label.name
+        return <NextLink key={labelName} href={`/${params.owner}/${params.repo}/labels/${labelName}`}>
+          <Link>
+            #{labelName}
+          </Link>
+        </NextLink>
+      })}
+    </Wrap>
+    {data.comments > 0 && <Box>
+      {data.comments} Comments
+    </Box>}
+  </Box>
 }
 
 const MessageAvatar: FC<{ message: Message }> = ({ message }) => {
@@ -93,7 +99,7 @@ const MessageBody: FC<{ message: Message }> = ({ message }) => {
   }
   return <Stack>
     <NextLink href={`/${owner}/${repo}/${target}/${value}/${data.number}`}>
-      <Link >
+      <Link w="100%">
         <Box boxSizing="border-box" textOverflow={"ellipsis"}>
           {data.title}
         </Box>
