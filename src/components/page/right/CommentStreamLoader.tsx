@@ -2,7 +2,8 @@ import { FC } from "react"
 import { useIssueComments } from "../apiHooks"
 import { CommentStream } from "../main/Stream"
 import { useChatRouteParam, useCommentNumber } from "../useChatRouteParam"
-import { Loading, StreamContainer } from "../main/ChatStream"
+import { StreamContainer } from "../main/StreamContainer"
+import { StreamLoading } from "../main/StreamLoading"
 
 
 const CommentStreamInner: FC<{ number: number }> = ({ number }) => {
@@ -11,7 +12,7 @@ const CommentStreamInner: FC<{ number: number }> = ({ number }) => {
   const { data } = useIssueComments({ owner, repo, number })
   console.log(data)
   if (!data) {
-    return <Loading />
+    return <StreamLoading />
   }
   return <StreamContainer>
     <CommentStream comments={data.comments} />
