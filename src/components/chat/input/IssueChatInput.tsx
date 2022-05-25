@@ -1,10 +1,10 @@
 import { Box, HStack, IconButton, Input } from "@chakra-ui/react"
 import { FC, useState } from "react"
-import { IssuePostParam } from "../../../../services/github/Schema"
-import { useIssues } from "../../apiHooks"
-import { resolveFilterToPost } from "../../../../services/github/resolveFilter"
-import { useChatRouteParam, useFilterValue } from "../../useChatRouteParam"
-import { alphaBgStyle } from "../../../atomic/styleUtils"
+import { IssuePostParam } from "../../../services/github/Schema"
+import { useIssues } from "../../page/apiHooks"
+import { resolveFilterToPost } from "../../../services/github/resolveFilter"
+import { useChatRouteParam, useFilterValue } from "../../page/useChatRouteParam"
+import { alphaBgStyle } from "../../atomic/styleUtils"
 import { CommentIcon } from '@primer/octicons-react'
 import { ReadOnlyGuard } from "./ReadOnly"
 

@@ -1,9 +1,9 @@
 import { FC } from "react"
-import { useIssueComments } from "../apiHooks"
-import { CommentStream } from "../main/Stream"
-import { useChatRouteParam, useCommentNumber } from "../useChatRouteParam"
-import { StreamContainer } from "../main/StreamContainer"
-import { StreamLoading } from "../main/StreamLoading"
+import { useIssueComments } from "../page/apiHooks"
+import { useChatRouteParam, useCommentNumber } from "../page/useChatRouteParam"
+import { CommentStream } from "./Stream"
+import { StreamContainer } from "./StreamContainer"
+import { StreamLoading } from "./StreamLoading"
 
 
 const CommentStreamInner: FC<{ number: number }> = ({ number }) => {

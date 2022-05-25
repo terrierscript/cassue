@@ -14,10 +14,10 @@ import { RightCommentDrawer } from "./right/DrawerComment"
 
 
 const LeftSidebar = dynamic(import("./left/LeftSidebar"))
-const ChatInputArea = dynamic(import("./main/input/IssueChatInput"))
-const IssueStreamLoader = dynamic(import("./main/IssueStreamLoader"))
+const ChatInputArea = dynamic(import("../chat/input/IssueChatInput"))
+const IssueStreamLoader = dynamic(import("../chat/IssueStreamLoader"))
 const ChatHeader = dynamic(import("./main/header/ChatHeader"))
-const CommentStreamLoader = dynamic(import("./right/CommentStreamLoader"))
+const CommentStreamLoader = dynamic(import("../chat/CommentStreamLoader"))
 
 
 export const ChatPage: FC<{}> = () => {

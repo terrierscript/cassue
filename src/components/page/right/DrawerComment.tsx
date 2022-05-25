@@ -1,10 +1,10 @@
 import { Box, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, Grid, useDisclosure } from "@chakra-ui/react"
 import { useEffect } from "react"
-import CommentStreamLoader from "./CommentStreamLoader"
+import CommentStreamLoader from "../../chat/CommentStreamLoader"
 import { useCommentNumber, useRouterValues } from "../useChatRouteParam"
 
 import { useBreakpointValue } from '@chakra-ui/react'
-import IssueChatInputArea from "../main/input/IssueChatInput"
+import IssueChatInputArea from "../../chat/input/IssueChatInput"
 import { useRouter } from "next/router"
 
 const DrawerInner = () => {
