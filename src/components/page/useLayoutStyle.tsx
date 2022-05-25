@@ -59,7 +59,7 @@ export const useLayoutStyle = (params: IssuesTargetQuery) => {
     return {
       left: getLeftLayout(mode),
       center: getCenterLayout(mode),
-      right: getRightLayout(mode),
+      // right: getRightLayout(mode),
     }
     // switch (mode) {
     //   case "issue":

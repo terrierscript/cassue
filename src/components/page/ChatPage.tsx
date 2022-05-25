@@ -8,6 +8,7 @@ import { useChatRouteParam } from "./useChatRouteParam"
 import dynamic from "next/dynamic"
 import { alphaBgStyle } from "../atomic/styleUtils"
 import { useLayoutStyle } from "./useLayoutStyle"
+import { RightCommentDrawer } from "./DrawerComment"
 // import CommentStreamLoader  from "./right/CommentStreamLoader"
 // import IssueStreamLoader from "./main/IssueStreamLoader"
 
@@ -44,15 +45,16 @@ export const ChatPage: FC<{}> = () => {
         <ChatInputArea />
       </Grid>
 
-      <Grid minH={0}
+      <RightCommentDrawer />
+      {/* <Grid minH={0}
         {...layout.right}
         gridTemplateRows={"auto max-content"}
         h="100%"
         {...alphaBgStyle(100)}
       >
-        <CommentStreamLoader />
-        {/* <ChatInputArea /> */}
-      </Grid>
+        {/* <CommentStreamLoader /> */}
+      {/* <ChatInputArea /> */}
+      {/* </Grid>  */}
     </Grid>
   </Box>
 }
