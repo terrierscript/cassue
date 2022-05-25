@@ -1,5 +1,5 @@
 import { Avatar, Box, HStack, Link, Spacer, Stack, useColorModeValue, Wrap } from "@chakra-ui/react"
-import { FC, useMemo } from "react"
+import { FC, PropsWithChildren, useMemo } from "react"
 import { formatDistance } from "date-fns"
 import { IssueComementResponse, IssueResponse } from "../../../services/github/GithubClient"
 import { useChatPageParams } from "../chatHooks"
@@ -85,9 +85,24 @@ const HtmlBody: FC<{ html: string }> = ({ html }) => {
 
 }
 
-const MessageBody: FC<{ message: Message }> = ({ message }) => {
+
+const usePath = () => {
   const { owner, repo } = useChatRouteParam()
   const { target, value } = useFilterValue()
+  return `/${owner}/${repo}/${target}/${value}`
+}
+
+const LinkMessage: FC<PropsWithChildren<{ message: Message }>> = ({ message, children }) => {
+  const path = usePath()
+  if (message.messageType === "comment") {
+    return <>{children}</>
+  }
+  return <NextLink href={`/${path}/${message.data.number}`}>
+    {children}
+  </NextLink>
+}
+const MessageBody: FC<{ message: Message }> = ({ message }) => {
+  const path = usePath()
   const { data, messageType } = message
 
   if (messageType === "comment") {
@@ -98,7 +113,7 @@ const MessageBody: FC<{ message: Message }> = ({ message }) => {
     </Stack>
   }
   return <Stack>
-    <NextLink href={`/${owner}/${repo}/${target}/${value}/${data.number}`}>
+    <NextLink href={`/${path}/${data.number}`}>
       <Link w="100%">
         <Box boxSizing="border-box" textOverflow={"ellipsis"}>
           {data.title}
@@ -109,6 +124,8 @@ const MessageBody: FC<{ message: Message }> = ({ message }) => {
 }
 
 export const StreamMessage: FC<{ message: Message }> = ({ message }) => {
+  const path = usePath()
+
   const activeStyle = useColorModeValue(
     { bg: "blackAlpha.50" },
     { bg: "whiteAlpha.50" }
@@ -123,17 +140,19 @@ export const StreamMessage: FC<{ message: Message }> = ({ message }) => {
     _pressed={activeStyle}
     _hover={activeStyle}
   >
-    <HStack spacing={4} w="100%" cursor={"default"}>
-      <Box alignSelf={"start"} py={2}>
-        <MessageAvatar message={message} />
-      </Box>
-      <Stack spacing={0} minW="0" w="100%">
-        <IssueTitle message={message} />
-        <MessageBody message={message} />
-        <Stack>
-          <MessageFooter message={message} />
+    <LinkMessage message={message}>
+      <HStack spacing={4} w="100%" cursor={"default"}>
+        <Box alignSelf={"start"} py={2}>
+          <MessageAvatar message={message} />
+        </Box>
+        <Stack spacing={0} minW="0" w="100%">
+          <IssueTitle message={message} />
+          <MessageBody message={message} />
+          <Stack>
+            <MessageFooter message={message} />
+          </Stack>
         </Stack>
-      </Stack>
-    </HStack>
+      </HStack>
+    </LinkMessage>
   </Stack>
 }

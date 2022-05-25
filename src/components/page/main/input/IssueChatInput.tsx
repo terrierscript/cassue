@@ -1,23 +1,12 @@
-import { Box, Button, HStack, IconButton, Input } from "@chakra-ui/react"
-import { useSession } from "next-auth/react"
-import { FC, useMemo, useState } from "react"
-import { IssuePostParam } from "../../../services/github/Schema"
-import { useIssues } from "../apiHooks"
-import { resolveFilterToPost } from "../../../services/github/resolveFilter"
-import { useChatRouteParam, useFilterValue } from "../useChatRouteParam"
-import { alphaBgStyle } from "../../atomic/styleUtils"
+import { Box, HStack, IconButton, Input } from "@chakra-ui/react"
+import { FC, useState } from "react"
+import { IssuePostParam } from "../../../../services/github/Schema"
+import { useIssues } from "../../apiHooks"
+import { resolveFilterToPost } from "../../../../services/github/resolveFilter"
+import { useChatRouteParam, useFilterValue } from "../../useChatRouteParam"
+import { alphaBgStyle } from "../../../atomic/styleUtils"
 import { CommentIcon } from '@primer/octicons-react'
-const ReadOnlyMode: FC<{}> = ({ }) => {
-  const { owner, repo } = useChatRouteParam()
-  return <HStack>
-    <Button as="a"
-      w="100%"
-      colorScheme="gray"
-      href={`https://github.com/${owner}/${repo}/issues/new`}>
-      Open in Github
-    </Button>
-  </HStack>
-}
+import { ReadOnlyGuard } from "./ReadOnly"
 
 const ChatInput: FC<{ onSubmit: (value: string) => void }> = ({ onSubmit }) => {
   const [value, setValue] = useState("")
@@ -68,27 +57,13 @@ const InputSending: FC<{}> = ({ }) => {
 }
 
 
-export const ChatInputAreaInner: FC<{}> = ({ }) => {
-  const { owner } = useChatRouteParam()
-
-  const { data } = useSession()
-  const disabled = useMemo(() => {
-    return (data?.user?.name !== owner)
-  }, [data, owner])
-  if (!data) {
-    return null
-  }
-  if (disabled) {
-    return <ReadOnlyMode />
-  }
-  return <InputSending />
-}
-
-export const ChatInputArea: FC<{}> = ({ }) => {
+export const IssueChatInputArea: FC<{}> = ({ }) => {
   return <Box p={2} {...alphaBgStyle(50)}>
-    <ChatInputAreaInner />
+    <ReadOnlyGuard >
+      <InputSending />
+    </ReadOnlyGuard>
   </Box>
 }
 
 
-export default ChatInputArea
+export default IssueChatInputArea
