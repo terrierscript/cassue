@@ -32,6 +32,8 @@ export const IssuesTargetTypeValueScheme = z.object({
   value: z.string(),
 })
 
+export type IssuesTargetTypeValue = z.infer<typeof IssuesTargetTypeValueScheme>
+
 export type IssuesTargetQuery = z.infer<typeof RepositoryQueryScheme> & {
   filter?: string[]
 }
