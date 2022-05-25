@@ -41,6 +41,11 @@ const Workspace = () => {
   const { owner, repo } = useChatRouteParam()
 
   return <HStack spacing={1}>
+    <Box>
+      <IconButton as="a" href={`https://github.com/${owner}/${repo}`} aria-label={"open github"} variant="ghost" colorScheme="gray" target="_blank">
+        <GoOctoface />
+      </IconButton>
+    </Box>
     <Box fontWeight={"bold"}>
       <Link href={`https://github.com/${owner}`}>
         {owner}
@@ -49,12 +54,6 @@ const Workspace = () => {
     <Box>{`/`}</Box>
     <Box fontWeight={"bold"}>
       {repo}
-    </Box>
-    <Box>
-
-      <IconButton as="a" href={`https://github.com/${owner}/${repo}`} aria-label={"open github"} variant="ghost" colorScheme="gray" target="_blank">
-        <GoOctoface />
-      </IconButton>
     </Box>
   </HStack >
 }
