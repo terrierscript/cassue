@@ -1,4 +1,4 @@
-import { Avatar, Box, Divider, HStack, IconButton, Link, Spacer, Stack, useColorMode, useColorModeValue } from "@chakra-ui/react"
+import { Avatar, Box, Divider, HStack, IconButton, Link, Spacer, Stack, useColorMode, useColorModeValue, Wrap } from "@chakra-ui/react"
 import { useSession } from "next-auth/react"
 import { FC } from "react"
 import { Rooms } from "./Rooms"
@@ -44,22 +44,24 @@ const Debugger = () => {
 const Workspace = () => {
   const { owner, repo } = useChatRouteParam()
 
-  return <HStack spacing={1}>
-    <Box fontWeight={"bold"}>
-      <Link href={`https://github.com/${owner}`}>
-        {owner}
-      </Link>
-    </Box>
-    <Box>{`/`}</Box>
-    <Box fontWeight={"bold"}>
-      {repo}
-    </Box>
+  return <HStack>
+    <Wrap spacing={1}>
+      <Box fontWeight={"bold"}>
+        <Link href={`https://github.com/${owner}`}>
+          {owner}
+        </Link>
+      </Box>
+      <Box>{`/`}</Box>
+      <Box fontWeight={"bold"}>
+        {repo}
+      </Box>
+    </Wrap >
     <Box>
       <IconButton as="a" href={`https://github.com/${owner}/${repo}`} aria-label={"open github"} variant="ghost" colorScheme="gray" target="_blank">
         <MarkGithubIcon />
       </IconButton>
     </Box>
-  </HStack >
+  </HStack>
 }
 
 export const LeftSidebar: FC<{}> = () => {
