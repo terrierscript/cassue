@@ -1,4 +1,4 @@
-import { Avatar, Box, Divider, HStack, IconButton, Link, Spacer, Stack, useColorMode, useColorModeValue } from "@chakra-ui/react"
+import { Avatar, Box, Divider, Grid, HStack, IconButton, Link, Spacer, Stack, useColorMode, useColorModeValue, Wrap } from "@chakra-ui/react"
 import { useSession } from "next-auth/react"
 import { FC } from "react"
 import { Rooms } from "./Rooms"
@@ -44,22 +44,24 @@ const Debugger = () => {
 const Workspace = () => {
   const { owner, repo } = useChatRouteParam()
 
-  return <HStack spacing={1}>
-    <Box fontWeight={"bold"}>
-      <Link href={`https://github.com/${owner}`}>
-        {owner}
-      </Link>
-    </Box>
-    <Box>{`/`}</Box>
-    <Box fontWeight={"bold"}>
-      {repo}
-    </Box>
+  return <HStack>
+    <Wrap spacing={1}>
+      <Box fontWeight={"bold"}>
+        <Link href={`https://github.com/${owner}`}>
+          {owner}
+        </Link>
+      </Box>
+      <Box>{`/`}</Box>
+      <Box fontWeight={"bold"}>
+        {repo}
+      </Box>
+    </Wrap >
     <Box>
       <IconButton as="a" href={`https://github.com/${owner}/${repo}`} aria-label={"open github"} variant="ghost" colorScheme="gray" target="_blank">
         <MarkGithubIcon />
       </IconButton>
     </Box>
-  </HStack >
+  </HStack>
 }
 
 export const LeftSidebar: FC<{}> = () => {
@@ -67,20 +69,29 @@ export const LeftSidebar: FC<{}> = () => {
   const bg = useAlpha(200)
   const color = useAlpha(800)
 
-  return <Stack h="100%" p={6}
+  return <Grid h="100%" minH={0} p={6}
+    gridTemplateRows={"max-content auto max-content"}
+
     bg={bg}
     color={color}>
-    <Workspace />
-    <Rooms />
-    <Spacer />
-    <Divider />
+    <Box>
 
-    <Debugger />
-    <HStack>
-      <User />
-      <ThemeSwitcher />
-    </HStack>
-  </Stack>
+      <Workspace />
+    </Box>
+    <Box
+      overflow={"scroll"}
+    >
+      <Rooms />
+    </Box>
+    <Box>
+      <Divider />
+      {/* <Debugger /> */}
+      <HStack>
+        <User />
+        <ThemeSwitcher />
+      </HStack>
+    </Box>
+  </Grid>
 }
 
 export default LeftSidebar

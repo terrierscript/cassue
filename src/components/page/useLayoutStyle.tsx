@@ -64,42 +64,6 @@ export const useLayoutStyle = (params: IssuesTargetQuery) => {
       center: getCenterLayout(mode),
       right: getRightLayout(mode),
     }
-    // switch (mode) {
-    //   case "issue":
-    //     return {
-    //       left: {
-    //         w: sideBarWidth, display: { base: "none", bp: "block" }
-    //       },
-    //       center: {},
-    //       right: { display: "none" }
-    //     }
-    //   case "comment":
-    //     return {
-    //       left: {
-    //         w: sideBarWidth, display: { base: "none", bp: "block" }
-    //       },
-    //       center: {
-    //         display: { base: "none", bp: "grid" }
-    //       },
-    //       right: {
-    //         w: {
-    //           base: "100%",
-    //           bp: 350
-    //         },
-    //         display: "grid"
-    //       }
-    //     }
-    //   case "room":
-    //     return {
-    //       left: {
-    //         w: { base: "100%", bp: sideBarWidth }
-    //       },
-    //       center: {
-    //         display: { base: "none", bp: "grid" }
-    //       },
-    //       right: { display: "none" }
-    //     }
-    // }
   }, [params])
   return layout
 }
