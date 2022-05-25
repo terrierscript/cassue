@@ -1,7 +1,7 @@
 import { Spacer, Stack } from "@chakra-ui/react"
 import { FC, useMemo } from "react"
-import { IssueComementResponse, IssueResponse } from "../../services/github/GithubClient"
-import { StreamMessage } from "./StreamMessage"
+import { IssueComementResponse, IssueResponse } from "../../../services/github/GithubClient"
+import { StreamMessage } from "../message/StreamMessage"
 
 export const IssueStream: FC<{ issues: IssueResponse[] }> = ({ issues }) => {
   const stream = useMemo(() => {
