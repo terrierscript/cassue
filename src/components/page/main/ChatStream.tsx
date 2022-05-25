@@ -23,12 +23,12 @@ export const Loading = () => {
   </Flex>
 }
 
-export const ChatStream: FC<{}> = ({ }) => {
-  const number = useCommentNumber()
-  if (number) {
-    return <CommentStreamLoader number={number} />
-  }
-  return <IssueStreamLoader />
-}
+// export const ChatStream: FC<{}> = ({ }) => {
+//   const number = useCommentNumber()
+//   if (number) {
+//     return <CommentStreamLoader number={number} />
+//   }
+//   return <IssueStreamLoader />
+// }
 
-export default ChatStream
+// export default ChatStream

@@ -1,12 +1,11 @@
 import { Box, Button, HStack, IconButton, Input } from "@chakra-ui/react"
 import { useSession } from "next-auth/react"
-import { FC, PropsWithChildren, useMemo, useState } from "react"
+import { FC, useMemo, useState } from "react"
 import { IssuePostParam } from "../../../services/github/Schema"
 import { useIssues } from "../apiHooks"
 import { resolveFilterToPost } from "../../../services/github/resolveFilter"
 import { BiSubdirectoryLeft } from "react-icons/bi"
 import { useChatRouteParam } from "../useChatRouteParam"
-import { AlphaBgContainer } from "../../atomic/AlphaContainer"
 import { alphaBgStyle } from "../../atomic/styleUtils"
 
 const ReadOnlyMode: FC<{}> = ({ }) => {
