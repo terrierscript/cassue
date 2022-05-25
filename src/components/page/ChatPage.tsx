@@ -52,14 +52,17 @@ const useLayoutStyle = (params: IssuesTargetQuery) => {
             display: { base: "none", bp: "grid" }
           },
           right: {
-            w: 350,
+            w: {
+              base: "100%",
+              bp: 350
+            },
             display: "grid"
           }
         }
       case "room":
         return {
           left: {
-            w: { base: "100%", bp: sideBarWidth }
+            w: { base: "100%", bp: "30%" }
           },
           center: {
             display: { base: "none", bp: "grid" }
