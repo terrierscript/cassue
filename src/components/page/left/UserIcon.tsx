@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, HStack, Popover, PopoverArrow, PopoverBody, PopoverCloseButton, PopoverContent, PopoverFooter, PopoverHeader, PopoverTrigger, Portal } from "@chakra-ui/react"
+import { Avatar, Box, Button, HStack, Popover, PopoverArrow, PopoverBody, PopoverCloseButton, PopoverContent, PopoverFooter, PopoverHeader, PopoverTrigger, Portal, Spacer } from "@chakra-ui/react"
 import { useSession } from "next-auth/react"
 import { FC, PropsWithChildren } from "react"
 import { signOut } from "next-auth/react"
@@ -31,6 +31,7 @@ export const UserIcon = () => {
       <UserMenu>
         <Avatar size="sm" src={session.data?.user?.image ?? undefined} />
       </UserMenu>
+      <Spacer />
       <Box>{session.data?.user?.name}</Box>
     </HStack>
   </Box>
