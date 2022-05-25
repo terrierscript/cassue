@@ -13,7 +13,7 @@ const Generate = () => {
     }
     return null
   }, [value])
-  return <HStack w={"50vw"}>
+  return <HStack w={{ base: "80vw", bp: "50vw" }} >
     <Input size="lg" value={value} placeholder="Input repository URL" textAlign={"center"} onChange={(e) => setValue(e.target.value)} />
     <IconButton as="a"
       size="lg"
