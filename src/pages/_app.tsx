@@ -1,12 +1,11 @@
 import { SessionProvider } from "next-auth/react"
-import { ChakraProvider } from "@chakra-ui/react"
+import { Box, ChakraProvider } from "@chakra-ui/react"
 import React, { } from "react"
 import { appTheme } from "../services/chakra/theme"
 import { AppProps } from "next/app"
 import { NeedLayout } from "../components/layout/NeedLayout"
 import Head from "next/head"
 import { AppSWRPRovider } from "../services/swr/AppSWRProvider"
-import { IconContext } from "react-icons"
 
 function MyApp({ Component, pageProps: { session, ...pageProps },
 }: AppProps) {
@@ -24,7 +23,6 @@ function MyApp({ Component, pageProps: { session, ...pageProps },
           {/* <Suspense fallback={<Box>...</Box>}> */}
           <SessionProvider session={session}>
             <NeedLayout>
-
               <Component {...pageProps} />
             </NeedLayout>
           </SessionProvider>

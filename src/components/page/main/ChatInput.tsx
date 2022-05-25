@@ -4,10 +4,9 @@ import { FC, useMemo, useState } from "react"
 import { IssuePostParam } from "../../../services/github/Schema"
 import { useIssues } from "../apiHooks"
 import { resolveFilterToPost } from "../../../services/github/resolveFilter"
-import { BiSubdirectoryLeft } from "react-icons/bi"
 import { useChatRouteParam } from "../useChatRouteParam"
 import { alphaBgStyle } from "../../atomic/styleUtils"
-
+import { CommentIcon } from '@primer/octicons-react'
 const ReadOnlyMode: FC<{}> = ({ }) => {
   const { owner, repo } = useChatRouteParam()
   return <HStack>
@@ -51,7 +50,7 @@ const ChatInput: FC<{ onSubmit: (value: string) => void }> = ({ onSubmit }) => {
       />
       <IconButton
         type="submit"
-        icon={<BiSubdirectoryLeft />}
+        icon={<CommentIcon />}
         aria-label={"Post"}
       />
     </HStack>
