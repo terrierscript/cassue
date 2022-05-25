@@ -36,17 +36,6 @@ const ChatInput: FC<{ onSubmit: (value: string) => void }> = ({ onSubmit }) => {
         }}
         value={value}
         onChange={(e) => setValue(e.target.value)}
-      // border={"2px solid"}
-      // _focus={{
-      // _light: {
-      //   borderColor: "blackAlpha.600",
-      // },
-      // _dark: {
-      //   borderColor: "whiteAlpha.600",
-      // },
-      // outlineColor: "gray.800"
-      // outline: "none"
-      // }} 
       />
       <IconButton
         type="submit"
