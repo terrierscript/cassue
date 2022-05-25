@@ -1,17 +1,17 @@
-import { Avatar, Box, Button, Divider, HStack, IconButton, Link, Spacer, Stack, useColorMode, useColorModeValue } from "@chakra-ui/react"
+import { Avatar, Box, Divider, HStack, IconButton, Link, Spacer, Stack, useColorMode, useColorModeValue } from "@chakra-ui/react"
 import { useSession } from "next-auth/react"
 import { FC } from "react"
-import { RepositoryQuery } from "../../../services/github/Schema"
+// import { RepositoryQuery } from "../../../services/github/Schema"
 import { Rooms } from "./Rooms"
 // import { LightBulbIcon } from '@heroicons/react/outline'
-import { BiBulb } from "react-icons/bi"
-import { GoOctoface } from "react-icons/go"
+// import { BiBulb } from "react-icons/bi"
+import { GoOctoface, GoLightBulb } from "react-icons/go"
 import { useChatRouteParam } from "../useChatRouteParam"
 
 const ThemeSwitcher = () => {
   const { toggleColorMode } = useColorMode()
   return <Box>
-    <IconButton onClick={() => toggleColorMode()} aria-label={"Change theme"} icon={<BiBulb />} />
+    <IconButton onClick={() => toggleColorMode()} aria-label={"Change theme"} icon={<GoLightBulb />} />
   </Box>
 }
 
