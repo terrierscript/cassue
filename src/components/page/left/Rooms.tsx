@@ -28,6 +28,7 @@ const RoomButton: FC<{ room: Room }> = ({ room }) => {
   </NextLink>
 }
 
+
 export const Rooms: FC<{}> = ({ }) => {
   const { owner, repo } = useChatRouteParam()
 
@@ -43,15 +44,6 @@ export const Rooms: FC<{}> = ({ }) => {
     })
   ]
   return <Stack  >
-    <Stack spacing={0}>
-      <Box fontWeight={"bold"}>
-        {owner}
-      </Box>
-      <Box fontWeight={"bold"}>
-        {repo}
-      </Box>
-    </Stack>
-    <Divider />
     {rooms.map(room => {
       return <Box key={room.name} >
         <RoomButton room={room} />
