@@ -85,9 +85,15 @@ const HtmlBody: FC<{ html: string }> = ({ html }) => {
 
 }
 
-const MessageBody: FC<{ message: Message }> = ({ message }) => {
+
+const usePath = () => {
   const { owner, repo } = useChatRouteParam()
   const { target, value } = useFilterValue()
+  return `/${owner}/${repo}/${target}/${value}`
+}
+
+const MessageBody: FC<{ message: Message }> = ({ message }) => {
+  const path = usePath()
   const { data, messageType } = message
 
   if (messageType === "comment") {
@@ -98,7 +104,7 @@ const MessageBody: FC<{ message: Message }> = ({ message }) => {
     </Stack>
   }
   return <Stack>
-    <NextLink href={`/${owner}/${repo}/${target}/${value}/${data.number}`}>
+    <NextLink href={`/${path}/${data.number}`}>
       <Link w="100%">
         <Box boxSizing="border-box" textOverflow={"ellipsis"}>
           {data.title}
@@ -109,6 +115,8 @@ const MessageBody: FC<{ message: Message }> = ({ message }) => {
 }
 
 export const StreamMessage: FC<{ message: Message }> = ({ message }) => {
+  const path = usePath()
+
   const activeStyle = useColorModeValue(
     { bg: "blackAlpha.50" },
     { bg: "whiteAlpha.50" }

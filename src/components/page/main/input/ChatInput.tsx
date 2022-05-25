@@ -1,12 +1,13 @@
 import { Box, Button, HStack, IconButton, Input } from "@chakra-ui/react"
 import { useSession } from "next-auth/react"
-import { FC, useMemo, useState } from "react"
-import { IssuePostParam } from "../../../services/github/Schema"
-import { useIssues } from "../apiHooks"
-import { resolveFilterToPost } from "../../../services/github/resolveFilter"
-import { useChatRouteParam, useFilterValue } from "../useChatRouteParam"
-import { alphaBgStyle } from "../../atomic/styleUtils"
+import { FC, PropsWithChildren, useMemo, useState } from "react"
+import { IssuePostParam } from "../../../../services/github/Schema"
+import { useIssues } from "../../apiHooks"
+import { resolveFilterToPost } from "../../../../services/github/resolveFilter"
+import { useChatRouteParam, useFilterValue } from "../../useChatRouteParam"
+import { alphaBgStyle } from "../../../atomic/styleUtils"
 import { CommentIcon } from '@primer/octicons-react'
+
 const ReadOnlyMode: FC<{}> = ({ }) => {
   const { owner, repo } = useChatRouteParam()
   return <HStack>
@@ -68,9 +69,8 @@ const InputSending: FC<{}> = ({ }) => {
 }
 
 
-export const ChatInputAreaInner: FC<{}> = ({ }) => {
+export const ChatInputGuard: FC<PropsWithChildren<{}>> = ({ children }) => {
   const { owner } = useChatRouteParam()
-
   const { data } = useSession()
   const disabled = useMemo(() => {
     return (data?.user?.name !== owner)
@@ -81,14 +81,16 @@ export const ChatInputAreaInner: FC<{}> = ({ }) => {
   if (disabled) {
     return <ReadOnlyMode />
   }
-  return <InputSending />
+  return <>{children}</>
 }
 
-export const ChatInputArea: FC<{}> = ({ }) => {
+export const IssueChatInputArea: FC<{}> = ({ }) => {
   return <Box p={2} {...alphaBgStyle(50)}>
-    <ChatInputAreaInner />
+    <ChatInputGuard >
+      <InputSending />
+    </ChatInputGuard>
   </Box>
 }
 
 
-export default ChatInputArea
+export default IssueChatInputArea

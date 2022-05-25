@@ -4,7 +4,7 @@ import CommentStreamLoader from "./CommentStreamLoader"
 import { useCommentNumber, useRouterValues } from "../useChatRouteParam"
 
 import { useBreakpointValue } from '@chakra-ui/react'
-import ChatInputArea from "../main/ChatInput"
+import IssueChatInputArea from "../main/input/ChatInput"
 import { useRouter } from "next/router"
 
 const DrawerInner = () => {
@@ -15,7 +15,7 @@ const DrawerInner = () => {
     h="100%">
     <Box></Box>
     <CommentStreamLoader />
-    <ChatInputArea />
+    <IssueChatInputArea />
   </Grid>
 }
 
