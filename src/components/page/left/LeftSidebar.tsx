@@ -2,13 +2,20 @@ import { Avatar, Box, Divider, HStack, IconButton, Link, Spacer, Stack, useColor
 import { useSession } from "next-auth/react"
 import { FC } from "react"
 import { Rooms } from "./Rooms"
-import { GoOctoface, GoLightBulb } from "react-icons/go"
+// import { GoOctoface, GoLightBulb } from "react-icons/go"
 import { useChatRouteParam } from "../useChatRouteParam"
+import { LightBulbIcon, MarkGithubIcon } from "@primer/octicons-react"
 
 const ThemeSwitcher = () => {
   const { toggleColorMode } = useColorMode()
   return <Box>
-    <IconButton onClick={() => toggleColorMode()} aria-label={"Change theme"} icon={<GoLightBulb />} />
+    <IconButton
+
+      onClick={() => toggleColorMode()}
+      // variant="outline"
+      // colorScheme="gray"
+      aria-label={"Change theme"}
+      icon={<LightBulbIcon />} />
   </Box>
 }
 
@@ -49,7 +56,7 @@ const Workspace = () => {
     </Box>
     <Box>
       <IconButton as="a" href={`https://github.com/${owner}/${repo}`} aria-label={"open github"} variant="ghost" colorScheme="gray" target="_blank">
-        <GoOctoface />
+        <MarkGithubIcon />
       </IconButton>
     </Box>
   </HStack >
