@@ -97,7 +97,7 @@ const LinkMessage: FC<PropsWithChildren<{ message: Message }>> = ({ message, chi
   if (message.messageType === "comment") {
     return <>{children}</>
   }
-  return <NextLink href={`/${path}/${message.data.number}`}>
+  return <NextLink href={`${path}/${message.data.number}`}>
     {children}
   </NextLink>
 }
@@ -113,7 +113,7 @@ const MessageBody: FC<{ message: Message }> = ({ message }) => {
     </Stack>
   }
   return <Stack>
-    <NextLink href={`/${path}/${data.number}`}>
+    <NextLink href={`${path}/${data.number}`}>
       <Link w="100%">
         <Box boxSizing="border-box" textOverflow={"ellipsis"}>
           {data.title}

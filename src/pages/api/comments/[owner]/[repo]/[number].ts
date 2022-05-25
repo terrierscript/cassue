@@ -1,7 +1,7 @@
 import { NextApiHandler } from "next"
 import { getSessionAccount } from "../../../../../services/auth/getSessionAccount"
 import { GithubClient } from "../../../../../services/github/GithubClient"
-import { IssueCommentQueryScheme } from "../../../../../services/github/Schema"
+import { CommentPostSchema, IssueCommentQueryScheme } from "../../../../../services/github/Schema"
 
 const getIssueCommentHandler: NextApiHandler = async (req, res) => {
   const account = await getSessionAccount({ req })
@@ -13,18 +13,20 @@ const getIssueCommentHandler: NextApiHandler = async (req, res) => {
   })
 }
 
-// const postIssueCommentHandler: NextApiHandler = async (req, res) => {
-//   const account = await getSessionAccount({ req })
-//   const accessor = new GithubClient(account)
-//   const issue = await accessor.postIssue(param, body)
-//   res.json(issue)
-// }
+const postIssueCommentHandler: NextApiHandler = async (req, res) => {
+  const account = await getSessionAccount({ req })
+  const accessor = new GithubClient(account)
+  const param = IssueCommentQueryScheme.parse(req.query)
+  const body = CommentPostSchema.parse(req.body)
+  const issue = await accessor.postComment(param, body)
+  res.json(issue)
+}
 
 export const handler: NextApiHandler = async (req, res) => {
-  // if (req.method === "POST") {
-  //   await postIssueHandler(req, res)
-  //   return
-  // }
+  if (req.method === "POST") {
+    await postIssueCommentHandler(req, res)
+    return
+  }
 
   await getIssueCommentHandler(req, res)
 
