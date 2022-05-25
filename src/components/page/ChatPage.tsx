@@ -18,6 +18,7 @@ const IssueStreamLoader = dynamic(import("./main/IssueStreamLoader"))
 const ChatHeader = dynamic(import("./main/header/ChatHeader"))
 const CommentStreamLoader = dynamic(import("./right/CommentStreamLoader"))
 
+
 export const ChatPage: FC<{}> = () => {
   const params = useChatRouteParam()
   const layout = useLayoutStyle(params)
@@ -30,14 +31,16 @@ export const ChatPage: FC<{}> = () => {
       base: "auto",
       bp: "max-content 1fr max-content"
     }} >
-      <Box {...layout.left}>
+      <Box {...layout.left}
+        minH={0}
+        h="100%">
         <LeftSidebar />
       </Box>
       <Grid
         {...layout.center}
         minH={0}
-        gridTemplateRows={"1fr auto max-content"}
         h="100%"
+        gridTemplateRows={"1fr auto max-content"}
       >
         <ChatHeader />
         <IssueStreamLoader />

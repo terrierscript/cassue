@@ -70,7 +70,7 @@ export const LeftSidebar: FC<{}> = () => {
   const color = useAlpha(800)
 
   return <Grid h="100%" minH={0} p={6}
-    gridTemplateRows={"1fr auto max-content"}
+    gridTemplateRows={"max-content auto max-content"}
 
     bg={bg}
     color={color}>
@@ -78,14 +78,14 @@ export const LeftSidebar: FC<{}> = () => {
 
       <Workspace />
     </Box>
-    <Box>
-
+    <Box
+      overflow={"scroll"}
+    >
       <Rooms />
-      <Spacer />
     </Box>
     <Box>
       <Divider />
-      <Debugger />
+      {/* <Debugger /> */}
       <HStack>
         <User />
         <ThemeSwitcher />
