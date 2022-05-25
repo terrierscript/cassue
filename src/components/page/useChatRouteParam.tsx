@@ -7,7 +7,6 @@ export const useChatRouteParam = () => {
   const router = useRouter()
   const param = IssuesTargetQueryScheme.parse(router.query)
   return param
-
 }
 
 export const useCommentNumber = (): number | null => {
@@ -30,4 +29,17 @@ export const useFilterValue = (): z.infer<typeof IssuesTargetTypeValueScheme> =>
   }
   return { target: "issues", value: "open" }
   // return { type, value }
+}
+
+export const useRouterValues = () => {
+  const { owner, repo } = useChatRouteParam()
+  const { target, value } = useFilterValue()
+  const number = useCommentNumber()
+  return {
+    owner,
+    repo,
+    target,
+    value,
+    number
+  }
 }
