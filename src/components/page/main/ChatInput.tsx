@@ -7,6 +7,7 @@ import { resolveFilterToPost } from "../../../services/github/resolveFilter"
 import { BiSubdirectoryLeft } from "react-icons/bi"
 import { useChatRouteParam } from "../useChatRouteParam"
 import { alphaBgStyle } from "../../atomic/styleUtils"
+import { GoCheck, GoComment, GoCommentDiscussion, GoGitCommit, GoPencil, GoPlay, GoReply } from "react-icons/go"
 
 const ReadOnlyMode: FC<{}> = ({ }) => {
   const { owner, repo } = useChatRouteParam()
@@ -51,7 +52,7 @@ const ChatInput: FC<{ onSubmit: (value: string) => void }> = ({ onSubmit }) => {
       />
       <IconButton
         type="submit"
-        icon={<BiSubdirectoryLeft />}
+        icon={<GoComment />}
         aria-label={"Post"}
       />
     </HStack>

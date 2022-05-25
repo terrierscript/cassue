@@ -29,6 +29,18 @@ const colors = {
     '800': '#322343',
     '900': '#23182F'
   },
+  "green": {
+    "50": "#EFF5EF",
+    "100": "#D3E3D3",
+    "200": "#B7D1B7",
+    "300": "#9BC09B",
+    "400": "#7FAE7F",
+    "500": "#639C63",
+    "600": "#4F7D4F",
+    "700": "#3B5E3B",
+    "800": "#283E28",
+    "900": "#141F14"
+  },
 }
 
 
@@ -53,7 +65,7 @@ export const appTheme = extendTheme({
   }
 
 },
-  withDefaultColorScheme({ colorScheme: 'teal' }),
+  withDefaultColorScheme({ colorScheme: 'green' }),
 )
 
 // console.log(appTheme)

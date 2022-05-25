@@ -1,10 +1,7 @@
 import { Avatar, Box, Divider, HStack, IconButton, Link, Spacer, Stack, useColorMode, useColorModeValue } from "@chakra-ui/react"
 import { useSession } from "next-auth/react"
 import { FC } from "react"
-// import { RepositoryQuery } from "../../../services/github/Schema"
 import { Rooms } from "./Rooms"
-// import { LightBulbIcon } from '@heroicons/react/outline'
-// import { BiBulb } from "react-icons/bi"
 import { GoOctoface, GoLightBulb } from "react-icons/go"
 import { useChatRouteParam } from "../useChatRouteParam"
 
@@ -41,11 +38,6 @@ const Workspace = () => {
   const { owner, repo } = useChatRouteParam()
 
   return <HStack spacing={1}>
-    <Box>
-      <IconButton as="a" href={`https://github.com/${owner}/${repo}`} aria-label={"open github"} variant="ghost" colorScheme="gray" target="_blank">
-        <GoOctoface />
-      </IconButton>
-    </Box>
     <Box fontWeight={"bold"}>
       <Link href={`https://github.com/${owner}`}>
         {owner}
@@ -54,6 +46,11 @@ const Workspace = () => {
     <Box>{`/`}</Box>
     <Box fontWeight={"bold"}>
       {repo}
+    </Box>
+    <Box>
+      <IconButton as="a" href={`https://github.com/${owner}/${repo}`} aria-label={"open github"} variant="ghost" colorScheme="gray" target="_blank">
+        <GoOctoface />
+      </IconButton>
     </Box>
   </HStack >
 }
