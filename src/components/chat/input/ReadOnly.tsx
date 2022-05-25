@@ -1,7 +1,7 @@
 import { Button, HStack } from "@chakra-ui/react"
 import { useSession } from "next-auth/react"
 import { FC, PropsWithChildren, useMemo } from "react"
-import { useChatRouteParam } from "../../useChatRouteParam"
+import { useChatRouteParam } from "../../page/useChatRouteParam"
 
 const ReadOnlyMode: FC<{}> = ({ }) => {
   const { owner, repo } = useChatRouteParam()

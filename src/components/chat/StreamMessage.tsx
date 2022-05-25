@@ -1,10 +1,10 @@
 import { Avatar, Box, HStack, Link, Spacer, Stack, useColorModeValue, Wrap } from "@chakra-ui/react"
 import { FC, PropsWithChildren, useMemo } from "react"
 import { formatDistance } from "date-fns"
-import { IssueComementResponse, IssueResponse } from "../../../services/github/GithubClient"
-import { useChatPageParams } from "../chatHooks"
+import { IssueResponse, IssueComementResponse } from "../../services/github/GithubClient"
+import { useChatPageParams } from "../page/chatHooks"
+import { useChatRouteParam, useFilterValue } from "../page/useChatRouteParam"
 import NextLink from "next/link"
-import { useChatRouteParam, useFilterValue } from "../useChatRouteParam"
 
 type Message = {
   messageType: "issue"

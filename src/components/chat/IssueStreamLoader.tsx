@@ -1,7 +1,7 @@
 import { FC } from "react"
-import { useIssues } from "../apiHooks"
+import { useIssues } from "../page/apiHooks"
 import { IssueStream } from "./Stream"
-import { useChatRouteParam, useFilterValue } from "../useChatRouteParam"
+import { useChatRouteParam, useFilterValue } from "../page/useChatRouteParam"
 import { StreamContainer } from "./StreamContainer"
 import { StreamLoading } from "./StreamLoading"
 
