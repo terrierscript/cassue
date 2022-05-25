@@ -17,6 +17,7 @@ const ChatStream = dynamic(async () => {
   const { ChatStream } = await import("./main/ChatStream")
   return ChatStream
 })
+
 const ChatInputArea = dynamic(async () => {
   const { ChatInputArea } = await import("./main/ChatInput")
   return ChatInputArea
