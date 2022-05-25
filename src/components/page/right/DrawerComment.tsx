@@ -1,10 +1,10 @@
 import { Box, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, Grid, useDisclosure } from "@chakra-ui/react"
 import { useEffect } from "react"
-import CommentStreamLoader from "./right/CommentStreamLoader"
-import { useCommentNumber } from "./useChatRouteParam"
+import CommentStreamLoader from "./CommentStreamLoader"
+import { useCommentNumber } from "../useChatRouteParam"
 
 import { useBreakpointValue } from '@chakra-ui/react'
-import ChatInputArea from "./main/ChatInput"
+import ChatInputArea from "../main/ChatInput"
 
 const DrawerInner = () => {
   return <Grid minH={0}
@@ -40,7 +40,6 @@ export const RightCommentDrawer = () => {
   // finalFocusRef={btnRef}
   >
     <DrawerContent >
-      <DrawerCloseButton />
       <DrawerBody p={0}>
         <DrawerInner />
       </DrawerBody>

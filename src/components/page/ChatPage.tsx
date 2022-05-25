@@ -8,7 +8,7 @@ import { useChatRouteParam } from "./useChatRouteParam"
 import dynamic from "next/dynamic"
 import { alphaBgStyle } from "../atomic/styleUtils"
 import { useLayoutStyle } from "./useLayoutStyle"
-import { RightCommentDrawer } from "./DrawerComment"
+import { RightCommentDrawer } from "./right/DrawerComment"
 // import CommentStreamLoader  from "./right/CommentStreamLoader"
 // import IssueStreamLoader from "./main/IssueStreamLoader"
 
