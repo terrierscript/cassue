@@ -4,7 +4,7 @@ import CommentStreamLoader from "./CommentStreamLoader"
 import { useCommentNumber, useRouterValues } from "../useChatRouteParam"
 
 import { useBreakpointValue } from '@chakra-ui/react'
-import IssueChatInputArea from "../main/input/ChatInput"
+import IssueChatInputArea from "../main/input/IssueChatInput"
 import { useRouter } from "next/router"
 
 const DrawerInner = () => {
