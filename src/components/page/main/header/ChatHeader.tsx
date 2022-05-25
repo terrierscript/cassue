@@ -3,25 +3,36 @@ import { Box, Divider, HStack, IconButton, Stack } from "@chakra-ui/react"
 import { FC, useMemo } from "react"
 import { IssuesTargetQuery } from "../../../../services/github/Schema"
 import { NextLink } from "../../../../services/next/components"
-import { useChatRouteParam } from "../../useChatRouteParam"
+import { useChatRouteParam, useCommentNumber, useFilterValue } from "../../useChatRouteParam"
 import { Description } from "./Description"
 
 const useTitle = () => {
-  const { owner, repo, filter } = useChatRouteParam()
-  const [type, value] = filter ?? []
-  if (type === "labels") {
+  const { owner, repo } = useChatRouteParam()
+  const { target, value } = useFilterValue()
+  if (target === "labels") {
     return value
   }
   return `${owner}/${repo}`
 }
 
+const useBackLink = () => {
+  const { owner, repo } = useChatRouteParam()
+  const { target, value } = useFilterValue()
+  const number = useCommentNumber()
+  if (number) {
+    return `/${owner}/${repo}/${target}/${value}`
+  }
+  return `/${owner}/${repo}`
+
+}
+
 export const ChatHeader: FC<{}> = () => {
-  const { owner, repo, filter } = useChatRouteParam()
   const title = useTitle()
+  const backLink = useBackLink()
   return <Stack p={4} spacing={1}>
     <HStack>
       <Box>
-        <NextLink href={`/${owner}/${repo}`}>
+        <NextLink href={`${backLink}`}>
           <IconButton
             as="a"
             variant={"ghost"}

@@ -1,10 +1,10 @@
 import { Center, Flex, Spinner } from "@chakra-ui/react"
 import { FC, PropsWithChildren } from "react"
-import { useIssueComments, useIssues } from "../apiHooks"
-import { CommentStream, IssueStream } from "./Stream"
-import { useChatRouteParam, useCommentNumber, useFilterValue } from "../useChatRouteParam"
+import { useCommentNumber } from "../useChatRouteParam"
+import { CommentStreamLoader } from "../right/CommentStreamLoader"
+import { IssueStreamLoader } from "./IssueStreamLoader"
 
-const StreamContainer: FC<PropsWithChildren<{}>> = ({ children }) => {
+export const StreamContainer: FC<PropsWithChildren<{}>> = ({ children }) => {
   return <Flex
     overflow="scroll"
     w="100%"
@@ -15,7 +15,7 @@ const StreamContainer: FC<PropsWithChildren<{}>> = ({ children }) => {
   </Flex>
 }
 
-const Loading = () => {
+export const Loading = () => {
   return <Flex h="100%" w="100%" overflow={"scroll"}>
     <Center h="50vh" w="100%" overflow={"scroll"}>
       <Spinner />
@@ -23,34 +23,12 @@ const Loading = () => {
   </Flex>
 }
 
-const IssueStreamLoader: FC<{}> = ({ }) => {
-  const { owner, repo, filter } = useChatRouteParam()
-  const { data } = useIssues({ owner, repo, filter })
-  if (!data) {
-    return <Loading />
-  }
-  return <StreamContainer>
-    <IssueStream issues={data.issues} />
-  </StreamContainer>
-}
+// export const ChatStream: FC<{}> = ({ }) => {
+//   const number = useCommentNumber()
+//   if (number) {
+//     return <CommentStreamLoader number={number} />
+//   }
+//   return <IssueStreamLoader />
+// }
 
-const CommentStreamLoader: FC<{ number: number }> = ({ number }) => {
-  const { owner, repo } = useChatRouteParam()
-
-  const { data } = useIssueComments({ owner, repo, number })
-  if (!data) {
-    return <Loading />
-  }
-  return <StreamContainer>
-    <CommentStream comments={data.comments} />
-  </StreamContainer>
-}
-
-export const ChatStream: FC<{}> = ({ }) => {
-  const number = useCommentNumber()
-  console.log(number)
-  if (number) {
-    return <CommentStreamLoader number={number} />
-  }
-  return <IssueStreamLoader />
-}
+// export default ChatStream

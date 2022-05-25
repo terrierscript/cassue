@@ -52,3 +52,5 @@ export const LeftSidebar: FC<{}> = () => {
     </HStack>
   </Stack>
 }
+
+export default LeftSidebar

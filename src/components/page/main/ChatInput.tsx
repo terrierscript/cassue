@@ -1,4 +1,4 @@
-import { Button, HStack, IconButton, Input } from "@chakra-ui/react"
+import { Box, Button, HStack, IconButton, Input } from "@chakra-ui/react"
 import { useSession } from "next-auth/react"
 import { FC, useMemo, useState } from "react"
 import { IssuePostParam } from "../../../services/github/Schema"
@@ -6,6 +6,7 @@ import { useIssues } from "../apiHooks"
 import { resolveFilterToPost } from "../../../services/github/resolveFilter"
 import { BiSubdirectoryLeft } from "react-icons/bi"
 import { useChatRouteParam } from "../useChatRouteParam"
+import { alphaBgStyle } from "../../atomic/styleUtils"
 
 const ReadOnlyMode: FC<{}> = ({ }) => {
   const { owner, repo } = useChatRouteParam()
@@ -76,7 +77,8 @@ const InputSending: FC<{}> = ({ }) => {
   }} />
 }
 
-export const ChatInputArea: FC<{}> = ({ }) => {
+
+export const ChatInputAreaInner: FC<{}> = ({ }) => {
   const { owner } = useChatRouteParam()
 
   const { data } = useSession()
@@ -91,3 +93,12 @@ export const ChatInputArea: FC<{}> = ({ }) => {
   }
   return <InputSending />
 }
+
+export const ChatInputArea: FC<{}> = ({ }) => {
+  return <Box p={2} {...alphaBgStyle(50)}>
+    <ChatInputAreaInner />
+  </Box>
+}
+
+
+export default ChatInputArea

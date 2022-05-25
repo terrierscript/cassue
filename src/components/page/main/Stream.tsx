@@ -15,6 +15,7 @@ export const IssueStream: FC<{ issues: IssueResponse[] }> = ({ issues }) => {
   </Stack>
 
 }
+
 export const CommentStream: FC<{ comments: IssueComementResponse[] }> = ({ comments }) => {
   const stream = useMemo(() => {
     // return comments?.concat().reverse()
@@ -26,5 +27,4 @@ export const CommentStream: FC<{ comments: IssueComementResponse[] }> = ({ comme
       return <StreamMessage message={{ messageType: "comment", data: comment }} key={key} />
     })}
   </Stack>
-
 }
