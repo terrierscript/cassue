@@ -1,10 +1,10 @@
-import { Avatar, Box, Divider, Grid, HStack, IconButton, Link, Spacer, Stack, useColorMode, useColorModeValue, Wrap } from "@chakra-ui/react"
-import { useSession } from "next-auth/react"
+import { Box, Divider, Grid, HStack, IconButton, Link, Spacer, Stack, useColorMode, useColorModeValue, Wrap } from "@chakra-ui/react"
 import { FC } from "react"
 import { Rooms } from "./Rooms"
 // import { GoOctoface, GoLightBulb } from "react-icons/go"
 import { useChatRouteParam } from "../useChatRouteParam"
 import { LightBulbIcon, MarkGithubIcon } from "@primer/octicons-react"
+import { UserIcon } from "./UserIcon"
 
 const ThemeSwitcher = () => {
   const { toggleColorMode } = useColorMode()
@@ -16,16 +16,6 @@ const ThemeSwitcher = () => {
       // colorScheme="gray"
       aria-label={"Change theme"}
       icon={<LightBulbIcon />} />
-  </Box>
-}
-
-const User = () => {
-  const session = useSession()
-  return <Box>
-    <HStack>
-      <Avatar size="sm" src={session.data?.user?.image ?? undefined} />
-      <Box>{session.data?.user?.name}</Box>
-    </HStack>
   </Box>
 }
 
@@ -84,7 +74,7 @@ export const LeftSidebar: FC<{}> = () => {
       <Divider />
       {/* <Debugger /> */}
       <HStack>
-        <User />
+        <UserIcon />
         <ThemeSwitcher />
       </HStack>
     </Box>
