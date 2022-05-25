@@ -1,4 +1,4 @@
-import { Box, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, Grid, useDisclosure } from "@chakra-ui/react"
+import { Box, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, Grid, useDisclosure } from "@chakra-ui/react"
 import { useEffect } from "react"
 import CommentStreamLoader from "../../chat/loader/CommentStreamLoader"
 import { useCommentNumber, useRouterValues } from "../useChatRouteParam"
@@ -7,15 +7,23 @@ import { useBreakpointValue } from '@chakra-ui/react'
 import IssueChatInputArea from "../../chat/input/IssueChatInput"
 import { useRouter } from "next/router"
 import CommentChatInputArea from "../../chat/input/CommentChatInput"
+import { useAlpha } from "../../atomic/styleUtils"
 
 const DrawerInner = () => {
-  return <Grid minH={0}
+  const bg = useAlpha(100)
+  return <Grid
     w="100%"
-    bg="gray.100"
-    gridTemplateRows={"1fr auto max-content"}
-    h="100%">
+    bg={bg}
+    minH={0}
+    gridTemplateRows={"max-content auto max-content"}
+    // HACK:
+    css={`height: 100dvh; height: 100vh`}
+  // h={[["100dvh", "100vh"]]}
+  >
     <Box></Box>
-    <CommentStreamLoader />
+    <Box overflow={"scroll"}>
+      <CommentStreamLoader />
+    </Box>
     <CommentChatInputArea />
   </Grid>
 }

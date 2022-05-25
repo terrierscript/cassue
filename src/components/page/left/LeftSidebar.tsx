@@ -61,7 +61,6 @@ export const LeftSidebar: FC<{}> = () => {
 
   return <Grid h="100%" minH={0} p={6} gap={4}
     gridTemplateRows={"max-content auto max-content"}
-
     bg={bg}
     color={color}>
     <Box>
