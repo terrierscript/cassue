@@ -30,12 +30,14 @@ const getLeftLayout = (mode: LayoutMode) => {
 }
 const getCenterLayout = (mode: LayoutMode) => {
   switch (mode) {
-    case "issue":
     case "room":
     case "comment":
       return { display: { base: "none", bp: "grid" } }
+    case "issue":
+      return { display: "grid" }
   }
 }
+
 const getRightLayout = (mode: LayoutMode) => {
   switch (mode) {
     case "issue":
@@ -51,8 +53,9 @@ const getRightLayout = (mode: LayoutMode) => {
       }
   }
 }
+
 export const useLayoutStyle = (params: IssuesTargetQuery) => {
-  const sideBarWidth = 240
+  // const sideBarWidth = 240
 
   const mode = useLayoutMode()
   const layout = useMemo(() => {
