@@ -7,11 +7,13 @@ import { useBreakpointValue } from '@chakra-ui/react'
 import IssueChatInputArea from "../../chat/input/IssueChatInput"
 import { useRouter } from "next/router"
 import CommentChatInputArea from "../../chat/input/CommentChatInput"
+import { useAlpha } from "../../atomic/styleUtils"
 
 const DrawerInner = () => {
+  const bg = useAlpha(100)
   return <Grid minH={0}
     w="100%"
-    bg="gray.100"
+    bg={bg}
     gridTemplateRows={"1fr auto max-content"}
     h="100%">
     <Box></Box>
