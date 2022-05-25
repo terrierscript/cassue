@@ -1,13 +1,13 @@
 import { Box, Grid } from "@chakra-ui/react"
-import { FC, useMemo } from "react"
-import { IssuesTargetQuery } from "../../services/github/Schema"
-import { useChatRouteParam, useCommentNumber } from "./useChatRouteParam"
+import { FC } from "react"
+import { useChatRouteParam } from "./useChatRouteParam"
 // import { ChatInputArea } from "./main/ChatInput"
 // import { LeftSidebar } from "./left/LeftSidebar"
 // import { ChatHeader } from "./main/header/ChatHeader"
 // import { ChatStream } from "./main/ChatStream"
 import dynamic from "next/dynamic"
 import { alphaBgStyle } from "../atomic/styleUtils"
+import { useLayoutStyle } from "./useLayoutStyle"
 // import CommentStreamLoader  from "./right/CommentStreamLoader"
 // import IssueStreamLoader from "./main/IssueStreamLoader"
 
@@ -17,63 +17,6 @@ const ChatInputArea = dynamic(import("./main/ChatInput"))
 const IssueStreamLoader = dynamic(import("./main/IssueStreamLoader"))
 const ChatHeader = dynamic(import("./main/header/ChatHeader"))
 const CommentStreamLoader = dynamic(import("./right/CommentStreamLoader"))
-
-const useLayoutMode = () => {
-  const params = useChatRouteParam()
-  const number = useCommentNumber()
-  if (number) {
-    return "comment"
-  }
-  if (params.filter && params.filter?.length > 1) {
-    return "issue"
-  }
-  return "room"
-}
-
-const useLayoutStyle = (params: IssuesTargetQuery) => {
-  const sideBarWidth = 240
-  const mode = useLayoutMode()
-  const layout = useMemo(() => {
-    switch (mode) {
-      case "issue":
-        return {
-          left: {
-            w: sideBarWidth, display: { base: "none", bp: "block" }
-          },
-          center: {},
-          right: { display: "none" }
-        }
-      case "comment":
-        return {
-          left: {
-            w: sideBarWidth, display: { base: "none", bp: "block" }
-          },
-          center: {
-            display: { base: "none", bp: "grid" }
-          },
-          right: {
-            w: {
-              base: "100%",
-              bp: 350
-            },
-            display: "grid"
-          }
-        }
-      case "room":
-        return {
-          left: {
-            w: { base: "100%", bp: "30%" }
-          },
-          center: {
-            display: { base: "none", bp: "grid" }
-          },
-          right: { display: "none" }
-        }
-    }
-  }, [params])
-  return layout
-}
-
 
 export const ChatPage: FC<{}> = () => {
   const params = useChatRouteParam()
@@ -90,27 +33,26 @@ export const ChatPage: FC<{}> = () => {
       <Box {...layout.left}>
         <LeftSidebar />
       </Box>
-      <Box  {...layout.center}>
-        <Grid
-          minH={0}
-          gridTemplateRows={"1fr auto max-content"}
-          h="100%"
-        >
-          <ChatHeader />
-          <IssueStreamLoader />
-          <ChatInputArea />
-        </Grid>
-      </Box>
-      <Box  {...layout.right}>
-        <Grid minH={0}
-          gridTemplateRows={"auto max-content"}
-          h="100%"
-          {...alphaBgStyle(100)}
-        >
-          <CommentStreamLoader />
-          {/* <ChatInputArea /> */}
-        </Grid>
-      </Box>
+      <Grid
+        {...layout.center}
+        minH={0}
+        gridTemplateRows={"1fr auto max-content"}
+        h="100%"
+      >
+        <ChatHeader />
+        <IssueStreamLoader />
+        <ChatInputArea />
+      </Grid>
+
+      <Grid minH={0}
+        {...layout.right}
+        gridTemplateRows={"auto max-content"}
+        h="100%"
+        {...alphaBgStyle(100)}
+      >
+        <CommentStreamLoader />
+        {/* <ChatInputArea /> */}
+      </Grid>
     </Grid>
   </Box>
 }
