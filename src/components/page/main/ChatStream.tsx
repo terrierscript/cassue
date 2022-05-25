@@ -1,7 +1,7 @@
 import { Center, Flex, Spinner } from "@chakra-ui/react"
 import { FC, PropsWithChildren } from "react"
 import { useCommentNumber } from "../useChatRouteParam"
-import { CommentStreamLoader } from "./CommentStreamLoader"
+import { CommentStreamLoader } from "../right/CommentStreamLoader"
 import { IssueStreamLoader } from "./IssueStreamLoader"
 
 export const StreamContainer: FC<PropsWithChildren<{}>> = ({ children }) => {

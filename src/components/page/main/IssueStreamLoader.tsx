@@ -15,3 +15,5 @@ export const IssueStreamLoader: FC<{}> = ({ }) => {
     <IssueStream issues={data.issues} />
   </StreamContainer>
 }
+
+export default IssueStreamLoader
