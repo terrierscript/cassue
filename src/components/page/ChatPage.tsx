@@ -105,7 +105,7 @@ export const ChatPage: FC<{}> = () => {
           {...alphaBgStyle(100)}
         >
           <CommentStreamLoader />
-          <ChatInputArea />
+          {/* <ChatInputArea /> */}
         </Grid>
       </Box>
     </Grid>
