@@ -17,7 +17,7 @@ const DrawerInner = () => {
     minH={0}
     gridTemplateRows={"max-content auto max-content"}
     // HACK:
-    css={`height: 100dvh; height: 100vh`}
+    css={` height: 100vh; height: 100dvh;`}
   // h={[["100dvh", "100vh"]]}
   >
     <Box></Box>
