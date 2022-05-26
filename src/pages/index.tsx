@@ -1,6 +1,6 @@
 import { Box, Center, HStack, IconButton, Input } from '@chakra-ui/react'
+import { ChevronRightIcon } from '@primer/octicons-react'
 import React, { useMemo, useState } from 'react'
-import { ArrowCircleRightIcon } from '@heroicons/react/outline'
 
 const Generate = () => {
   const [value, setValue] = useState("")
@@ -19,7 +19,7 @@ const Generate = () => {
       size="lg"
       isDisabled={destination === null}
       href={`/${destination}`}
-      p={2} icon={<ArrowCircleRightIcon />} aria-label={'GO'}
+      p={2} icon={<ChevronRightIcon />} aria-label={'GO'}
     />
   </HStack>
 }
