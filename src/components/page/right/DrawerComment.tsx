@@ -18,8 +18,12 @@ const DrawerInner = () => {
     minH={0}
     gridTemplateRows={"max-content auto max-content"}
     // HACK:
-    css={` height: 100vh; height: 100dvh;`}
-  // h={[["100dvh", "100vh"]]}
+    sx={{
+      height: "100vh",
+      "&":{
+        height: "100dvh"
+      }
+    }}  
   >
     <Box>
       <CommentHeader/>
