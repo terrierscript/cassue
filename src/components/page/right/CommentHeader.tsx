@@ -1,4 +1,4 @@
-import { Box, Heading, HStack, Link } from "@chakra-ui/react"
+import { Box, Heading, HStack, Link, Stack } from "@chakra-ui/react"
 import { FC } from "react"
 import { IssueNumberResponse } from "../../../services/github/GithubClient"
 import { useAlpha, useInverseAlpha } from "../../atomic/styleUtils"
@@ -17,14 +17,14 @@ export const CommentHeader: FC<{ issueNumber: number }> = ({ issueNumber }) => {
   }
 
   return <Box p={4}>
-    <Box>
+    <Stack>
       <HStack>
         <Link href={issue?.html_url}>
           #{issueNumber}
         </Link>
         <Link href={issue?.html_url}>
           <Box>
-            <Heading size="sm">
+            <Heading size="sm" w="80%">
               {issue?.title}
             </Heading>
           </Box>
@@ -39,6 +39,6 @@ export const CommentHeader: FC<{ issueNumber: number }> = ({ issueNumber }) => {
       {/* <Box bg="red.100">
         {issue?.body}
       </Box> */}
-    </Box>
+    </Stack>
   </Box>
 }
