@@ -8,7 +8,6 @@ const getIssueHandler: NextApiHandler = async (req, res) => {
   const account = await getSessionAccount({ req })
   const accessor = new GithubClient(account)
   const param = IssuesTargetQueryScheme.parse(req.query)
-  const [type, value] = param.filter
   const issues = await accessor.getAllIssue(param)
   res.json({
     issues

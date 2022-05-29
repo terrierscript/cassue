@@ -10,6 +10,8 @@ const octokit = new Octokit()
 type IssueResponsees = GetResponseDataTypeFromEndpointMethod<typeof octokit.rest.issues.listForRepo>
 export type IssueResponse = IssueResponsees[number]
 
+export type IssueNumberResponse = GetResponseDataTypeFromEndpointMethod<typeof octokit.rest.issues.get>
+
 type IssueCommentResponsees = GetResponseDataTypeFromEndpointMethod<typeof octokit.rest.issues.listComments>
 export type IssueComementResponse = IssueCommentResponsees[number]
 
@@ -38,6 +40,7 @@ export type LabelResponse = GetResponseDataTypeFromEndpointMethod<typeof octokit
 const headers = {
   accept: "application/vnd.github.VERSION.full+json"
 }
+
 export class GithubClient {
   client: Octokit
   account: Record<string, string>
@@ -50,6 +53,15 @@ export class GithubClient {
   }
 
 
+  async getIssue(target: IssueCommentQuery): Promise<IssueNumberResponse> {
+    const { number, ...rest } = target
+    const result = await this.client.rest.issues.get({
+      issue_number: number,
+      ...rest,
+      headers
+    })
+    return result.data
+  }
   async getAllIssue(param: IssuesTargetQuery): Promise<IssueResponsees> {
     const { filter, ...repoParam } = param
     const filterQuery = resolveIssueListFilter(filter ?? [])

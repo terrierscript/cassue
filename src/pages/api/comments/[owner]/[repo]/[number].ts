@@ -8,8 +8,11 @@ const getIssueCommentHandler: NextApiHandler = async (req, res) => {
   const accessor = new GithubClient(account)
   const param = IssueCommentQueryScheme.parse(req.query)
   const comments = await accessor.getComments(param)
+
+  const issue = await accessor.getIssue(param)
   res.json({
-    comments
+    issue,
+    comments,
   })
 }
 

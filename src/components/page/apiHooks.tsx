@@ -1,5 +1,5 @@
 import useSWR from "swr"
-import { IssueComementResponse, IssueResponse, LabelResponse } from "../../services/github/GithubClient"
+import { IssueComementResponse, IssueNumberResponse, IssueResponse, LabelResponse } from "../../services/github/GithubClient"
 import { IssueCommentQuery, IssuesTargetQuery, IssuesTargetTypeValue, RepositoryQuery } from "../../services/github/Schema"
 import { jsonFetcher } from "../../services/swr/fetcher"
 
@@ -10,8 +10,9 @@ export const useIssues = ({ owner, repo, target, value }: RepositoryQuery & Issu
     // suspense: true
   })
 }
+
 export const useIssueComments = ({ owner, repo, number }: IssueCommentQuery) => {
-  return useSWR<{ comments: IssueComementResponse[] }>(`/api/comments/${owner}/${repo}/${number}`, jsonFetcher, {
+  return useSWR<{ comments: IssueComementResponse[], issue: IssueNumberResponse }>(`/api/comments/${owner}/${repo}/${number}`, jsonFetcher, {
     // fallbackData: { issues },
     // suspense: true
   })

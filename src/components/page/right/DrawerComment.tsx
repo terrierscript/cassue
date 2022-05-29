@@ -8,9 +8,14 @@ import IssueChatInputArea from "../../chat/input/IssueChatInput"
 import { useRouter } from "next/router"
 import CommentChatInputArea from "../../chat/input/CommentChatInput"
 import { useAlpha } from "../../atomic/styleUtils"
+import { CommentHeader } from "./CommentHeader"
 
 const DrawerInner = () => {
   const bg = useAlpha(100)
+  const number = useCommentNumber()
+  if (!number) {
+    return null
+  }
   return <Grid
     w="100%"
     bg={bg}
@@ -19,12 +24,14 @@ const DrawerInner = () => {
     // HACK:
     sx={{
       height: "100vh",
-      "&":{
+      "&": {
         height: "100dvh"
       }
-    }}  
+    }}
   >
-    <Box></Box>
+    <Box>
+      <CommentHeader issueNumber={number} />
+    </Box>
     <Box overflow={"scroll"}>
       <CommentStreamLoader />
     </Box>
