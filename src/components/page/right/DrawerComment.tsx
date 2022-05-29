@@ -12,6 +12,10 @@ import { CommentHeader } from "./CommentHeader"
 
 const DrawerInner = () => {
   const bg = useAlpha(100)
+  const number = useCommentNumber()
+  if (!number) {
+    return null
+  }
   return <Grid
     w="100%"
     bg={bg}
@@ -20,13 +24,13 @@ const DrawerInner = () => {
     // HACK:
     sx={{
       height: "100vh",
-      "&":{
+      "&": {
         height: "100dvh"
       }
-    }}  
+    }}
   >
     <Box>
-      <CommentHeader/>
+      <CommentHeader issueNumber={number} />
     </Box>
     <Box overflow={"scroll"}>
       <CommentStreamLoader />

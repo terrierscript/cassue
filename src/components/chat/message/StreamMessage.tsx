@@ -5,6 +5,7 @@ import { IssueResponse, IssueComementResponse } from "../../../services/github/G
 import { useChatPageParams } from "../../page/chatHooks"
 import { useChatRouteParam, useFilterValue } from "../../page/useChatRouteParam"
 import NextLink from "next/link"
+import { HtmlBody } from "./HtmlBody"
 
 type Message = {
   messageType: "issue"
@@ -70,19 +71,6 @@ const MessageAvatar: FC<{ message: Message }> = ({ message }) => {
   return <Avatar size="sm"
     name={data.user?.login}
     src={data.user?.avatar_url} />
-}
-
-
-const HtmlBody: FC<{ html: string }> = ({ html }) => {
-  return <Box
-    sx={{
-      ul: {
-        px: 4,
-      }
-    }}
-    dangerouslySetInnerHTML={{ __html: html }}
-  />
-
 }
 
 
