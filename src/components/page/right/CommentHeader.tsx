@@ -6,10 +6,23 @@ import { HtmlBody } from "../../chat/message/HtmlBody"
 import { useIssueComments } from "../apiHooks"
 import { useChatRouteParam, useCommentNumber } from "../useChatRouteParam"
 
+const IssueBody: FC<{ issue: IssueNumberResponse }> = ({ issue }) => {
+  const bg = useInverseAlpha(50)
+  if (issue.body_html) {
+    return <Box bg={bg}>
+      <HtmlBody html={issue.body_html} />
+    </Box>
+  }
+  if (issue.body) {
+    return <Box bg={bg}>
+      <Box>{issue.body}</Box>
+    </Box>
+  }
+  return null
+}
 export const CommentHeader: FC<{ issueNumber: number }> = ({ issueNumber }) => {
   const { owner, repo } = useChatRouteParam()
   const { data } = useIssueComments({ owner, repo, number: issueNumber })
-  const bg = useInverseAlpha(100)
   const issue = data?.issue
   if (!issue) {
     // TODO: error?
@@ -30,11 +43,8 @@ export const CommentHeader: FC<{ issueNumber: number }> = ({ issueNumber }) => {
           </Box>
         </Link>
       </HStack>
-      <Box p={4} bg={bg}>
-        {issue.body_html
-          ? <HtmlBody html={issue.body_html} />
-          : <Box>{issue.body}</Box>
-        }
+      <Box p={4} >
+        <IssueBody issue={issue} />
       </Box>
       {/* <Box bg="red.100">
         {issue?.body}
