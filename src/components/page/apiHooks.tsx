@@ -11,13 +11,6 @@ export const useIssues = ({ owner, repo, target, value }: RepositoryQuery & Issu
   })
 }
 
-export const useIssue = ({ owner, repo, number }: RepositoryQuery & IssueCommentQuery) => {
-  return useSWR<{ issues: IssueResponse[] }>(`/api/issues/${owner}/${repo}/${number}`, jsonFetcher, {
-    // fallbackData: { issues },
-    // suspense: true
-  })
-}
-
 export const useIssueComments = ({ owner, repo, number }: IssueCommentQuery) => {
   return useSWR<{ comments: IssueComementResponse[] }>(`/api/comments/${owner}/${repo}/${number}`, jsonFetcher, {
     // fallbackData: { issues },
