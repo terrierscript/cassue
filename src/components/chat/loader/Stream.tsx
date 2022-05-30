@@ -7,10 +7,10 @@ export const IssueStream: FC<{ issues: IssueResponse[] }> = ({ issues }) => {
   const stream = useMemo(() => {
     return issues?.concat().reverse()
   }, [issues])
-  return <Stack spacing={0}>
+  return <Stack spacing={0} >
     <Spacer />
-    {stream.map((issue, key) => {
-      return <StreamMessage message={{ messageType: "issue", data: issue }} key={key} />
+    {stream.map((issue) => {
+      return <StreamMessage message={{ messageType: "issue", data: issue }} key={issue.number} />
     })}
   </Stack>
 
