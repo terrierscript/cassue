@@ -15,6 +15,7 @@ export type IssueNumberResponse = GetResponseDataTypeFromEndpointMethod<typeof o
 type IssueCommentResponsees = GetResponseDataTypeFromEndpointMethod<typeof octokit.rest.issues.listComments>
 export type IssueComementResponse = IssueCommentResponsees[number]
 
+const closeReason = ["complete", "not planned"] as const
 const issueState = ["all", "closed", "open"] as const
 
 const resolveIssueListFilter = (filter: string[] = []) => {
@@ -100,6 +101,18 @@ export class GithubClient {
       headers
     })
     return result.data
+  }
+
+  async closeIssue(target: IssueCommentQuery) {
+    const { number, ...rest } = target
+
+    const result = await this.client.rest.issues.update({
+      ...rest,
+      issue_number: number,
+      status: "close",
+      state_reason: ""
+    })
+
   }
 
   async getCustomLabels(param: RepositoryQuery) {
