@@ -35,13 +35,13 @@ export const CommentHeader: FC<{ issueNumber: number }> = ({ issueNumber }) => {
         <Link href={issue?.html_url}>
           #{issueNumber}
         </Link>
-        <Link href={issue?.html_url}>
-          <Box>
-            <Heading size="sm" w="80%">
+        <Box w="80%">
+          <Link href={issue?.html_url}>
+            <Heading size="sm" >
               {issue?.title}
             </Heading>
-          </Box>
-        </Link>
+          </Link>
+        </Box>
       </HStack>
       <Box p={4} >
         <IssueBody issue={issue} />
