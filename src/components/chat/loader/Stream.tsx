@@ -7,7 +7,7 @@ export const IssueStream: FC<{ issues: IssueResponse[] }> = ({ issues }) => {
   const stream = useMemo(() => {
     return issues?.concat().reverse()
   }, [issues])
-  const latestNumber = useMemo(() => issues[0].number, [issues])
+  const latestNumber = useMemo(() => issues[0]?.number, [issues])
 
   return <Stack spacing={0} >
     <Spacer />
@@ -26,10 +26,11 @@ export const CommentStream: FC<{ comments: IssueComementResponse[] }> = ({ comme
     // return comments?.concat().reverse()
     return comments
   }, [comments])
+  const latestNumber = useMemo(() => comments.concat().reverse()[0]?.id, [comments])
   return <Stack spacing={0}>
     <Spacer />
-    {stream.map((comment, key) => {
-      return <StreamMessage isLatest={false} message={{ messageType: "comment", data: comment }} key={key} />
+    {stream.map((comment) => {
+      return <StreamMessage isLatest={comment.id === latestNumber} message={{ messageType: "comment", data: comment }} key={comment.id} />
     })}
   </Stack>
 }
