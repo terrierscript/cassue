@@ -1,5 +1,5 @@
 import { Avatar, Box, HStack, Link, Spacer, Stack, useColorModeValue, Wrap } from "@chakra-ui/react"
-import { FC, PropsWithChildren, useMemo } from "react"
+import { FC, PropsWithChildren, useEffect, useMemo, useRef } from "react"
 import { formatDistance } from "date-fns"
 import { IssueResponse, IssueComementResponse } from "../../../services/github/GithubClient"
 import { useChatPageParams } from "../../page/chatHooks"
@@ -111,16 +111,26 @@ const MessageBody: FC<{ message: Message }> = ({ message }) => {
   </Stack>
 }
 
-export const StreamMessage: FC<{ message: Message }> = ({ message }) => {
-  const path = usePath()
+export const StreamMessage: FC<{ message: Message, isLatest: boolean }> = ({ isLatest, message }) => {
+  const ref = useRef<HTMLDivElement>(null)
+  useEffect(() => {
+    if (!isLatest) {
+      return
+    }
+    if (!ref.current) {
+      return
+    }
+    ref.current.scrollIntoView()
+  }, [isLatest, ref.current])
 
   const activeStyle = useColorModeValue(
     { bg: "blackAlpha.50" },
     { bg: "whiteAlpha.50" }
   )
   // const { owner, repo } = useChatRouteParam()
-  const { data } = message
+  // const { data } = message
   return <Stack
+    ref={ref}
     spacing={4}
     p={2}
     px={4}
