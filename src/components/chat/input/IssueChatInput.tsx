@@ -10,7 +10,6 @@ import { IssuePost } from "../../../services/github/Schema"
 import { useForm } from "react-hook-form"
 
 const ChatInput: FC<{ onSubmit: (value: string) => void }> = ({ onSubmit }) => {
-  // const [value, setValue] = useState("")
   const { register, handleSubmit, formState, reset } = useForm()
   return <form onSubmit={handleSubmit(async (data) => {
     await onSubmit(data.value)
@@ -25,11 +24,10 @@ const ChatInput: FC<{ onSubmit: (value: string) => void }> = ({ onSubmit }) => {
         _dark={{
           bg: "blackAlpha.800"
         }}
-        // value={value}
-        // onChange={(e) => setValue(e.target.value)}
         {...register("value")}
       />
       <IconButton
+        disabled={formState.isSubmitting}
         type="submit"
         icon={<CommentIcon />}
         aria-label={"Post"}

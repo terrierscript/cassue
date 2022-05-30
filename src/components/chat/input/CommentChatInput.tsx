@@ -7,26 +7,29 @@ import { useChatRouteParam, useCommentNumber, useFilterValue } from "../../page/
 import { alphaBgStyle } from "../../atomic/styleUtils"
 import { CommentDiscussionIcon } from '@primer/octicons-react'
 import { ReadOnlyGuard } from "./ReadOnly"
+import { useForm } from "react-hook-form"
 
 const ChatInput: FC<{ onSubmit: (value: string) => void }> = ({ onSubmit }) => {
-  const [value, setValue] = useState("")
-  return <form onSubmit={(e) => {
-    e.preventDefault()
-    onSubmit(value)
-    setValue("")
-  }}>
+  // const [value, setValue] = useState("")
+  const { register, handleSubmit, formState, reset } = useForm()
+
+  return <form onSubmit={handleSubmit(async (data) => {
+    await onSubmit(data.value)
+    reset()
+  })}>
     <HStack>
       <Input
+        disabled={formState.isSubmitting}
         _light={{
           bg: "whiteAlpha.800"
         }}
         _dark={{
           bg: "blackAlpha.800"
         }}
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
+        {...register("value")}
       />
       <IconButton
+        disabled={formState.isSubmitting}
         type="submit"
         icon={<CommentDiscussionIcon />}
         aria-label={"Post"}
