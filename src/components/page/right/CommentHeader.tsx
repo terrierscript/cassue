@@ -1,24 +1,27 @@
 import { Box, Heading, HStack, Link, Stack } from "@chakra-ui/react"
-import { FC } from "react"
+import { FC, PropsWithChildren } from "react"
 import { IssueNumberResponse } from "../../../services/github/GithubClient"
 import { useAlpha, useInverseAlpha } from "../../atomic/styleUtils"
 import { HtmlBody } from "../../chat/message/HtmlBody"
 import { useIssueComments } from "../apiHooks"
 import { useChatRouteParam, useCommentNumber } from "../useChatRouteParam"
 
-const IssueBody: FC<{ issue: IssueNumberResponse }> = ({ issue }) => {
+const IssueBodyContainer: FC<PropsWithChildren<{}>> = ({ children }) => {
   const bg = useInverseAlpha(50)
+  return <Box bg={bg} p={4}>
+    {children}
+  </Box>
+}
+const IssueBody: FC<{ issue: IssueNumberResponse }> = ({ issue }) => {
+  const color = useInverseAlpha(500)
   if (issue.body_html) {
-    return <Box bg={bg}>
-      <HtmlBody html={issue.body_html} />
-    </Box>
+    return <HtmlBody html={issue.body_html} />
   }
   if (issue.body) {
-    return <Box bg={bg}>
-      <Box>{issue.body}</Box>
-    </Box>
+    return <Box>{issue.body}</Box>
   }
-  return null
+  return <Box color={color}
+    fontStyle="italic">No description provided.</Box>
 }
 export const CommentHeader: FC<{ issueNumber: number }> = ({ issueNumber }) => {
   const { owner, repo } = useChatRouteParam()
@@ -43,9 +46,10 @@ export const CommentHeader: FC<{ issueNumber: number }> = ({ issueNumber }) => {
           </Link>
         </Box>
       </HStack>
-      <Box p={4} >
+      <IssueBodyContainer>
+
         <IssueBody issue={issue} />
-      </Box>
+      </IssueBodyContainer>
       {/* <Box bg="red.100">
         {issue?.body}
       </Box> */}
