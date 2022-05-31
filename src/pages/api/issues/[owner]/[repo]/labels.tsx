@@ -19,9 +19,12 @@ export const postLabel: NextApiHandler = async (req, res) => {
   const account = await getSessionAccount({ req })
   const param = RepositoryQueryScheme.parse(req.query)
   const body = LabelPostScheme.parse(req.body)
+  const convert = {
+    ...body,
+    color: body.color?.replace("#", "")
+  }
   const accessor = new GithubClient(account)
-  console.log(param, body)
-  const labels = await accessor.createCustomLabel(param, body)
+  const labels = await accessor.createCustomLabel(param, convert)
 
   res.json({
     labels

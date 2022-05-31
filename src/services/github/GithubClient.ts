@@ -135,7 +135,7 @@ export class GithubClient {
   async updateCustomLabel(param: RepositoryQuery, label: LabelPost) {
     await this.client.rest.issues.updateLabel({
       ...param,
-      ...label
+      ...label,
     })
   }
 
