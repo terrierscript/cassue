@@ -1,4 +1,4 @@
-import { HStack, IconButton, IconButtonProps, Input } from "@chakra-ui/react"
+import { Box, HStack, IconButton, IconButtonProps, Input } from "@chakra-ui/react"
 import { FC, useEffect } from "react"
 import { useForm, useWatch } from "react-hook-form"
 
@@ -14,7 +14,7 @@ export const ChatInput: FC<{
   }, [watchValue])
   return <form onSubmit={handleSubmit(async (data) => {
     await onSubmit(data.value)
-    reset()
+    reset({ value: "" })
   })}>
     <HStack>
       <Input
