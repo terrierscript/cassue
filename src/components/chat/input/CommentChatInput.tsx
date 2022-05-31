@@ -1,8 +1,7 @@
 import { Box, HStack, IconButton, Input } from "@chakra-ui/react"
-import { FC, useState } from "react"
-import { CommentPost, IssuePost } from "../../../services/github/Schema"
+import { FC } from "react"
+import { CommentPost } from "../../../services/github/Schema"
 import { useIssueComments, useIssues } from "../../page/apiHooks"
-import { resolveFilterToPost } from "../../../services/github/resolveFilter"
 import { useChatRouteParam, useCommentNumber, useFilterValue } from "../../page/useChatRouteParam"
 import { alphaBgStyle } from "../../atomic/styleUtils"
 import { CommentDiscussionIcon } from '@primer/octicons-react'

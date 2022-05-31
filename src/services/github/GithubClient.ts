@@ -1,6 +1,6 @@
 import { Octokit } from "octokit"
 import { GetResponseDataTypeFromEndpointMethod } from "@octokit/types"
-import { RepositoryQuery, IssuePost, IssuesTargetQuery, IssueCommentQuery, CommentPost } from "./Schema"
+import { RepositoryQuery, IssuePost, IssuesTargetQuery, IssueCommentQuery, CommentPost, LabelPost } from "./Schema"
 
 
 const octokit = new Octokit()
@@ -122,6 +122,20 @@ export class GithubClient {
 
     return result.data.filter(label => {
       return label.default === false
+    })
+  }
+
+  async createCustomLabel(param: RepositoryQuery, label: LabelPost) {
+    await this.client.rest.issues.createLabel({
+      ...param,
+      ...label
+    })
+  }
+
+  async updateCustomLabel(param: RepositoryQuery, label: LabelPost) {
+    await this.client.rest.issues.updateLabel({
+      ...param,
+      ...label
     })
   }
 
