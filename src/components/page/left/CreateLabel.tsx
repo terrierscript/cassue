@@ -1,21 +1,41 @@
-import { Box, Button, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure } from "@chakra-ui/react"
+import { Box, Button, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack, useDisclosure } from "@chakra-ui/react"
 import { FC, useState } from "react"
 import { useForm } from "react-hook-form"
 import { LabelPost, RepositoryQuery } from "../../../services/github/Schema"
+import { fetchPost } from "../../../services/swr/fetcher"
+import { useLabels } from "../apiHooks"
+import { useRouterValues } from "../useChatRouteParam"
+import { random } from "@ctrl/tinycolor"
 
-const LabelForm: FC<RepositoryQuery> = (param) => {
-  const { register, handleSubmit } = useForm<LabelPost>()
+const LabelForm: FC<{ onSubmit: Function }> = ({ onSubmit }) => {
+  const { register, handleSubmit } = useForm<LabelPost>({
+    defaultValues: {
+      color: `#${random().toHex()}`
+    }
+  })
+  const { owner, repo } = useRouterValues()
+  const { mutate } = useLabels({ owner, repo })
 
-  return <form onSubmit={handleSubmit((data) => {
-
+  return <form onSubmit={handleSubmit(async (data) => {
+    await fetchPost(`/api/issues/${owner}/${repo}/labels`, data)
+    mutate()
+    onSubmit()
   })}>
-    <Input {...register("name")} autoComplete="off" />
+    <Stack>
+      {/* <Label></Label> */}
+      <Input {...register("name")} autoComplete="off" />
+      {/* <Input {...register("description")} autoComplete="off" /> */}
+      {/* TODO... */}
+      <Input type="hidden" {...register("color")} autoComplete="off" />
+      <Button>Create</Button>
+    </Stack>
   </form >
 }
-export const CreateLabel: FC<RepositoryQuery> = (param) => {
+
+export const CreateLabel: FC<{}> = ({ }) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   return <>
-    <Button variant={"outline"} onClick={onOpen}>
+    <Button color="gray.500" variant={"outline"} onClick={onOpen}>
       Create new label
     </Button>
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -24,7 +44,9 @@ export const CreateLabel: FC<RepositoryQuery> = (param) => {
         <ModalHeader>Create new Label</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <LabelForm {...param} />
+          <LabelForm onSubmit={() => {
+            onClose()
+          }} />
         </ModalBody>
         <ModalFooter>
 

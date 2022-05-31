@@ -50,6 +50,6 @@ export const Rooms: FC<{}> = ({ }) => {
       </Box>
     })}
     <Divider />
-    {/* <CreateLabel  {...{ owner, repo }} /> */}
+    <CreateLabel />
   </Stack >
 }

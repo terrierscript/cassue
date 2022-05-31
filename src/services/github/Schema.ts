@@ -58,5 +58,9 @@ export const IssueSearchScehme = z.object({
 
 export const LabelPostScheme = z.object({
   name: z.string(),
+  color: z.string().optional(),
+  description: z.string().optional()
 })
+
 export type LabelPost = z.infer<typeof LabelPostScheme>
+

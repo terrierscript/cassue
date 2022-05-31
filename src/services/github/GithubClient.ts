@@ -1,6 +1,6 @@
 import { Octokit } from "octokit"
 import { GetResponseDataTypeFromEndpointMethod } from "@octokit/types"
-import { RepositoryQuery, IssuePost, IssuesTargetQuery, IssueCommentQuery, CommentPost } from "./Schema"
+import { RepositoryQuery, IssuePost, IssuesTargetQuery, IssueCommentQuery, CommentPost, LabelPost } from "./Schema"
 
 
 const octokit = new Octokit()
@@ -15,6 +15,7 @@ export type IssueNumberResponse = GetResponseDataTypeFromEndpointMethod<typeof o
 type IssueCommentResponsees = GetResponseDataTypeFromEndpointMethod<typeof octokit.rest.issues.listComments>
 export type IssueComementResponse = IssueCommentResponsees[number]
 
+const closeReason = ["complete", "not planned"] as const
 const issueState = ["all", "closed", "open"] as const
 
 const resolveIssueListFilter = (filter: string[] = []) => {
@@ -102,6 +103,18 @@ export class GithubClient {
     return result.data
   }
 
+  async closeIssue(target: IssueCommentQuery) {
+    const { number, ...rest } = target
+
+    const result = await this.client.rest.issues.update({
+      ...rest,
+      issue_number: number,
+      status: "close",
+      state_reason: ""
+    })
+
+  }
+
   async getCustomLabels(param: RepositoryQuery) {
     const result = await this.client.rest.issues.listLabelsForRepo({
       ...param,
@@ -109,6 +122,20 @@ export class GithubClient {
 
     return result.data.filter(label => {
       return label.default === false
+    })
+  }
+
+  async createCustomLabel(param: RepositoryQuery, label: LabelPost) {
+    await this.client.rest.issues.createLabel({
+      ...param,
+      ...label
+    })
+  }
+
+  async updateCustomLabel(param: RepositoryQuery, label: LabelPost) {
+    await this.client.rest.issues.updateLabel({
+      ...param,
+      ...label,
     })
   }
 
