@@ -38,3 +38,11 @@ export const IssueStateIcon: FC<{ issue: IssueState }> = ({ issue }) => {
       return <IssueClosedIcon />
   }
 }
+
+
+export const ColorIssueStateIcon: FC<{ issue: IssueState }> = ({ issue }) => {
+  const color = useIssueIconColor(issue)
+  return <Box color={`${color}.500`}>
+    <IssueStateIcon issue={issue} />
+  </Box>
+}

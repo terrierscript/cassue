@@ -6,7 +6,7 @@ import { useChatPageParams } from "../../page/chatHooks"
 import { useChatRouteParam, useFilterValue } from "../../page/useChatRouteParam"
 import NextLink from "next/link"
 import { HtmlBody } from "./HtmlBody"
-import { IssueStateIcon, useIssueIconColor } from "./IssueStateIcon"
+import { ColorIssueStateIcon, IssueStateIcon, useIssueIconColor } from "./IssueStateIcon"
 
 type Message = {
   messageType: "issue"
@@ -101,15 +101,13 @@ const ComemntBody: FC<{ comment: IssueComementResponse }> = ({ comment }) => {
 const IssueBody: FC<{ issue: IssueResponse }> = ({ issue }) => {
   const color = useIssueIconColor(issue)
   return <HStack>
-    <Box color={`${color}.500`}>
-
-      <IssueStateIcon issue={issue} />
-    </Box>
+    <ColorIssueStateIcon issue={issue} />
     <Box boxSizing="border-box" textOverflow={"ellipsis"}>
       {issue.title}
     </Box>
   </HStack>
 }
+
 const MessageBody: FC<{ message: Message }> = ({ message }) => {
   const path = usePath()
   const { data, messageType } = message
