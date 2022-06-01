@@ -1,4 +1,4 @@
-import { Box, Heading, HStack, Link, Stack } from "@chakra-ui/react"
+import { Box, Button, Heading, HStack, Link, Stack } from "@chakra-ui/react"
 import { FC, PropsWithChildren } from "react"
 import { IssueNumberResponse } from "../../../services/github/GithubClient"
 import { useAlpha, useInverseAlpha } from "../../atomic/styleUtils"
@@ -22,6 +22,14 @@ const IssueBody: FC<{ issue: IssueNumberResponse }> = ({ issue }) => {
   }
   return <Box color={color}
     fontStyle="italic">No description provided.</Box>
+}
+const StateButtons: FC<{ currentStatue: string }> = ({ currentStatue }) => {
+  return <HStack>
+    {/* {currentStatue === "open"
+      ? <Box><Button leftIcon={<}>Close</Button></Box>
+      : <Box><Button>Open</Button> </Box>
+    } */}
+  </HStack>
 }
 export const CommentHeader: FC<{ issueNumber: number }> = ({ issueNumber }) => {
   const { owner, repo } = useChatRouteParam()
@@ -47,9 +55,9 @@ export const CommentHeader: FC<{ issueNumber: number }> = ({ issueNumber }) => {
         </Box>
       </HStack>
       <IssueBodyContainer>
-
         <IssueBody issue={issue} />
       </IssueBodyContainer>
+      <StateButtons currentStatue={issue.state} />
       {/* <Box bg="red.100">
         {issue?.body}
       </Box> */}

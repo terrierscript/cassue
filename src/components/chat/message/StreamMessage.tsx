@@ -6,6 +6,7 @@ import { useChatPageParams } from "../../page/chatHooks"
 import { useChatRouteParam, useFilterValue } from "../../page/useChatRouteParam"
 import NextLink from "next/link"
 import { HtmlBody } from "./HtmlBody"
+import { IssueClosedIcon, IssueOpenedIcon, SkipIcon } from "@primer/octicons-react"
 
 type Message = {
   messageType: "issue"
@@ -14,7 +15,24 @@ type Message = {
   messageType: "comment"
   data: IssueComementResponse
 }
+
+
 // type Postable2 = IssueComementResponse & IssueResponse
+const StateBadge: FC<{ issue: IssueResponse }> = ({ issue }) => {
+  switch (issue.state) {
+    case "open":
+      return <Box color="green.500"><IssueOpenedIcon /></Box>
+  }
+  // @ts-ignore 
+  switch (issue.state_reason) {
+    case "not_planned":
+      return <Box color="gray.500"><SkipIcon /></Box>
+    default:
+      return <Box color="purple.500"><IssueClosedIcon /></Box>
+  }
+}
+
+
 
 const IssueTitle: FC<{ message: Message }> = ({ message }) => {
   const { messageType, data } = message
@@ -89,23 +107,38 @@ const LinkMessage: FC<PropsWithChildren<{ message: Message }>> = ({ message, chi
     {children}
   </NextLink>
 }
+
+const ComemntBody: FC<{ comment: IssueComementResponse }> = ({ comment }) => {
+  return <Stack>
+    <Box boxSizing="border-box" >
+      <HtmlBody html={comment.body_html ?? ""} />
+    </Box>
+  </Stack>
+}
+
+const IssueBody: FC<{ issue: IssueResponse }> = ({ issue }) => {
+  return <HStack>
+    <Box>
+      <StateBadge issue={issue} />
+    </Box>
+    <Box boxSizing="border-box" textOverflow={"ellipsis"}>
+      {issue.title}
+    </Box>
+  </HStack>
+}
 const MessageBody: FC<{ message: Message }> = ({ message }) => {
   const path = usePath()
   const { data, messageType } = message
 
   if (messageType === "comment") {
     return <Stack>
-      <Box boxSizing="border-box" >
-        <HtmlBody html={data.body_html ?? ""} />
-      </Box>
+      <ComemntBody comment={data} />
     </Stack>
   }
   return <Stack>
     <NextLink href={`${path}/${data.number}`} >
       <Link w="100%">
-        <Box boxSizing="border-box" textOverflow={"ellipsis"}>
-          {data.title}
-        </Box>
+        <IssueBody issue={data} />
       </Link>
     </NextLink>
   </Stack>
