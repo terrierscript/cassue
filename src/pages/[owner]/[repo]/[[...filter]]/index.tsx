@@ -18,7 +18,7 @@ const PageHead: FC<{}> = ({ }) => {
 
   return <Head>
     <title>{owner}/{repo}</title>
-    <link rel="manifest" href={`/api/issues/${owner}/${repo}/manifest.webmanifest`} />
+    <link rel="manifest" href={`/api/rooms/${owner}/${repo}/manifest.webmanifest`} />
     <script async src="https://unpkg.com/pwacompat" crossOrigin="anonymous"></script>
   </Head>
 }
