@@ -120,7 +120,7 @@ const MessageBody: FC<{ message: Message }> = ({ message }) => {
     </Stack>
   }
   return <Stack>
-    <NextLink href={`${path}/${data.number}`} replace={true}>
+    <NextLink href={`${path}/${data.number}`} >
       <Link w="100%">
         <IssueBody issue={data} />
       </Link>

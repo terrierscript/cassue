@@ -64,7 +64,7 @@ export const RightCommentDrawer = () => {
   return <Drawer isOpen={isOpen}
     placement='right'
     onClose={() => {
-      router.replace(parentPath)
+      router.push(parentPath)
     }}
     size={drawerSize}
   // size={{ base: "full", md: "sm" }}
