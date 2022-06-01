@@ -5,8 +5,8 @@ import { fetchPost } from "../../../services/swr/fetcher"
 import { useAlpha, useInverseAlpha } from "../../atomic/styleUtils"
 import { HtmlBody } from "../../chat/message/HtmlBody"
 import { IssueStateIcon } from "../../chat/message/IssueStateIcon"
-import { useIssueComments } from "../apiHooks"
-import { useChatRouteParam, useCommentNumber } from "../useChatRouteParam"
+import { useIssueComments, useIssues } from "../apiHooks"
+import { useChatRouteParam, useCommentNumber, useRouterValues } from "../useChatRouteParam"
 
 const IssueBodyContainer: FC<PropsWithChildren<{}>> = ({ children }) => {
   const bg = useInverseAlpha(50)
@@ -28,23 +28,26 @@ const IssueBody: FC<{ issue: IssueNumberResponse }> = ({ issue }) => {
 }
 
 const StateButtons: FC<{ issue: IssueResponse }> = ({ issue }) => {
-  const { owner, repo } = useChatRouteParam()
+  const { owner, repo, number, target, value } = useRouterValues()
   const { mutate } = useIssueComments({ owner, repo, number: issue.number })
+  const { mutate: mutateIssue } = useIssues({ owner, repo, target, value })
 
   return <HStack>
     {issue.state === "open"
       ? <HStack>
         {/* <Button variant="outline" leftIcon={<IssueStateIcon issue={{ state: "close", state_reason: "not_planned" }} />}>Not Planned</Button> */}
         <Button onClick={async () => {
-          await fetchPost(`/api/${owner}/${repo}/state`, {
-            issue: "close"
+          await fetchPost(`/api/issues/${owner}/${repo}/${number}/state`, {
+            state: "closed"
           })
           mutate()
+          mutateIssue()
         }} variant={"outline"} colorScheme="purple" leftIcon={<IssueStateIcon issue={{ state: "close", state_reason: "completed" }} />}>Close</Button>
       </HStack>
       : <Box><Button leftIcon={<IssueStateIcon issue={{ state: "open" }} />} >Open</Button> </Box>
     }
   </HStack >
+
 }
 export const CommentHeader: FC<{ issueNumber: number }> = ({ issueNumber }) => {
   const { owner, repo } = useChatRouteParam()
