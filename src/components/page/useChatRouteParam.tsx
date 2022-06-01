@@ -31,7 +31,14 @@ export const useFilterValue = (): z.infer<typeof IssuesTargetTypeValueScheme> =>
   // return { type, value }
 }
 
-export const useRouterValues = () => {
+type RouterValue
+  = ReturnType<typeof useFilterValue>
+  & Omit<ReturnType<typeof useChatRouteParam>, "filter">
+  & {
+    number: ReturnType<typeof useCommentNumber>
+  }
+
+export const useRouterValues = (): RouterValue => {
   const { owner, repo } = useChatRouteParam()
   const { target, value } = useFilterValue()
   const number = useCommentNumber()

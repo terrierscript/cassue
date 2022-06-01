@@ -1,10 +1,12 @@
-import { Box, Button, Heading, HStack, Link, Stack } from "@chakra-ui/react"
+import { Box, Heading, HStack, Link, Stack } from "@chakra-ui/react"
 import { FC, PropsWithChildren } from "react"
 import { IssueNumberResponse } from "../../../services/github/GithubClient"
 import { useAlpha, useInverseAlpha } from "../../atomic/styleUtils"
 import { HtmlBody } from "../../chat/message/HtmlBody"
+import { ColorIssueStateIcon, useIssueIconColor } from "../../chat/message/IssueStateIcon"
 import { useIssueComments } from "../apiHooks"
 import { useChatRouteParam, useCommentNumber } from "../useChatRouteParam"
+import { StateButtons } from "./StateButtons"
 
 const IssueBodyContainer: FC<PropsWithChildren<{}>> = ({ children }) => {
   const bg = useInverseAlpha(50)
@@ -12,6 +14,7 @@ const IssueBodyContainer: FC<PropsWithChildren<{}>> = ({ children }) => {
     {children}
   </Box>
 }
+
 const IssueBody: FC<{ issue: IssueNumberResponse }> = ({ issue }) => {
   const color = useInverseAlpha(500)
   if (issue.body_html) {
@@ -23,14 +26,7 @@ const IssueBody: FC<{ issue: IssueNumberResponse }> = ({ issue }) => {
   return <Box color={color}
     fontStyle="italic">No description provided.</Box>
 }
-const StateButtons: FC<{ currentStatue: string }> = ({ currentStatue }) => {
-  return <HStack>
-    {/* {currentStatue === "open"
-      ? <Box><Button leftIcon={<}>Close</Button></Box>
-      : <Box><Button>Open</Button> </Box>
-    } */}
-  </HStack>
-}
+
 export const CommentHeader: FC<{ issueNumber: number }> = ({ issueNumber }) => {
   const { owner, repo } = useChatRouteParam()
   const { data } = useIssueComments({ owner, repo, number: issueNumber })
@@ -46,21 +42,23 @@ export const CommentHeader: FC<{ issueNumber: number }> = ({ issueNumber }) => {
         <Link href={issue?.html_url}>
           #{issueNumber}
         </Link>
-        <Box w="80%">
+        <HStack w="80%">
+          <ColorIssueStateIcon issue={issue} />
           <Link href={issue?.html_url}>
             <Heading size="sm" >
               {issue?.title}
             </Heading>
           </Link>
-        </Box>
+        </HStack>
       </HStack>
       <IssueBodyContainer>
         <IssueBody issue={issue} />
       </IssueBodyContainer>
-      <StateButtons currentStatue={issue.state} />
+      <StateButtons issue={issue} />
       {/* <Box bg="red.100">
         {issue?.body}
       </Box> */}
     </Stack>
   </Box>
 }
+

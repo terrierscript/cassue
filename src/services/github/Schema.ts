@@ -17,6 +17,8 @@ export const zStringNumber = z.preprocess(
   z.number().positive()
 )
 
+
+
 export const IssueCommentQueryScheme = RepositoryQueryScheme.extend({
   number: zStringNumber
 })
@@ -44,6 +46,12 @@ export const IssuePostScheme = z.object({
 })
 
 export type IssuePost = z.infer<typeof IssuePostScheme>
+
+export const IssueUpdateScheme = z.object({
+  state: z.enum(["closed", "open"]).optional(),
+  state_reason: z.string().optional()
+})
+export type IssueUpdate = z.infer<typeof IssueUpdateScheme>
 
 export const CommentPostSchema = z.object({
   body: z.string()
