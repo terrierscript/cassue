@@ -43,6 +43,7 @@ const useParentPath = () => {
   const { owner, repo, target, value } = useRouterValues()
   return `/${owner}/${repo}/${target}/${value}`
 }
+
 export const RightCommentDrawer = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const number = useCommentNumber()
@@ -63,7 +64,7 @@ export const RightCommentDrawer = () => {
   return <Drawer isOpen={isOpen}
     placement='right'
     onClose={() => {
-      router.push(parentPath)
+      router.replace(parentPath)
     }}
     size={drawerSize}
   // size={{ base: "full", md: "sm" }}

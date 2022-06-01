@@ -101,7 +101,7 @@ const MessageBody: FC<{ message: Message }> = ({ message }) => {
     </Stack>
   }
   return <Stack>
-    <NextLink href={`${path}/${data.number}`}>
+    <NextLink href={`${path}/${data.number}`} replace={true}>
       <Link w="100%">
         <Box boxSizing="border-box" textOverflow={"ellipsis"}>
           {data.title}
