@@ -1,6 +1,6 @@
 import { Octokit } from "octokit"
 import { GetResponseDataTypeFromEndpointMethod } from "@octokit/types"
-import { RepositoryQuery, IssuePost, IssuesTargetQuery, IssueCommentQuery, CommentPost, LabelPost } from "./Schema"
+import { RepositoryQuery, IssuePost, IssuesTargetQuery, IssueCommentQuery, CommentPost, LabelPost, IssueUpdate } from "./Schema"
 
 
 const octokit = new Octokit()
@@ -103,16 +103,15 @@ export class GithubClient {
     return result.data
   }
 
-  async closeIssue(target: IssueCommentQuery) {
+  async updateIssue(target: IssueCommentQuery, body: IssueUpdate) {
     const { number, ...rest } = target
 
     const result = await this.client.rest.issues.update({
       ...rest,
       issue_number: number,
-      status: "close",
-      state_reason: ""
+      ...body,
     })
-
+    return result.data
   }
 
   async getCustomLabels(param: RepositoryQuery) {

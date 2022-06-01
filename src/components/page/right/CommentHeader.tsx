@@ -1,8 +1,10 @@
 import { Box, Button, Heading, HStack, Link, Stack } from "@chakra-ui/react"
 import { FC, PropsWithChildren } from "react"
-import { IssueNumberResponse } from "../../../services/github/GithubClient"
+import { IssueNumberResponse, IssueResponse } from "../../../services/github/GithubClient"
+import { fetchPost } from "../../../services/swr/fetcher"
 import { useAlpha, useInverseAlpha } from "../../atomic/styleUtils"
 import { HtmlBody } from "../../chat/message/HtmlBody"
+import { IssueStateIcon } from "../../chat/message/IssueStateIcon"
 import { useIssueComments } from "../apiHooks"
 import { useChatRouteParam, useCommentNumber } from "../useChatRouteParam"
 
@@ -12,6 +14,7 @@ const IssueBodyContainer: FC<PropsWithChildren<{}>> = ({ children }) => {
     {children}
   </Box>
 }
+
 const IssueBody: FC<{ issue: IssueNumberResponse }> = ({ issue }) => {
   const color = useInverseAlpha(500)
   if (issue.body_html) {
@@ -23,13 +26,25 @@ const IssueBody: FC<{ issue: IssueNumberResponse }> = ({ issue }) => {
   return <Box color={color}
     fontStyle="italic">No description provided.</Box>
 }
-const StateButtons: FC<{ currentStatue: string }> = ({ currentStatue }) => {
+
+const StateButtons: FC<{ issue: IssueResponse }> = ({ issue }) => {
+  const { owner, repo } = useChatRouteParam()
+  const { mutate } = useIssueComments({ owner, repo, number: issue.number })
+
   return <HStack>
-    {/* {currentStatue === "open"
-      ? <Box><Button leftIcon={<}>Close</Button></Box>
-      : <Box><Button>Open</Button> </Box>
-    } */}
-  </HStack>
+    {issue.state === "open"
+      ? <HStack>
+        {/* <Button variant="outline" leftIcon={<IssueStateIcon issue={{ state: "close", state_reason: "not_planned" }} />}>Not Planned</Button> */}
+        <Button onClick={async () => {
+          await fetchPost(`/api/${owner}/${repo}/state`, {
+            issue: "close"
+          })
+          mutate()
+        }} variant={"outline"} colorScheme="purple" leftIcon={<IssueStateIcon issue={{ state: "close", state_reason: "completed" }} />}>Close</Button>
+      </HStack>
+      : <Box><Button leftIcon={<IssueStateIcon issue={{ state: "open" }} />} >Open</Button> </Box>
+    }
+  </HStack >
 }
 export const CommentHeader: FC<{ issueNumber: number }> = ({ issueNumber }) => {
   const { owner, repo } = useChatRouteParam()
@@ -57,10 +72,11 @@ export const CommentHeader: FC<{ issueNumber: number }> = ({ issueNumber }) => {
       <IssueBodyContainer>
         <IssueBody issue={issue} />
       </IssueBodyContainer>
-      <StateButtons currentStatue={issue.state} />
+      <StateButtons issue={issue} />
       {/* <Box bg="red.100">
         {issue?.body}
       </Box> */}
     </Stack>
   </Box>
 }
+
