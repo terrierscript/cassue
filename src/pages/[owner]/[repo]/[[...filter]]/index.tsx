@@ -1,4 +1,4 @@
-import { Box, Center, Spinner } from "@chakra-ui/react"
+import { Box, Button, Center, Spinner, VStack } from "@chakra-ui/react"
 import { FC, PropsWithChildren, Suspense } from "react"
 import Head from "next/head"
 import { RepositoryQuery } from "../../../../services/github/Schema"
@@ -30,7 +30,10 @@ const RepoExist: FC<PropsWithChildren<{}>> = ({ children }) => {
   console.log(data, error)
   if (data === false) {
     return <Center p={4}>
-      <Box>Repository Not found</Box>
+      <VStack>
+        <Box>Repository Not found</Box>
+        <Button as="a" href="/">Select another repositoruy</Button>
+      </VStack>
     </Center>
   }
   if (!data) {
