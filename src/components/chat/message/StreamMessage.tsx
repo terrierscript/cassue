@@ -135,7 +135,10 @@ export const StreamMessage: FC<{ message: Message, isLatest: boolean }> = ({ isL
     if (!ref.current) {
       return
     }
-    ref.current.scrollIntoView()
+    ref.current.scrollIntoView({
+      behavior: "smooth",
+      block: "end",
+    })
   }, [isLatest, ref.current])
 
   const activeStyle = useColorModeValue(
