@@ -6,6 +6,7 @@ import { useChatPageParams } from "../../page/chatHooks"
 import { useChatRouteParam, useFilterValue } from "../../page/useChatRouteParam"
 import NextLink from "next/link"
 import { HtmlBody } from "./HtmlBody"
+import { ColorIssueStateIcon, IssueStateIcon, useIssueIconColor } from "./IssueStateIcon"
 
 type Message = {
   messageType: "issue"
@@ -14,7 +15,6 @@ type Message = {
   messageType: "comment"
   data: IssueComementResponse
 }
-// type Postable2 = IssueComementResponse & IssueResponse
 
 const IssueTitle: FC<{ message: Message }> = ({ message }) => {
   const { messageType, data } = message
@@ -89,23 +89,38 @@ const LinkMessage: FC<PropsWithChildren<{ message: Message }>> = ({ message, chi
     {children}
   </NextLink>
 }
+
+const ComemntBody: FC<{ comment: IssueComementResponse }> = ({ comment }) => {
+  return <Stack>
+    <Box boxSizing="border-box" >
+      <HtmlBody html={comment.body_html ?? ""} />
+    </Box>
+  </Stack>
+}
+
+const IssueBody: FC<{ issue: IssueResponse }> = ({ issue }) => {
+  const color = useIssueIconColor(issue)
+  return <HStack>
+    <ColorIssueStateIcon issue={issue} />
+    <Box boxSizing="border-box" textOverflow={"ellipsis"}>
+      {issue.title}
+    </Box>
+  </HStack>
+}
+
 const MessageBody: FC<{ message: Message }> = ({ message }) => {
   const path = usePath()
   const { data, messageType } = message
 
   if (messageType === "comment") {
     return <Stack>
-      <Box boxSizing="border-box" >
-        <HtmlBody html={data.body_html ?? ""} />
-      </Box>
+      <ComemntBody comment={data} />
     </Stack>
   }
   return <Stack>
-    <NextLink href={`${path}/${data.number}`} replace={true}>
+    <NextLink href={`${path}/${data.number}`} >
       <Link w="100%">
-        <Box boxSizing="border-box" textOverflow={"ellipsis"}>
-          {data.title}
-        </Box>
+        <IssueBody issue={data} />
       </Link>
     </NextLink>
   </Stack>

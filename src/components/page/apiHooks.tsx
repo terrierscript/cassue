@@ -4,7 +4,7 @@ import { IssueCommentQuery, IssuesTargetQuery, IssuesTargetTypeValue, Repository
 import { jsonFetcher } from "../../services/swr/fetcher"
 
 export const useIssues = ({ owner, repo, target, value }: RepositoryQuery & IssuesTargetTypeValue) => {
-  return useSWR<{ issues: IssueResponse[] }>(`/api/issues/${owner}/${repo}/${target}/${value
+  return useSWR<{ issues: IssueResponse[] }>(`/api/messages/${owner}/${repo}/${target}/${value
     }`, jsonFetcher, {
     // fallbackData: { issues },
     // suspense: true

@@ -19,7 +19,7 @@ const InputSending: FC<{}> = ({ }) => {
     onSubmit={async (v) => {
       const resolvedParams = resolveFilterToPost(filter)
       const issue: IssuePost = { title: v, ...resolvedParams }
-      const result = await fetch(`/api/issues/${owner}/${repo}`, {
+      const result = await fetch(`/api/messages/${owner}/${repo}`, {
         headers: {
           'Content-Type': 'application/json'
         },
