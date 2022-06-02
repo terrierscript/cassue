@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, HStack, Popover, PopoverArrow, PopoverBody, PopoverCloseButton, PopoverContent, PopoverFooter, PopoverHeader, PopoverTrigger, Portal, Spacer } from "@chakra-ui/react"
+import { Avatar, Box, Button, HStack, Popover, PopoverArrow, PopoverBody, PopoverCloseButton, PopoverContent, PopoverFooter, PopoverHeader, PopoverTrigger, Portal, Spacer, Stack } from "@chakra-ui/react"
 import { useSession } from "next-auth/react"
 import { FC, PropsWithChildren } from "react"
 import { signOut } from "next-auth/react"
@@ -14,9 +14,15 @@ const UserMenu: FC<PropsWithChildren<{}>> = ({ children }) => {
         {/* <PopoverHeader></PopoverHeader> */}
         <PopoverCloseButton />
         <PopoverBody>
-          <Button variant="link" colorScheme="red" onClick={() => {
-            signOut()
-          }}>Logout</Button>
+          <Stack spacing={4}>
+
+            <Button variant="link" as="a" href="/">
+              Switch repository
+            </Button>
+            <Button variant="link" colorScheme="red" onClick={() => {
+              signOut()
+            }}>Logout</Button>
+          </Stack>
         </PopoverBody>
         {/* <PopoverFooter>This is the footer</PopoverFooter> */}
       </PopoverContent>
