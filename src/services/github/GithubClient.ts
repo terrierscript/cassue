@@ -53,6 +53,10 @@ export class GithubClient {
 
   }
 
+  async getRepository(param: IssuesTargetQuery) {
+    const result = await this.client.rest.repos.get(param)
+    return result.data
+  }
 
   async getIssue(target: IssueCommentQuery): Promise<IssueNumberResponse> {
     const { number, ...rest } = target
