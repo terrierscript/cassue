@@ -1,7 +1,7 @@
-import { Box, Button, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack, useDisclosure } from "@chakra-ui/react"
-import { FC, useState } from "react"
+import { Button, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack, useDisclosure } from "@chakra-ui/react"
+import { FC } from "react"
 import { useForm } from "react-hook-form"
-import { LabelPost, RepositoryQuery } from "../../../services/github/Schema"
+import { LabelPost } from "../../../services/github/Schema"
 import { fetchPost } from "../../../services/swr/fetcher"
 import { useLabels } from "../apiHooks"
 import { useRouterValues } from "../useChatRouteParam"
@@ -17,7 +17,8 @@ const LabelForm: FC<{ onSubmit: Function }> = ({ onSubmit }) => {
   const { mutate } = useLabels({ owner, repo })
 
   return <form onSubmit={handleSubmit(async (data) => {
-    await fetchPost(`/api/issues/${owner}/${repo}/labels`, data)
+    const label = await fetchPost(`/api/issues/${owner}/${repo}/labels`, data)
+    console.log(label)
     mutate()
     onSubmit()
   })}>
@@ -27,7 +28,7 @@ const LabelForm: FC<{ onSubmit: Function }> = ({ onSubmit }) => {
       {/* <Input {...register("description")} autoComplete="off" /> */}
       {/* TODO... */}
       <Input type="hidden" {...register("color")} autoComplete="off" />
-      <Button>Create</Button>
+      <Button type="submit">Create</Button>
     </Stack>
   </form >
 }
@@ -46,6 +47,7 @@ export const CreateLabel: FC<{}> = ({ }) => {
         <ModalBody>
           <LabelForm onSubmit={() => {
             onClose()
+
           }} />
         </ModalBody>
         <ModalFooter>
