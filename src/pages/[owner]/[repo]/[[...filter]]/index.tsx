@@ -1,11 +1,12 @@
-import { Box, Spinner } from "@chakra-ui/react"
-import { FC, Suspense } from "react"
+import { Box, Center, Spinner } from "@chakra-ui/react"
+import { FC, PropsWithChildren, Suspense } from "react"
 import Head from "next/head"
 import { RepositoryQuery } from "../../../../services/github/Schema"
 // import { IssueChatPage } from "../../../../components/page/IssueChatPage"
 import { useChatRouteParam } from "../../../../components/page/useChatRouteParam"
 import { useRouter } from "next/router"
 import dynamic from "next/dynamic"
+import { useRepoExist } from "../../../../components/page/apiHooks"
 
 const IssueChatPage = dynamic(import("../../../../components/page/ChatPage"))
 
@@ -23,6 +24,22 @@ const PageHead: FC<{}> = ({ }) => {
   </Head>
 }
 
+const RepoExist: FC<PropsWithChildren<{}>> = ({ children }) => {
+  const { owner, repo } = useChatRouteParam()
+  const { data, error } = useRepoExist({ owner, repo })
+  console.log(data, error)
+  if (data === false) {
+    return <Center p={4}>
+      <Box>Repository Not found</Box>
+    </Center>
+  }
+  if (!data) {
+    return <Center p={4}>
+      <Spinner />
+    </Center>
+  }
+  return <>{children}</>
+}
 export const Page: FC<Props> = ({ }) => {
   const router = useRouter()
   if (!router.isReady) {
@@ -30,8 +47,11 @@ export const Page: FC<Props> = ({ }) => {
   }
 
   return <Box>
+
     <PageHead />
-    <IssueChatPage />
+    <RepoExist>
+      <IssueChatPage />
+    </RepoExist>
   </Box>
 }
 

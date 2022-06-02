@@ -36,3 +36,9 @@ export const useLabel = ({ owner, repo }: RepositoryQuery, targetLabel: string) 
     ...rest
   }
 }
+
+export const useRepoExist = ({ owner, repo }: RepositoryQuery) => {
+  return useSWR<boolean>(`/api/repos/${owner}/${repo}`, (url) => jsonFetcher(url).then(data => {
+    return (data.repo !== null)
+  }))
+}
