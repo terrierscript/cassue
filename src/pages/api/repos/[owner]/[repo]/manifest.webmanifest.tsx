@@ -8,14 +8,14 @@ export const handler: NextApiHandler = async (req, res) => {
     "background_color": "white",
     "description": "",
     "display": "standalone",
-    "icons": [
-      {
-        "src": "/icon.png",
-        "sizes": "150x150",
-        "type": "image/png",
-        // "purpose": "any"
-      }
-    ],
+    // "icons": [
+    //   {
+    //     "src": "/icon.svg",
+    //     "sizes": "150x150",
+    //     "type": "image/png",
+    //     // "purpose": "any"
+    //   }
+    // ],
     "name": "Cassue",
     "short_name": "Cassue",
     "start_url": `/${owner}/${repo}`
