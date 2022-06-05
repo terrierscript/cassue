@@ -15,7 +15,7 @@ type Room = {
 const RoomButton: FC<{ room: Room }> = ({ room }) => {
   const { owner, repo } = useChatRouteParam()
   const query = room?.query ?? room.name
-  return <NextLink href={`/${owner}/${repo}/${query}`} passHref>
+  return <NextLink href={`/issues/${owner}/${repo}/${query}`} passHref>
     <Button variant={"ghost"} w="100%" justifyContent={"start"}
       size="sm" colorScheme={"gray"} as="a" >
       <HStack>
