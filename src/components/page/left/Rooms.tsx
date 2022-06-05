@@ -8,7 +8,7 @@ import { CreateLabel } from "./CreateLabel"
 
 type Room = {
   name: string,
-  color: string,
+  color?: string,
   query?: string
 }
 
@@ -19,7 +19,7 @@ const RoomButton: FC<{ room: Room }> = ({ room }) => {
     <Button variant={"ghost"} w="100%" justifyContent={"start"}
       size="sm" colorScheme={"gray"} as="a" >
       <HStack>
-        <Box rounded="full" w={"1em"} h="1em" bg={`#${room?.color}`}></Box>
+        <Box rounded="sm" w={"1em"} h="1em" bg={`#${room?.color}`}></Box>
         <Box>
           {room.name}
         </Box>
@@ -34,7 +34,7 @@ export const Rooms: FC<{}> = ({ }) => {
 
   const { data } = useLabels({ owner, repo })
   const rooms: Room[] = [
-    { name: "all", color: "ffffff", query: "issues/all" },
+    { name: "issues", query: "issues/all" },
     ...(data?.labels ?? []).map(label => {
       return {
         name: label.name,
