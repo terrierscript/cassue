@@ -7,7 +7,7 @@ export const handler: NextApiHandler = async (req, res) => {
   const manifest = {
     "background_color": "white",
     "description": "",
-    "display": "minimal-ui",
+    "display": "standalone",
     "icons": [
       {
         "src": "/icon.svg",
