@@ -132,20 +132,20 @@ const MessageBody: FC<{ message: Message }> = ({ message }) => {
   </Stack>
 }
 
-export const StreamMessage: FC<{ message: Message, isLatest: boolean }> = ({ isLatest, message }) => {
-  const ref = useRef<HTMLDivElement>(null)
-  useEffect(() => {
-    if (!isLatest) {
-      return
-    }
-    if (!ref.current) {
-      return
-    }
-    ref.current.scrollIntoView({
-      behavior: "smooth",
-      block: "end",
-    })
-  }, [isLatest, ref.current])
+export const StreamMessage: FC<{ message: Message }> = ({ message }) => {
+  // const ref = useRef<HTMLDivElement>(null)
+  // useEffect(() => {
+  //   if (!isLatest) {
+  //     return
+  //   }
+  //   if (!ref.current) {
+  //     return
+  //   }
+  //   ref.current.scrollIntoView({
+  //     behavior: "smooth",
+  //     block: "end",
+  //   })
+  // }, [isLatest, ref.current])
 
   const activeStyle = useColorModeValue(
     { bg: "blackAlpha.50" },
@@ -154,7 +154,7 @@ export const StreamMessage: FC<{ message: Message, isLatest: boolean }> = ({ isL
   // const { owner, repo } = useChatRouteParam()
   // const { data } = message
   return <Stack
-    ref={ref}
+    // ref={ref}
     spacing={4}
     p={2}
     px={4}
