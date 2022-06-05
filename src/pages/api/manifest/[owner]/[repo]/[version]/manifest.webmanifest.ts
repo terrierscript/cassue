@@ -15,6 +15,12 @@ export const handler: NextApiHandler = async (req, res) => {
         "sizes": "150x150",
         "type": "image/svg",
         "purpose": "any"
+      },
+      {
+        "src": "/icon.png",
+        "sizes": "150x150",
+        "type": "image/ong",
+        "purpose": "any"
       }
     ],
     "name": "Cassue",
