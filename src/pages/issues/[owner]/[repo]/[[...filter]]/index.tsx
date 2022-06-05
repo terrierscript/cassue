@@ -7,6 +7,7 @@ import { useChatRouteParam } from "../../../../../components/page/useChatRoutePa
 import { useRouter } from "next/router"
 import dynamic from "next/dynamic"
 import { useRepoExist } from "../../../../../components/page/apiHooks"
+import { signOut } from "next-auth/react"
 
 const IssueChatPage = dynamic(import("../../../../../components/page/ChatPage"))
 
@@ -34,6 +35,9 @@ const RepoExist: FC<PropsWithChildren<{}>> = ({ children }) => {
       <VStack>
         <Box>Repository Not found</Box>
         <Button as="a" href="/">Select another repository</Button>
+        <Button colorScheme={"red"} onClick={() => {
+          signOut()
+        }}>Logout</Button>
       </VStack>
     </Center>
   }
@@ -51,7 +55,6 @@ export const Page: FC<Props> = ({ }) => {
   }
 
   return <Box>
-
     <PageHead />
     <RepoExist>
       <IssueChatPage />
