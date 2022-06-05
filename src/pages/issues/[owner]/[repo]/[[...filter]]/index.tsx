@@ -50,7 +50,7 @@ export const Page: FC<Props> = ({ }) => {
     return <Spinner />
   }
 
-  return <Box paddingTop={`env(safe-area-inset-bottom))`}>
+  return <Box>
 
     <PageHead />
     <RepoExist>
