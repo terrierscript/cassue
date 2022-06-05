@@ -74,6 +74,7 @@ export const LeftSidebar: FC<{}> = () => {
       {/* <Debugger /> */}
       <HStack>
         <UserIcon />
+        <Spacer />
         <ThemeSwitcher />
       </HStack>
     </Box>
