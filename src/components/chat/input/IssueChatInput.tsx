@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/react"
 import { FC } from "react"
-import { useIssues } from "../../page/apiHooks"
+import { useIssuesInfinate } from "../../page/apiHooks"
 import { resolveFilterToPost } from "../../../services/github/resolveFilter"
 import { useChatRouteParam, useFilterValue } from "../../page/useChatRouteParam"
 import { alphaBgStyle } from "../../atomic/styleUtils"
@@ -13,7 +13,7 @@ const InputSending: FC<{}> = ({ }) => {
   const { owner, repo, filter } = useChatRouteParam()
   const { target, value } = useFilterValue()
 
-  const { mutate } = useIssues({ owner, repo, target, value })
+  const { mutate } = useIssuesInfinate({ owner, repo, target, value })
   return <ChatInput
     icon={<CommentIcon />}
     onSubmit={async (v) => {

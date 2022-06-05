@@ -1,7 +1,7 @@
 import { Box } from "@chakra-ui/react"
 import { FC } from "react"
 import { CommentPost } from "../../../services/github/Schema"
-import { useIssueComments, useIssues } from "../../page/apiHooks"
+import { useIssueComments, useIssuesInfinate } from "../../page/apiHooks"
 import { useChatRouteParam, useCommentNumber, useFilterValue } from "../../page/useChatRouteParam"
 import { alphaBgStyle } from "../../atomic/styleUtils"
 import { CommentDiscussionIcon } from '@primer/octicons-react'
@@ -12,7 +12,7 @@ import { ChatInput } from "./ChatInput"
 const InputSending: FC<{ number: number }> = ({ number }) => {
   const { owner, repo, filter } = useChatRouteParam()
   const { target, value } = useFilterValue()
-  const { mutate } = useIssues({ owner, repo, target, value })
+  const { mutate } = useIssuesInfinate({ owner, repo, target, value })
   const { mutate: mutateComment } = useIssueComments({ owner, repo, number })
   return <ChatInput
     icon={<CommentDiscussionIcon />}

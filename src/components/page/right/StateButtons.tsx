@@ -4,7 +4,7 @@ import { FC } from "react"
 import { IssueResponse } from "../../../services/github/GithubClient"
 import { fetchPost } from "../../../services/swr/fetcher"
 import { IssueStateIcon } from "../../chat/message/IssueStateIcon"
-import { useIssueComments, useIssues } from "../apiHooks"
+import { useIssueComments, useIssuesInfinate } from "../apiHooks"
 import { useRouterValues } from "../useChatRouteParam"
 
 const useStateUpdateHandler = () => {
@@ -39,7 +39,7 @@ const OpenButton: FC<{ onChange: Function }> = ({ onChange }) => {
 export const StateButtons: FC<{ issue: IssueResponse }> = ({ issue }) => {
   const { owner, repo, target, value } = useRouterValues()
   const { mutate: mutateComment } = useIssueComments({ owner, repo, number: issue.number })
-  const { mutate: mutateIssue } = useIssues({ owner, repo, target, value })
+  const { mutate: mutateIssue } = useIssuesInfinate({ owner, repo, target, value })
   const change = () => {
     mutateComment()
     mutateIssue()

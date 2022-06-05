@@ -1,10 +1,11 @@
 import useSWR from "swr"
+import useSWRInfinite from "swr/immutable"
 import { IssueComementResponse, IssueNumberResponse, IssueResponse, LabelResponse } from "../../services/github/GithubClient"
 import { IssueCommentQuery, IssuesTargetQuery, IssuesTargetTypeValue, RepositoryQuery } from "../../services/github/Schema"
 import { jsonFetcher } from "../../services/swr/fetcher"
 
-export const useIssues = ({ owner, repo, target, value }: RepositoryQuery & IssuesTargetTypeValue) => {
-  return useSWR<{ issues: IssueResponse[] }>(`/api/messages/${owner}/${repo}/${target}/${value
+export const useIssuesInfinate = ({ owner, repo, target, value }: RepositoryQuery & IssuesTargetTypeValue) => {
+  return useSWRInfinite<{ issues: IssueResponse[] }>(`/api/messages/${owner}/${repo}/${target}/${value
     }`, jsonFetcher, {
     // fallbackData: { issues },
     // suspense: true
@@ -42,3 +43,4 @@ export const useRepoExist = ({ owner, repo }: RepositoryQuery) => {
     return (data.repo !== null)
   }))
 }
+
