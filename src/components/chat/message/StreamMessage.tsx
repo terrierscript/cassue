@@ -77,7 +77,7 @@ const MessageAvatar: FC<{ message: Message }> = ({ message }) => {
 const usePath = () => {
   const { owner, repo } = useChatRouteParam()
   const { target, value } = useFilterValue()
-  return `/${owner}/${repo}/${target}/${value}`
+  return `/issues/${owner}/${repo}/${target}/${value}`
 }
 
 const LinkMessage: FC<PropsWithChildren<{ message: Message }>> = ({ message, children }) => {

@@ -1,14 +1,14 @@
 import { Box, Button, Center, Spinner, VStack } from "@chakra-ui/react"
 import { FC, PropsWithChildren, Suspense } from "react"
 import Head from "next/head"
-import { RepositoryQuery } from "../../../../services/github/Schema"
+import { RepositoryQuery } from "../../../../../services/github/Schema"
 // import { IssueChatPage } from "../../../../components/page/IssueChatPage"
-import { useChatRouteParam } from "../../../../components/page/useChatRouteParam"
+import { useChatRouteParam } from "../../../../../components/page/useChatRouteParam"
 import { useRouter } from "next/router"
 import dynamic from "next/dynamic"
-import { useRepoExist } from "../../../../components/page/apiHooks"
+import { useRepoExist } from "../../../../../components/page/apiHooks"
 
-const IssueChatPage = dynamic(import("../../../../components/page/ChatPage"))
+const IssueChatPage = dynamic(import("../../../../../components/page/ChatPage"))
 
 export type Props = {
   error?: string,

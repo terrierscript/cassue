@@ -41,7 +41,7 @@ const DrawerInner = () => {
 
 const useParentPath = () => {
   const { owner, repo, target, value } = useRouterValues()
-  return `/${owner}/${repo}/${target}/${value}`
+  return `/issues/${owner}/${repo}/${target}/${value}`
 }
 
 export const RightCommentDrawer = () => {
