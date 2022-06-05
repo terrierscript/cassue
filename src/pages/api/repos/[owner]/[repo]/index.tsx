@@ -12,6 +12,7 @@ export const handler: NextApiHandler = async (req, res) => {
     const repo = await client.getRepository(param)
     res.json({ repo })
   } catch (e) {
+    console.error(e)
     res.status(404).json({ repo: null })
   }
 }
