@@ -18,7 +18,7 @@ export const handler: NextApiHandler = async (req, res) => {
     ],
     "name": "Cassue",
     "short_name": "Cassue",
-    "start_url": `/${owner}/${repo}`
+    "start_url": `/issues/${owner}/${repo}`
   }
   res.setHeader("Content-Type", "application/manifest+json")
   res.json(manifest)
