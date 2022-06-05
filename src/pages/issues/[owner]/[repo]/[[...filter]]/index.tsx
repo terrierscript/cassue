@@ -16,10 +16,10 @@ export type Props = {
 
 const PageHead: FC<{}> = ({ }) => {
   const { owner, repo } = useChatRouteParam()
-
+  const manifestVersion = "20220605-2"
   return <Head>
     <title>{owner}/{repo}</title>
-    <link rel="manifest" href={`/api/repos/${owner}/${repo}/manifest/20220605.webmanifest`} />
+    <link rel="manifest" href={`/api/repos/${owner}/${repo}/manifest/${manifestVersion}.webmanifest`} />
     <script async src="https://unpkg.com/pwacompat" crossOrigin="anonymous"></script>
   </Head>
 }
