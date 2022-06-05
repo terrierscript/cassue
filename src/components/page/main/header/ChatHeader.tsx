@@ -19,9 +19,9 @@ const useBackLink = () => {
   const { target, value } = useFilterValue()
   const number = useCommentNumber()
   if (number) {
-    return `/${owner}/${repo}/${target}/${value}`
+    return `/issues/${owner}/${repo}/${target}/${value}`
   }
-  return `/${owner}/${repo}`
+  return `/issues/${owner}/${repo}`
 
 }
 

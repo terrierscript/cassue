@@ -1,28 +1,46 @@
 import { Box, Center, HStack, IconButton, Input } from '@chakra-ui/react'
 import { ChevronRightIcon } from '@primer/octicons-react'
+import { useRouter } from 'next/router'
 import React, { useMemo, useState } from 'react'
+import { useForm, useWatch } from 'react-hook-form'
 
 const Generate = () => {
-  const [value, setValue] = useState("")
+  const router = useRouter()
+  const { register, handleSubmit, control } = useForm({
+    defaultValues: {
+      target: ""
+    }
+  })
+  const value = useWatch({ control })
   const destination = useMemo(() => {
-    const normalized = value
-      .replace("https://", "")
+    const normalized = value.target?.replace("https://", "")
       .replace("github.com/", "")
-    if (normalized.includes("/")) {
+    if (normalized?.includes("/")) {
       return normalized
     }
+  }, [value.target])
+
+  return <form onSubmit={handleSubmit(((data) => {
+    router.push(`/issues/${destination}`)
     return null
-  }, [value])
-  return <HStack w={{ base: "80vw", bp: "50vw" }} >
-    <Input size="lg" value={value} placeholder="Input repository URL" textAlign={"center"} onChange={(e) => setValue(e.target.value)} />
-    <IconButton as="a"
-      size="lg"
-      isDisabled={destination === null}
-      href={`/${destination}`}
-      p={2} icon={<ChevronRightIcon />} aria-label={'GO'}
-    />
-  </HStack>
+  }))}>
+    <HStack w={{ base: "80vw", bp: "50vw" }} >
+      <Input size="lg" placeholder="Input repository URL"
+        textAlign={"center"}
+        {...register("target")}
+      />
+      <IconButton as="a"
+        size="lg"
+        isDisabled={!destination}
+        // href={`/${destination}`}
+        p={2} icon={<ChevronRightIcon />} aria-label={'GO'}
+        type="submit"
+      />
+
+    </HStack>
+  </form>
 }
+
 
 export default function Home() {
   return (
