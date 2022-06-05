@@ -19,7 +19,7 @@ const PageHead: FC<{}> = ({ }) => {
   const manifestVersion = "20220605-2"
   return <Head>
     <title>{owner}/{repo}</title>
-    <link rel="manifest" href={`/api/repos/${owner}/${repo}/manifest/${manifestVersion}.webmanifest`} />
+    <link rel="manifest" href={`/api/manifest/${owner}/${repo}/${manifestVersion}/manifest.webmanifest`} />
     <script async src="https://unpkg.com/pwacompat" crossOrigin="anonymous"></script>
   </Head>
 }
