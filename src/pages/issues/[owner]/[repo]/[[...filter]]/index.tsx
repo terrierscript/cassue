@@ -33,7 +33,7 @@ const RepoExist: FC<PropsWithChildren<{}>> = ({ children }) => {
     return <Center p={4}>
       <VStack>
         <Box>Repository Not found</Box>
-        <Button as="a" href="/">Select another repositoruy</Button>
+        <Button as="a" href="/">Select another repository</Button>
       </VStack>
     </Center>
   }
