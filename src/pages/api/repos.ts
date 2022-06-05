@@ -11,7 +11,7 @@ const handler: NextApiHandler = async (req, res) => {
     return
   }
   const client = new GithubClient(account)
-  // @ts-ignore
+  // @ts-ignore TODO: not implemented
   const repos = await client.getOwnerRepository(session?.user?.name)
   res.json({
     repos

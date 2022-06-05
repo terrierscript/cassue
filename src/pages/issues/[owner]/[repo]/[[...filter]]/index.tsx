@@ -29,8 +29,13 @@ const PageHead: FC<{}> = ({ }) => {
 const RepoExist: FC<PropsWithChildren<{}>> = ({ children }) => {
   const { owner, repo } = useChatRouteParam()
   const { data, error } = useRepoExist({ owner, repo })
-  console.log(data, error)
-  if (data === false) {
+
+  if (!data) {
+    return <Center p={4}>
+      <Spinner />
+    </Center>
+  }
+  if (data.exist === false) {
     return <Center p={4}>
       <VStack>
         <Box>Repository Not found</Box>
@@ -39,11 +44,6 @@ const RepoExist: FC<PropsWithChildren<{}>> = ({ children }) => {
           signOut()
         }}>Logout</Button>
       </VStack>
-    </Center>
-  }
-  if (!data) {
-    return <Center p={4}>
-      <Spinner />
     </Center>
   }
   return <>{children}</>

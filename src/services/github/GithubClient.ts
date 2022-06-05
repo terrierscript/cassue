@@ -15,6 +15,8 @@ export type IssueNumberResponse = GetResponseDataTypeFromEndpointMethod<typeof o
 type IssueCommentResponsees = GetResponseDataTypeFromEndpointMethod<typeof octokit.rest.issues.listComments>
 export type IssueComementResponse = IssueCommentResponsees[number]
 
+export type RepoResponse = GetResponseDataTypeFromEndpointMethod<typeof octokit.rest.repos.get>
+
 const closeReason = ["complete", "not planned"] as const
 const issueState = ["all", "closed", "open"] as const
 
