@@ -111,13 +111,19 @@ const IssueBody: FC<{ issue: IssueResponse }> = ({ issue }) => {
 const MessageBody: FC<{ message: Message }> = ({ message }) => {
   const path = usePath()
   const { data, messageType } = message
+  const closed = useMemo(() => {
+    if (message.messageType !== "issue") {
+      return false
+    }
+    return message.data.state !== "open"
+  }, [])
 
   if (messageType === "comment") {
     return <Stack>
       <ComemntBody comment={data} />
     </Stack>
   }
-  return <Stack>
+  return <Stack opacity={closed ? 0.5 : 1}>
     <NextLink href={`${path}/${data.number}`} >
       <Link w="100%">
         <IssueBody issue={data} />
