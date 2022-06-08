@@ -6,6 +6,7 @@ import { AppProps } from "next/app"
 import { NeedLayout } from "../components/layout/NeedLayout"
 import Head from "next/head"
 import { AppSWRPRovider } from "../services/swr/AppSWRProvider"
+import { SafeArea } from "../components/layout/SafeArea"
 
 function MyApp({ Component, pageProps: { session, ...pageProps },
 }: AppProps) {
@@ -22,9 +23,11 @@ function MyApp({ Component, pageProps: { session, ...pageProps },
           {/* <IconContext.Provider value={{ color: "white" }}> */}
           {/* <Suspense fallback={<Box>...</Box>}> */}
           <SessionProvider session={session}>
-            <NeedLayout>
-              <Component {...pageProps} />
-            </NeedLayout>
+            <SafeArea>
+              <NeedLayout>
+                <Component {...pageProps} />
+              </NeedLayout>
+            </SafeArea>
           </SessionProvider>
           {/* </Suspense> */}
           {/* </IconContext.Provider> */}
