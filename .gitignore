@@ -37,3 +37,7 @@ yarn-error.log*
 tsconfig.tsbuildinfo
 
 /secrets
+
+public/sw.js*
+public/workbox-*
+public/fallback-*
