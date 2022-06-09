@@ -4,9 +4,10 @@ import { createEditor, Descendant } from "slate"
 import { withReact, Slate, Editable } from "slate-react"
 import { Node } from 'slate'
 
-const serialize = nodes => {
+const serialize = (nodes: Descendant[]) => {
   return nodes.map(n => Node.string(n)).join('\n')
 }
+
 const initialValue = [
   {
     type: "paragrahp",
