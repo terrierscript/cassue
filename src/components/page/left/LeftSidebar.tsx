@@ -35,7 +35,12 @@ const Workspace = () => {
   const { owner, repo } = useChatRouteParam()
 
   return <HStack>
-    <Wrap spacing={1}>
+    <Box>
+      <IconButton as="a" href={`https://github.com/${owner}/${repo}`} aria-label={"open github"} variant="ghost" colorScheme="gray" target="_blank">
+        <MarkGithubIcon />
+      </IconButton>
+    </Box>
+    {/* <Wrap spacing={1}>
       <Box fontWeight={"bold"}>
         <Link href={`https://github.com/${owner}`}>
           {owner}
@@ -45,12 +50,7 @@ const Workspace = () => {
       <Box fontWeight={"bold"}>
         {repo}
       </Box>
-    </Wrap >
-    <Box>
-      <IconButton as="a" href={`https://github.com/${owner}/${repo}`} aria-label={"open github"} variant="ghost" colorScheme="gray" target="_blank">
-        <MarkGithubIcon />
-      </IconButton>
-    </Box>
+    </Wrap > */}
   </HStack>
 }
 
@@ -74,6 +74,7 @@ export const LeftSidebar: FC<{}> = () => {
       {/* <Debugger /> */}
       <HStack>
         <UserIcon />
+        <Spacer />
         <ThemeSwitcher />
       </HStack>
     </Box>

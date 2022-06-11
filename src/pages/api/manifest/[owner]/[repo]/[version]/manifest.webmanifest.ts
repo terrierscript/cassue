@@ -1,5 +1,5 @@
 import { NextApiHandler } from "next"
-import { RepositoryQueryScheme } from "../../../../../services/github/Schema"
+import { RepositoryQueryScheme } from "../../../../../../services/github/Schema"
 
 export const handler: NextApiHandler = async (req, res) => {
   const { owner, repo } = RepositoryQueryScheme.parse(req.query)
@@ -8,9 +8,16 @@ export const handler: NextApiHandler = async (req, res) => {
     "background_color": "white",
     "description": "",
     "display": "standalone",
+    "theme_color": "#333333",
     "icons": [
       {
         "src": "/icon.svg",
+        "sizes": "150x150",
+        "type": "image/svg",
+        "purpose": "any"
+      },
+      {
+        "src": "/icon.png",
         "sizes": "150x150",
         "type": "image/png",
         "purpose": "any"

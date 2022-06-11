@@ -41,3 +41,5 @@ tsconfig.tsbuildinfo
 public/sw.js*
 public/workbox-*
 public/fallback-*
+
+tsconfig.tsbuildinfo

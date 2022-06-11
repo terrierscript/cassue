@@ -1,6 +1,6 @@
 import useSWR from "swr"
 import useSWRInfinite from "swr/immutable"
-import { IssueComementResponse, IssueNumberResponse, IssueResponse, LabelResponse } from "../../services/github/GithubClient"
+import { IssueComementResponse, IssueNumberResponse, IssueResponse, LabelResponse, RepoResponse } from "../../services/github/GithubClient"
 import { IssueCommentQuery, IssuesTargetQuery, IssuesTargetTypeValue, RepositoryQuery } from "../../services/github/Schema"
 import { jsonFetcher } from "../../services/swr/fetcher"
 
@@ -38,9 +38,29 @@ export const useLabel = ({ owner, repo }: RepositoryQuery, targetLabel: string) 
   }
 }
 
-export const useRepoExist = ({ owner, repo }: RepositoryQuery) => {
-  return useSWR<boolean>(`/api/repos/${owner}/${repo}`, (url) => jsonFetcher(url).then(data => {
-    return (data.repo !== null)
+const useRepo = ({ owner, repo }: RepositoryQuery) => {
+  return useSWR<RepoResponse>(`/api/repos/${owner}/${repo}`, (url) => jsonFetcher(url).then(data => {
+    return data.repo
   }))
 }
+export const useRepoExist = ({ owner, repo }: RepositoryQuery) => {
+  const { data: repository, ...rest } = useRepo({ owner, repo })
+  console.log({ repository })
+  return {
+    data: {
+      exist: (repository !== null),
+    },
+    ...rest
+  }
+}
 
+export const useIsRepoMaintainer = ({ owner, repo }: RepositoryQuery) => {
+  const { data, ...rest } = useRepo({ owner, repo })
+  console.log({ data })
+  return {
+    data: {
+      isMaintainer: data?.permissions?.maintain === true,
+    },
+    ...rest
+  }
+}

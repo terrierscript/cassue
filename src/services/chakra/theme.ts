@@ -5,6 +5,18 @@ export const themeConfig: ThemeConfig = {
 }
 
 const colors = {
+  'black2': {
+    '50': '#f2f2f2',
+    '100': '#e6e6e6',
+    '200': '#bfbfbf',
+    '300': '#999999',
+    '400': '#4d4d4d',
+    "500": "#18181B",
+    "600": "#18181B",
+    "700": "#18181B",
+    '800': '#000000',
+    '900': '#000000'
+  },
   gh: {
     "50": "#F2F2F3",
     "100": "#D9D9DD",
@@ -78,7 +90,7 @@ export const appTheme = extendTheme({
   }
 
 },
-  withDefaultColorScheme({ colorScheme: 'green' }),
+  withDefaultColorScheme({ colorScheme: 'black2' }),
 )
 
 // console.log(appTheme)

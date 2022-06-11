@@ -4,6 +4,7 @@ import { GithubClient } from "../../../../../services/github/GithubClient"
 import { RepositoryQueryScheme } from "../../../../../services/github/Schema"
 
 
+
 export const handler: NextApiHandler = async (req, res) => {
   const account = await getSessionAccount({ req })
   const param = RepositoryQueryScheme.parse(req.query)
@@ -12,6 +13,7 @@ export const handler: NextApiHandler = async (req, res) => {
     const repo = await client.getRepository(param)
     res.json({ repo })
   } catch (e) {
+    console.error(e)
     res.status(404).json({ repo: null })
   }
 }
