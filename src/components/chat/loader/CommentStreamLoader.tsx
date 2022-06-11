@@ -2,7 +2,7 @@ import { FC } from "react"
 import { useIssueComments } from "../../page/apiHooks"
 import { useChatRouteParam, useCommentNumber } from "../../page/useChatRouteParam"
 import { CommentStream } from "./Stream"
-import { StreamContainer } from "./StreamContainer"
+import { StreamStack } from "./StreamContainer"
 import { StreamLoading } from "./StreamLoading"
 
 
