@@ -4,8 +4,9 @@ import { FC, PropsWithChildren, useEffect, useRef } from "react"
 export const StreamContainer: FC<PropsWithChildren<{}>> = ({ children }) => {
   const scrollRef = useRef<HTMLDivElement>(null)
   useEffect(() => {
+    const behavior = scrollRef.current?.scrollTop === 0 ? "auto" : "smooth"
     scrollRef.current?.scroll({
-      behavior: "smooth",
+      behavior: behavior,
       top: scrollRef.current?.scrollHeight
     })
   }, [scrollRef.current?.scrollHeight])
