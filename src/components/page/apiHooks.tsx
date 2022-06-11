@@ -53,7 +53,7 @@ const useRepo = ({ owner, repo }: RepositoryQuery) => {
 }
 export const useRepoExist = ({ owner, repo }: RepositoryQuery) => {
   const { data: repository, ...rest } = useRepo({ owner, repo })
-  console.log({ repository })
+  // console.log({ repository })
   return {
     data: {
       exist: (repository !== null),
@@ -64,7 +64,7 @@ export const useRepoExist = ({ owner, repo }: RepositoryQuery) => {
 
 export const useIsRepoMaintainer = ({ owner, repo }: RepositoryQuery) => {
   const { data, ...rest } = useRepo({ owner, repo })
-  console.log({ data })
+  // console.log({ data })
   return {
     data: {
       isMaintainer: data?.permissions?.maintain === true,

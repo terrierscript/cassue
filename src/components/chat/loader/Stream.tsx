@@ -1,44 +1,48 @@
-import { Box, Spacer, Stack } from "@chakra-ui/react"
+import { Box, Button, Spacer, Stack } from "@chakra-ui/react"
 import { FC, useEffect, useMemo, useRef } from "react"
 import { IssueComementResponse, IssueResponse } from "../../../services/github/GithubClient"
 import { StreamMessage } from "../message/StreamMessage"
+import { StreamStack } from "./StreamContainer"
 
-export const IssueStream: FC<{ issues: IssueResponse[] }> = ({ issues }) => {
-  const ref = useRef<HTMLDivElement>(null)
+export const IssueStream: FC<{ issues: IssueResponse[], onLoadMore: Function }> = ({ issues, onLoadMore }) => {
+  // const ref = useRef<HTMLDivElement>(null)
   const stream = useMemo(() => {
-    return issues?.concat().reverse()
+    return issues
+    // return issues?.concat().reverse()
   }, [issues])
-  // const latestNumber = useMemo(() => issues[0]?.number, [issues])
-  // useEffect(() => {
-  //   console.log(ref.current?.scrollHeight)
-  //   const s = ref.current?.scroll({
-  //     behavior: "smooth",
-  //     top: 0 // ref.current.scrollHeight
-  //   })
-  //   console.log(s)
-  // }, [latestNumber])
 
-  return <Stack spacing={0} ref={ref}>
-    <Spacer />
+  return <>
     {stream.map((issue) => {
       return <Box key={issue.number}>
         <StreamMessage
           message={{ messageType: "issue", data: issue }} />
       </Box>
     })}
-  </Stack>
+    <Box>
+      <Button onClick={() => [
+        onLoadMore()
+      ]}>more</Button>
+
+    </Box>
+  </>
 }
+
 
 export const CommentStream: FC<{ comments: IssueComementResponse[] }> = ({ comments }) => {
   const stream = useMemo(() => {
-    // return comments?.concat().reverse()
     return comments
+    // return comments?.concat().reverse()
   }, [comments])
   // const latestNumber = useMemo(() => comments.concat().reverse()[0]?.id, [comments])
-  return <Stack spacing={0}>
-    <Spacer />
+  return <>
+    {/* <StreamStack> */}
     {stream.map((comment) => {
-      return <StreamMessage message={{ messageType: "comment", data: comment }} key={comment.id} />
+      return <Box key={comment.id}
+      >
+        <StreamMessage message={{ messageType: "comment", data: comment }}
+        />
+      </Box>
     })}
-  </Stack>
+    {/* </StreamStack> */}
+  </>
 }

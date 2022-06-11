@@ -2,9 +2,10 @@ import { FC, useMemo } from "react"
 import { useIssuesInfinate } from "../../page/apiHooks"
 import { IssueStream } from "./Stream"
 import { useChatRouteParam, useFilterValue } from "../../page/useChatRouteParam"
-import { StreamContainer } from "./StreamContainer"
+// import { StreamStack } from "./StreamContainer"
 import { StreamLoading } from "./StreamLoading"
 import { Box } from "@chakra-ui/react"
+import { StreamStack } from "./StreamContainer"
 
 
 export const IssueStreamLoader: FC<{}> = ({ }) => {
@@ -14,22 +15,19 @@ export const IssueStreamLoader: FC<{}> = ({ }) => {
   const issues = useMemo(() => {
     return data?.map(data => data.issues).flat(1) ?? []
   }, [data])
+
   const loadPaginate = () => {
     setSize(size + 1)
   }
 
-
   if (!data) {
     return <StreamLoading />
   }
-  return <StreamContainer key={`${owner}_${repo}_${target}_${value}`}
-    scrollTargetKey={issues[0].number.toString() ?? ""}
-  >
-    <IssueStream issues={issues} />
-    <Box onClick={() => [
+  return <StreamStack key={`${owner}_${repo}_${target}_${value}`}>
+    <IssueStream issues={issues} onLoadMore={() => {
       loadPaginate()
-    ]}>more</Box>
-  </StreamContainer>
+    }} />
+  </StreamStack>
 
 }
 
