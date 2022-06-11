@@ -12,9 +12,7 @@ const CommentStreamInner: FC<{ number: number }> = ({ number }) => {
   if (!data) {
     return <StreamLoading />
   }
-  return <StreamContainer>
-    <CommentStream comments={data.comments} />
-  </StreamContainer>
+  return <CommentStream comments={data.comments} />
 }
 
 export const CommentStreamLoader: FC<{}> = ({ }) => {

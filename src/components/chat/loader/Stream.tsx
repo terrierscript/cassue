@@ -2,6 +2,7 @@ import { Box, Spacer, Stack } from "@chakra-ui/react"
 import { FC, useEffect, useMemo, useRef } from "react"
 import { IssueComementResponse, IssueResponse } from "../../../services/github/GithubClient"
 import { StreamMessage } from "../message/StreamMessage"
+import { StreamContainer } from "./StreamContainer"
 
 export const IssueStream: FC<{ issues: IssueResponse[] }> = ({ issues }) => {
   const ref = useRef<HTMLDivElement>(null)
@@ -30,14 +31,17 @@ export const IssueStream: FC<{ issues: IssueResponse[] }> = ({ issues }) => {
 
 export const CommentStream: FC<{ comments: IssueComementResponse[] }> = ({ comments }) => {
   const stream = useMemo(() => {
-    // return comments?.concat().reverse()
+    return comments?.concat().reverse()
     return comments
   }, [comments])
   // const latestNumber = useMemo(() => comments.concat().reverse()[0]?.id, [comments])
   return <Stack spacing={0}>
-    <Spacer />
-    {stream.map((comment) => {
-      return <StreamMessage message={{ messageType: "comment", data: comment }} key={comment.id} />
-    })}
+    <StreamContainer>
+      <Spacer />
+
+      {stream.map((comment) => {
+        return <StreamMessage message={{ messageType: "comment", data: comment }} key={comment.id} />
+      })}
+    </StreamContainer>
   </Stack>
 }
