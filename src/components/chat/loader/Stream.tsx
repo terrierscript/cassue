@@ -5,10 +5,10 @@ import { StreamMessage } from "../message/StreamMessage"
 import { StreamStack } from "./StreamContainer"
 
 export const IssueStream: FC<{ issues: IssueResponse[] }> = ({ issues }) => {
-  const ref = useRef<HTMLDivElement>(null)
+  // const ref = useRef<HTMLDivElement>(null)
   const stream = useMemo(() => {
     return issues
-    return issues?.concat().reverse()
+    // return issues?.concat().reverse()
   }, [issues])
   return <StreamStack>
     {stream.map((issue) => {
@@ -27,7 +27,8 @@ export const CommentStream: FC<{ comments: IssueComementResponse[] }> = ({ comme
     // return comments?.concat().reverse()
   }, [comments])
   // const latestNumber = useMemo(() => comments.concat().reverse()[0]?.id, [comments])
-  return <StreamStack>
+  return <>
+    {/* <StreamStack> */}
     {stream.map((comment) => {
       return <Box key={comment.id}
       >
@@ -35,5 +36,6 @@ export const CommentStream: FC<{ comments: IssueComementResponse[] }> = ({ comme
         />
       </Box>
     })}
-  </StreamStack>
+    {/* </StreamStack> */}
+  </>
 }

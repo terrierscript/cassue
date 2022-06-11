@@ -1,15 +1,16 @@
-import { Flex, Stack } from "@chakra-ui/react"
-import { FC, PropsWithChildren, useEffect, useRef } from "react"
+import { Stack, StackProps } from "@chakra-ui/react"
+import { FC, useEffect, useRef } from "react"
 
-export const StreamStack: FC<PropsWithChildren<{}>> = ({ children }) => {
+export const StreamStack: FC<StackProps> = (props) => {
   const scrollRef = useRef<HTMLDivElement>(null)
   useEffect(() => {
     const behavior = scrollRef.current?.scrollTop === 0 ? "auto" : "smooth"
-    // console.log({
-    //   "sss": scrollRef.current?.scrollHeight,
-    //   st: scrollRef.current?.scrollTop
-    // })
-    scrollRef.current?.scroll({
+    // const behavior = "smooth"
+    console.log({
+      "sss": scrollRef.current?.scrollHeight,
+      st: scrollRef.current?.scrollTop
+    })
+    scrollRef.current?.scrollTo({
       behavior: behavior,
       top: scrollRef.current?.scrollHeight
     })
@@ -20,9 +21,8 @@ export const StreamStack: FC<PropsWithChildren<{}>> = ({ children }) => {
     h="100%"
     ref={scrollRef}
     flexDirection="column-reverse"
-  >
-    {children}
-  </Stack>
+    {...props}
+  />
 }
 
 
