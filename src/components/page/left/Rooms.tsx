@@ -1,4 +1,4 @@
-import { Box, Button, Divider, HStack, Link, Stack } from "@chakra-ui/react"
+import { Box, Button, Divider, Flex, HStack, Link, Stack } from "@chakra-ui/react"
 import { FC, useMemo } from "react"
 import { RepositoryQuery } from "../../../services/github/Schema"
 import { NextLink } from "../../../services/next/components"
@@ -19,7 +19,7 @@ const RoomButton: FC<{ room: Room }> = ({ room }) => {
   const isActiveTarget = useMemo(() => {
     return target === room.target && value === room.value
   }, [room, target, value])
-  console.log(target, value, isActiveTarget)
+  // console.log(target, value, isActiveTarget)
   const query = `${room.target}/${room.value}` // room?.query ?? room.name
   return <NextLink href={`/issues/${owner}/${repo}/${query}`} passHref>
     <Button variant={isActiveTarget ? "solid" : "ghost"}
@@ -27,7 +27,12 @@ const RoomButton: FC<{ room: Room }> = ({ room }) => {
       size="sm" colorScheme={isActiveTarget ? "blackAlpha" : "gray"}
       as="a" >
       <HStack>
-        <Box rounded="sm" w={"1em"} h="1em" bg={`#${room?.color}`}></Box>
+        <Flex rounded={4} w={"1em"} h="1em" bg={`#${room?.color}`}
+          justifyContent="center" alignItems={"center"}
+
+          textAlign="center" verticalAlign={"middle"} >
+
+        </Flex>
         <Box>
           {room.name}
         </Box>

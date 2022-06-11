@@ -137,10 +137,15 @@ export class GithubClient {
     })
   }
 
-  async updateCustomLabel(param: RepositoryQuery, label: LabelPost) {
+  async updateCustomLabel(param: RepositoryQuery, name: string, label: LabelPost) {
+    const labelParam = {
+      ...label,
+      name: name,
+      new_name: label.name
+    }
     await this.client.rest.issues.updateLabel({
       ...param,
-      ...label,
+      ...labelParam,
     })
   }
 

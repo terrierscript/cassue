@@ -7,7 +7,7 @@ import { useLabels } from "../apiHooks"
 import { useRouterValues } from "../useChatRouteParam"
 import { random } from "@ctrl/tinycolor"
 
-const LabelForm: FC<{ onSubmit: Function }> = ({ onSubmit }) => {
+const LabelForm: FC<{ onSubmit: Functionm, targetName?: string }> = ({ onSubmit, targetName }) => {
   const { register, handleSubmit } = useForm<LabelPost>({
     defaultValues: {
       color: `#${random().toHex()}`
@@ -17,7 +17,8 @@ const LabelForm: FC<{ onSubmit: Function }> = ({ onSubmit }) => {
   const { mutate } = useLabels({ owner, repo })
 
   return <form onSubmit={handleSubmit(async (data) => {
-    const label = await fetchPost(`/api/issues/${owner}/${repo}/labels`, data)
+    const label = await fetchPost(`/api/issues/${owner}/${repo}/labels/${targetName
+      }`, data)
     console.log(label)
     mutate()
     onSubmit()
@@ -28,9 +29,9 @@ const LabelForm: FC<{ onSubmit: Function }> = ({ onSubmit }) => {
       {/* <Input {...register("description")} autoComplete="off" /> */}
       {/* TODO... */}
       <Input type="hidden" {...register("color")} autoComplete="off" />
-      <Button type="submit">Create</Button>
+      <Button type="submit">{targetName ? "Update" : "Create"}</Button>
     </Stack>
-  </form >
+  </form>
 }
 
 export const CreateLabel: FC<{}> = ({ }) => {

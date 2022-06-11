@@ -1,7 +1,9 @@
 import { ChevronLeftIcon } from "@chakra-ui/icons"
-import { Box, Divider, HStack, IconButton, Stack } from "@chakra-ui/react"
+import { Box, Divider, HStack, Icon, IconButton, Stack } from "@chakra-ui/react"
+import { HashIcon, PencilIcon } from "@primer/octicons-react"
 import { FC } from "react"
 import { NextLink } from "../../../../services/next/components"
+import { useInverseAlpha } from "../../../atomic/styleUtils"
 import { useChatRouteParam, useCommentNumber, useFilterValue } from "../../useChatRouteParam"
 import { Description } from "./Description"
 
@@ -25,6 +27,20 @@ const useBackLink = () => {
 
 }
 
+const LabelEdit = () => {
+  const alpha = useInverseAlpha(500)
+  return <Box>
+    <Icon as={PencilIcon}
+      color={alpha}
+    />
+  </Box>
+
+}
+
+// const GithubLinkIcon = () => {
+
+// }
+
 export const ChatHeader: FC<{}> = () => {
   const title = useTitle()
   const backLink = useBackLink()
@@ -41,9 +57,12 @@ export const ChatHeader: FC<{}> = () => {
           />
         </NextLink>
       </Box>
-      <Box fontWeight="bold">
-        # {title}
+      {/* <HashIcon /> */}
+      <Box fontWeight="bold" >
+        {title}
       </Box>
+      {/* <GithubLinkIcon /> */}
+      <LabelEdit />
     </HStack>
     <Stack p={2} fontSize="xs">
       <Description />
