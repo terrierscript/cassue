@@ -21,6 +21,7 @@ const Generate = () => {
   }, [value.target])
 
   return <form onSubmit={handleSubmit(((data) => {
+    console.log("xxx")
     router.push(`/issues/${destination}`)
     return null
   }))}>
@@ -29,7 +30,7 @@ const Generate = () => {
         textAlign={"center"}
         {...register("target")}
       />
-      <IconButton as="a"
+      <IconButton
         size="lg"
         isDisabled={!destination}
         // href={`/${destination}`}
