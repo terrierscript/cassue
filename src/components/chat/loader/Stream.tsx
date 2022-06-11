@@ -17,6 +17,7 @@ export const IssueStream: FC<{ issues: IssueResponse[] }> = ({ issues }) => {
   //   })
   //   console.log(s)
   // }, [latestNumber])
+
   return <Stack spacing={0} ref={ref}>
     <Spacer />
     {stream.map((issue) => {

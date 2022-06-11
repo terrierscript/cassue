@@ -1,15 +1,23 @@
-import useSWR from "swr"
-import useSWRInfinite from "swr/immutable"
+import useSWR, { KeyLoader } from "swr"
+import useSWRInfinite from "swr/infinite"
 import { IssueComementResponse, IssueNumberResponse, IssueResponse, LabelResponse, RepoResponse } from "../../services/github/GithubClient"
-import { IssueCommentQuery, IssuesTargetQuery, IssuesTargetTypeValue, RepositoryQuery } from "../../services/github/Schema"
+import { IssueCommentQuery, IssuesTargetTypeValue, RepositoryQuery } from "../../services/github/Schema"
 import { jsonFetcher } from "../../services/swr/fetcher"
 
 export const useIssuesInfinate = ({ owner, repo, target, value }: RepositoryQuery & IssuesTargetTypeValue) => {
-  return useSWRInfinite<{ issues: IssueResponse[] }>(`/api/messages/${owner}/${repo}/${target}/${value
-    }`, jsonFetcher, {
+  return useSWRInfinite<{ issues: IssueResponse[] }>(
+    ((page, previous) => {
+      if (previous && previous.length === 0) {
+        return null
+      }
+      console.log(page)
+      return `/api/messages/${owner}/${repo}/${target}/${value}?page=${page + 1}`
+    }), jsonFetcher, {
+    initialSize: 1,
     // fallbackData: { issues },
     // suspense: true
   })
+
 }
 
 export const useIssueComments = ({ owner, repo, number }: IssueCommentQuery) => {
