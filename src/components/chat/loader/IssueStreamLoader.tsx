@@ -22,16 +22,15 @@ export const IssueStreamLoader: FC<{}> = ({ }) => {
   if (!data) {
     return <StreamLoading />
   }
-  return <Box>
+  return <StreamContainer key={`${owner}_${repo}_${target}_${value}`}
+    scrollTargetKey={issues[0].number.toString() ?? ""}
+  >
+    <IssueStream issues={issues} />
     <Box onClick={() => [
       loadPaginate()
     ]}>more</Box>
-    <StreamContainer key={`${owner}_${repo}_${target}_${value}`}
-      scrollTargetKey={issues[0].number.toString() ?? ""}
-    >
-      <IssueStream issues={issues} />
-    </StreamContainer>
-  </Box>
+  </StreamContainer>
+
 }
 
 export default IssueStreamLoader
