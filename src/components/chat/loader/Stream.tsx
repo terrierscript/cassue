@@ -18,10 +18,10 @@ export const IssueStream: FC<{ issues: IssueResponse[], onLoadMore: Function }> 
           message={{ messageType: "issue", data: issue }} />
       </Box>
     })}
-    <Box>
-      <Button onClick={() => [
+    <Box p={2}>
+      <Button w="100%" variant={"solid"} colorScheme="gray" onClick={() => [
         onLoadMore()
-      ]}>more</Button>
+      ]}>Load more</Button>
 
     </Box>
   </>
