@@ -14,7 +14,7 @@ export const StreamContainer: FC<PropsWithChildren<{}>> = ({ children }) => {
     w="100%"
     h="100%"
     ref={scrollRef}
-    flexDirection="column-reverse"
+    flexDirection="column"
   >
     {children}
   </Flex>
