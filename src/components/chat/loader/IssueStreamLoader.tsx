@@ -13,9 +13,7 @@ export const IssueStreamLoader: FC<{}> = ({ }) => {
   if (!data) {
     return <StreamLoading />
   }
-  return <StreamStack key={`${owner}_${repo}_${target}_${value}`} >
-    <IssueStream issues={data.issues} />
-  </StreamStack>
+  return <IssueStream key={`${owner}_${repo}_${target}_${value}`} issues={data.issues} />
 }
 
 export default IssueStreamLoader
