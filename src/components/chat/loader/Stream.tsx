@@ -33,16 +33,11 @@ export const CommentStream: FC<{ comments: IssueComementResponse[] }> = ({ comme
     return comments
     // return comments?.concat().reverse()
   }, [comments])
-  // const latestNumber = useMemo(() => comments.concat().reverse()[0]?.id, [comments])
   return <>
-    {/* <StreamStack> */}
     {stream.map((comment) => {
-      return <Box key={comment.id}
-      >
-        <StreamMessage message={{ messageType: "comment", data: comment }}
-        />
+      return <Box key={comment.id}>
+        <StreamMessage message={{ messageType: "comment", data: comment }} />
       </Box>
     })}
-    {/* </StreamStack> */}
   </>
 }
