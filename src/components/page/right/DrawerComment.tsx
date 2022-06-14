@@ -1,4 +1,4 @@
-import { Box, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, Flex, Grid, useDisclosure } from "@chakra-ui/react"
+import { Box, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, Flex, Grid, Spacer, useDisclosure } from "@chakra-ui/react"
 import { useEffect } from "react"
 import CommentStreamLoader from "../../chat/loader/CommentStreamLoader"
 import { useCommentNumber, useRouterValues } from "../useChatRouteParam"
@@ -37,6 +37,7 @@ const DrawerInner = () => {
       minH={0}
       flexDirection="column"
     >
+      <Spacer />
       <CommentStreamLoader />
     </StreamStack>
     <CommentChatInputArea />
