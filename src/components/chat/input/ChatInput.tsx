@@ -5,16 +5,13 @@ import { useForm, useWatch } from "react-hook-form"
 export const ChatInput: FC<{
   onSubmit: (value: string) => void
 } & Pick<IconButtonProps, "icon">> = ({ onSubmit, icon }) => {
-  const { register, handleSubmit, formState, reset, control, setFocus } = useForm<{ value: string }>()
-  const watchValue = useWatch({ control, name: "value" })
+  const { register, handleSubmit, formState, resetField, setFocus } = useForm<{ value: string }>()
   useEffect(() => {
-    if (watchValue === "") {
-      setFocus("value")
-    }
-  }, [watchValue])
+    setFocus("value")
+  }, [formState.submitCount])
   return <form onSubmit={handleSubmit(async (data) => {
     await onSubmit(data.value)
-    reset({ value: "" })
+    resetField("value")
   })}>
     <HStack>
       <Input
