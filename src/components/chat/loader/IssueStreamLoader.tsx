@@ -12,6 +12,7 @@ export const IssueStreamLoader: FC<{}> = ({ }) => {
   const { owner, repo } = useChatRouteParam()
   const { target, value } = useFilterValue()
   const { data, setSize, size } = useIssuesInfinate({ owner, repo, target, value })
+  // console.log(data, size)
   const issues = useMemo(() => {
     return data?.map(data => data.issues).flat(1) ?? []
   }, [data])
