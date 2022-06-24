@@ -36,7 +36,7 @@ const Workspace = () => {
 
   return <HStack>
     <Box>
-      <IconButton as="a" href={`https://github.com/${owner}/${repo}`} aria-label={"open github"} variant="ghost" colorScheme="gray" target="_blank">
+      <IconButton as="a" href={`https://github.com/${owner}/${repo}/issues`} aria-label={"open github"} variant="ghost" colorScheme="gray" target="_blank">
         <MarkGithubIcon />
       </IconButton>
     </Box>
