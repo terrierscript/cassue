@@ -1,9 +1,9 @@
-import { Box, Divider, Grid, HStack, IconButton, Input, Link, Spacer, Stack, useColorMode, useColorModeValue, Wrap } from "@chakra-ui/react"
+import { Box, Divider, Grid, HStack, IconButton, Input, InputGroup, InputLeftElement, Link, Spacer, Stack, useColorMode, useColorModeValue, Wrap } from "@chakra-ui/react"
 import { FC } from "react"
 import { Rooms } from "./Rooms"
 // import { GoOctoface, GoLightBulb } from "react-icons/go"
 import { useChatRouteParam } from "../useChatRouteParam"
-import { LightBulbIcon, MarkGithubIcon } from "@primer/octicons-react"
+import { LightBulbIcon, MarkGithubIcon, SearchIcon } from "@primer/octicons-react"
 import { UserIcon } from "./UserIcon"
 import { useInverseAlpha } from "../../atomic/styleUtils"
 import { useForm } from "react-hook-form"
@@ -43,12 +43,19 @@ const SearchIssue = () => {
     router.push(url)
   })
   return <form onSubmit={onSubmit}>
-    <Input
-      {...register("query")}
-      placeholder="Search issues"
-      bg={alpha}
-      rounded="full"
-    />
+    <InputGroup>
+      {/* <InputLeftElement
+        pointerEvents='none'
+        children={<SearchIcon />}
+      /> */}
+      <Input
+        {...register("query")}
+        placeholder="Search issues"
+        bg={alpha}
+        rounded="full"
+      />
+    </InputGroup>
+
   </form>
 
 }
