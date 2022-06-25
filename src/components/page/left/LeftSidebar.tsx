@@ -1,10 +1,13 @@
-import { Box, Divider, Grid, HStack, IconButton, Link, Spacer, Stack, useColorMode, useColorModeValue, Wrap } from "@chakra-ui/react"
+import { Box, Divider, Grid, HStack, IconButton, Input, Link, Spacer, Stack, useColorMode, useColorModeValue, Wrap } from "@chakra-ui/react"
 import { FC } from "react"
 import { Rooms } from "./Rooms"
 // import { GoOctoface, GoLightBulb } from "react-icons/go"
 import { useChatRouteParam } from "../useChatRouteParam"
 import { LightBulbIcon, MarkGithubIcon } from "@primer/octicons-react"
 import { UserIcon } from "./UserIcon"
+import { useInverseAlpha } from "../../atomic/styleUtils"
+import { useForm } from "react-hook-form"
+import { useRouter } from "next/router"
 
 const ThemeSwitcher = () => {
   const { toggleColorMode } = useColorMode()
@@ -30,15 +33,35 @@ const Debugger = () => {
   </Box>
 }
 
+const SearchIssue = () => {
+  const alpha = useAlpha(100)
+  const router = useRouter()
+  const { owner, repo } = useChatRouteParam()
+  const { register, handleSubmit } = useForm()
+  const onSubmit = handleSubmit((data) => {
+    const url = `https://github.com/${owner}/${repo}/issues?q=is%3Aissue+${encodeURIComponent(data.query)}`
+    router.push(url)
+  })
+  return <form onSubmit={onSubmit}>
+    <Input
+      {...register("query")}
+      placeholder="Search issue"
+      bg={alpha}
+      rounded="full"
+    />
+  </form>
 
+}
 const Workspace = () => {
   const { owner, repo } = useChatRouteParam()
-
   return <HStack>
     <Box>
       <IconButton as="a" href={`https://github.com/${owner}/${repo}/issues`} aria-label={"open github"} variant="ghost" colorScheme="gray" target="_blank">
         <MarkGithubIcon />
       </IconButton>
+    </Box>
+    <Box>
+      <SearchIssue />
     </Box>
     {/* <Wrap spacing={1}>
       <Box fontWeight={"bold"}>
@@ -56,8 +79,8 @@ const Workspace = () => {
 
 export const LeftSidebar: FC<{}> = () => {
 
-  const bg = useAlpha(200)
-  const color = useAlpha(800)
+  const bg = useInverseAlpha(200)
+  const color = useInverseAlpha(800)
 
   return <Grid h="100%" minH={0} p={6} gap={4}
     gridTemplateRows={"max-content auto max-content"}
