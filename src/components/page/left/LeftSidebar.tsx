@@ -45,7 +45,7 @@ const SearchIssue = () => {
   return <form onSubmit={onSubmit}>
     <Input
       {...register("query")}
-      placeholder="Search issue"
+      placeholder="Search issues"
       bg={alpha}
       rounded="full"
     />
