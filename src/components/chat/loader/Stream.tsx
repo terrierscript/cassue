@@ -1,10 +1,13 @@
-import { Box, Button, Spacer, Stack } from "@chakra-ui/react"
-import { FC, useEffect, useMemo, useRef } from "react"
+import { Box, Button } from "@chakra-ui/react"
+import { FC, useMemo } from "react"
 import { IssueComementResponse, IssueResponse } from "../../../services/github/GithubClient"
 import { StreamMessage } from "../message/StreamMessage"
-import { StreamStack } from "./StreamContainer"
 
-export const IssueStream: FC<{ issues: IssueResponse[], onLoadMore: Function }> = ({ issues, onLoadMore }) => {
+export const IssueStream: FC<{
+  issues: IssueResponse[],
+  onLoadMore: Function,
+  isLoading: boolean
+}> = ({ issues, onLoadMore, isLoading }) => {
   // const ref = useRef<HTMLDivElement>(null)
   const stream = useMemo(() => {
     return issues
@@ -19,8 +22,13 @@ export const IssueStream: FC<{ issues: IssueResponse[], onLoadMore: Function }> 
       </Box>
     })}
     <Box p={2}>
-      <Button w="100%" variant={"outline"} colorScheme="gray" onClick={() => onLoadMore()
-      }>Load more</Button>
+      <Button w="100%"
+        variant={"outline"} colorScheme="gray"
+        onClick={() => onLoadMore()}
+        isLoading={isLoading}
+      >
+        Load more
+      </Button>
     </Box>
   </>
 }

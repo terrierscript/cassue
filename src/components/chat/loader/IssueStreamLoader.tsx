@@ -11,8 +11,7 @@ import { StreamStack } from "./StreamContainer"
 export const IssueStreamLoader: FC<{}> = ({ }) => {
   const { owner, repo } = useChatRouteParam()
   const { target, value } = useFilterValue()
-  const { data, setSize, size } = useIssuesInfinate({ owner, repo, target, value })
-  // console.log(data, size)
+  const { data, setSize, size, isValidating } = useIssuesInfinate({ owner, repo, target, value })
   const issues = useMemo(() => {
     return data?.map(data => data.issues).flat(1) ?? []
   }, [data])
@@ -25,9 +24,11 @@ export const IssueStreamLoader: FC<{}> = ({ }) => {
     return <StreamLoading />
   }
   return <StreamStack key={`${owner}_${repo}_${target}_${value}`}>
-    <IssueStream issues={issues} onLoadMore={() => {
-      loadPaginate()
-    }} />
+    <IssueStream issues={issues}
+      isLoading={isValidating}
+      onLoadMore={() => {
+        loadPaginate()
+      }} />
   </StreamStack>
 
 }
