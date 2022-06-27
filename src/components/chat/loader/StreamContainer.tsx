@@ -6,8 +6,13 @@ type IssueScroll = {
 } | null
 
 const IssueScrollContext = createContext<IssueScroll>(null)
-export const useScroll = () => {
-  return useContext(IssueScrollContext)
+
+export const useScroll = (): NonNullable<IssueScroll> => {
+  const ctx = useContext(IssueScrollContext)
+  if (ctx === null) {
+    throw new Error("Need to be wrapped in IssueScrollProvider")
+  }
+  return ctx
 }
 
 export const StreamStack: FC<StackProps> = (props, targetKey) => {

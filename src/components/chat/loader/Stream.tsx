@@ -1,18 +1,27 @@
 import { Box, Button } from "@chakra-ui/react"
-import { FC, useMemo } from "react"
+import { FC, useEffect, useMemo } from "react"
 import { IssueComementResponse, IssueResponse } from "../../../services/github/GithubClient"
 import { StreamMessage } from "../message/StreamMessage"
+import { useScroll } from "./StreamContainer"
 
 export const IssueStream: FC<{
   issues: IssueResponse[],
   onLoadMore: Function,
   isLoading: boolean
 }> = ({ issues, onLoadMore, isLoading }) => {
+  const { scrollToBottom } = useScroll()
   // const ref = useRef<HTMLDivElement>(null)
   const stream = useMemo(() => {
     return issues
     // return issues?.concat().reverse()
   }, [issues])
+
+  const latestNumber = useMemo(() => {
+    return Math.max(...stream.map(issue => issue.number))
+  }, [stream])
+  useEffect(() => {
+    scrollToBottom()
+  }, [latestNumber])
 
   return <>
     {stream.map((issue) => {
