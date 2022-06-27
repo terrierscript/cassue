@@ -26,17 +26,6 @@ export const StreamStack: FC<StackProps> = (props, targetKey) => {
       top: scrollRef.current?.scrollHeight
     })
   }
-  // useEffect(() => {
-  //   const behavior = scrollRef.current?.scrollTop === 0 ? "auto" : "smooth"
-  //   // const behavior = "smooth"
-  //   scrollRef.current?.scrollTo({
-  //     behavior: behavior,
-  //     top: scrollRef.current?.scrollHeight
-  //   })
-  // }, [
-  //   childNum
-  //   // scrollRef.current?.scrollHeight
-  // ])
   return <IssueScrollContext.Provider value={{ scrollToBottom }}>
     <Stack
       overflow="scroll"
