@@ -2,7 +2,7 @@ import { Stack, StackProps } from "@chakra-ui/react"
 import { Children, createContext, FC, useContext, useEffect, useRef } from "react"
 
 type IssueScroll = {
-  scrollToBottom: () => void
+  scrollToBottom: (behavior?: ScrollBehavior) => void
 } | null
 
 const StreamScrollContext = createContext<IssueScroll>(null)
@@ -18,7 +18,7 @@ export const useScroll = (): NonNullable<IssueScroll> => {
 export const StreamStack: FC<StackProps> = (props, targetKey) => {
   // const childNum = Children.count(props.children)
   const scrollRef = useRef<HTMLDivElement>(null)
-  const scrollToBottom = (overrideBehabior?: string) => {
+  const scrollToBottom = (overrideBehabior?: ScrollBehavior) => {
     const behavior = overrideBehabior ?? (scrollRef.current?.scrollTop === 0 ? "auto" : "smooth")
     // const behavior = "smooth"
     scrollRef.current?.scrollTo({
