@@ -44,10 +44,19 @@ export const IssueStream: FC<{
 
 
 export const CommentStream: FC<{ comments: IssueComementResponse[] }> = ({ comments }) => {
+  const { scrollToBottom } = useScroll()
   const stream = useMemo(() => {
     return comments
     // return comments?.concat().reverse()
   }, [comments])
+
+  const maxCommentId = useMemo(() => {
+    return Math.max(...stream.map(comment => comment.id))
+  }, [comments])
+
+  useEffect(() => {
+    scrollToBottom("smooth")
+  }, [maxCommentId])
   return <>
     {stream.map((comment) => {
       return <Box key={comment.id}>

@@ -5,10 +5,10 @@ type IssueScroll = {
   scrollToBottom: () => void
 } | null
 
-const IssueScrollContext = createContext<IssueScroll>(null)
+const StreamScrollContext = createContext<IssueScroll>(null)
 
 export const useScroll = (): NonNullable<IssueScroll> => {
-  const ctx = useContext(IssueScrollContext)
+  const ctx = useContext(StreamScrollContext)
   if (ctx === null) {
     throw new Error("Need to be wrapped in IssueScrollProvider")
   }
@@ -18,15 +18,15 @@ export const useScroll = (): NonNullable<IssueScroll> => {
 export const StreamStack: FC<StackProps> = (props, targetKey) => {
   // const childNum = Children.count(props.children)
   const scrollRef = useRef<HTMLDivElement>(null)
-  const scrollToBottom = () => {
-    const behavior = scrollRef.current?.scrollTop === 0 ? "auto" : "smooth"
+  const scrollToBottom = (overrideBehabior?: string) => {
+    const behavior = overrideBehabior ?? (scrollRef.current?.scrollTop === 0 ? "auto" : "smooth")
     // const behavior = "smooth"
     scrollRef.current?.scrollTo({
       behavior: behavior,
       top: scrollRef.current?.scrollHeight
     })
   }
-  return <IssueScrollContext.Provider value={{ scrollToBottom }}>
+  return <StreamScrollContext.Provider value={{ scrollToBottom }}>
     <Stack
       overflow="scroll"
       w="100%"
@@ -35,7 +35,7 @@ export const StreamStack: FC<StackProps> = (props, targetKey) => {
       flexDirection="column-reverse"
       {...props}
     />
-  </IssueScrollContext.Provider>
+  </StreamScrollContext.Provider>
 }
 
 
