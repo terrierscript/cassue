@@ -1,11 +1,12 @@
 import { Box, HStack, IconButton, IconButtonProps, Input } from "@chakra-ui/react"
 import { FC, useEffect } from "react"
 import { useForm, useWatch } from "react-hook-form"
+import { SlateEditor } from "./SlateEditor"
 
 export const ChatInput: FC<{
   onSubmit: (value: string) => void
 } & Pick<IconButtonProps, "icon">> = ({ onSubmit, icon }) => {
-  const { register, handleSubmit, formState, resetField, setFocus } = useForm<{ value: string }>()
+  const { register, handleSubmit, formState, setValue, resetField, setFocus } = useForm<{ value: string }>()
   useEffect(() => {
     setFocus("value")
   }, [formState.submitCount])
@@ -14,7 +15,12 @@ export const ChatInput: FC<{
     resetField("value")
   })}>
     <HStack>
-      <Input
+      <SlateEditor
+        onChange={(text) => {
+          setValue("value", text)
+        }}
+      />
+      {/* <Input
         disabled={formState.isSubmitting}
         _light={{
           bg: "whiteAlpha.800"
@@ -22,7 +28,7 @@ export const ChatInput: FC<{
         _dark={{
           bg: "blackAlpha.800"
         }}
-        {...register("value")} />
+        {...register("value")} /> */}
       <IconButton
         disabled={formState.isSubmitting}
         type="submit"
