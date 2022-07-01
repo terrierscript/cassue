@@ -12,7 +12,7 @@ const useStateUpdateHandler = () => {
   const { owner, repo, number } = useRouterValues()
   const changeHandler = async (state: "closed" | "open", /*state_reason*/) => {
     setSending(true)
-    await fetchPost(`/api/issues/${owner}/${repo}/${number}/state`, {
+    await fetchPost(`/api/issues/${owner}/${repo}/${number}`, {
       state: state
     })
     setSending(false)

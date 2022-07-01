@@ -1,11 +1,12 @@
 import { Box, Heading, HStack, Link, Stack } from "@chakra-ui/react"
-import { FC, PropsWithChildren } from "react"
+import { FC, PropsWithChildren, useState } from "react"
 import { IssueNumberResponse } from "../../../services/github/GithubClient"
-import { useAlpha, useInverseAlpha } from "../../atomic/styleUtils"
-import { HtmlBody } from "../../chat/message/HtmlBody"
-import { ColorIssueStateIcon, useIssueIconColor } from "../../chat/message/IssueStateIcon"
+import { useInverseAlpha } from "../../atomic/styleUtils"
+import { ColorIssueStateIcon } from "../../chat/message/IssueStateIcon"
 import { useIssueComments } from "../apiHooks"
-import { useChatRouteParam, useCommentNumber } from "../useChatRouteParam"
+import { useChatRouteParam, useRouterValues } from "../useChatRouteParam"
+import { IssueBodyEdit } from "./IssueBodyEdit"
+import { IssueBodyText } from "./IssueBodyText"
 import { StateButtons } from "./StateButtons"
 
 const IssueBodyContainer: FC<PropsWithChildren<{}>> = ({ children }) => {
@@ -16,15 +17,20 @@ const IssueBodyContainer: FC<PropsWithChildren<{}>> = ({ children }) => {
 }
 
 const IssueBody: FC<{ issue: IssueNumberResponse }> = ({ issue }) => {
-  const color = useInverseAlpha(500)
-  if (issue.body_html) {
-    return <HtmlBody html={issue.body_html} />
+  const [editMode, setEditMode] = useState(false)
+  const { owner, repo } = useRouterValues()
+  const { mutate } = useIssueComments({ owner, repo, number: issue.number })
+  if (editMode) {
+    return <IssueBodyEdit issue={issue}
+      onEditFinished={() => {
+        setEditMode(false)
+        mutate()
+      }}
+    />
   }
-  if (issue.body) {
-    return <Box>{issue.body}</Box>
-  }
-  return <Box color={color}
-    fontStyle="italic">No description provided.</Box>
+  return <Box onClick={() => setEditMode(true)}>
+    <IssueBodyText issue={issue} />
+  </Box>
 }
 
 export const CommentHeader: FC<{ issueNumber: number }> = ({ issueNumber }) => {
