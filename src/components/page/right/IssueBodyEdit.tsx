@@ -15,7 +15,6 @@ export const IssueBodyEdit: FC<{
   })
   const [disabled, setDisabled] = useState(false)
 
-
   const onBlurHandler = async (body: string) => {
     setDisabled(true)
     console.log("x")
