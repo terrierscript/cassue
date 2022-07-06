@@ -21,7 +21,6 @@ const Generate = () => {
   }, [value.target])
 
   return <form onSubmit={handleSubmit(((data) => {
-    console.log("xxx")
     router.push(`/issues/${destination}`)
     return null
   }))}>

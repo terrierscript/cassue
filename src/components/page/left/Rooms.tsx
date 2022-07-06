@@ -19,7 +19,6 @@ const RoomButton: FC<{ room: Room }> = ({ room }) => {
   const isActiveTarget = useMemo(() => {
     return target === room.target && value === room.value
   }, [room, target, value])
-  console.log(target, value, isActiveTarget)
   const query = `${room.target}/${room.value}` // room?.query ?? room.name
   return <NextLink href={`/issues/${owner}/${repo}/${query}`} passHref>
     <Button variant={isActiveTarget ? "solid" : "ghost"}

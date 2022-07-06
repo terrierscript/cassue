@@ -17,8 +17,7 @@ const LabelForm: FC<{ onSubmit: Function }> = ({ onSubmit }) => {
   const { mutate } = useLabels({ owner, repo })
 
   return <form onSubmit={handleSubmit(async (data) => {
-    const label = await fetchPost(`/api/issues/${owner}/${repo}/labels`, data)
-    console.log(label)
+    // const label = await fetchPost(`/api/issues/${owner}/${repo}/labels`, data)
     mutate()
     onSubmit()
   })}>

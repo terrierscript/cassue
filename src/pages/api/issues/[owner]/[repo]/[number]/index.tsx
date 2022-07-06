@@ -14,7 +14,7 @@ export const handler: NextApiHandler = async (req, res) => {
   const query = IssueCommentQueryScheme.parse(req.query)
   const body = IssueUpdateScheme.parse(req.body)
   const result = await accessor.updateIssue(query, body)
-  console.log(query, body, result)
+
   res.json(result)
 }
 
