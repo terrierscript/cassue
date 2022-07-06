@@ -17,7 +17,6 @@ export const IssueBodyEdit: FC<{
 
   const onBlurHandler = async (body: string) => {
     setDisabled(true)
-    console.log("x")
     const result = await fetch(`/api/issues/${owner}/${repo}/${number}`, {
       headers: {
         'Content-Type': 'application/json'
@@ -27,16 +26,16 @@ export const IssueBodyEdit: FC<{
         body
       })
     })
-    console.log("y")
     await mutate()
     setDisabled(false)
     onEditFinished()
-    console.log("z")
   }
+
   return <SlateEditor
     disabled={disabled}
     onBlur={value => {
       onBlurHandler(value)
     }}
-    intialText={(issue.body ?? "").split("\n")} />
+    intialText={(issue.body ?? "").split("\n")}
+  />
 }
