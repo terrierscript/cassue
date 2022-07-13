@@ -20,7 +20,7 @@ jobs:
           build_command: yarn build
           dist_path: .next
           token: ${{ secrets.GITHUB_TOKEN }}
-      - uses: carlesnunez/check-my-bundlephobia@v1
+      - uses: carlesnunez/check-my-bundlephobia@master
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           strict: true
