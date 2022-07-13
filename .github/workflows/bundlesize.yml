@@ -1,0 +1,22 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  bundlesize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: sarthak-saxena/JSBundleSize@master
+        with:
+          bootstrap: yarn install
+          build_command: yarn build
+          dist_path: .next
+          token: ${{ secrets.GITHUB_TOKEN }}
