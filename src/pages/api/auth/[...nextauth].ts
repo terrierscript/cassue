@@ -1,7 +1,6 @@
 import NextAuth from "next-auth"
-import { JWT } from "next-auth/jwt"
 import GithubProvider from "next-auth/providers/github"
-import { refreshAccessToken, refreshAccessTokenIfNeed } from "../../../services/github/refreshToken"
+
 export default NextAuth({
   // Configure one or more authentication providers
   secret: process.env.NEXTAUTH_SECRET,
