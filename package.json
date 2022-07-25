@@ -18,7 +18,7 @@
     "@heroicons/react": "^1.0.6",
     "@next/bundle-analyzer": "^12.2.3",
     "@primer/octicons-react": "^17.3.0",
-    "date-fns": "^2.28.0",
+    "date-fns": "^2.29.1",
     "framer-motion": "^6.5.1",
     "next": "^12.2.3",
     "next-auth": "^4.10.2",
