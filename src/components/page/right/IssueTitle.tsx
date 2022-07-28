@@ -1,4 +1,4 @@
-import { Button, Heading, HStack, IconButton, Input, Link } from "@chakra-ui/react"
+import { Heading, HStack, IconButton, Input, Link } from "@chakra-ui/react"
 import { PencilIcon } from "@primer/octicons-react"
 import { FC, useState } from "react"
 import { IssueNumberResponse } from "../../../services/github/GithubClient"

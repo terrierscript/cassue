@@ -25,10 +25,10 @@ type IssueCommentPartialQuery = {
   repo: string,
   number: number | null
 }
-type IssueResponse = { comments: IssueComementResponse[], issue: IssueNumberResponse }
+type IssueApiResponse = { comments: IssueComementResponse[], issue: IssueNumberResponse }
 export const useIssueComments = ({ owner, repo, number }: IssueCommentPartialQuery) => {
   const url = `/api/comments/${owner}/${repo}/${number}`
-  return useSWR<IssueResponse>(number ? url : null, jsonFetcher, {
+  return useSWR<IssueApiResponse>(number ? url : null, jsonFetcher, {
     // fallbackData: { issues },
     // suspense: true
   })
