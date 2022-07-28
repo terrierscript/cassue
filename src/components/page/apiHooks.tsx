@@ -19,8 +19,16 @@ export const useIssuesInfinate = ({ owner, repo, target, value }: RepositoryQuer
 
 }
 
-export const useIssueComments = ({ owner, repo, number }: IssueCommentQuery) => {
-  return useSWR<{ comments: IssueComementResponse[], issue: IssueNumberResponse }>(`/api/comments/${owner}/${repo}/${number}`, jsonFetcher, {
+
+type IssueCommentPartialQuery = {
+  owner: string,
+  repo: string,
+  number: number | null
+}
+type IssueApiResponse = { comments: IssueComementResponse[], issue: IssueNumberResponse }
+export const useIssueComments = ({ owner, repo, number }: IssueCommentPartialQuery) => {
+  const url = `/api/comments/${owner}/${repo}/${number}`
+  return useSWR<IssueApiResponse>(number ? url : null, jsonFetcher, {
     // fallbackData: { issues },
     // suspense: true
   })

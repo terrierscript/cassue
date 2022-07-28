@@ -3,6 +3,7 @@ import { IssueNumberResponse } from "../../../services/github/GithubClient"
 import { SlateEditor } from "../../chat/input/SlateEditor"
 import { useIssueComments } from "../apiHooks"
 import { useRouterValues } from "../useChatRouteParam"
+import { useIssuePost } from "./useIssuePost"
 
 export const IssueBodyEdit: FC<{
   issue: IssueNumberResponse
@@ -10,6 +11,7 @@ export const IssueBodyEdit: FC<{
 }> = ({ issue, onEditFinished }) => {
   const { owner, repo } = useRouterValues()
   const number = issue.number
+  const postIssue = useIssuePost()
   const { mutate } = useIssueComments({
     owner, repo, number
   })
@@ -17,14 +19,8 @@ export const IssueBodyEdit: FC<{
 
   const onBlurHandler = async (body: string) => {
     setDisabled(true)
-    const result = await fetch(`/api/issues/${owner}/${repo}/${number}`, {
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      method: "POST",
-      body: JSON.stringify({
-        body
-      })
+    const result = await postIssue({
+      body
     })
     await mutate()
     setDisabled(false)
