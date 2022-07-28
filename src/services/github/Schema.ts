@@ -50,6 +50,7 @@ export const IssuePostScheme = z.object({
 export type IssuePost = z.infer<typeof IssuePostScheme>
 
 export const IssueUpdateScheme = z.object({
+  title: z.string().optional(),
   state: z.enum(["closed", "open"]).optional(),
   state_reason: z.string().optional(),
   body: z.string().optional()

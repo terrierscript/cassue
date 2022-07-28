@@ -1,4 +1,4 @@
-import { Box, Heading, HStack, Link, Stack } from "@chakra-ui/react"
+import { Box, HStack, Link, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack, useDisclosure } from "@chakra-ui/react"
 import { FC, PropsWithChildren, useState } from "react"
 import { IssueNumberResponse } from "../../../services/github/GithubClient"
 import { useInverseAlpha } from "../../atomic/styleUtils"
@@ -8,6 +8,7 @@ import { useChatRouteParam, useRouterValues } from "../useChatRouteParam"
 import { IssueBodyEdit } from "./IssueBodyEdit"
 import { IssueBodyText } from "./IssueBodyText"
 import { StateButtons } from "./StateButtons"
+import { IssueTitle } from "./IssueTitle"
 
 const IssueBodyContainer: FC<PropsWithChildren<{}>> = ({ children }) => {
   const bg = useInverseAlpha(50)
@@ -50,11 +51,7 @@ export const CommentHeader: FC<{ issueNumber: number }> = ({ issueNumber }) => {
         </Link>
         <HStack w="80%">
           <ColorIssueStateIcon issue={issue} />
-          <Link href={issue?.html_url}>
-            <Heading size="sm" >
-              {issue?.title}
-            </Heading>
-          </Link>
+          <IssueTitle issue={issue} />
         </HStack>
       </HStack>
       <IssueBodyContainer>
