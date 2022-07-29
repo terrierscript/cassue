@@ -7,7 +7,7 @@ import { useBreakpointValue } from '@chakra-ui/react'
 import IssueChatInputArea from "../../chat/input/IssueChatInput"
 import { useRouter } from "next/router"
 import CommentChatInputArea from "../../chat/input/CommentChatInput"
-import { useAlpha } from "../../atomic/styleUtils"
+import { useAlpha } from "../../chakra/styleUtils"
 import { CommentHeader } from "./CommentHeader"
 import { StreamStack } from "../../chat/loader/StreamContainer"
 
