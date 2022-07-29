@@ -3,7 +3,7 @@ import { FC } from "react"
 import { CommentPost } from "../../../services/github/Schema"
 import { useIssueComments, useIssuesInfinate } from "../../page/apiHooks"
 import { useChatRouteParam, useCommentNumber, useFilterValue } from "../../page/useChatRouteParam"
-import { alphaBgStyle } from "../../atomic/styleUtils"
+import { alphaBgStyle } from "../../chakra/styleUtils"
 import { CommentDiscussionIcon } from '@primer/octicons-react'
 import { ReadOnlyGuard } from "./ReadOnly"
 import { ChatInput } from "./ChatInput"
