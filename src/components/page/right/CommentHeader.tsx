@@ -1,7 +1,7 @@
 import { Box, HStack, Link, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack, useDisclosure } from "@chakra-ui/react"
 import { FC, PropsWithChildren, useState } from "react"
 import { IssueNumberResponse } from "../../../services/github/GithubClient"
-import { useInverseAlpha } from "../../atomic/styleUtils"
+import { useInverseAlpha } from "../../chakra/styleUtils"
 import { ColorIssueStateIcon } from "../../chat/message/IssueStateIcon"
 import { useIssueComments } from "../apiHooks"
 import { useChatRouteParam, useRouterValues } from "../useChatRouteParam"

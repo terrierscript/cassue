@@ -1,4 +1,4 @@
-import { Box, Button, Center, Spinner, VStack } from "@chakra-ui/react"
+import { Box, Button, Center, HStack, Spinner, VStack } from "@chakra-ui/react"
 import { FC, PropsWithChildren, Suspense } from "react"
 import Head from "next/head"
 import { RepositoryQuery } from "../../../../../services/github/Schema"
@@ -8,6 +8,7 @@ import { useRouter } from "next/router"
 import dynamic from "next/dynamic"
 import { useRepoExist } from "../../../../../components/page/apiHooks"
 import { signOut } from "next-auth/react"
+import { CenterSpinner } from "../../../../../components/layout/CenterSpinner"
 
 const IssueChatPage = dynamic(import("../../../../../components/page/ChatPage"))
 
@@ -31,9 +32,9 @@ const RepoExist: FC<PropsWithChildren<{}>> = ({ children }) => {
   const { data, error } = useRepoExist({ owner, repo })
 
   if (!data) {
-    return <Center p={4}>
-      <Spinner />
-    </Center>
+    return <CenterSpinner>
+      Loading Repository
+    </CenterSpinner>
   }
   if (data.exist === false) {
     return <Center p={4}>
@@ -51,7 +52,9 @@ const RepoExist: FC<PropsWithChildren<{}>> = ({ children }) => {
 export const Page: FC<Props> = ({ }) => {
   const router = useRouter()
   if (!router.isReady) {
-    return <Spinner />
+    return <CenterSpinner >
+      Router Loading
+    </CenterSpinner>
   }
 
   return <Box>

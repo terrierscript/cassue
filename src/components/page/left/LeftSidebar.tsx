@@ -5,7 +5,7 @@ import { Rooms } from "./Rooms"
 import { useChatRouteParam } from "../useChatRouteParam"
 import { LightBulbIcon, MarkGithubIcon, SearchIcon } from "@primer/octicons-react"
 import { UserIcon } from "./UserIcon"
-import { useInverseAlpha } from "../../atomic/styleUtils"
+import { useInverseAlpha } from "../../chakra/styleUtils"
 import { useForm } from "react-hook-form"
 import { useRouter } from "next/router"
 
