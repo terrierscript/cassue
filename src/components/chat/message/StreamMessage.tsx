@@ -53,7 +53,7 @@ const MessageFooter: FC<{ message: Message }> = ({ message }) => {
     <Wrap >
       {(data.labels).flat(1).map(label => {
         const labelName = typeof label === "string" ? label : label.name
-        return <NextLink key={labelName} href={`/${params.owner}/${params.repo}/labels/${labelName}`}>
+        return <NextLink key={labelName} href={`/issues/${params.owner}/${params.repo}/labels/${labelName}`}>
           <Link>
             #{labelName}
           </Link>
