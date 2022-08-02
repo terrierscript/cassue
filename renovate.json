@@ -9,5 +9,11 @@
   },
   "dependencyDashboard": true,
   "stabilityDays": 3,
-  "prCreation": "not-pending"
+  "prCreation": "not-pending",
+  "packageRules": [
+    {
+      "matchPackagePatterns": ["slate","slate-*"],
+      "groupName": "slate"
+    }
+  ]
 }
