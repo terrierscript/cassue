@@ -21,7 +21,7 @@
     "date-fns": "^2.29.1",
     "framer-motion": "^6.5.1",
     "next": "^12.2.3",
-    "next-auth": "^4.10.2",
+    "next-auth": "^4.10.3",
     "next-pwa": "5.5.5",
     "octokit": "^2.0.4",
     "react": "^18.2.0",
