@@ -16,7 +16,7 @@ type Message = {
   data: IssueComementResponse
 }
 
-const IssueTitle: FC<{ message: Message }> = ({ message }) => {
+const MessageHeaderTitle: FC<{ message: Message }> = ({ message }) => {
   const { messageType, data } = message
   const linkLabel = useMemo(() => {
     if (messageType === "issue") {
@@ -133,26 +133,11 @@ const MessageBody: FC<{ message: Message }> = ({ message }) => {
 }
 
 export const StreamMessage: FC<{ message: Message }> = ({ message }) => {
-  // const ref = useRef<HTMLDivElement>(null)
-  // useEffect(() => {
-  //   if (!isLatest) {
-  //     return
-  //   }
-  //   if (!ref.current) {
-  //     return
-  //   }
-  //   ref.current.scrollIntoView({
-  //     behavior: "smooth",
-  //     block: "end",
-  //   })
-  // }, [isLatest, ref.current])
 
   const activeStyle = useColorModeValue(
     { bg: "blackAlpha.50" },
     { bg: "whiteAlpha.50" }
   )
-  // const { owner, repo } = useChatRouteParam()
-  // const { data } = message
   return <Stack
     // ref={ref}
     spacing={4}
@@ -168,7 +153,7 @@ export const StreamMessage: FC<{ message: Message }> = ({ message }) => {
           <MessageAvatar message={message} />
         </Box>
         <Stack spacing={0} minW="0" w="100%">
-          <IssueTitle message={message} />
+          <MessageHeaderTitle message={message} />
           <MessageBody message={message} />
           <Stack>
             <MessageFooter message={message} />
