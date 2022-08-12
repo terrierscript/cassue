@@ -3,7 +3,7 @@ import { Box, ChakraProvider } from "@chakra-ui/react"
 import React, { } from "react"
 import { appTheme } from "../services/chakra/theme"
 import { AppProps } from "next/app"
-import { NeedLayout } from "../components/layout/NeedLayout"
+import { NeedLogin } from "../components/layout/NeedLogin"
 import Head from "next/head"
 import { AppSWRPRovider } from "../services/swr/AppSWRProvider"
 import { SafeArea } from "../components/layout/SafeArea"
@@ -26,9 +26,9 @@ function MyApp({ Component, pageProps: { session, ...pageProps },
           {/* <Suspense fallback={<Box>...</Box>}> */}
           <SessionProvider session={session}>
             <SafeArea>
-              <NeedLayout>
-                <Component {...pageProps} />
-              </NeedLayout>
+              <Component {...pageProps} />
+              {/* <NeedLayout>
+              </NeedLayout> */}
             </SafeArea>
           </SessionProvider>
           {/* </Suspense> */}

@@ -1,7 +1,8 @@
 import { Avatar, Box, Button, HStack, Popover, PopoverArrow, PopoverBody, PopoverCloseButton, PopoverContent, PopoverFooter, PopoverHeader, PopoverTrigger, Portal, Spacer, Stack } from "@chakra-ui/react"
-import { useSession } from "next-auth/react"
+import { signIn, useSession } from "next-auth/react"
 import { FC, PropsWithChildren } from "react"
 import { signOut } from "next-auth/react"
+import { GithubLoginButton } from "../../layout/GithubLoginButton"
 
 const UserMenu: FC<PropsWithChildren<{}>> = ({ children }) => {
   return <Popover>
@@ -32,6 +33,11 @@ const UserMenu: FC<PropsWithChildren<{}>> = ({ children }) => {
 
 export const UserIcon = () => {
   const session = useSession()
+  if (!session.data) {
+    return <Box>
+      <GithubLoginButton>Login</GithubLoginButton>
+    </Box>
+  }
   return <Box>
     <HStack>
       <UserMenu>

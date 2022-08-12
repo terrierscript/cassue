@@ -12,7 +12,7 @@ export const getSessionAccount = async (req: GetSessionParams): Promise<GithubAc
   const session = await getSession(req)
   if (!session?.account) {
     // TODO...
-    throw new Error("Invalid login")
+    // throw new Error("Invalid login")
   }
   // @ts-ignore
   return session?.account ?? null

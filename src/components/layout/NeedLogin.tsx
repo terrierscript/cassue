@@ -4,7 +4,7 @@ import { FC, PropsWithChildren } from "react"
 import { CenterSpinner } from "./CenterSpinner"
 import { LoginPage } from "./Login"
 
-export const NeedLayout: FC<PropsWithChildren<{}>> = ({ children }) => {
+export const NeedLogin: FC<PropsWithChildren<{}>> = ({ children }) => {
   const { status } = useSession()
   if (status === "loading") {
     return <CenterSpinner>
