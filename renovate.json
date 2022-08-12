@@ -10,9 +10,15 @@
   "dependencyDashboard": true,
   "stabilityDays": 3,
   "prCreation": "not-pending",
+  "ignoreDeps": [
+    "next-pwa"
+  ],
   "packageRules": [
     {
-      "matchPackagePatterns": ["slate","slate-*"],
+      "matchPackagePatterns": [
+        "slate",
+        "slate-*"
+      ],
       "groupName": "slate"
     }
   ]
