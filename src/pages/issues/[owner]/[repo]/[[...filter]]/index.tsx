@@ -7,8 +7,9 @@ import { useChatRouteParam } from "../../../../../components/page/useChatRoutePa
 import { useRouter } from "next/router"
 import dynamic from "next/dynamic"
 import { useRepoExist } from "../../../../../components/page/apiHooks"
-import { signOut } from "next-auth/react"
+import { signOut, useSession } from "next-auth/react"
 import { CenterSpinner } from "../../../../../components/layout/CenterSpinner"
+import { GithubLoginButton } from "../../../../../components/layout/GithubLoginButton"
 
 const IssueChatPage = dynamic(import("../../../../../components/page/ChatPage"))
 
@@ -27,6 +28,17 @@ const PageHead: FC<{}> = ({ }) => {
   </Head>
 }
 
+const NotExistLogin = () => {
+  const session = useSession()
+  if (!session.data) {
+    return <GithubLoginButton >
+      Login
+    </GithubLoginButton>
+  }
+  return <Button colorScheme={"red"} onClick={() => {
+    signOut()
+  }}>Logout</Button>
+}
 const RepoExist: FC<PropsWithChildren<{}>> = ({ children }) => {
   const { owner, repo } = useChatRouteParam()
   const { data, error } = useRepoExist({ owner, repo })
@@ -37,13 +49,12 @@ const RepoExist: FC<PropsWithChildren<{}>> = ({ children }) => {
     </CenterSpinner>
   }
   if (data.exist === false) {
-    return <Center p={4}>
+    return <Center p={4} h="100vh">
       <VStack>
         <Box>Repository Not found</Box>
         <Button as="a" href="/">Select another repository</Button>
-        <Button colorScheme={"red"} onClick={() => {
-          signOut()
-        }}>Logout</Button>
+        <Box>or</Box>
+        <NotExistLogin />
       </VStack>
     </Center>
   }
