@@ -36,7 +36,6 @@ const Generate = () => {
         p={2} icon={<ChevronRightIcon />} aria-label={'GO'}
         type="submit"
       />
-
     </HStack>
   </form>
 }

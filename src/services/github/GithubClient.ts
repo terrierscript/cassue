@@ -49,9 +49,14 @@ export class GithubClient {
   account: Record<string, string>
   constructor(account: Record<string, string>) {
     this.account = account
-    this.client = new Octokit({
-      auth: this.account.access_token,
-    })
+    if (!account?.access_token) {
+      this.client = new Octokit()
+    } else {
+      const authParam = {
+        auth: this.account.access_token,
+      }
+      this.client = new Octokit(authParam)
+    }
 
   }
 
