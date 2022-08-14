@@ -30,6 +30,9 @@ const PageHead: FC<{}> = ({ }) => {
 
 const NotExistLogin = () => {
   const session = useSession()
+  if (session.status === "loading") {
+    return null
+  }
   if (!session.data) {
     return <GithubLoginButton >
       Login
