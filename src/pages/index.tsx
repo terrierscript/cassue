@@ -48,6 +48,10 @@ const Generate = () => {
 
 const UserOrLogin = () => {
   const session = useSession()
+  if (session.status === "loading") {
+    return null
+  }
+
   if (!session.data) {
     return <Box>
       <GithubLoginButton>

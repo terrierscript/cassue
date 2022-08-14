@@ -33,6 +33,9 @@ const UserMenu: FC<PropsWithChildren<{}>> = ({ children }) => {
 
 export const UserIcon = () => {
   const session = useSession()
+  if (session.status === "loading") {
+    return null
+  }
   if (!session.data) {
     return <Box>
       <GithubLoginButton>Login</GithubLoginButton>
