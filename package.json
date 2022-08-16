@@ -23,7 +23,7 @@
     "next": "^12.2.5",
     "next-auth": "^4.10.3",
     "next-pwa": "5.5.4",
-    "octokit": "^2.0.5",
+    "octokit": "^2.0.7",
     "react": "^18.2.0",
     "react-div-100vh": "^0.7.0",
     "react-dom": "^18.2.0",
