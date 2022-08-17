@@ -1,12 +1,12 @@
 import { SessionProvider } from "next-auth/react"
-import { Box, ChakraProvider } from "@chakra-ui/react"
+import { ChakraProvider } from "@chakra-ui/react"
 import React, { } from "react"
 import { appTheme } from "../services/chakra/theme"
 import { AppProps } from "next/app"
-import { NeedLogin } from "../components/layout/NeedLogin"
 import Head from "next/head"
 import { AppSWRPRovider } from "../services/swr/AppSWRProvider"
 import { SafeArea } from "../components/layout/SafeArea"
+import { withAppTRPC } from "../utils/withTRPC"
 
 function MyApp({ Component, pageProps: { session, ...pageProps },
 }: AppProps) {
@@ -39,4 +39,4 @@ function MyApp({ Component, pageProps: { session, ...pageProps },
   )
 }
 
-export default MyApp
+export default withAppTRPC(MyApp)
