@@ -10,8 +10,8 @@
     "test": "vitest"
   },
   "dependencies": {
-    "@chakra-ui/icons": "^2.0.6",
-    "@chakra-ui/react": "^2.2.6",
+    "@chakra-ui/icons": "^2.0.8",
+    "@chakra-ui/react": "^2.2.8",
     "@ctrl/tinycolor": "^3.4.1",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
