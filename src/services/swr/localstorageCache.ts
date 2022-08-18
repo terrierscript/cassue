@@ -1,28 +1,34 @@
 
+const KEY_NAME = "app-cache"
+
+const save = (map: Map<unknown, unknown>) => {
+  console.log("save")
+  const appCache = JSON.stringify(Array.from(map.entries()))
+  localStorage.setItem(KEY_NAME, appCache)
+}
 
 export function localStorageProvider() {
   // for SSR
   if (typeof window === "undefined") {
     return new Map()
   }
-  const map = new Map(JSON.parse(localStorage.getItem('app-cache') || '[]'))
-  const save = () => {
-    console.log("save")
-    const appCache = JSON.stringify(Array.from(map.entries()))
-    localStorage.setItem('app-cache', appCache)
-  }
+  const map = new Map(JSON.parse(localStorage.getItem(KEY_NAME) || '[]'))
   window.addEventListener('beforeunload', () => {
-    save()
+    save(map)
   })
   window.addEventListener('pagehide', () => {
-    save()
+    save(map)
   })
   // performance reason
   // window.addEventListener('unload', () => {
   //   save()
   // })
   window.addEventListener('visibilitychange', () => {
-    save()
+    save(map)
   })
   return map
+}
+
+export function clearLocalStorageCache() {
+  save(new Map())
 }
