@@ -1,28 +1,27 @@
 import * as trpc from '@trpc/server'
 import * as trpcNext from '@trpc/server/adapters/next'
 import { z } from 'zod'
+import { getSessionAccount, GithubAccount } from '../../../services/auth/getSessionAccount'
+import { GithubClient } from '../../../services/github/GithubClient'
 
+type Context = {
+  account: GithubAccount
+}
 export const appRouter = trpc
-  .router()
-  .query('hello', {
-    input: z
-      .object({
-        text: z.string().nullish(),
-      })
-      .nullish(),
-    resolve({ input }) {
-      return {
-        greeting: `hello ${input?.text ?? 'world'}`,
-      }
-    },
-  })
+  .router<Context>()
   .query("userRepos", {
     input: z.object({
-      owner: z.string()
+      username: z.string().optional().nullish()
     }),
-    resolve({ input }) {
+    async resolve({ ctx, input }) {
+      const account = ctx.account
+      const client = new GithubClient(account)
+      if (!input.username) {
+        return {}
+      }
+      const repo = await client.getOwnerRepositories(input?.username)
 
-      return {}
+      return { repo }
     }
   })
 
@@ -31,7 +30,12 @@ export const appRouter = trpc
 export type AppRouter = typeof appRouter
 
 // export API handler
-export default trpcNext.createNextApiHandler({
+export default trpcNext.createNextApiHandler<AppRouter>({
   router: appRouter,
-  createContext: () => null,
+  createContext: async ({ req }) => {
+    const account = await getSessionAccount({ req })
+    return {
+      account
+    }
+  }
 })

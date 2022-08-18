@@ -64,6 +64,10 @@ export class GithubClient {
     const result = await this.client.rest.repos.get(param)
     return result.data
   }
+  async getOwnerRepositories(username: string) {
+    const result = await this.client.rest.repos.listForUser({ username })
+    return result.data
+  }
 
   async getIssue(target: IssueCommentQuery): Promise<IssueNumberResponse> {
     const { number, ...rest } = target

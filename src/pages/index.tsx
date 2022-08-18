@@ -5,9 +5,11 @@ import { useRouter } from 'next/router'
 import React, { useMemo, useState } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 import { GithubLoginButton } from '../components/layout/GithubLoginButton'
+import { useTrpcQuery } from '../utils/trpc'
 
 const Generate = () => {
   const router = useRouter()
+  const session = useSession()
   const { register, handleSubmit, control } = useForm({
     defaultValues: {
       target: ""
@@ -21,6 +23,8 @@ const Generate = () => {
       return normalized
     }
   }, [value.target])
+  const repos = useTrpcQuery(['userRepos', { username: session.data?.user?.name }])
+
 
   return <form onSubmit={handleSubmit(((data) => {
     router.push(`/issues/${destination}`)

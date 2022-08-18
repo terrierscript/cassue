@@ -1,13 +1,13 @@
 import { trpc, useTrpcQuery } from '../utils/trpc'
 
 export default function PingPage() {
-  const hello = useTrpcQuery(['hello', { text: 'client' }])
+  const hello = useTrpcQuery(['userRepos',])
   if (!hello.data) {
     return <div>Loading...</div>
   }
   return (
     <div>
-      <p>{hello.data.greeting}</p>
+      <p>{JSON.stringify(hello.data.account)}</p>
     </div>
   )
 }
