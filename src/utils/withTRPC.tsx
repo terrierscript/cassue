@@ -1,6 +1,7 @@
 import { withTRPC } from '@trpc/next'
 import { AppType } from 'next/dist/shared/lib/utils'
-import { AppRouter } from '../pages/api/trpc/[trpc]'
+import { GithubAccount } from '../services/auth/getSessionAccount'
+import { AppRouter } from "../services/trpc/AppRouter"
 
 
 function getBaseUrl() {
