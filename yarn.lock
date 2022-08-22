@@ -2477,10 +2477,10 @@
   resolved "https://registry.yarnpkg.com/@swc/wasm/-/wasm-1.2.130.tgz#88ac26433335d1f957162a9a92f1450b73c176a0"
   integrity sha512-rNcJsBxS70+pv8YUWwf5fRlWX6JoY/HJc25HD/F8m6Kv7XhJdqPPMhyX6TKkUBPAG7TWlZYoxa+rHAjPy4Cj3Q==
 
-"@trpc/client@^9.27.0":
-  version "9.27.0"
-  resolved "https://registry.yarnpkg.com/@trpc/client/-/client-9.27.0.tgz#6fb2af2df051dea834173e5b9f12e74c65662af2"
-  integrity sha512-Yh+oDBiANArjDx69bSnXqIK36wjlRm8iGLQkMmrvTTFwVRt3hgfreCzjyj4PgNEd4SNX4iGrhLLPIDHeH+qlJA==
+"@trpc/client@^9.27.1":
+  version "9.27.1"
+  resolved "https://registry.yarnpkg.com/@trpc/client/-/client-9.27.1.tgz#9bfbab4162c7ea157158c2c054141888fa706a1b"
+  integrity sha512-srh3s1ekhV5fssqxdE5DagcW+bnWUXp4LWkuHTunPDUL5BaIs6l0FXE4wKMv9AFAcCw7xJOFx8VSwFl/raXqKQ==
   dependencies:
     "@babel/runtime" "^7.9.0"
 
