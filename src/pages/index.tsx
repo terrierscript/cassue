@@ -1,13 +1,16 @@
-import { Avatar, Box, Button, Center, Heading, HStack, IconButton, Input, Spacer, VStack } from '@chakra-ui/react'
+import { Avatar, Box, Button, Center, Heading, HStack, Input, VStack } from '@chakra-ui/react'
 import { ChevronRightIcon } from '@primer/octicons-react'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
-import React, { useMemo, useState } from 'react'
+import React, { useMemo } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 import { GithubLoginButton } from '../components/layout/GithubLoginButton'
+import { useAppClient } from '../utils/trpc'
 
 const Generate = () => {
+  const trpc = useAppClient()
   const router = useRouter()
+  const session = useSession()
   const { register, handleSubmit, control } = useForm({
     defaultValues: {
       target: ""
@@ -21,6 +24,7 @@ const Generate = () => {
       return normalized
     }
   }, [value.target])
+
 
   return <form onSubmit={handleSubmit(((data) => {
     router.push(`/issues/${destination}`)

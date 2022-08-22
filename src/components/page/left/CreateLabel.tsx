@@ -6,18 +6,24 @@ import { fetchPost } from "../../../services/swr/fetcher"
 import { useLabels } from "../apiHooks"
 import { useRouterValues } from "../useChatRouteParam"
 import { random } from "@ctrl/tinycolor"
+import { trpcHooks, useAppClient } from "../../../utils/trpc"
 
 const LabelForm: FC<{ onSubmit: Function }> = ({ onSubmit }) => {
-  const { register, handleSubmit } = useForm<LabelPost>({
+  const client = useAppClient()
+  const { register, handleSubmit, formState } = useForm<LabelPost>({
     defaultValues: {
-      color: `#${random().toHex()}`
+      color: `${random().toHex()}`
     }
   })
   const { owner, repo } = useRouterValues()
   const { mutate } = useLabels({ owner, repo })
 
   return <form onSubmit={handleSubmit(async (data) => {
-    // const label = await fetchPost(`/api/issues/${owner}/${repo}/labels`, data)
+    const input = {
+      repo: { owner, repo },
+      label: data
+    }
+    await client.mutation("createLabel", input)
     mutate()
     onSubmit()
   })}>
@@ -27,7 +33,7 @@ const LabelForm: FC<{ onSubmit: Function }> = ({ onSubmit }) => {
       {/* <Input {...register("description")} autoComplete="off" /> */}
       {/* TODO... */}
       <Input type="hidden" {...register("color")} autoComplete="off" />
-      <Button type="submit">Create</Button>
+      <Button type="submit" isLoading={formState.isSubmitting}  >Create</Button>
     </Stack>
   </form >
 }
