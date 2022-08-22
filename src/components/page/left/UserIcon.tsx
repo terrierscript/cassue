@@ -3,8 +3,17 @@ import { signIn, useSession } from "next-auth/react"
 import { FC, PropsWithChildren } from "react"
 import { signOut } from "next-auth/react"
 import { GithubLoginButton } from "../../layout/GithubLoginButton"
+import { useSWRConfig } from "swr"
+import { clearLocalStorageCache } from "../../../services/swr/localstorageCache"
 
 const UserMenu: FC<PropsWithChildren<{}>> = ({ children }) => {
+  const { cache } = useSWRConfig()
+  const clearCache = () => {
+    // @ts-ignore
+    cache.clear()
+    clearLocalStorageCache()
+  }
+
   return <Popover>
     <PopoverTrigger>
       {children}
@@ -16,11 +25,14 @@ const UserMenu: FC<PropsWithChildren<{}>> = ({ children }) => {
         <PopoverCloseButton />
         <PopoverBody>
           <Stack spacing={4}>
-
             <Button variant="link" as="a" href="/">
               Switch repository
             </Button>
+            <Button variant="link" onClick={() => {
+              clearCache()
+            }}>Clear cache</Button>
             <Button variant="link" colorScheme="red" onClick={() => {
+              clearCache()
               signOut()
             }}>Logout</Button>
           </Stack>
