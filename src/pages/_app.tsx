@@ -39,4 +39,4 @@ function MyApp({ Component, pageProps: { session, ...pageProps },
   )
 }
 
-export default withAppTRPC(MyApp)
+export default MyApp
