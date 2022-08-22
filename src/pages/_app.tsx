@@ -6,7 +6,6 @@ import { AppProps } from "next/app"
 import Head from "next/head"
 import { AppSWRPRovider } from "../services/swr/AppSWRProvider"
 import { SafeArea } from "../components/layout/SafeArea"
-import { withAppTRPC } from "../utils/withTRPC"
 
 function MyApp({ Component, pageProps: { session, ...pageProps },
 }: AppProps) {
