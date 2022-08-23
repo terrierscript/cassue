@@ -20,7 +20,7 @@
     "@primer/octicons-react": "^17.4.1",
     "@trpc/client": "^9.27.1",
     "@trpc/next": "^9.27.1",
-    "@trpc/react": "^9.27.0",
+    "@trpc/react": "^9.27.1",
     "@trpc/server": "^9.27.0",
     "date-fns": "^2.29.2",
     "framer-motion": "^7.2.0",
