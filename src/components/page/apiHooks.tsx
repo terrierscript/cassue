@@ -3,15 +3,25 @@ import useSWRInfinite from "swr/infinite"
 import { IssueComementResponse, IssueNumberResponse, IssueResponse, LabelResponse, RepoResponse } from "../../services/github/GithubClient"
 import { IssueCommentQuery, IssuesTargetTypeValue, RepositoryQuery } from "../../services/github/Schema"
 import { delayJsonFetcher, jsonFetcher } from "../../services/swr/fetcher"
+import { useAppClient } from "../../utils/trpc"
 
 export const useIssuesInfinate = ({ owner, repo, target, value }: RepositoryQuery & IssuesTargetTypeValue) => {
+  const trpc = useAppClient()
   return useSWRInfinite<{ issues: IssueResponse[] }>(
     ((page, previous) => {
       if (previous && previous.length === 0) {
         return null
       }
-      return `/api/messages/${owner}/${repo}/${target}/${value}?page=${page + 1}`
-    }), jsonFetcher, {
+      return { page }
+      // return `/api/messages/${owner}/${repo}/${target}/${value}?page=${page + 1}`
+    }), ({ page }) => {
+      return trpc.query("repositoryMessages", {
+        owner,
+        repo,
+        filter: [target, value],
+        page,
+      })
+    }, {
     initialSize: 1,
     // fallbackData: { issues },
     // suspense: true
