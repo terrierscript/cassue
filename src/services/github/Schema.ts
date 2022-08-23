@@ -27,7 +27,7 @@ export type IssueCommentQuery = z.infer<typeof IssueCommentQueryScheme>
 
 export const IssuesTargetQueryScheme = RepositoryQueryScheme.extend({
   filter: z.array(z.string()).optional().default([]),
-  page: zStringNumber.optional()
+  page: z.number().optional().nullable()
 })
 
 export const IssuesTargetTypeValueScheme = z.object({
@@ -39,7 +39,7 @@ export type IssuesTargetTypeValue = z.infer<typeof IssuesTargetTypeValueScheme>
 
 export type IssuesTargetQuery = z.infer<typeof RepositoryQueryScheme> & {
   filter?: string[]
-  page?: number
+  page?: number | null
 }
 
 export const IssuePostScheme = z.object({

@@ -1,15 +1,15 @@
-import useSWR, { KeyLoader } from "swr"
+import useSWR from "swr"
 import useSWRInfinite from "swr/infinite"
 import { IssueComementResponse, IssueNumberResponse, IssueResponse, LabelResponse, RepoResponse } from "../../services/github/GithubClient"
-import { IssueCommentQuery, IssuesTargetTypeValue, RepositoryQuery } from "../../services/github/Schema"
-import { delayJsonFetcher, jsonFetcher } from "../../services/swr/fetcher"
+import { IssuesTargetTypeValue, RepositoryQuery } from "../../services/github/Schema"
+import { jsonFetcher } from "../../services/swr/fetcher"
 import { useAppClient } from "../../utils/trpc"
 
 export const useIssuesInfinate = ({ owner, repo, target, value }: RepositoryQuery & IssuesTargetTypeValue) => {
   const trpc = useAppClient()
   return useSWRInfinite<{ issues: IssueResponse[] }>(
     ((page, previous) => {
-      if (previous && previous.length === 0) {
+      if (previous && previous.issues.length === 0) {
         return null
       }
       return { page }
