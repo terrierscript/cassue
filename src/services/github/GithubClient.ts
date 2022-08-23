@@ -85,7 +85,7 @@ export class GithubClient {
       ...repoParam,
       ...filterQuery,
       direction: "desc",
-      page,
+      page: page ?? 0,
       headers
     }) //.issues.list(param)
     return result.data
