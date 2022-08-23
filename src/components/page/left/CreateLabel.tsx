@@ -2,11 +2,10 @@ import { Button, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalF
 import { FC } from "react"
 import { useForm } from "react-hook-form"
 import { LabelPost } from "../../../services/github/Schema"
-import { fetchPost } from "../../../services/swr/fetcher"
 import { useLabels } from "../apiHooks"
 import { useRouterValues } from "../useChatRouteParam"
 import { random } from "@ctrl/tinycolor"
-import { trpcHooks, useAppClient } from "../../../utils/trpc"
+import { useAppClient } from "../../../utils/trpc"
 
 const LabelForm: FC<{ onSubmit: Function }> = ({ onSubmit }) => {
   const client = useAppClient()
