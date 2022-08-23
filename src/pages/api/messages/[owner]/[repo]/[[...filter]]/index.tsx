@@ -3,7 +3,7 @@ import { getSessionAccount } from "../../../../../../services/auth/getSessionAcc
 import { GithubClient } from "../../../../../../services/github/GithubClient"
 import { RepositoryQueryScheme, IssuePostScheme, IssuesTargetQueryScheme } from "../../../../../../services/github/Schema"
 
-
+/** @deprecated */
 const getIssueHandler: NextApiHandler = async (req, res) => {
   const account = await getSessionAccount({ req })
   const accessor = new GithubClient(account)
