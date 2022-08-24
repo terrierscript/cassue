@@ -7,14 +7,22 @@ import { useAppClient } from "../../utils/trpc"
 
 export const useIssuesInfinate = ({ owner, repo, target, value }: RepositoryQuery & IssuesTargetTypeValue) => {
   const trpc = useAppClient()
-  return useSWRInfinite<{ issues: IssueResponse[] }>(
+  const result = useSWRInfinite<{ issues: IssueResponse[] }>(
     ((page, previous) => {
       if (previous && previous.issues.length === 0) {
         return null
       }
-      return { page }
-      // return `/api/messages/${owner}/${repo}/${target}/${value}?page=${page + 1}`
-    }), ({ page }) => {
+      return {
+        query: "repositoryMessage",
+        params: {
+          owner,
+          repo,
+          filter: [target, value],
+        },
+        page,
+      }
+    }), (key) => {
+      const { page } = key
       return trpc.query("repositoryMessages", {
         owner,
         repo,
@@ -26,7 +34,7 @@ export const useIssuesInfinate = ({ owner, repo, target, value }: RepositoryQuer
     // fallbackData: { issues },
     // suspense: true
   })
-
+  return result
 }
 
 
