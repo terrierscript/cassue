@@ -81,6 +81,7 @@ export class GithubClient {
   async getAllIssue(param: IssuesTargetQuery): Promise<IssueResponsees> {
     const { filter, page, ...repoParam } = param
     const filterQuery = resolveIssueListFilter(filter ?? [])
+
     const result = await this.client.rest.issues.listForRepo({
       ...repoParam,
       ...filterQuery,
