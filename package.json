@@ -15,7 +15,6 @@
     "@ctrl/tinycolor": "^3.4.1",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
-    "@heroicons/react": "^1.0.6",
     "@next/bundle-analyzer": "^12.2.5",
     "@primer/octicons-react": "^17.4.1",
     "@trpc/client": "^9.27.1",
