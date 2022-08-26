@@ -2,7 +2,7 @@ import { useAppClient } from "../../../utils/trpc"
 import { useIssueComments } from "../apiHooks"
 import { useRouterValues } from "../useChatRouteParam"
 
-export const useIssuePost = (issueNumber: number) => {
+export const useIssueUpdate = (issueNumber: number) => {
   const { owner, repo } = useRouterValues()
   const trpc = useAppClient()
   const { mutate } = useIssueComments({

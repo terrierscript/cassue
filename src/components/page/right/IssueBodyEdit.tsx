@@ -3,7 +3,7 @@ import { IssueNumberResponse } from "../../../services/github/GithubClient"
 import { SlateEditor } from "../../chat/input/SlateEditor"
 import { useIssueComments } from "../apiHooks"
 import { useRouterValues } from "../useChatRouteParam"
-import { useIssuePost } from "./useIssuePost"
+import { useIssueUpdate } from "./useIssuePost"
 
 export const IssueBodyEdit: FC<{
   issue: IssueNumberResponse
@@ -11,7 +11,7 @@ export const IssueBodyEdit: FC<{
 }> = ({ issue, onEditFinished }) => {
   const { owner, repo } = useRouterValues()
   const number = issue.number
-  const postIssue = useIssuePost(number)
+  const postIssue = useIssueUpdate(number)
   const { mutate } = useIssueComments({
     owner, repo, number
   })
