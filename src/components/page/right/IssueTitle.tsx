@@ -7,7 +7,7 @@ import { useIssuePost } from "./useIssuePost"
 const TitleEdit: FC<{ issue: IssueNumberResponse, onComplete: Function }> = ({ issue, onComplete }) => {
   const [value, setValue] = useState(issue.title)
   const [sending, setSending] = useState(false)
-  const postIssue = useIssuePost()
+  const postIssue = useIssuePost(issue.number)
 
   const submit = async () => {
     setSending(true)

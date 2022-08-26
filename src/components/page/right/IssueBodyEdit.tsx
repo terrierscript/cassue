@@ -11,7 +11,7 @@ export const IssueBodyEdit: FC<{
 }> = ({ issue, onEditFinished }) => {
   const { owner, repo } = useRouterValues()
   const number = issue.number
-  const postIssue = useIssuePost()
+  const postIssue = useIssuePost(number)
   const { mutate } = useIssueComments({
     owner, repo, number
   })

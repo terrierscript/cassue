@@ -1,19 +1,20 @@
+import { useAppClient } from "../../../utils/trpc"
 import { useIssueComments } from "../apiHooks"
 import { useRouterValues } from "../useChatRouteParam"
 
-export const useIssuePost = () => {
-  const { owner, repo, number } = useRouterValues()
+export const useIssuePost = (issueNumber: number) => {
+  const { owner, repo } = useRouterValues()
+  const trpc = useAppClient()
   const { mutate } = useIssueComments({
-    owner, repo, number
+    owner,
+    repo,
+    number: issueNumber
   })
 
   return async (body: Record<string, string>) => {
-    const result = await fetch(`/api/issues/${owner}/${repo}/${number}`, {
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      method: "POST",
-      body: JSON.stringify(body)
+    const result = await trpc.mutation("updateIssue", {
+      query: { owner, repo, number: issueNumber },
+      issue: body
     })
 
     await mutate()
