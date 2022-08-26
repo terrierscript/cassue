@@ -1,7 +1,7 @@
 import { NextApiHandler } from "next"
 import { getSessionAccount } from "../../../../../../services/auth/getSessionAccount"
 import { GithubClient } from "../../../../../../services/github/GithubClient"
-import { IssueNumberQueryScheme, IssueUpdateScheme } from "../../../../../../services/github/Schema"
+import { IssueCommentQueryScheme, IssueUpdateScheme } from "../../../../../../services/github/Schema"
 
 /** @deprecated */
 // export const handler: NextApiHandler = async (req, res) => {

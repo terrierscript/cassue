@@ -2,7 +2,7 @@ import * as trpc from '@trpc/server'
 import { z } from 'zod'
 import { GithubAccount } from '../auth/getSessionAccount'
 import { GithubClient } from '../github/GithubClient'
-import { IssueNumberQueryScheme, IssuePostScheme, IssuesTargetQueryScheme, IssueUpdateScheme, LabelPostScheme, RepositoryQueryScheme } from '../github/Schema'
+import { IssueCommentQueryScheme, IssueNumberQueryScheme, IssuePostScheme, IssuesTargetQueryScheme, IssueUpdateScheme, LabelPostScheme, RepositoryQueryScheme } from '../github/Schema'
 
 export type AppRouterContext = {
   account: GithubAccount
