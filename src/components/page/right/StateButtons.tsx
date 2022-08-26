@@ -6,13 +6,14 @@ import { fetchPost } from "../../../services/swr/fetcher"
 import { IssueStateIcon } from "../../chat/message/IssueStateIcon"
 import { useIssueComments, useIssuesInfinate } from "../apiHooks"
 import { useRouterValues } from "../useChatRouteParam"
+import { useIssueUpdate } from "./useIssueUpdate"
 
-const useStateUpdateHandler = () => {
+const useStateUpdateHandler = (issueNumber: number) => {
   const [sending, setSending] = useState(false)
-  const { owner, repo, number } = useRouterValues()
+  const update = useIssueUpdate(issueNumber)
   const changeHandler = async (state: "closed" | "open", /*state_reason*/) => {
     setSending(true)
-    await fetchPost(`/api/issues/${owner}/${repo}/${number}`, {
+    await update({
       state: state
     })
     setSending(false)
@@ -24,7 +25,12 @@ const useStateUpdateHandler = () => {
 }
 
 const CloseButton: FC<{ onChange: Function }> = ({ onChange }) => {
-  const { sending, changeHandler } = useStateUpdateHandler()
+  const { number } = useRouterValues()
+  if (number === null) {
+    return <Box />
+  }
+
+  const { sending, changeHandler } = useStateUpdateHandler(number)
   return <HStack>
     <Button
       isDisabled={sending}

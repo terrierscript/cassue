@@ -1,3 +1,4 @@
+import { IssueUpdate } from "../../../services/github/Schema"
 import { useAppClient } from "../../../utils/trpc"
 import { useIssueComments } from "../apiHooks"
 import { useRouterValues } from "../useChatRouteParam"
@@ -11,7 +12,7 @@ export const useIssueUpdate = (issueNumber: number) => {
     number: issueNumber
   })
 
-  return async (body: Record<string, string>) => {
+  return async (body: IssueUpdate) => {
     const result = await trpc.mutation("updateIssue", {
       query: { owner, repo, number: issueNumber },
       issue: body
