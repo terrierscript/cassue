@@ -2,7 +2,7 @@ import * as trpc from '@trpc/server'
 import { z } from 'zod'
 import { GithubAccount } from '../auth/getSessionAccount'
 import { GithubClient } from '../github/GithubClient'
-import { IssueCommentQueryScheme, IssuePostScheme, IssuesTargetQueryScheme, IssueUpdateScheme, LabelPostScheme, RepositoryQueryScheme } from '../github/Schema'
+import { IssueNumberQueryScheme, IssuePostScheme, IssuesTargetQueryScheme, IssueUpdateScheme, LabelPostScheme, RepositoryQueryScheme } from '../github/Schema'
 
 export type AppRouterContext = {
   account: GithubAccount
@@ -33,7 +33,7 @@ export const appRouter = trpc
   })
   .mutation("updateIssue", {
     input: z.object({
-      query: IssueCommentQueryScheme,
+      query: IssueNumberQueryScheme,
       issue: IssueUpdateScheme
     }),
     async resolve({ input, ctx }) {
