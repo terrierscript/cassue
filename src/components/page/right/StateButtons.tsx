@@ -6,13 +6,14 @@ import { fetchPost } from "../../../services/swr/fetcher"
 import { IssueStateIcon } from "../../chat/message/IssueStateIcon"
 import { useIssueComments, useIssuesInfinate } from "../apiHooks"
 import { useRouterValues } from "../useChatRouteParam"
+import { useIssueUpdate } from "./useIssueUpdate"
 
-const useStateUpdateHandler = () => {
+const useStateUpdateHandler = (issueNumber: number) => {
   const [sending, setSending] = useState(false)
-  const { owner, repo, number } = useRouterValues()
+  const update = useIssueUpdate(issueNumber)
   const changeHandler = async (state: "closed" | "open", /*state_reason*/) => {
     setSending(true)
-    await fetchPost(`/api/issues/${owner}/${repo}/${number}`, {
+    await update({
       state: state
     })
     setSending(false)
@@ -23,8 +24,8 @@ const useStateUpdateHandler = () => {
   }
 }
 
-const CloseButton: FC<{ onChange: Function }> = ({ onChange }) => {
-  const { sending, changeHandler } = useStateUpdateHandler()
+const CloseButton: FC<{ issueNumber: number, onChange: Function }> = ({ onChange, issueNumber }) => {
+  const { sending, changeHandler } = useStateUpdateHandler(issueNumber)
   return <HStack>
     <Button
       isDisabled={sending}
@@ -35,8 +36,8 @@ const CloseButton: FC<{ onChange: Function }> = ({ onChange }) => {
   </HStack>
 }
 
-const OpenButton: FC<{ onChange: Function }> = ({ onChange }) => {
-  const { sending, changeHandler } = useStateUpdateHandler()
+const OpenButton: FC<{ issueNumber: number, onChange: Function }> = ({ onChange, issueNumber }) => {
+  const { sending, changeHandler } = useStateUpdateHandler(issueNumber)
   return <HStack>
     <Button
       isDisabled={sending}
@@ -48,17 +49,20 @@ const OpenButton: FC<{ onChange: Function }> = ({ onChange }) => {
 }
 
 export const StateButtons: FC<{ issue: IssueResponse }> = ({ issue }) => {
-  const { owner, repo, target, value } = useRouterValues()
+  const { owner, repo, target, value, number } = useRouterValues()
   const { mutate: mutateComment } = useIssueComments({ owner, repo, number: issue.number })
   const { mutate: mutateIssue } = useIssuesInfinate({ owner, repo, target, value })
   const change = () => {
     mutateComment()
     mutateIssue()
   }
+  if (number === null) {
+    return null
+  }
 
   return <HStack>
     {issue.state === "open"
-      ? <CloseButton onChange={change} />
-      : <OpenButton onChange={change} />}
+      ? <CloseButton issueNumber={number} onChange={change} />
+      : <OpenButton issueNumber={number} onChange={change} />}
   </HStack>
 }

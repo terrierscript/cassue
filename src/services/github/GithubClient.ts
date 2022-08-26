@@ -1,6 +1,6 @@
 import { Octokit } from "octokit"
 import { GetResponseDataTypeFromEndpointMethod } from "@octokit/types"
-import { RepositoryQuery, IssuePost, IssuesTargetQuery, IssueCommentQuery, CommentPost, LabelPost, IssueUpdate } from "./Schema"
+import { RepositoryQuery, IssuePost, IssuesTargetQuery, IssueCommentQuery, CommentPost, LabelPost, IssueUpdate, IssueNumberQuery } from "./Schema"
 
 
 const octokit = new Octokit()
@@ -120,7 +120,7 @@ export class GithubClient {
     return result.data
   }
 
-  async updateIssue(target: IssueCommentQuery, body: IssueUpdate) {
+  async updateIssue(target: IssueNumberQuery, body: IssueUpdate) {
     const { number, ...rest } = target
 
     const result = await this.client.rest.issues.update({

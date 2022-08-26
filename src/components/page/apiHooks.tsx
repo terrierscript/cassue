@@ -44,6 +44,7 @@ type IssueCommentPartialQuery = {
   number: number | null
 }
 type IssueApiResponse = { comments: IssueComementResponse[], issue: IssueNumberResponse }
+
 export const useIssueComments = ({ owner, repo, number }: IssueCommentPartialQuery) => {
   const url = `/api/comments/${owner}/${repo}/${number}`
   return useSWR<IssueApiResponse>(number ? url : null, jsonFetcher, {
