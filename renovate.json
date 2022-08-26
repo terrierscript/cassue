@@ -20,6 +20,12 @@
         "slate-*"
       ],
       "groupName": "slate"
+    },
+    {
+      "matchPackagePatterns": [
+        "@trpc/*"
+      ],
+      "groupName": "trpc"
     }
   ]
 }
