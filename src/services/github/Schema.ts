@@ -20,10 +20,17 @@ export const zStringNumber = z.preprocess(
 
 
 export const IssueCommentQueryScheme = RepositoryQueryScheme.extend({
+  // number: z.number()
   number: zStringNumber
 })
 
 export type IssueCommentQuery = z.infer<typeof IssueCommentQueryScheme>
+
+export const IssueNumberQueryScheme = RepositoryQueryScheme.extend({
+  number: z.number()
+})
+
+export type IssueNumberQuery = z.infer<typeof IssueNumberQueryScheme>
 
 export const IssuesTargetQueryScheme = RepositoryQueryScheme.extend({
   filter: z.array(z.string()).optional().default([]),
