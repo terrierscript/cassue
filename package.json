@@ -22,7 +22,7 @@
     "@trpc/react": "^9.27.1",
     "@trpc/server": "^9.27.1",
     "date-fns": "^2.29.2",
-    "framer-motion": "^7.2.0",
+    "framer-motion": "^7.2.1",
     "next": "^12.2.5",
     "next-auth": "^4.10.3",
     "next-pwa": "5.5.4",
