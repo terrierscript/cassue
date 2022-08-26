@@ -2,12 +2,13 @@ import * as trpc from '@trpc/server'
 import { z } from 'zod'
 import { GithubAccount } from '../auth/getSessionAccount'
 import { GithubClient } from '../github/GithubClient'
-import { IssuesTargetQueryScheme, LabelPostScheme, RepositoryQueryScheme } from '../github/Schema'
+import { IssuePostScheme, IssuesTargetQueryScheme, LabelPostScheme, RepositoryQueryScheme } from '../github/Schema'
 
 export type AppRouterContext = {
   account: GithubAccount
   githubClient: GithubClient
 }
+
 
 
 export const appRouter = trpc
@@ -16,6 +17,17 @@ export const appRouter = trpc
     input: IssuesTargetQueryScheme,
     async resolve({ input, ctx }) {
       const issues = await ctx.githubClient.getAllIssue(input)
+      return { issues }
+    }
+  })
+  .mutation("postMessage", {
+    input: z.object({
+      query: RepositoryQueryScheme,
+      issue: IssuePostScheme
+    }),
+    async resolve({ input, ctx }) {
+      const { query, issue } = input
+      const issues = await ctx.githubClient.postIssue(query, issue)
       return { issues }
     }
   })
