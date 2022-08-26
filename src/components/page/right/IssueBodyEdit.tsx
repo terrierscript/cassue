@@ -3,7 +3,7 @@ import { IssueNumberResponse } from "../../../services/github/GithubClient"
 import { SlateEditor } from "../../chat/input/SlateEditor"
 import { useIssueComments } from "../apiHooks"
 import { useRouterValues } from "../useChatRouteParam"
-import { useIssueUpdate } from "./useIssuePost"
+import { useIssueUpdate } from "./useIssueUpdate"
 
 export const IssueBodyEdit: FC<{
   issue: IssueNumberResponse

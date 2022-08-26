@@ -2,7 +2,7 @@ import { Heading, HStack, IconButton, Input, Link } from "@chakra-ui/react"
 import { PencilIcon } from "@primer/octicons-react"
 import { FC, useState } from "react"
 import { IssueNumberResponse } from "../../../services/github/GithubClient"
-import { useIssueUpdate } from "./useIssuePost"
+import { useIssueUpdate } from "./useIssueUpdate"
 
 const TitleEdit: FC<{ issue: IssueNumberResponse, onComplete: Function }> = ({ issue, onComplete }) => {
   const [value, setValue] = useState(issue.title)
