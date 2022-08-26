@@ -65,6 +65,13 @@ export const appRouter = trpc
       return ctx.githubClient.getCustomLabels(input.repo)
     }
   })
+  .query("labels", {
+    input: RepositoryQueryScheme,
+    async resolve({ input, ctx }) {
+      const labels = await ctx.githubClient.getCustomLabels(input)
+      return { labels }
+    }
+  })
 // export type definition of API
 
 
