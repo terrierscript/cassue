@@ -9,6 +9,12 @@
     "start": "next start",
     "test": "vitest"
   },
+  "size-limit": [
+    {
+      "path": ".next/**/*.js",
+      "limit": "500 kB"
+    }
+  ],
   "dependencies": {
     "@chakra-ui/icons": "^2.0.9",
     "@chakra-ui/react": "^2.3.1",
