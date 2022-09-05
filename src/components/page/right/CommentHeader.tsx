@@ -1,4 +1,4 @@
-import { Box, HStack, Link, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack, useDisclosure } from "@chakra-ui/react"
+import { Box, HStack, Link, Spacer, Stack } from "@chakra-ui/react"
 import { FC, PropsWithChildren, useState } from "react"
 import { IssueNumberResponse } from "../../../services/github/GithubClient"
 import { useInverseAlpha } from "../../chakra/styleUtils"
@@ -9,6 +9,7 @@ import { IssueBodyEdit } from "./IssueBodyEdit"
 import { IssueBodyText } from "./IssueBodyText"
 import { StateButtons } from "./StateButtons"
 import { IssueTitle } from "./IssueTitle"
+import { LabelSelector } from "./LabelSelector"
 
 const IssueBodyContainer: FC<PropsWithChildren<{}>> = ({ children }) => {
   const bg = useInverseAlpha(50)
@@ -34,6 +35,7 @@ const IssueBody: FC<{ issue: IssueNumberResponse }> = ({ issue }) => {
   </Box>
 }
 
+
 export const CommentHeader: FC<{ issueNumber: number }> = ({ issueNumber }) => {
   const { owner, repo } = useChatRouteParam()
   const { data } = useIssueComments({ owner, repo, number: issueNumber })
@@ -57,7 +59,11 @@ export const CommentHeader: FC<{ issueNumber: number }> = ({ issueNumber }) => {
       <IssueBodyContainer>
         <IssueBody issue={issue} />
       </IssueBodyContainer>
-      <StateButtons issue={issue} />
+      <HStack>
+        <LabelSelector issue={issue} />
+        <Spacer />
+        <StateButtons issue={issue} />
+      </HStack>
       {/* <Box bg="red.100">
         {issue?.body}
       </Box> */}
