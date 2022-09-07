@@ -110,15 +110,6 @@ export class GithubClient {
     })
     return result.data
   }
-  async removeLabel(param: IssueCommentQuery, label: string) {
-    const { number, ...rest } = param
-    const result = await this.client.rest.issues.removeLabel({
-      ...rest,
-      issue_number: number,
-      name: label,
-    })
-    return result.data
-  }
 
   async getComments(param: IssueCommentQuery) {
     const { number, ...rest } = param
