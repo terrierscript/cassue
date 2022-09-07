@@ -100,6 +100,16 @@ export class GithubClient {
     return result.data
   }
 
+  async addLabel(param: IssueCommentQuery, labels: string[]) {
+    const { number, ...rest } = param
+    const result = await this.client.rest.issues.addLabels({
+      ...rest,
+      issue_number: number,
+      labels: labels,
+    })
+    return result.data
+  }
+
   async getComments(param: IssueCommentQuery) {
     const { number, ...rest } = param
     const result = await this.client.rest.issues.listComments({
@@ -109,6 +119,7 @@ export class GithubClient {
     })
     return result.data
   }
+
   async postComment(target: IssueCommentQuery, body: CommentPost) {
     const { number, ...rest } = target
     const result = await this.client.rest.issues.createComment({
