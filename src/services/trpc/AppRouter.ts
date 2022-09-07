@@ -67,11 +67,21 @@ export const appRouter = trpc
   })
   .mutation("addLabel", {
     input: z.object({
-      labels: z.array(z.string()),
+      label: z.string(),
       query: IssueNumberQueryScheme,
     }),
     async resolve({ input, ctx }) {
-      await ctx.githubClient.addLabel(input.query, input.labels)
+      await ctx.githubClient.addLabel(input.query, [input.label])
+      return ctx.githubClient.getIssue(input.query)
+    }
+  })
+  .mutation("removeLabel", {
+    input: z.object({
+      label: z.string(),
+      query: IssueNumberQueryScheme,
+    }),
+    async resolve({ input, ctx }) {
+      await ctx.githubClient.removeLabel(input.query, input.label)
       return ctx.githubClient.getIssue(input.query)
     }
   })

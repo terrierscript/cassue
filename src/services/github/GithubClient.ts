@@ -39,6 +39,7 @@ const resolveIssueListFilter = (filter: string[] = []) => {
 
 
 export type LabelResponse = GetResponseDataTypeFromEndpointMethod<typeof octokit.rest.issues.listLabelsForRepo>
+export type LabelItem = LabelResponse[number]
 
 const headers = {
   accept: "application/vnd.github.VERSION.full+json"
@@ -106,6 +107,15 @@ export class GithubClient {
       ...rest,
       issue_number: number,
       labels: labels,
+    })
+    return result.data
+  }
+  async removeLabel(param: IssueCommentQuery, label: string) {
+    const { number, ...rest } = param
+    const result = await this.client.rest.issues.removeLabel({
+      ...rest,
+      issue_number: number,
+      name: label,
     })
     return result.data
   }

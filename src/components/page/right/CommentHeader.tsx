@@ -38,7 +38,10 @@ const IssueBody: FC<{ issue: IssueNumberResponse }> = ({ issue }) => {
 
 export const CommentHeader: FC<{ issueNumber: number }> = ({ issueNumber }) => {
   const { owner, repo } = useChatRouteParam()
-  const { data } = useIssueComments({ owner, repo, number: issueNumber })
+  const { data, mutate } = useIssueComments({ owner, repo, number: issueNumber })
+  const onChange = () => {
+    mutate()
+  }
   const issue = data?.issue
   if (!issue) {
     // TODO: error?
@@ -60,7 +63,7 @@ export const CommentHeader: FC<{ issueNumber: number }> = ({ issueNumber }) => {
         <IssueBody issue={issue} />
       </IssueBodyContainer>
       <HStack>
-        <LabelSelector issue={issue} />
+        <LabelSelector issue={issue} onChangeLabel={onChange} />
         <Spacer />
         <StateButtons issue={issue} />
       </HStack>
