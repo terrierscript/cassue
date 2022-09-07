@@ -65,6 +65,16 @@ export const appRouter = trpc
       return ctx.githubClient.getCustomLabels(input.repo)
     }
   })
+  .mutation("setLabel", {
+    input: z.object({
+      labels: z.array(z.string()),
+      query: IssueNumberQueryScheme,
+    }),
+    async resolve({ input, ctx }) {
+      await ctx.githubClient.setLabels(input.query, input.labels)
+      return ctx.githubClient.getIssue(input.query)
+    }
+  })
   .query("labels", {
     input: RepositoryQueryScheme,
     async resolve({ input, ctx }) {

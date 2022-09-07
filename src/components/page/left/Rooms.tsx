@@ -38,7 +38,6 @@ const RoomButton: FC<{ room: Room }> = ({ room }) => {
 
 export const Rooms: FC<{}> = ({ }) => {
   const { owner, repo } = useRouterValues()
-
   const { data } = useLabels({ owner, repo })
   const rooms: Room[] = [
     {
