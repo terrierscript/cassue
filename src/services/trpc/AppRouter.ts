@@ -82,6 +82,20 @@ export const appRouter = trpc
       return { labels }
     }
   })
+  .query("comments", {
+    input: IssueNumberQueryScheme,
+    async resolve({ input, ctx }) {
+      const comments = await ctx.githubClient.getComments(input)
+      return { comments }
+    }
+  })
+  .query("issue", {
+    input: IssueNumberQueryScheme,
+    async resolve({ input, ctx }) {
+      const issue = await ctx.githubClient.getIssue(input)
+      return { issue }
+    }
+  })
 // export type definition of API
 
 

@@ -1,7 +1,7 @@
 import useSWR from "swr"
 import useSWRInfinite from "swr/infinite"
 import { IssueComementResponse, IssueNumberResponse, IssueResponse, LabelResponse, RepoResponse } from "../../services/github/GithubClient"
-import { IssuesTargetTypeValue, RepositoryQuery } from "../../services/github/Schema"
+import { IssueNumberQuery, IssuesTargetTypeValue, RepositoryQuery } from "../../services/github/Schema"
 import { jsonFetcher } from "../../services/swr/fetcher"
 import { useAppClient } from "../../utils/trpc"
 
@@ -45,12 +45,32 @@ type IssueCommentPartialQuery = {
 }
 type IssueApiResponse = { comments: IssueComementResponse[], issue: IssueNumberResponse }
 
+type IssueCommentKey = ["issue_comment", IssueNumberQuery]
 export const useIssueComments = ({ owner, repo, number }: IssueCommentPartialQuery) => {
-  const url = `/api/comments/${owner}/${repo}/${number}`
-  return useSWR<IssueApiResponse>(number ? url : null, jsonFetcher, {
-    // fallbackData: { issues },
-    // suspense: true
+  const trpc = useAppClient()
+  return useSWR<IssueApiResponse, IssueCommentKey | null>(() => {
+    if (number === null) {
+      return null
+    }
+    const param: IssueNumberQuery = {
+      owner, repo, number
+    }
+    const keys: IssueCommentKey = ["issue_comment", param]
+    return keys
+  }, async (_, param) => {
+    const { comments } = await trpc.query("comments", param)
+    const { issue } = await trpc.query("issue", param)
+    const res: IssueApiResponse = {
+      comments,
+      issue
+    }
+    return res
   })
+  // const url = `/api/comments/${owner}/${repo}/${number}`
+  // return useSWR<IssueApiResponse>(number ? url : null, jsonFetcher, {
+  //   // fallbackData: { issues },
+  //   // suspense: true
+  // })
 }
 
 
