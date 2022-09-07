@@ -15,36 +15,18 @@ type ModalProps = {
   // onOpen: () => void
 }
 
-const LabelRowItem: FC<{ label: LabelItem, selected: boolean, onChangeLabel: () => void }> = ({ label, selected, onChangeLabel }) => {
-  const [sending, setSending] = useState(false)
+const LabelRowItem: FC<{
+  label: LabelItem,
+  selected: boolean,
+  onChange: (label: string, selected: boolean) => void
+}> = ({ label, selected, onChange }) => {
   const bg = useInverseAlpha(selected ? 300 : 200)
   const color = useInverseAlpha(800)
-  const trpc = useAppClient()
-  const { owner, repo, number } = useRouterValues()
-
-  if (!number) {
-    return null
-  }
-  const onClick = async () => {
-    if (sending) {
-      return
-    }
-    setSending(true)
-    if (selected) {
-      await trpc.mutation("removeLabel", { query: { repo, owner, number }, label: label.name })
-    } else {
-      await trpc.mutation("addLabel", { query: { repo, owner, number }, label: label.name })
-    }
-    onChangeLabel()
-    setSending(false)
-
-  }
 
   return <HStack
-    opacity={sending ? 0.5 : 1}
     color={color} bg={bg}
     onClick={() => {
-      onClick()
+      onChange(label.name, !selected)
     }}
     p={2} fontSize="sm" borderRadius={8} cursor="pointer"
   >
@@ -57,14 +39,16 @@ const LabelRowItem: FC<{ label: LabelItem, selected: boolean, onChangeLabel: () 
 }
 const LabelInnerContent: FC<{
   repoLabels: LabelResponse,
-  issueLabels: string[]
-  onChangeLabel: () => void
-}> = ({ repoLabels, issueLabels, onChangeLabel }) => {
-
+  selectedLabels: string[]
+  onChange: (label: string, selected: boolean) => void
+}> = ({ repoLabels, selectedLabels, onChange }) => {
   return <Stack>
     {repoLabels.map(label => {
-      const selected = issueLabels.includes(label.name)
-      return <LabelRowItem selected={selected} label={label} key={label.name} onChangeLabel={onChangeLabel} />
+      const selected = selectedLabels.includes(label.name)
+      return <LabelRowItem selected={selected} label={label} key={label.name} onChange={(label, selected) => {
+        onChange(label, selected)
+
+      }} />
     })}
   </Stack>
 }
@@ -74,7 +58,23 @@ const LabelChangeModal: FC<{
   issueLabels: string[],
   onChangeLabel: () => void,
 }> = ({ repoLabels, issueLabels, onChangeLabel }) => {
+  const labelFlags = Object.fromEntries(issueLabels.map(label => [label, true]))
+  const [selectLabelFlags, setSelectedLabelFlags] = useState(labelFlags)
+  const selectedLabels = Object.entries(selectLabelFlags).filter(([_, value]) => value).map(([key]) => key)
+  const trpc = useAppClient()
+  const { owner, repo, number } = useRouterValues()
+
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const send = () => {
+    if (number === null) {
+      // TODO: throw errors
+      return
+    }
+    trpc.mutation("setLabel", { query: { owner, repo, number }, labels: selectedLabels }).then(() => {
+      onChangeLabel()
+    })
+    onClose()
+  }
   return <>
     <IconButton
       colorScheme={"gray"}
@@ -84,18 +84,22 @@ const LabelChangeModal: FC<{
       variant={"link"}
       onClick={() => onOpen()}
     />
-
     <Modal isOpen={isOpen} onClose={onClose} scrollBehavior="inside">
       <ModalOverlay />
       <ModalContent >
         <ModalHeader>Change Labels</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <LabelInnerContent repoLabels={repoLabels} issueLabels={issueLabels} onChangeLabel={onChangeLabel} />
+          <LabelInnerContent repoLabels={repoLabels} selectedLabels={selectedLabels}
+            onChange={(label, selected) => {
+              setSelectedLabelFlags((labels) => {
+                return { ...labels, [label]: selected }
+              })
+            }} />
         </ModalBody>
-        {/* <ModalFooter>
-          <Button>Send</Button>
-        </ModalFooter> */}
+        <ModalFooter>
+          <Button onClick={() => send()}>Send</Button>
+        </ModalFooter>
       </ModalContent>
     </Modal>
   </>

@@ -65,23 +65,33 @@ export const appRouter = trpc
       return ctx.githubClient.getCustomLabels(input.repo)
     }
   })
-  .mutation("addLabel", {
+  // .mutation("addLabel", {
+  //   input: z.object({
+  //     label: z.string(),
+  //     query: IssueNumberQueryScheme,
+  //   }),
+  //   async resolve({ input, ctx }) {
+  //     await ctx.githubClient.addLabel(input.query, [input.label])
+  //     return ctx.githubClient.getIssue(input.query)
+  //   }
+  // })
+  // .mutation("removeLabel", {
+  //   input: z.object({
+  //     label: z.string(),
+  //     query: IssueNumberQueryScheme,
+  //   }),
+  //   async resolve({ input, ctx }) {
+  //     await ctx.githubClient.removeLabel(input.query, input.label)
+  //     return ctx.githubClient.getIssue(input.query)
+  //   }
+  // })
+  .mutation("setLabel", {
     input: z.object({
-      label: z.string(),
+      labels: z.array(z.string()),
       query: IssueNumberQueryScheme,
     }),
     async resolve({ input, ctx }) {
-      await ctx.githubClient.addLabel(input.query, [input.label])
-      return ctx.githubClient.getIssue(input.query)
-    }
-  })
-  .mutation("removeLabel", {
-    input: z.object({
-      label: z.string(),
-      query: IssueNumberQueryScheme,
-    }),
-    async resolve({ input, ctx }) {
-      await ctx.githubClient.removeLabel(input.query, input.label)
+      await ctx.githubClient.setLabels(input.query, input.labels)
       return ctx.githubClient.getIssue(input.query)
     }
   })

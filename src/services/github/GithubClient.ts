@@ -101,9 +101,9 @@ export class GithubClient {
     return result.data
   }
 
-  async addLabel(param: IssueCommentQuery, labels: string[]) {
+  async setLabels(param: IssueCommentQuery, labels: string[]) {
     const { number, ...rest } = param
-    const result = await this.client.rest.issues.addLabels({
+    const result = await this.client.rest.issues.setLabels({
       ...rest,
       issue_number: number,
       labels: labels,
