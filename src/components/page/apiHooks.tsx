@@ -43,7 +43,11 @@ type IssueCommentPartialQuery = {
   repo: string,
   number: number | null
 }
-type IssueApiResponse = { comments: IssueComementResponse[], issue: IssueNumberResponse }
+
+type IssueApiResponse = {
+  comments: IssueComementResponse[],
+  issue: IssueNumberResponse
+}
 
 type IssueCommentKey = ["issue_comment", IssueNumberQuery]
 export const useIssueComments = ({ owner, repo, number }: IssueCommentPartialQuery) => {
