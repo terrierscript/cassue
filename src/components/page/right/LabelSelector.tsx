@@ -1,12 +1,11 @@
-import { Box, Button, HStack, IconButton, Link, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Spacer, Stack, useDisclosure, Wrap } from "@chakra-ui/react"
-import { FC, PropsWithChildren, useEffect, useMemo, useState } from "react"
+import { Box, Button, HStack, IconButton, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Spacer, Stack, useDisclosure, Wrap } from "@chakra-ui/react"
+import { FC, useMemo, useState } from "react"
 import { IssueResponse, LabelItem, LabelResponse } from "../../../services/github/GithubClient"
-
-import { CheckIcon, CommentIcon, DuplicateIcon } from '@primer/octicons-react'
+import { CheckIcon, DuplicateIcon } from '@primer/octicons-react'
 import { useRouterValues } from "../useChatRouteParam"
 import { useLabels } from "../apiHooks"
 import { isString } from "typesafe-utils"
-import { useAlpha, useInverseAlpha } from "../../chakra/styleUtils"
+import { useInverseAlpha } from "../../chakra/styleUtils"
 import { useAppClient } from "../../../utils/trpc"
 
 type ModalProps = {
@@ -123,7 +122,7 @@ export const LabelSelector: FC<{
   return <HStack>
     <Wrap>
       {issueLabels.map(labelName => {
-        return <Box fontSize={"xs"}>
+        return <Box fontSize={"xs"} key={labelName}>
           {labelName}
         </Box>
       })}
