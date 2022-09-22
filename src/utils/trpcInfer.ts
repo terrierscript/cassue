@@ -1,7 +1,6 @@
-import { TRPCClient, TRPCRequestOptions } from "@trpc/client"
-import { AnyRouter, inferHandlerInput, inferProcedureOutput } from "@trpc/server"
+import { TRPCClient } from "@trpc/client"
+import { AnyRouter, inferHandlerInput } from "@trpc/server"
 import useSWR from "swr"
-import useSWRInfinite from "swr/infinite"
 
 
 export type TrpcPath<TRouter extends AnyRouter> = string & keyof TRouter["_def"]["queries"]

@@ -55,14 +55,12 @@ export const useIssueComments = ({ owner, repo, number }: IssueCommentPartialQue
 
 
 export const useLabels = ({ owner, repo }: RepositoryQuery) => {
-  const trpc = useAppClient()
-  const param = { owner, repo }
   return useAppQuery("labels", { owner, repo })
 }
 
 // TODO: create api?
 export const useLabel = ({ owner, repo }: RepositoryQuery, targetLabel: string) => {
-  const { data, ...rest } = useLabels({ owner, repo })
+  const { data, ...rest } = useAppQuery("labels", { owner, repo })
   return {
     data: {
       label: data?.labels.find(label => label.name === targetLabel)
