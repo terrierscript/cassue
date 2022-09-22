@@ -57,7 +57,7 @@ export const useIssueComments = ({ owner, repo, number }: IssueCommentPartialQue
 export const useLabels = ({ owner, repo }: RepositoryQuery) => {
   const trpc = useAppClient()
   const param = { owner, repo }
-  return useSWR<{ labels: LabelResponse }>(["query_labels", param], async () => {
+  return useSWR(["query_labels", param], async () => {
     const result = await trpc.query("labels", param)
     console.log(result)
     return result
