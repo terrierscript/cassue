@@ -3,7 +3,7 @@ import useSWRInfinite from "swr/infinite"
 import { IssueComementResponse, IssueNumberResponse, IssueResponse, LabelResponse, RepoResponse } from "../../services/github/GithubClient"
 import { IssuesTargetTypeValue, RepositoryQuery } from "../../services/github/Schema"
 import { jsonFetcher } from "../../services/swr/fetcher"
-import { useAppClient } from "../../utils/trpc"
+import { useAppClient, useAppQuery } from "../../utils/trpc"
 
 export const useIssuesInfinate = ({ owner, repo, target, value }: RepositoryQuery & IssuesTargetTypeValue) => {
   const trpc = useAppClient()
@@ -55,21 +55,12 @@ export const useIssueComments = ({ owner, repo, number }: IssueCommentPartialQue
 
 
 export const useLabels = ({ owner, repo }: RepositoryQuery) => {
-  const trpc = useAppClient()
-  const param = { owner, repo }
-  return useSWR<{ labels: LabelResponse }>(["query_labels", param], async () => {
-    const result = await trpc.query("labels", param)
-    console.log(result)
-    return result
-  }, {
-    // fallbackData: { issues },
-    // suspense: true
-  })
+  return useAppQuery("labels", { owner, repo })
 }
 
 // TODO: create api?
 export const useLabel = ({ owner, repo }: RepositoryQuery, targetLabel: string) => {
-  const { data, ...rest } = useLabels({ owner, repo })
+  const { data, ...rest } = useAppQuery("labels", { owner, repo })
   return {
     data: {
       label: data?.labels.find(label => label.name === targetLabel)
