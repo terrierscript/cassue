@@ -1,7 +1,7 @@
 
 import { createTRPCClient } from '@trpc/react'
 import type { AppRouter } from "../services/trpc/AppRouter"
-import { TrpcInput, TrpcInputs, TrpcPath, TrpcValue, useTrpcSWRQuery } from './trpcInfer'
+import { TrpcInputs, TrpcPath, useTrpcSWRQuery } from './trpcInfer'
 
 /** @deprecated */
 export const useAppClient = () => {
@@ -10,7 +10,7 @@ export const useAppClient = () => {
   })
 }
 
-export const useAppQuery = (path: TrpcPath<AppRouter>, ...params: TrpcInputs<AppRouter>) => {
+export const useAppQuery = <TPath extends TrpcPath<AppRouter>>(path: TPath, ...params: TrpcInputs<AppRouter>) => {
   const trpc = useAppClient()
   return useTrpcSWRQuery(trpc, path, ...params)
 }
