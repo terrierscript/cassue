@@ -40,7 +40,7 @@
     "react-icons": "^4.4.0",
     "react-query": "3",
     "slate": "^0.82.1",
-    "slate-react": "^0.82.2",
+    "slate-react": "^0.83.0",
     "swr": "^1.3.0",
     "typesafe-utils": "^1.16.2",
     "vitest": "^0.23.4",
