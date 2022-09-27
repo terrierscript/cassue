@@ -20,7 +20,7 @@ const InputSending: FC<{}> = ({ }) => {
     onSubmit={async (v) => {
       const resolvedParams = resolveFilterToPost(filter)
       const issue: IssuePost = { title: v, ...resolvedParams }
-      const result = await trpc.mutation("postMessage", {
+      const result = await trpc.postMessage.mutate({
         query: { owner, repo },
         issue
       })

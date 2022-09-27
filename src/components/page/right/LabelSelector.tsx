@@ -69,7 +69,7 @@ const LabelChangeModal: FC<{
       // TODO: throw errors
       return
     }
-    trpc.mutation("setLabel", { query: { owner, repo, number }, labels: selectedLabels }).then(() => {
+    trpc.setLabel.mutate({ query: { owner, repo, number }, labels: selectedLabels }).then(() => {
       onChangeLabel()
     })
     onClose()

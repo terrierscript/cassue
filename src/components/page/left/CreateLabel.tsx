@@ -22,7 +22,7 @@ const LabelForm: FC<{ onSubmit: Function }> = ({ onSubmit }) => {
       repo: { owner, repo },
       label: data
     }
-    await client.mutation("createLabel", input)
+    await client.createLabel.mutate(input)
     mutate()
     onSubmit()
   })}>
