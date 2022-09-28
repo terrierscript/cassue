@@ -13,7 +13,7 @@ export const useIssueUpdate = (issueNumber: number) => {
   })
 
   return async (body: IssueUpdate) => {
-    const result = await trpc.mutation("updateIssue", {
+    const result = await trpc.updateIssue.mutate({
       query: { owner, repo, number: issueNumber },
       issue: body
     })
