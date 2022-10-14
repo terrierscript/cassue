@@ -87,22 +87,21 @@ const Workspace = () => {
 export const LeftSidebar: FC<{}> = () => {
 
   const bg = useInverseAlpha(200)
+  const footerBg = useInverseAlpha(100)
   const color = useInverseAlpha(800)
 
-  return <Grid h="100%" minH={0} p={6} gap={4}
+  return <Grid h="100%" minH={0}
     gridTemplateRows={"max-content auto max-content"}
     bg={bg}
     color={color}>
-    <Box>
+    <Box p={6}>
       <Workspace />
     </Box>
-    <Box overflow={"scroll"}>
+    <Box overflow={"scroll"} p={6} gridGap={0}>
       <Rooms />
     </Box>
-    <Box>
-      <Divider />
-      {/* <Debugger /> */}
-      <HStack>
+    <Box bg={footerBg}>
+      <HStack p={6}>
         <UserIcon />
         <Spacer />
         <ThemeSwitcher />
