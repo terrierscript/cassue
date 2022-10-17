@@ -37,7 +37,7 @@
     "react-div-100vh": "^0.7.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.37.0",
-    "react-icons": "^4.4.0",
+    "react-icons": "^4.6.0",
     "react-query": "3",
     "slate": "^0.82.1",
     "slate-react": "^0.83.1",
