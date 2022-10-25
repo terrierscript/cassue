@@ -30,7 +30,7 @@
     "date-fns": "^2.29.3",
     "framer-motion": "^7.6.1",
     "next": "^12.2.5",
-    "next-auth": "^4.12.3",
+    "next-auth": "^4.15.0",
     "next-pwa": "5.6.0",
     "octokit": "^2.0.9",
     "react": "^18.2.0",
