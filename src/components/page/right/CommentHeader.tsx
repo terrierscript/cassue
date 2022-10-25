@@ -51,7 +51,7 @@ export const CommentHeader: FC<{ issueNumber: number }> = ({ issueNumber }) => {
   return <Box p={4}>
     <Stack>
       <HStack>
-        <Link href={issue?.html_url}>
+        <Link href={issue?.html_url} target="_blank">
           #{issueNumber}
         </Link>
         <HStack w="80%">
