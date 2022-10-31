@@ -22,7 +22,7 @@
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@next/bundle-analyzer": "^12.2.5",
-    "@primer/octicons-react": "^17.7.0",
+    "@primer/octicons-react": "^17.8.0",
     "@trpc/client": "next",
     "@trpc/next": "next",
     "@trpc/react": "next",
