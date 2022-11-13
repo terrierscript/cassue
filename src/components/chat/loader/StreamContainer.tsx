@@ -21,10 +21,12 @@ export const StreamStack: FC<StackProps> = (props, targetKey) => {
   const scrollToBottom = (overrideBehabior?: ScrollBehavior) => {
     const behavior = overrideBehabior ?? (scrollRef.current?.scrollTop === 0 ? "auto" : "smooth")
     // const behavior = "smooth"
-    scrollRef.current?.scrollTo({
-      behavior: behavior,
-      top: scrollRef.current?.scrollHeight
-    })
+    setTimeout(() => {
+      scrollRef.current?.scrollTo({
+        behavior: behavior,
+        top: scrollRef.current?.scrollHeight
+      })
+    }, 50)
   }
   return <StreamScrollContext.Provider value={{ scrollToBottom }}>
     <Stack
