@@ -102,7 +102,7 @@ const IssueBody: FC<{ issue: IssueResponse }> = ({ issue }) => {
   const color = useIssueIconColor(issue)
   return <HStack>
     <ColorIssueStateIcon issue={issue} />
-    <Box boxSizing="border-box" textOverflow={"ellipsis"}>
+    <Box boxSizing="border-box" textOverflow={"ellipsis"} wordBreak="break-all">
       {issue.title}
     </Box>
   </HStack>
