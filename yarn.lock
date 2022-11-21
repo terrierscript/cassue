@@ -2579,7 +2579,7 @@
   resolved "https://registry.yarnpkg.com/@swc/core-win32-x64-msvc/-/core-win32-x64-msvc-1.3.18.tgz#ed8608f79b70f18a247e581c6c0422dee2ddea1e"
   integrity sha512-9o8uFNsPmWB5FFQSDCsI/KVBSHuAILEwB/hMvbUxKtZeSWAQTm5BqbNPi6X11KJ3MdyoJn7zPejj3grL3dcd/w==
 
-"@swc/core@^1.3.17":
+"@swc/core@^1.3.18":
   version "1.3.18"
   resolved "https://registry.yarnpkg.com/@swc/core/-/core-1.3.18.tgz#7bb9936a53a5088c7db9f8615f7f4ab8e5784a35"
   integrity sha512-VChk3ldLhmVoX3Hd2M3Y4j960T0lo2Zus60iZoWST6P65RVPt8BatFVVPAB9dABy1dB5zn1BCpHlH85yXVysQw==
@@ -2713,10 +2713,10 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-17.0.34.tgz#3b0b6a50ff797280b8d000c6281d229f9c538cef"
   integrity sha512-XImEz7XwTvDBtzlTnm8YvMqGW/ErMWBsKZ+hMTvnDIjGCKxwK5Xpc+c/oQjOauwq8M4OS11hEkpjX8rrI/eEgA==
 
-"@types/node@^17.0.36":
-  version "17.0.36"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-17.0.36.tgz#c0d5f2fe76b47b63e0e0efc3d2049a9970d68794"
-  integrity sha512-V3orv+ggDsWVHP99K3JlwtH20R7J4IhI1Kksgc+64q5VxgfRkQG8Ws3MFm/FZOKDYGy9feGFlZ70/HpCNe9QaA==
+"@types/node@^18.11.9":
+  version "18.11.9"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.11.9.tgz#02d013de7058cea16d36168ef2fc653464cfbad4"
+  integrity sha512-CRpX21/kGdzjOpFsZSkcrXMGIBWMGNIHXXBVFSH+ggkftxg+XYP20TESbh+zFvFj3EQOl5byk0HTRn1IL6hbqg==
 
 "@types/parse-json@^4.0.0":
   version "4.0.0"
@@ -4185,10 +4185,10 @@ focus-lock@^0.11.2:
   dependencies:
     tslib "^2.0.3"
 
-framer-motion@^7.6.6:
-  version "7.6.6"
-  resolved "https://registry.yarnpkg.com/framer-motion/-/framer-motion-7.6.6.tgz#50e0d3bc29b899a79dbafb6085e398fb53a2f04a"
-  integrity sha512-7ti5mEzhTRBFCMlKs8Zxu9dWtVattpj2jPCNc4jaz4d7bDFekClALaBzmi1pGOKzsOWJsKMeV5ckIkD1DLI9lw==
+framer-motion@^7.6.7:
+  version "7.6.7"
+  resolved "https://registry.yarnpkg.com/framer-motion/-/framer-motion-7.6.7.tgz#4ab0f33d0b77b4fe2289ce8b7c5cf6448d84f23d"
+  integrity sha512-vEGsjXygf4qSmgXXsCT1FC56DjiZau9tSQTCchwAP2mOHnYHUy5gbthc4RXFWJh4Z/gFtqE8bzEmjahwOrfT7w==
   dependencies:
     "@motionone/dom" "10.13.1"
     framesync "6.1.2"
@@ -6074,10 +6074,10 @@ slash@^3.0.0:
   resolved "https://registry.yarnpkg.com/slash/-/slash-3.0.0.tgz#6539be870c165adbd5240220dbe361f1bc4d4634"
   integrity sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q==
 
-slate-react@^0.83.2:
-  version "0.83.2"
-  resolved "https://registry.yarnpkg.com/slate-react/-/slate-react-0.83.2.tgz#7099db1607b79c95cc2a41e2df1e04982b7e26a5"
-  integrity sha512-V5qtPsCOiDVCMU3ovj/CWndxx9/as5/wGJxnbJDRVzuazSh+NVw/YuGTlus1fCt+Nlt6UHOhFvM7C9pXYaftPA==
+slate-react@^0.86.0:
+  version "0.86.0"
+  resolved "https://registry.yarnpkg.com/slate-react/-/slate-react-0.86.0.tgz#e1e0bfaf9a21f8e18d86b616538d11e81c0f8920"
+  integrity sha512-FlzG0CL1MtpZk7DRH6a101FdqdhTi+vZ23SbY5hQudIdgLo7QnUBv97BRe30VctqsL9L+Z2OsFHSCmWpIIxJAw==
   dependencies:
     "@types/is-hotkey" "^0.1.1"
     "@types/lodash" "^4.14.149"
@@ -6088,10 +6088,10 @@ slate-react@^0.83.2:
     scroll-into-view-if-needed "^2.2.20"
     tiny-invariant "1.0.6"
 
-slate@^0.85.0:
-  version "0.85.0"
-  resolved "https://registry.yarnpkg.com/slate/-/slate-0.85.0.tgz#1e922dce13a7b37816670312f5caac70aa2a8d1c"
-  integrity sha512-SHlgOI7fDG50sL+lfAI+nXF9FQpoqf7KNRofggyyE4ngsj1nINOEpFSYKGPkZgVUUkPflWK6PuBJMR6nEuUiKg==
+slate@^0.86.0:
+  version "0.86.0"
+  resolved "https://registry.yarnpkg.com/slate/-/slate-0.86.0.tgz#9704a195a2fe56bcff497b278f0489f3a94b23fc"
+  integrity sha512-aexL720Tpqx6St5oz0jo0/wZWCT7z8lChKkVJo2eiFkSNmoSnCGR62d2itAvmse7dEXkl4DbfAxRQPj8JDuGTg==
   dependencies:
     immer "^9.0.6"
     is-plain-object "^5.0.0"
@@ -6463,10 +6463,10 @@ typesafe-utils@^1.16.2:
   resolved "https://registry.yarnpkg.com/typesafe-utils/-/typesafe-utils-1.16.2.tgz#ba3647f005eabb4f037995e7b4e706ab15af6544"
   integrity sha512-5Ej1sd5V541LPxlJEs4JKpsmF0zvMcwakXJ/s2N9SpdYAEr6CQcgr2COF350nxaO1FSbHYfL+tEKBcMcLDrdOQ==
 
-typescript@^4.8.4:
-  version "4.8.4"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.8.4.tgz#c464abca159669597be5f96b8943500b238e60e6"
-  integrity sha512-QCh+85mCy+h0IGff8r5XWzOVSbBO+KfeYrMQh7NJ58QujwcE22u+NUSmUxqF+un70P9GXKxa2HCNiTTMJknyjQ==
+typescript@^4.9.3:
+  version "4.9.3"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.9.3.tgz#3aea307c1746b8c384435d8ac36b8a2e580d85db"
+  integrity sha512-CIfGzTelbKNEnLpLdGFgdyKhG23CKdKgQPOBc+OUNrkJ2vr+KSzsSV5kq5iWhEQbok+quxgGzrAtGWCyU7tHnA==
 
 unbox-primitive@^1.0.2:
   version "1.0.2"
