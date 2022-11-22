@@ -100,7 +100,7 @@ export const LeftSidebar: FC<{}> = () => {
     <Box overflow={"scroll"} p={6} gridGap={0}>
       <Rooms />
     </Box>
-    <Box bg={footerBg}>
+    <Box>
       <HStack p={6}>
         <UserIcon />
         <Spacer />
