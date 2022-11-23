@@ -86,7 +86,7 @@ export class GithubClient {
     const result = await this.client.rest.issues.listForRepo({
       ...repoParam,
       ...filterQuery,
-      sort: "updated",
+      // sort: "updated",
       direction: "desc",
       page: page ?? 0,
       headers
