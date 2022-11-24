@@ -1,9 +1,25 @@
-import { Box, Button } from "@chakra-ui/react"
+import { Box, Button, Collapse, HStack, Slide, SlideFade, Spinner, useDisclosure } from "@chakra-ui/react"
 import { FC, useEffect, useMemo } from "react"
+import { useRecoilValue } from "recoil"
 import { IssueComementResponse, IssueResponse } from "../../../services/github/GithubClient"
+import { chatInputAtom } from "../../../services/state/chatInputAtom"
 import { StreamMessage } from "../message/StreamMessage"
 import { useScroll } from "./StreamContainer"
 
+const SendingMessage = () => {
+  const chatInputSending = useRecoilValue(chatInputAtom)
+  if (!chatInputSending) {
+    return null
+  }
+  return <SlideFade
+    in={true}
+  >
+    <HStack p={4} color="gray.500">
+      <Spinner size="xs" />
+      <Box>Sending...</Box>
+    </HStack>
+  </SlideFade>
+}
 export const IssueStream: FC<{
   issues: IssueResponse[],
   onLoadMore: Function,
@@ -24,6 +40,7 @@ export const IssueStream: FC<{
   }, [latestNumber])
 
   return <>
+    <SendingMessage />
     {stream.map((issue) => {
       return <Box key={issue.number}>
         <StreamMessage
