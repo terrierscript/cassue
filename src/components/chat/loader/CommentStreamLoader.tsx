@@ -1,7 +1,7 @@
 import { FC } from "react"
 import { useIssueComments } from "../../page/apiHooks"
 import { useChatRouteParam, useCommentNumber } from "../../page/useChatRouteParam"
-import { CommentStream } from "./Stream"
+import { CommentStream } from "./CommentStream"
 import { StreamLoading } from "./StreamLoading"
 
 
