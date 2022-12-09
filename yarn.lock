@@ -6851,7 +6851,7 @@ vite@^3.0.0:
   optionalDependencies:
     fsevents "~2.3.2"
 
-vitest@^0.25.4:
+vitest@^0.25.5:
   version "0.25.6"
   resolved "https://registry.yarnpkg.com/vitest/-/vitest-0.25.6.tgz#3db1692671c702c84165984e6651f8f6c36fbdf5"
   integrity sha512-jdPgmZ7BcDnm1+hmMPIl9BZjSy+b8Y8V0tQMsv7ECO90Qic7EZ5/+traILXLpsXgqK5KgVrUJmchevAUuKL/1w==
