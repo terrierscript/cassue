@@ -31,7 +31,7 @@ const MessageHeaderTitle: FC<{ message: Message }> = ({ message }) => {
     </Box>
     <Spacer />
     {messageType === "issue" && <Box fontSize={"xs"} color="gray.500">
-      <Link href={data.html_url} target="_blank">
+      <Link href={data.html_url} target="_blank" >
         {linkLabel}
       </Link>
     </Box>}
@@ -147,19 +147,19 @@ export const StreamMessage: FC<{ message: Message }> = ({ message }) => {
     _pressed={activeStyle}
     _hover={activeStyle}
   >
-    <LinkMessage message={message}>
-      <HStack spacing={4} w="100%" cursor={"default"}>
-        <Box alignSelf={"start"} py={2}>
-          <MessageAvatar message={message} />
-        </Box>
-        <Stack spacing={0} minW="0" w="100%">
-          <MessageHeaderTitle message={message} />
+    <HStack spacing={4} w="100%" cursor={"default"}>
+      <Box alignSelf={"start"} py={2}>
+        <MessageAvatar message={message} />
+      </Box>
+      <Stack spacing={0} minW="0" w="100%">
+        <MessageHeaderTitle message={message} />
+        <LinkMessage message={message}>
           <MessageBody message={message} />
-          <Stack>
-            <MessageFooter message={message} />
-          </Stack>
+        </LinkMessage>
+        <Stack>
+          <MessageFooter message={message} />
         </Stack>
-      </HStack>
-    </LinkMessage>
+      </Stack>
+    </HStack>
   </Stack>
 }
