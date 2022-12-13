@@ -22,7 +22,7 @@ const PageHead: FC<{}> = ({ }) => {
   const manifestVersion = "20220605-2"
   return <Head>
     <title>{owner}/{repo}</title>
-    <link rel="manifest" href={`/api/manifest/${owner}/${repo}/${manifestVersion}/manifest.webmanifest`} />
+    <link rel="manifest" href={`/api/manifest/${owner}/${repo}/${manifestVersion}/manifest.webmanifest?v2`} />
     <meta name="apple-mobile-web-app-status-bar-style" content="black"></meta>
     <script async src="https://unpkg.com/pwacompat" crossOrigin="anonymous"></script>
   </Head>
