@@ -1,6 +1,6 @@
 import { FC, useMemo } from "react"
 import { useIssuesInfinate } from "../../page/apiHooks"
-import { IssueStream } from "./Stream"
+import { IssueStream } from "./IssueStream"
 import { useChatRouteParam, useFilterValue } from "../../page/useChatRouteParam"
 import { StreamLoading } from "./StreamLoading"
 import { StreamStack } from "./StreamContainer"
