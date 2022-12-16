@@ -6820,7 +6820,7 @@ uuid@^8.3.2:
   optionalDependencies:
     fsevents "~2.3.2"
 
-vitest@^0.25.7:
+vitest@^0.25.8:
   version "0.25.8"
   resolved "https://registry.yarnpkg.com/vitest/-/vitest-0.25.8.tgz#9b57e0b41cd6f2d2d92aa94a39b35c36f715f8cc"
   integrity sha512-X75TApG2wZTJn299E/TIYevr4E9/nBo1sUtZzn0Ci5oK8qnpZAZyhwg0qCeMSakGIWtc6oRwcQFyFfW14aOFWg==
