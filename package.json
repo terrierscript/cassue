@@ -40,7 +40,7 @@
     "react-query": "3",
     "recoil": "^0.7.6",
     "slate": "^0.87.0",
-    "slate-react": "^0.87.1",
+    "slate-react": "^0.88.0",
     "swr": "^1.3.0",
     "typesafe-utils": "^1.16.2",
     "vitest": "^0.26.1",
