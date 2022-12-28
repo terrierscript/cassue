@@ -37,7 +37,7 @@ const MessageHeaderTitle: FC<{ message: Message }> = ({ message }) => {
       <Link
         // href={data.html_url} target="_blank"
         onClick={onClickLink} >
-        {linkLabel}
+        {linkLabel}.
       </Link>
     </Box>}
   </HStack>
