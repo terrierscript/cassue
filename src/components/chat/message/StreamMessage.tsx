@@ -26,7 +26,7 @@ const MessageHeaderTitle: FC<{ message: Message }> = ({ message }) => {
   }, [messageType, data])
   const onClickLink = () => {
     // https://stackoverflow.com/a/61612696
-    window.open(data.html_url, null, 'width=600,height=400')
+    window.open(data.html_url, undefined, 'width=600,height=400')
   }
   return <HStack w="100%">
     <Box fontWeight={"bold"}>{data.user?.login}</Box>
