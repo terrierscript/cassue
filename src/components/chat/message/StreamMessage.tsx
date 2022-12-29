@@ -36,7 +36,7 @@ const MessageHeaderTitle: FC<{ message: Message }> = ({ message }) => {
     <Spacer />
     {messageType === "issue" && <Box fontSize={"xs"} color="gray.500">
       <Link
-        href={`${data.html_url}?openExternalBrowser=1`} target="_blank"
+        href={`${data.html_url}`} target="_blank"
       // onClick={onClickLink}
       >
         {linkLabel}.
