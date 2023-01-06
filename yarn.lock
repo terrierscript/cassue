@@ -2571,10 +2571,10 @@
   resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.10.2.tgz#0798c03351f0dea1a5a4cabddf26a55a7cbee590"
   integrity sha512-IXf3XA7+XyN7CP9gGh/XB0UxVMlvARGEgGXLubFICsUMGz6Q+DU+i4gGlpOxTjKvXjkJDJC8YdqdKkDj9qZHEQ==
 
-"@primer/octicons-react@^17.10.0":
-  version "17.10.0"
-  resolved "https://registry.yarnpkg.com/@primer/octicons-react/-/octicons-react-17.10.0.tgz#69753f8b6977cccb733e791c2ffc31c8f09cbfcb"
-  integrity sha512-6uJeWWPrReHNlGLlsp4bL2rmUr1mmlaKfFNTAkVnzi2Nnp8MmLhGhtdWAktXfFUOll1JF4AacrEK3j91Xq99UQ==
+"@primer/octicons-react@^17.10.1":
+  version "17.10.1"
+  resolved "https://registry.yarnpkg.com/@primer/octicons-react/-/octicons-react-17.10.1.tgz#38ac186f086eda0e83feb198978bb1c9d0067af8"
+  integrity sha512-27F3OyrZVifha5bw84lVnuoxcLWaQFiOZ840itfvzRqlDD03q+bUb0wrw26+hGbbXuX8I65rzxh75T32blZFIw==
 
 "@rollup/plugin-babel@^5.2.0":
   version "5.3.1"
