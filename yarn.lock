@@ -1533,7 +1533,7 @@
   dependencies:
     "@chakra-ui/utils" "2.0.15"
 
-"@chakra-ui/react@^2.4.7":
+"@chakra-ui/react@^2.4.8":
   version "2.4.8"
   resolved "https://registry.yarnpkg.com/@chakra-ui/react/-/react-2.4.8.tgz#9c1dc10f676822beb8ab5d497d20ec4a844a597b"
   integrity sha512-s1iY+u6nUb/OiB6WgcWbBmbCwkmfPfQQ6xJn4Vs7rJAy7FiE8EEm623tHm1k4UdT0h4HJOm0UkQEyjh1kusCkQ==
