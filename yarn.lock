@@ -6919,7 +6919,7 @@ vite-node@0.27.1:
   optionalDependencies:
     fsevents "~2.3.2"
 
-vitest@^0.27.0:
+vitest@^0.27.1:
   version "0.27.1"
   resolved "https://registry.yarnpkg.com/vitest/-/vitest-0.27.1.tgz#62e61a70eb8fba60f0888f8e69c61622eb92203b"
   integrity sha512-1sIpQ1DVFTEn7c1ici1XHcVfdU4nKiBmPtPAtGKJJJLuJjojTv/OHGgcf69P57alM4ty8V4NMv+7Yoi5Cxqx9g==
