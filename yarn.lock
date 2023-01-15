@@ -2753,22 +2753,22 @@
   dependencies:
     tslib "^2.4.0"
 
-"@trpc/client@10.8.2":
-  version "10.8.2"
-  resolved "https://registry.yarnpkg.com/@trpc/client/-/client-10.8.2.tgz#20b82d7ea5f87c498296889bbe397b45e4c0d4e4"
-  integrity sha512-uQi+FWjogxQS7H09s5phWB8XeazlbA6R1eabFXq84Tmtvt6BWTYxStFLcv7C/p8gyduwT8/ZyrZ61P1Igce7gA==
+"@trpc/client@10.9.0":
+  version "10.9.0"
+  resolved "https://registry.yarnpkg.com/@trpc/client/-/client-10.9.0.tgz#c6c672ab1b8764ddb2f8f4d8884d5d4c156bc957"
+  integrity sha512-id6318qpgqllNOuBp7nuciXFPXCe+zae5d4r1hze6Eyp5fFFNO58TqA+4Q44KIcHgpfWyW2egs6iPeql3PrdKA==
 
-"@trpc/next@10.8.2":
-  version "10.8.2"
-  resolved "https://registry.yarnpkg.com/@trpc/next/-/next-10.8.2.tgz#c8b004382e17b8d41f2bd54407ab1eeab792dedc"
-  integrity sha512-exJzXUZbTK4vWVQRVfnwnWenjVNXPGqgWpa70r92X+w3bNatfqf4FUFegFcswpcK1JSHZCjye25eiiB7WVYQ1g==
+"@trpc/next@10.9.0":
+  version "10.9.0"
+  resolved "https://registry.yarnpkg.com/@trpc/next/-/next-10.9.0.tgz#342242be9a3d0ee4ebe5c1e4f4a45c055100a730"
+  integrity sha512-h/W8VHMki/fw7vHNMs1Ku7bLqccjpiKCE1wkqbvHfBOO1ARDmarRbuK6dLqJilip/f7jkFXcrxwB+eNgK4+6Wg==
   dependencies:
     react-ssr-prepass "^1.5.0"
 
-"@trpc/server@10.8.2":
-  version "10.8.2"
-  resolved "https://registry.yarnpkg.com/@trpc/server/-/server-10.8.2.tgz#b89b8f8c5cd5a601eddf6c72da8dff306aeb0242"
-  integrity sha512-a5Ak83Q01l0yV8lg2NkpQeYWdNPjKxXVllBLliWdkvkVEodH3mLqqhYymzJkhCusSlBwwOff28JRHY0gF98/zQ==
+"@trpc/server@10.9.0":
+  version "10.9.0"
+  resolved "https://registry.yarnpkg.com/@trpc/server/-/server-10.9.0.tgz#e470df429c823858d715b21acd564f9c6f17f0d9"
+  integrity sha512-5psyZgbvy29pJND32hwkWTMbv6s86IbsPOeDopsgNF0VegZT6Dsijmb7Ub/TDhuJVQVq5u4u5briMXi3SxmBkw==
 
 "@types/aws-lambda@^8.10.83":
   version "8.10.97"
