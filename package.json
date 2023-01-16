@@ -35,7 +35,7 @@
     "react": "^18.2.0",
     "react-div-100vh": "^0.7.0",
     "react-dom": "^18.2.0",
-    "react-hook-form": "^7.41.5",
+    "react-hook-form": "^7.42.0",
     "react-icons": "^4.7.1",
     "react-query": "3",
     "recoil": "^0.7.6",
