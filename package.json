@@ -43,7 +43,7 @@
     "slate-react": "^0.88.2",
     "swr": "^1.3.0",
     "typesafe-utils": "^1.16.2",
-    "vitest": "^0.27.3",
+    "vitest": "^0.28.1",
     "zod": "^3.20.2"
   },
   "devDependencies": {
