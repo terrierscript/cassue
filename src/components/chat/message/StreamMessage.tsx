@@ -24,6 +24,10 @@ const MessageHeaderTitle: FC<{ message: Message }> = ({ message }) => {
     }
     return data.id
   }, [messageType, data])
+  // const onClickLink = () => {
+  //   // https://stackoverflow.com/a/61612696
+  //   window.open(data.html_url, "_blank", 'width=600,height=400')
+  // }
   return <HStack w="100%">
     <Box fontWeight={"bold"}>{data.user?.login}</Box>
     <Box fontSize={"sm"}>
@@ -31,8 +35,11 @@ const MessageHeaderTitle: FC<{ message: Message }> = ({ message }) => {
     </Box>
     <Spacer />
     {messageType === "issue" && <Box fontSize={"xs"} color="gray.500">
-      <Link href={data.html_url} target="_blank">
-        {linkLabel}
+      <Link
+        href={`${data.html_url}`} target="_blank"
+      // onClick={onClickLink}
+      >
+        {linkLabel}.
       </Link>
     </Box>}
   </HStack>
@@ -102,7 +109,7 @@ const IssueBody: FC<{ issue: IssueResponse }> = ({ issue }) => {
   const color = useIssueIconColor(issue)
   return <HStack>
     <ColorIssueStateIcon issue={issue} />
-    <Box boxSizing="border-box" textOverflow={"ellipsis"}>
+    <Box boxSizing="border-box" textOverflow={"ellipsis"} wordBreak="break-all">
       {issue.title}
     </Box>
   </HStack>
@@ -147,19 +154,19 @@ export const StreamMessage: FC<{ message: Message }> = ({ message }) => {
     _pressed={activeStyle}
     _hover={activeStyle}
   >
-    <LinkMessage message={message}>
-      <HStack spacing={4} w="100%" cursor={"default"}>
-        <Box alignSelf={"start"} py={2}>
-          <MessageAvatar message={message} />
-        </Box>
-        <Stack spacing={0} minW="0" w="100%">
-          <MessageHeaderTitle message={message} />
+    <HStack spacing={4} w="100%" cursor={"default"}>
+      <Box alignSelf={"start"} py={2}>
+        <MessageAvatar message={message} />
+      </Box>
+      <Stack spacing={0} minW="0" w="100%">
+        <MessageHeaderTitle message={message} />
+        <LinkMessage message={message}>
           <MessageBody message={message} />
-          <Stack>
-            <MessageFooter message={message} />
-          </Stack>
+        </LinkMessage>
+        <Stack>
+          <MessageFooter message={message} />
         </Stack>
-      </HStack>
-    </LinkMessage>
+      </Stack>
+    </HStack>
   </Stack>
 }

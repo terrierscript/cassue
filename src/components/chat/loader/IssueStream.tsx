@@ -1,12 +1,14 @@
 import { Box, Button } from "@chakra-ui/react"
 import { FC, useEffect, useMemo } from "react"
-import { IssueComementResponse, IssueResponse } from "../../../services/github/GithubClient"
+import { IssueResponse } from "../../../services/github/GithubClient"
 import { StreamMessage } from "../message/StreamMessage"
+import { SendingMessage } from "./SendingMessage"
 import { useScroll } from "./StreamContainer"
 
+
 export const IssueStream: FC<{
-  issues: IssueResponse[],
-  onLoadMore: Function,
+  issues: IssueResponse[]
+  onLoadMore: Function
   isLoading: boolean
 }> = ({ issues, onLoadMore, isLoading }) => {
   const { scrollToBottom } = useScroll()
@@ -24,6 +26,7 @@ export const IssueStream: FC<{
   }, [latestNumber])
 
   return <>
+    <SendingMessage />
     {stream.map((issue) => {
       return <Box key={issue.number}>
         <StreamMessage
@@ -39,29 +42,5 @@ export const IssueStream: FC<{
         Load more
       </Button>
     </Box>
-  </>
-}
-
-
-export const CommentStream: FC<{ comments: IssueComementResponse[] }> = ({ comments }) => {
-  const { scrollToBottom } = useScroll()
-  const stream = useMemo(() => {
-    return comments
-    // return comments?.concat().reverse()
-  }, [comments])
-
-  const maxCommentId = useMemo(() => {
-    return Math.max(...stream.map(comment => comment.id))
-  }, [comments])
-
-  useEffect(() => {
-    scrollToBottom("smooth")
-  }, [maxCommentId])
-  return <>
-    {stream.map((comment) => {
-      return <Box key={comment.id}>
-        <StreamMessage message={{ messageType: "comment", data: comment }} />
-      </Box>
-    })}
   </>
 }

@@ -27,7 +27,7 @@ export const useIssuesInfinate = ({ owner, repo, target, value }: RepositoryQuer
         owner,
         repo,
         filter: [target, value],
-        page,
+        page: page + 1,
       })
     }, {
     initialSize: 1,

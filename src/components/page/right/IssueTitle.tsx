@@ -32,7 +32,7 @@ export const IssueTitle: FC<{ issue: IssueNumberResponse }> = ({ issue }) => {
   }
 
   return <HStack>
-    <Link href={issue?.html_url}>
+    <Link href={issue?.html_url} target="_blank" rel="noreferrer external">
       <Heading size="sm">
         {issue?.title}
       </Heading>

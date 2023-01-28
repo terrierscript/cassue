@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, HStack, Popover, PopoverArrow, PopoverBody, PopoverCloseButton, PopoverContent, PopoverFooter, PopoverHeader, PopoverTrigger, Portal, Spacer, Stack } from "@chakra-ui/react"
+import { Avatar, Box, Button, HStack, Popover, PopoverArrow, PopoverBody, PopoverCloseButton, PopoverContent, PopoverFooter, PopoverHeader, PopoverTrigger, Portal, Skeleton, SkeletonCircle, Spacer, Stack } from "@chakra-ui/react"
 import { signIn, useSession } from "next-auth/react"
 import { FC, PropsWithChildren } from "react"
 import { signOut } from "next-auth/react"
@@ -46,7 +46,10 @@ const UserMenu: FC<PropsWithChildren<{}>> = ({ children }) => {
 export const UserIcon = () => {
   const session = useSession()
   if (session.status === "loading") {
-    return null
+    return <HStack w="100%">
+      <SkeletonCircle size='8' />
+      <Skeleton h={"10px"} w={"50%"}></Skeleton>
+    </HStack>
   }
   if (!session.data) {
     return <Box>
