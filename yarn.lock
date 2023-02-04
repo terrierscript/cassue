@@ -6428,10 +6428,10 @@ slash@^4.0.0:
   resolved "https://registry.yarnpkg.com/slash/-/slash-4.0.0.tgz#2422372176c4c6c5addb5e2ada885af984b396a7"
   integrity sha512-3dOsAHXXUkQTpOYcoAxLIorMTp4gIQr5IW3iVb7A7lFIp0VHhnynm9izx6TssdrIcVIESAlVjtnO2K8bg+Coew==
 
-slate-react@^0.89.0:
-  version "0.89.0"
-  resolved "https://registry.yarnpkg.com/slate-react/-/slate-react-0.89.0.tgz#04292f761b6a78b5d7e782f1f44a1fa6e91ea7bb"
-  integrity sha512-ZTR0OwHbFWU9AK2iAUSxqpLK+GZFwTp4RttthDeWFzbF6y0aRAZRAwNNsi21jboZ26/7e8z68y2T9njhjKe/0w==
+slate-react@^0.90.0:
+  version "0.90.0"
+  resolved "https://registry.yarnpkg.com/slate-react/-/slate-react-0.90.0.tgz#956f7b19913bc8ea81e162cef5efc6ee5f3a9e95"
+  integrity sha512-z6pGd6jjU5VazLxlDi6zL3a6yaPBPJ+A2VyIlE/h/rvDywaLYGvk0xcrA9NrK71Dr47HK5ZN2zFEZNleh6wlPA==
   dependencies:
     "@juggle/resize-observer" "^3.4.0"
     "@types/is-hotkey" "^0.1.1"
@@ -6443,10 +6443,10 @@ slate-react@^0.89.0:
     scroll-into-view-if-needed "^2.2.20"
     tiny-invariant "1.0.6"
 
-slate@^0.88.1:
-  version "0.88.1"
-  resolved "https://registry.yarnpkg.com/slate/-/slate-0.88.1.tgz#0fc20f33b7baed7ea979fa848232c336e788cc31"
-  integrity sha512-DEj9RpkNwPfdh3zbE9eGpeOVGWdS8BYQt754S0Lk6IvJXOkYaxza7WEZLZl/vnp7vloMdTe24zccyxywA3XK8g==
+slate@^0.90.0:
+  version "0.90.0"
+  resolved "https://registry.yarnpkg.com/slate/-/slate-0.90.0.tgz#a21e5eae70171d435b30f9f50a92bddc3615143e"
+  integrity sha512-dv8idv0JjYyHiAJcVKf5yWKPDMTDi+PSZyfjsnquEI8VB5nmTVGjeJab06lc3o69O7aN05ROwO9/OY8mU1IUPA==
   dependencies:
     immer "^9.0.6"
     is-plain-object "^5.0.0"
