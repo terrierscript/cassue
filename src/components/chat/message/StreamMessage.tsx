@@ -24,6 +24,10 @@ const MessageHeaderTitle: FC<{ message: Message }> = ({ message }) => {
     }
     return data.id
   }, [messageType, data])
+  // const onClickLink = () => {
+  //   // https://stackoverflow.com/a/61612696
+  //   window.open(data.html_url, "_blank", 'width=600,height=400')
+  // }
   return <HStack w="100%">
     <Box fontWeight={"bold"}>{data.user?.login}</Box>
     <Box fontSize={"sm"}>
@@ -31,8 +35,11 @@ const MessageHeaderTitle: FC<{ message: Message }> = ({ message }) => {
     </Box>
     <Spacer />
     {messageType === "issue" && <Box fontSize={"xs"} color="gray.500">
-      <Link href={data.html_url} target="_blank" >
-        {linkLabel}
+      <Link
+        href={`${data.html_url}`} target="_blank"
+      // onClick={onClickLink}
+      >
+        {linkLabel}.
       </Link>
     </Box>}
   </HStack>

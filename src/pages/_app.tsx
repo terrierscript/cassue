@@ -16,8 +16,10 @@ function MyApp({ Component, pageProps: { session, ...pageProps },
         <title>Cassue</title>
         <link rel="icon" href="/icon.svg" type="image/svg+xml" />
         <meta name="apple-mobile-web-app-capable" content="yes"></meta>
+
         <meta name="apple-mobile-web-app-status-bar-style" content="black" ></meta>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
       </Head>
       <RecoilRoot>
         <ChakraProvider theme={appTheme}>

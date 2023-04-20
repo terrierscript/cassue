@@ -59,7 +59,7 @@ export type IssuePost = z.infer<typeof IssuePostScheme>
 export const IssueUpdateScheme = z.object({
   title: z.string().optional(),
   state: z.enum(["closed", "open"]).optional(),
-  state_reason: z.string().optional(),
+  state_reason: z.enum(["completed", "not_planned", "reopened"]).optional(),
   body: z.string().optional()
 })
 export type IssueUpdate = z.infer<typeof IssueUpdateScheme>

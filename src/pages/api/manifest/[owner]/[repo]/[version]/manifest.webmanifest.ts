@@ -8,7 +8,7 @@ export const handler: NextApiHandler = async (req, res) => {
     "background_color": "white",
     "description": "",
     "display": "standalone",
-    "theme_color": "#333333",
+    "theme_color": "#444444",
     "icons": [
       {
         "src": "/icon.svg",
