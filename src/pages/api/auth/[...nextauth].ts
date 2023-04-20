@@ -38,10 +38,11 @@ export default NextAuth({
       }
 
       // await refreshAccessTokenIfNeed(token.account)
-
-      if (profile?.login) {
-        token.login = profile.login
-      }
+      // @ts-ignore
+      // if (profile?.login) {
+      //   // @ts-ignore
+      //   token.login = profile.login
+      // }
       return token
     }
   },
