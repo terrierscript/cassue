@@ -16,6 +16,6 @@ export default trpcNext.createNextApiHandler<AppRouter>({
     }
   },
   onError(error) {
-    console.error(error)
+    console.error("Error")
   }
 })
