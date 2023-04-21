@@ -34,7 +34,7 @@ export const IssueStreamLoader: FC<{}> = ({ }) => {
     return <StreamLoading />
   }
   return <StreamStack key={`${owner}_${repo}_${target}_${value}`}>
-    <LoadingOverlay isLoading={isLoading} />
+    <LoadingOverlay isLoading={isValidating} />
     <IssueStream issues={issues}
       isLoading={isValidating}
       onLoadMore={() => {
