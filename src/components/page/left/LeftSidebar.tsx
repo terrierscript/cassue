@@ -1,5 +1,5 @@
 import { Box, Divider, Grid, HStack, IconButton, Input, InputGroup, InputLeftElement, Link, Spacer, Stack, useColorMode, useColorModeValue, Wrap } from "@chakra-ui/react"
-import { FC } from "react"
+import { FC, useEffect } from "react"
 import { Rooms } from "./Rooms"
 // import { GoOctoface, GoLightBulb } from "react-icons/go"
 import { useChatRouteParam } from "../useChatRouteParam"
@@ -10,15 +10,20 @@ import { useForm } from "react-hook-form"
 import { useRouter } from "next/router"
 
 const ThemeSwitcher = () => {
-  const { toggleColorMode } = useColorMode()
+  const { setColorMode, toggleColorMode } = useColorMode()
+
+  // TODO: force color mode without useEffect
+  useEffect(() => {
+    setColorMode("light")
+  }, [])
   return <Box>
-    <IconButton
+    {/* <IconButton
 
       onClick={() => toggleColorMode()}
       // variant="outline"
       // colorScheme="gray"
       aria-label={"Change theme"}
-      icon={<LightBulbIcon />} />
+      icon={<LightBulbIcon />} /> */}
   </Box>
 }
 
