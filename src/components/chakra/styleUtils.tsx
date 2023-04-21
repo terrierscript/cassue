@@ -1,5 +1,6 @@
 import { useColorModeValue } from "@chakra-ui/react"
 
+/** @deprecated */
 export const alphaBgStyle = (level = 50) => {
   return {
     _light: { bg: `blackAlpha.${level}` },
@@ -7,10 +8,11 @@ export const alphaBgStyle = (level = 50) => {
   }
 }
 
-
+/** @deprecated */
 export const useAlpha = (level: number) => {
   return useColorModeValue(`whiteAlpha.${level}`, `blackAlpha.${level}`)
 }
+/** @deprecated */
 export const useInverseAlpha = (level: number) => {
   return useColorModeValue(`blackAlpha.${level}`, `whiteAlpha.${level}`,)
 }

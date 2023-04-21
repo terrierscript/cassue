@@ -1,7 +1,7 @@
 import { extendTheme, ThemeConfig, withDefaultColorScheme } from "@chakra-ui/react"
 export const themeConfig: ThemeConfig = {
-  initialColorMode: 'dark',
-  useSystemColorMode: false,
+  // initialColorMode: 'dark',
+  // useSystemColorMode: false,
 }
 
 const colors = {
@@ -92,5 +92,3 @@ export const appTheme = extendTheme({
 },
   withDefaultColorScheme({ colorScheme: 'black2' }),
 )
-
-// console.log(appTheme)
