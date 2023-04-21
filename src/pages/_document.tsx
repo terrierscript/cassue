@@ -23,6 +23,7 @@ export default class Document extends NextDocument {
           </style>
         </Head>
         <body >
+          <ColorModeScript initialColorMode={"light"} type="cookie" storageKey="__override" />
           <Main />
           <NextScript />
         </body>

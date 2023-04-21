@@ -1,12 +1,12 @@
-import { Avatar, Box, HStack, Link, Spacer, Stack, useColorModeValue, Wrap } from "@chakra-ui/react"
-import { FC, PropsWithChildren, useEffect, useMemo, useRef } from "react"
+import { Avatar, Box, HStack, Link, Spacer, Stack, Wrap } from "@chakra-ui/react"
+import { FC, PropsWithChildren, useMemo } from "react"
 import { formatDistance } from "date-fns"
 import { IssueResponse, IssueComementResponse } from "../../../services/github/GithubClient"
 import { useChatPageParams } from "../../page/chatHooks"
 import { useChatRouteParam, useFilterValue } from "../../page/useChatRouteParam"
 import NextLink from "next/link"
 import { HtmlBody } from "./HtmlBody"
-import { ColorIssueStateIcon, IssueStateIcon, useIssueIconColor } from "./IssueStateIcon"
+import { ColorIssueStateIcon, useIssueIconColor } from "./IssueStateIcon"
 
 type Message = {
   messageType: "issue"
@@ -141,10 +141,7 @@ const MessageBody: FC<{ message: Message }> = ({ message }) => {
 
 export const StreamMessage: FC<{ message: Message }> = ({ message }) => {
 
-  const activeStyle = useColorModeValue(
-    { bg: "blackAlpha.50" },
-    { bg: "whiteAlpha.50" }
-  )
+  const activeStyle = { bg: "blackAlpha.50" }
   return <Stack
     // ref={ref}
     spacing={4}

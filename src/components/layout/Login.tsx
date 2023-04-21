@@ -1,6 +1,6 @@
-import { Box, Button, Center, useColorModeValue } from "@chakra-ui/react"
+import { Button, Center } from "@chakra-ui/react"
 import { MarkGithubIcon } from "@primer/octicons-react"
-import { signIn, signOut, useSession } from "next-auth/react"
+import { signIn } from "next-auth/react"
 
 
 export const LoginPage = () => {

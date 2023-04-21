@@ -1,17 +1,9 @@
 import { Box, Grid } from "@chakra-ui/react"
 import { FC } from "react"
 import { useChatRouteParam } from "./useChatRouteParam"
-// import { ChatInputArea } from "./main/ChatInput"
-// import { LeftSidebar } from "./left/LeftSidebar"
-// import { ChatHeader } from "./main/header/ChatHeader"
-// import { ChatStream } from "./main/ChatStream"
 import dynamic from "next/dynamic"
-import { alphaBgStyle } from "../chakra/styleUtils"
 import { useLayoutStyle } from "./useLayoutStyle"
 import { RightCommentDrawer } from "./right/DrawerComment"
-// import CommentStreamLoader  from "./right/CommentStreamLoader"
-// import IssueStreamLoader from "./main/IssueStreamLoader"
-
 
 const LeftSidebar = dynamic(import("./left/LeftSidebar"))
 const ChatInputArea = dynamic(import("../chat/input/IssueChatInput"))

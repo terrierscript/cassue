@@ -1,9 +1,9 @@
-import { Box, Divider, Grid, HStack, IconButton, Input, InputGroup, InputLeftElement, Link, Spacer, Stack, useColorMode, useColorModeValue, Wrap } from "@chakra-ui/react"
+import { Box, Grid, HStack, IconButton, Input, InputGroup, Spacer, useColorMode } from "@chakra-ui/react"
 import { FC } from "react"
 import { Rooms } from "./Rooms"
 // import { GoOctoface, GoLightBulb } from "react-icons/go"
 import { useChatRouteParam } from "../useChatRouteParam"
-import { LightBulbIcon, MarkGithubIcon, SearchIcon } from "@primer/octicons-react"
+import { LightBulbIcon, MarkGithubIcon } from "@primer/octicons-react"
 import { UserIcon } from "./UserIcon"
 import { useInverseAlpha } from "../../chakra/styleUtils"
 import { useForm } from "react-hook-form"
@@ -22,8 +22,9 @@ const ThemeSwitcher = () => {
   </Box>
 }
 
+/** @deprecated */
 const useAlpha = (value: number) => {
-  return useColorModeValue(`blackAlpha.${value}`, `whiteAlpha.${value}`)
+  return `blackAlpha.${value}`
 }
 
 const Debugger = () => {
