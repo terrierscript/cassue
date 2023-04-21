@@ -1,13 +1,13 @@
 import { Cache } from "swr"
 const KEY_NAME = "app-cache-v2"
 
-const save = (map: Map<any, any>) => {
+const save = (map: Map<unknown, unknown>) => {
   console.log("save")
   const appCache = JSON.stringify(Array.from(map.entries()))
   localStorage.setItem(KEY_NAME, appCache)
 }
 
-export function localStorageProvider(): Cache {
+export function localStorageProvider() {
   // for SSR
   if (typeof window === "undefined") {
     return new Map()

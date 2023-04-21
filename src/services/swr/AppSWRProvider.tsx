@@ -4,7 +4,7 @@ import { localStorageProvider } from "./localstorageCache"
 
 export const AppSWRPRovider: FC<PropsWithChildren<{}>> = ({ children }) => {
   return <SWRConfig value={{
-    provider: () => localStorageProvider()
+    provider: localStorageProvider
   }}>
     {children}
   </SWRConfig>
