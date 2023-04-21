@@ -104,7 +104,7 @@ export const LeftSidebar: FC<{}> = () => {
       <HStack p={6}>
         <UserIcon />
         <Spacer />
-        <ThemeSwitcher />
+        {/* <ThemeSwitcher /> */}
       </HStack>
     </Box>
   </Grid>
