@@ -1,5 +1,5 @@
 
-const KEY_NAME = "app-cache"
+const KEY_NAME = "app-cache-v2"
 
 const save = (map: Map<unknown, unknown>) => {
   console.log("save")
