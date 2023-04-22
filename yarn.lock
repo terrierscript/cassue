@@ -1786,7 +1786,7 @@
   resolved "https://registry.yarnpkg.com/@chakra-ui/visually-hidden/-/visually-hidden-2.0.15.tgz#60df64e0ab97d95fee4e6c61ccabd15fd5ace398"
   integrity sha512-WWULIiucYRBIewHKFA7BssQ2ABLHLVd9lrUo3N3SZgR0u4ZRDDVEUNOy+r+9ruDze8+36dGbN9wsN1IdELtdOw==
 
-"@ctrl/tinycolor@^3.5.1":
+"@ctrl/tinycolor@^3.6.0":
   version "3.6.0"
   resolved "https://registry.yarnpkg.com/@ctrl/tinycolor/-/tinycolor-3.6.0.tgz#53fa5fe9c34faee89469e48f91d51a3766108bc8"
   integrity sha512-/Z3l6pXthq0JvMYdUFyX9j0MaCltlIn6mfh9jLyQwg5aPKxkyNa0PTHtU1AlFXLNk55ZuAeJRcpvq+tmLfKmaQ==
