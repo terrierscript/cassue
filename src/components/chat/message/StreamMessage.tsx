@@ -98,7 +98,6 @@ const LinkMessage: FC<PropsWithChildren<{ message: Message }>> = ({ message, chi
 }
 
 const ComemntBody: FC<{ comment: IssueComementResponse }> = ({ comment }) => {
-  console.log({ comment })
   return <Stack>
     <Box boxSizing="border-box" >
       <HtmlBody html={comment.body_html ?? ""} />
