@@ -2768,22 +2768,22 @@
     "@tanstack/query-core" "4.29.1"
     use-sync-external-store "^1.2.0"
 
-"@trpc/client@10.22.0":
-  version "10.22.0"
-  resolved "https://registry.yarnpkg.com/@trpc/client/-/client-10.22.0.tgz#e215a566baf2115a33eb3f3d33faf6be63a437dc"
-  integrity sha512-zM1JKYWHg8O19JtqZnXQpwRjCcW9iGVmuxj+gKGr0Xmfy8OQRzYVxs625WHXzFt//UtuCjX24YBVjWMDcadAyg==
+"@trpc/client@10.23.0":
+  version "10.23.0"
+  resolved "https://registry.yarnpkg.com/@trpc/client/-/client-10.23.0.tgz#cf1549d4c198038ae711cd1552c1d68f690d1d28"
+  integrity sha512-7hTh9OjVIx4Co3kUyIu94SjbUIuS2WKl3E5BMseYbNOHfeY5rqwkCsw0N5EHWszhIVttUMDE0oCf10tNhYEq1A==
 
-"@trpc/next@10.22.0":
-  version "10.22.0"
-  resolved "https://registry.yarnpkg.com/@trpc/next/-/next-10.22.0.tgz#ee20cef25350ac9aa947dc1b0a755e0b29efb1eb"
-  integrity sha512-UlgeuUvws1QFXCFwNQjUcDhJrdd8sYHQVwQuuih2W+tePuq4nPTUxM2lTS3JnJf6uqgRGox4qZfzLmDVZ6vdxg==
+"@trpc/next@10.23.0":
+  version "10.23.0"
+  resolved "https://registry.yarnpkg.com/@trpc/next/-/next-10.23.0.tgz#5031471a5012f6d67a651806adce45d6828e4fa7"
+  integrity sha512-IoyoID4wUIFI1nrx6EJM1fBVdkyLiadCsw+r3XLtKnxCwfK5PLeIwwJAQrf+4IFtQT7KYhw4dSkP4gfltIPC3Q==
   dependencies:
     react-ssr-prepass "^1.5.0"
 
-"@trpc/server@10.22.0":
-  version "10.22.0"
-  resolved "https://registry.yarnpkg.com/@trpc/server/-/server-10.22.0.tgz#63d3a265ea4f5e3bfebf8028b74ec2bbf952c498"
-  integrity sha512-je1onD7yyjJjhy9kiqMmf8TN93hhE+aWO6N3sVmQBh0Q8bCvJ4d24GdEOhI2yvj5tHTpARTvYtsZMkX9GuyTpw==
+"@trpc/server@10.23.0":
+  version "10.23.0"
+  resolved "https://registry.yarnpkg.com/@trpc/server/-/server-10.23.0.tgz#b73c648f592a5bc88b9a2a64594ce8e952a10380"
+  integrity sha512-0CPfGZK3v3gfAL8ylV5vDJVBQtPp47EB4Vgx6WItSXmwYQlLC39ZC3gkZ4I5cGpQKl4l3QrNNeUvIcse4hlMxA==
 
 "@types/aws-lambda@^8.10.83":
   version "8.10.97"
