@@ -26,7 +26,7 @@
     "@trpc/client": "10.23.0",
     "@trpc/next": "10.23.0",
     "@trpc/server": "10.23.0",
-    "date-fns": "^2.29.3",
+    "date-fns": "^2.30.0",
     "framer-motion": "^7.10.3",
     "next": "^13.3.2",
     "next-auth": "^4.12.3",
