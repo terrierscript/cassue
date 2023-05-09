@@ -9,6 +9,7 @@
   },
   "dependencyDashboard": true,
   "stabilityDays": 3,
+  "prConcurrentLimit":3,
   "prCreation": "not-pending",
   "ignoreDeps": [
     "next-pwa"
