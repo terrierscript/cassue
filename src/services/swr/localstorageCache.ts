@@ -32,7 +32,7 @@ export function localStorageProvider(cache: Readonly<Cache>): Cache {
     get: (key: string) => map.get(key),
     set: (key: string, value: any) => {
       map.set(key, value)
-      save(map)
+      // save(map)
     },
     delete: (key: string) => map.delete(key)
   }
