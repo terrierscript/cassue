@@ -27,7 +27,15 @@ export function localStorageProvider(cache: Readonly<Cache>): Cache {
     save(map)
   })
 
-  return map
+  return {
+    keys: () => map.keys(),
+    get: (key: string) => map.get(key),
+    set: (key: string, value: any) => {
+      map.set(key, value)
+      save(map)
+    },
+    delete: (key: string) => map.delete(key)
+  }
 }
 
 export function clearLocalStorageCache() {

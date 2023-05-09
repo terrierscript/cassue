@@ -20,7 +20,7 @@ const RoomButton: FC<{ room: Room }> = ({ room }) => {
     return target === room.target && value === room.value
   }, [room, target, value])
   const query = `${room.target}/${room.value}` // room?.query ?? room.name
-  return <NextLink href={`/issues/${owner}/${repo}/${query}`} passHref>
+  return <NextLink href={`/issues/${owner}/${repo}/${query}`} passHref legacyBehavior>
     <Button variant={isActiveTarget ? "solid" : "ghost"}
       w="100%" justifyContent={"start"}
       size="sm" colorScheme={isActiveTarget ? "blackAlpha" : "gray"}
