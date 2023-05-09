@@ -26,6 +26,7 @@ export function localStorageProvider(cache: Readonly<Cache>): Cache {
   window.addEventListener('visibilitychange', () => {
     save(map)
   })
+
   return map
 }
 
