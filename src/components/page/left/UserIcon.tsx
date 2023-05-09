@@ -8,6 +8,8 @@ import { clearLocalStorageCache } from "../../../services/swr/localstorageCache"
 
 const UserMenu: FC<PropsWithChildren<{}>> = ({ children }) => {
   const { cache } = useSWRConfig()
+
+  const cacheLength = [...cache.keys()].length
   const clearCache = () => {
     // @ts-ignore
     cache.clear()
@@ -30,7 +32,7 @@ const UserMenu: FC<PropsWithChildren<{}>> = ({ children }) => {
             </Button>
             <Button variant="link" onClick={() => {
               clearCache()
-            }}>Clear cache</Button>
+            }}>Clear cache ({cacheLength})</Button>
             <Button variant="link" colorScheme="red" onClick={() => {
               clearCache()
               signOut()
