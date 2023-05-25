@@ -5517,7 +5517,7 @@ object.values@^1.1.6:
     define-properties "^1.1.4"
     es-abstract "^1.20.4"
 
-octokit@^2.0.16:
+octokit@^2.0.18:
   version "2.0.18"
   resolved "https://registry.yarnpkg.com/octokit/-/octokit-2.0.18.tgz#38248db68972019c52aa2e2f8e61413514c44291"
   integrity sha512-IR3l4RRBS7MSgMt8qngLt7URChtu1zf5MEb9SYa7Flw+jwwm7Ya4JQJ6leh/S5v1J0RV1Phmj3p+SH+jMCSrjw==
