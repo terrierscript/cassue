@@ -19,7 +19,7 @@
     "@chakra-ui/icons": "^2.0.19",
     "@chakra-ui/react": "^2.7.0",
     "@ctrl/tinycolor": "^3.6.0",
-    "@emotion/react": "^11.11.0",
+    "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@next/bundle-analyzer": "^13.4.4",
     "@primer/octicons-react": "^17.12.0",
