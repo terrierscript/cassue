@@ -50,7 +50,7 @@
     "@size-limit/preset-app": "^8.2.4",
     "@swc/core": "^1.3.62",
     "@types/node": "^18.16.17",
-    "@types/react": "^18.2.11",
+    "@types/react": "^18.2.12",
     "eslint": "8.42.0",
     "eslint-config-next": "13.4.5",
     "size-limit": "^8.2.4",
