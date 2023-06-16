@@ -49,7 +49,7 @@
   "devDependencies": {
     "@size-limit/preset-app": "^8.2.4",
     "@swc/core": "^1.3.63",
-    "@types/node": "^18.16.17",
+    "@types/node": "^18.16.18",
     "@types/react": "^18.2.12",
     "eslint": "8.42.0",
     "eslint-config-next": "13.4.5",
