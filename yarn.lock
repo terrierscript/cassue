@@ -5521,10 +5521,10 @@ object.values@^1.1.6:
     define-properties "^1.1.4"
     es-abstract "^1.20.4"
 
-octokit@^2.0.19:
-  version "2.0.19"
-  resolved "https://registry.yarnpkg.com/octokit/-/octokit-2.0.19.tgz#924ede002302f965c2399eb582f23ee8c74660ba"
-  integrity sha512-hSloK4MK78QGbAuBrtIir0bsxMoRVZE5CkwKSbSRH9lqv2hx9EwhCxtPqEF+BtHqLXkXdfUaGkJMyMBotYno+A==
+octokit@^2.0.22:
+  version "2.0.22"
+  resolved "https://registry.yarnpkg.com/octokit/-/octokit-2.0.22.tgz#ce44c7bdbb546029e7f2e765764d5843125f6c90"
+  integrity sha512-QBgGSB+odZ5o3ysLy5d2Qvwwx5+GU1zLVgkgpy3o4XocmrD/YInaIVUCA6nR8jUmdf5lgyyiYPyxRt0UrNwqMQ==
   dependencies:
     "@octokit/app" "^13.1.5"
     "@octokit/core" "^4.2.1"
